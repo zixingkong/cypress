@@ -11,6 +11,7 @@ const install = require(`${lib}/tasks/install`)
 const snapshot = require('snap-shot-it')
 const execa = require('execa-wrap')
 const path = require('path')
+const launcher = require('@packages/launcher')
 
 describe('cli', function () {
   beforeEach(function () {
@@ -22,23 +23,28 @@ describe('cli', function () {
   })
 
   context('help command', () => {
-    it('shows help', () =>
-      execa('bin/cypress', ['help']).then(snapshot)
-    )
+    it('shows help', () => execa('bin/cypress', ['help']).then(snapshot))
 
-    it('shows help for -h', () =>
-      execa('bin/cypress', ['-h']).then(snapshot)
-    )
+    it('shows help for -h', () => execa('bin/cypress', ['-h']).then(snapshot))
 
     it('shows help for --help', () =>
-      execa('bin/cypress', ['--help']).then(snapshot)
-    )
+      execa('bin/cypress', ['--help']).then(snapshot))
   })
 
   context('unknown command', () => {
     it('shows usage and exits', () =>
-      execa('bin/cypress', ['foo']).then(snapshot)
-    )
+      execa('bin/cypress', ['foo']).then(snapshot))
+  })
+
+  context('browsers', function () {
+    it('prints list of detected browsers', function (done) {
+      this.sandbox.stub(launcher, 'printDetectedBrowsers').resolves()
+      this.exec('browsers')
+      process.exit.callsFake(() => {
+        expect(launcher.printDetectedBrowsers).to.be.calledWith()
+        done()
+      })
+    })
   })
 
   context('cypress version', function () {
@@ -146,7 +152,9 @@ describe('cli', function () {
 
     it('calls run with spec', function () {
       this.exec('run --spec cypress/integration/foo_spec.js')
-      expect(run.start).to.be.calledWith({ spec: 'cypress/integration/foo_spec.js' })
+      expect(run.start).to.be.calledWith({
+        spec: 'cypress/integration/foo_spec.js',
+      })
     })
 
     it('calls run with port with -p arg', function () {
@@ -156,12 +164,16 @@ describe('cli', function () {
 
     it('calls run with env variables', function () {
       this.exec('run --env foo=bar,host=http://localhost:8888')
-      expect(run.start).to.be.calledWith({ env: 'foo=bar,host=http://localhost:8888' })
+      expect(run.start).to.be.calledWith({
+        env: 'foo=bar,host=http://localhost:8888',
+      })
     })
 
     it('calls run with config', function () {
       this.exec('run --config watchForFileChanges=false,baseUrl=localhost')
-      expect(run.start).to.be.calledWith({ config: 'watchForFileChanges=false,baseUrl=localhost' })
+      expect(run.start).to.be.calledWith({
+        config: 'watchForFileChanges=false,baseUrl=localhost',
+      })
     })
 
     it('calls run with key', function () {
@@ -180,8 +192,10 @@ describe('cli', function () {
     })
 
     it('calls run with relative --project folder', function () {
-      this.sandbox.stub(path, 'resolve')
-      .withArgs('foo/bar').returns('/mock/absolute/foo/bar')
+      this.sandbox
+      .stub(path, 'resolve')
+      .withArgs('foo/bar')
+      .returns('/mock/absolute/foo/bar')
       this.exec('run --project foo/bar')
       expect(run.start).to.be.calledWith({ project: '/mock/absolute/foo/bar' })
     })
@@ -203,8 +217,10 @@ describe('cli', function () {
     })
 
     it('calls open.start with relative --project folder', function () {
-      this.sandbox.stub(path, 'resolve')
-      .withArgs('foo/bar').returns('/mock/absolute/foo/bar')
+      this.sandbox
+      .stub(path, 'resolve')
+      .withArgs('foo/bar')
+      .returns('/mock/absolute/foo/bar')
       this.exec('open --project foo/bar')
       expect(open.start).to.be.calledWith({ project: '/mock/absolute/foo/bar' })
     })
@@ -239,7 +255,6 @@ describe('cli', function () {
     })
   })
 
-
   it('install calls install.start with force: true', function () {
     this.sandbox.stub(install, 'start').resolves()
     this.exec('install')
@@ -261,7 +276,10 @@ describe('cli', function () {
   it('verify calls verify.start with force: true', function () {
     this.sandbox.stub(verify, 'start').resolves()
     this.exec('verify')
-    expect(verify.start).to.be.calledWith({ force: true, welcomeMessage: false })
+    expect(verify.start).to.be.calledWith({
+      force: true,
+      welcomeMessage: false,
+    })
   })
 
   it('verify calls verify.start + catches errors', function (done) {

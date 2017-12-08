@@ -199,7 +199,11 @@ module.exports = {
     .action(() => {
       require('@packages/launcher')
       .printDetectedBrowsers()
-      .catch(util.logErrorExit1)
+      .then(process.exit)
+      .catch((e) => {
+        console.error(e) // eslint-disable-line no-console
+        util.logErrorExit1(e)
+      })
     })
 
     debug('cli starts with arguments %j', args)
