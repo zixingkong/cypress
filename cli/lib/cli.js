@@ -11,11 +11,27 @@ const coerceFalse = (arg) => {
 }
 
 const parseOpts = (opts) => {
-  opts = _.pick(opts,
-    'project', 'spec', 'reporter', 'reporterOptions', 'path', 'destination',
-    'port', 'env', 'cypressVersion', 'config', 'record', 'key',
-    'browser', 'detached', 'headed',
-    'group', 'groupId', 'global')
+  opts = _.pick(
+    opts,
+    'project',
+    'spec',
+    'reporter',
+    'reporterOptions',
+    'path',
+    'destination',
+    'port',
+    'env',
+    'cypressVersion',
+    'config',
+    'record',
+    'key',
+    'browser',
+    'detached',
+    'headed',
+    'group',
+    'groupId',
+    'global'
+  )
 
   if (opts.project) {
     opts.project = path.resolve(opts.project)
@@ -48,7 +64,19 @@ const descriptions = {
   groupId: 'optional common id to group runs by, extracted from CI environment variables by default',
 }
 
-const knownCommands = ['version', 'run', 'open', 'install', 'verify', '-v', '--version', 'help', '-h', '--help']
+const knownCommands = [
+  'version',
+  'run',
+  'open',
+  'install',
+  'verify',
+  '-v',
+  '--version',
+  'help',
+  '-h',
+  '--help',
+  'browsers',
+]
 
 const text = (description) => {
   if (!descriptions[description]) {
@@ -59,16 +87,16 @@ const text = (description) => {
 }
 
 function includesVersion (args) {
-  return _.includes(args, 'version') ||
+  return (
+    _.includes(args, 'version') ||
     _.includes(args, '--version') ||
     _.includes(args, '-v')
+  )
 }
 
 function showVersions () {
   debug('printing Cypress version')
-  return require('./exec/versions')
-  .getVersions()
-  .then((versions = {}) => {
+  return require('./exec/versions').getVersions().then((versions = {}) => {
     logger.log('Cypress package version:', versions.package)
     logger.log('Cypress binary version:', versions.binary)
     process.exit(0)
@@ -109,7 +137,10 @@ module.exports = {
     .option('-k, --key <record-key>', text('key'))
     .option('-s, --spec <spec>', text('spec'))
     .option('-r, --reporter <reporter>', text('reporter'))
-    .option('-o, --reporter-options <reporter-options>', text('reporterOptions'))
+    .option(
+      '-o, --reporter-options <reporter-options>',
+      text('reporterOptions')
+    )
     .option('-p, --port <port>', text('port'))
     .option('-e, --env <env>', text('env'))
     .option('-c, --config <config>', text('config'))
@@ -137,14 +168,14 @@ module.exports = {
     .option('--global', text('global'))
     .action((opts) => {
       debug('opening Cypress')
-      require('./exec/open')
-      .start(parseOpts(opts))
-      .catch(util.logErrorExit1)
+      require('./exec/open').start(parseOpts(opts)).catch(util.logErrorExit1)
     })
 
     program
     .command('install')
-    .description('Installs the Cypress executable matching this package\'s version')
+    .description(
+      'Installs the Cypress executable matching this package\'s version'
+    )
     .action(() => {
       require('./tasks/install')
       .start({ force: true })
@@ -153,10 +184,21 @@ module.exports = {
 
     program
     .command('verify')
-    .description('Verifies that Cypress is installed correctly and executable')
+    .description(
+      'Verifies that Cypress is installed correctly and executable'
+    )
     .action(() => {
       require('./tasks/verify')
       .start({ force: true, welcomeMessage: false })
+      .catch(util.logErrorExit1)
+    })
+
+    program
+    .command('browsers')
+    .description('Prints list of detected browsers')
+    .action(() => {
+      require('@packages/launcher')
+      .printDetectedBrowsers()
       .catch(util.logErrorExit1)
     })
 
