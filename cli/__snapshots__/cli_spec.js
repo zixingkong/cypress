@@ -26,6 +26,7 @@ exports['cli help command shows help 1'] = `
     open [options]   Opens Cypress in the interactive GUI.
     install          Installs the Cypress executable matching this package's version
     verify           Verifies that Cypress is installed correctly and executable
+    browsers         Prints list of detected browsers
   -------
   stderr:
   -------
@@ -62,6 +63,7 @@ exports['cli help command shows help for -h 1'] = `
     open [options]   Opens Cypress in the interactive GUI.
     install          Installs the Cypress executable matching this package's version
     verify           Verifies that Cypress is installed correctly and executable
+    browsers         Prints list of detected browsers
   -------
   stderr:
   -------
@@ -98,6 +100,7 @@ exports['cli help command shows help for --help 1'] = `
     open [options]   Opens Cypress in the interactive GUI.
     install          Installs the Cypress executable matching this package's version
     verify           Verifies that Cypress is installed correctly and executable
+    browsers         Prints list of detected browsers
   -------
   stderr:
   -------
@@ -136,6 +139,7 @@ exports['cli unknown command shows usage and exits 1'] = `
       open [options]   Opens Cypress in the interactive GUI.
       install          Installs the Cypress executable matching this package's version
       verify           Verifies that Cypress is installed correctly and executable
+      browsers         Prints list of detected browsers
   -------
   stderr:
   -------
