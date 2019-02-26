@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "types": "../ts/index.d.ts",
-  "browser": "./lib/client.js",
+  "browser": "./dist/lib/client.js",
   "scripts": {
     "build": "tsc",
     "pretest": "npm run check-deps-pre",
