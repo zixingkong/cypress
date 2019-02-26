@@ -1,0 +1,15 @@
+{
+    "extends": "../ts/tsconfig.json",
+    "include": [
+        "./lib/*.ts",
+        "./test/*.ts"
+    ],
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "types": ["node", "mocha"],
+        "allowSyntheticDefaultImports": true
+    },
+    "files": [
+        "./../ts/index.d.ts"
+    ]
+}

@@ -38,7 +38,7 @@ describe('Socket', function () {
     it('returns client source as a string', function (done) {
       const clientPath = path.join(process.cwd(), 'node_modules', 'socket.io-client', 'dist', 'socket.io.js')
 
-      fs.readFile(clientPath, 'utf8', function (err, str) {
+      fs.readFile(clientPath, 'utf8', function (err: Error, str: string) {
         if (err) done(err)
 
         expect(lib.getClientSource()).to.eq(str)
