@@ -7,8 +7,7 @@
     "compilerOptions": {
         "resolveJsonModule": true,
         "types": ["node", "mocha"],
-        "allowSyntheticDefaultImports": true,
-        "noEmit": true,
+        "allowSyntheticDefaultImports": true
     },
     "files": [
         "./../ts/index.d.ts"
