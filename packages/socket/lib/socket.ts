@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 import server from 'socket.io'
 import { version } from 'socket.io-client/package.json'
 import client from './client'
