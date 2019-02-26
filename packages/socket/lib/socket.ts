@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import server from 'socket.io'
-import { version } from 'socket.io-client/package.json'
-import client from './client'
+import * as server from 'socket.io'
+import pkg = require('socket.io-client/package.json')
+import * as client from './client'
 
 const clientPath = require.resolve('socket.io-client')
 
@@ -15,7 +15,7 @@ export function getPathToClientSource () {
 }
 
 export function getClientVersion () {
-  return version
+  return pkg.version
 }
 
 export function getClientSource () {

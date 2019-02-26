@@ -1,3 +1,3 @@
-import client from 'socket.io-client'
+import * as client from 'socket.io-client'
 
-export default client
+export = client
