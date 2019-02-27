@@ -5,7 +5,7 @@ import client from './client'
 
 const clientPath = require.resolve('socket.io-client')
 
-const pkg = JSON.parse(fs.readFileSync(path.join(clientPath, 'package.json')).toString())
+const pkg = JSON.parse(fs.readFileSync(path.join(clientPath, '../../package.json')).toString())
 
 export { server, client }
 
