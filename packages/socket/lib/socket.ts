@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as server from 'socket.io'
-import client from './client'
+import * as client from './client'
 
 const clientPath = require.resolve('socket.io-client')
 
