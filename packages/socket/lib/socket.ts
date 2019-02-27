@@ -1,10 +1,11 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as server from 'socket.io'
-import pkg = require('socket.io-client/package.json')
-import * as client from './client'
+import client from './client'
 
 const clientPath = require.resolve('socket.io-client')
+
+const pkg = JSON.parse(fs.readFileSync(path.join(clientPath, 'package.json')).toString())
 
 export { server, client }
 
