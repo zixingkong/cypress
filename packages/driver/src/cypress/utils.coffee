@@ -2,6 +2,7 @@ $ = require("jquery")
 _ = require("lodash")
 moment = require("moment")
 Promise = require("bluebird")
+urlEncoder = require("postman-url-encoder")
 
 $jquery = require("../dom/jquery")
 $Location = require("./location")
@@ -42,6 +43,9 @@ module.exports = {
       return item.first()
 
     return item
+
+  encodeUrl: (url) ->
+    urlEncoder.encode(url)
 
   switchCase: (value, casesObj, defaultKey = "default") ->
     if _.has(casesObj, value)
