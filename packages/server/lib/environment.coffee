@@ -27,6 +27,9 @@ try
   ## https://github.com/cypress-io/cypress/issues/2376
   app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required")
 
+  app.commandLine.appendSwitch("log-net-log", "/tmp/artifacts/#{Number(new Date())}-net-log.json")
+  app.commandLine.appendSwitch("remote-debugging-port", "13425")
+
   if os.platform() is "linux"
     app.disableHardwareAcceleration()
 
