@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-unused-vars */
 
 const Promise = require('bluebird')
 const humanInterval = require('human-interval')
@@ -23,6 +23,11 @@ const run = () => {
 
     return res
   })
+  .catch(Promise.TimeoutError, (err) => {
+    console.log('exiting after 5 minute timeout')
+
+    throw new Error('timeout on an individual run')
+  })
 }
 
 // run for a maximum of 1 hour
@@ -31,7 +36,10 @@ run()
 .timeout(oneHour)
 .then(console.log)
 .catch(Promise.TimeoutError, (err) => {
-  console.log('exiting due to timeout', err.message)
+  console.log('exiting due to 1 hour timeout')
 
+  throw err
+})
+.catch(() => {
   process.exit(1)
 })
