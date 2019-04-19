@@ -91,8 +91,9 @@ module.exports = {
 
     Promise
     .try =>
-      if options.show is false
-        @_attachDebugger(win.webContents)
+
+      @_attachDebugger(win.webContents)
+      @_attachHarCapturer(win.webContents)
 
       if ua = options.userAgent
         @_setUserAgent(win.webContents, ua)
@@ -123,12 +124,11 @@ module.exports = {
       if method is "Console.messageAdded"
         debug("console message: %o", params.message)
 
-    @_attachHarCapturer(webContents)
-
     webContents.debugger.sendCommand("Console.enable")
 
   _attachHarCapturer: (webContents) ->
     log = []
+    debug('attaching har capturer')
     onMessage = (event, method, params) ->
       # https://github.com/cyrus-and/chrome-har-capturer#fromlogurl-log-options
       if not [
@@ -143,22 +143,29 @@ module.exports = {
       ].includes(method)
         return
 
+      debug("pushing #{method} event to har")
       log.push({
         method
         params
       })
 
+    debug('har capturer attached')
+
     webContents.debugger.on "message", onMessage
 
     webContents.debugger.once "detach", ->
       # on detach, write out the HAR
+      debug("debugger detaching")
       chc.fromLog("http://cypress-full-internal-HAR", log)
       .then (har) ->
         path = "/tmp/artifacts/#{Number(new Date())}-har.json"
+        debug("writing har to #{path}")
         fs.writeJson(path, log)
 
-        webContents.removeEventListener(onMessage)
         log = []
+
+    webContents.debugger.sendCommand('Network.enable')
+    webContents.debugger.sendCommand('Page.enable')
 
   _getPartition: (options) ->
     if options.isTextTerminal
