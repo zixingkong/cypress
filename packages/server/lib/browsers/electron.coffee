@@ -1,7 +1,9 @@
 _             = require("lodash")
 EE            = require("events")
 Promise       = require("bluebird")
+chc           = require("chrome-har-capturer")
 debug         = require("debug")("cypress:server:browsers:electron")
+fs            = require("../util/fs")
 menu          = require("../gui/menu")
 Windows       = require("../gui/windows")
 appData       = require("../util/app_data")
@@ -121,7 +123,42 @@ module.exports = {
       if method is "Console.messageAdded"
         debug("console message: %o", params.message)
 
+    @_attachHarCapturer(webContents)
+
     webContents.debugger.sendCommand("Console.enable")
+
+  _attachHarCapturer: (webContents) ->
+    log = []
+    onMessage = (event, method, params) ->
+      # https://github.com/cyrus-and/chrome-har-capturer#fromlogurl-log-options
+      if not [
+        "Page.domContentEventFired",
+        "Page.loadEventFired",
+        "Network.requestWillBeSent",
+        "Network.dataReceived",
+        "Network.responseReceived",
+        "Network.resourceChangedPriority",
+        "Network.loadingFinished",
+        "Network.loadingFailed"
+      ].includes(method)
+        return
+
+      log.push({
+        method
+        params
+      })
+
+    webContents.debugger.on "message", onMessage
+
+    webContents.debugger.once "detach"
+      # on detach, write out the HAR
+      chc.fromLog("http://cypress-full-internal-HAR", log)
+      .then (har) ->
+        path = "/tmp/artifacts/#{Number(new Date())}-har.json"
+        fs.writeJson(path, log)
+
+        webContents.removeEventListener(onMessage)
+        log = []
 
   _getPartition: (options) ->
     if options.isTextTerminal
