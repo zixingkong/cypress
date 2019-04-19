@@ -5,7 +5,7 @@ const humanInterval = require('human-interval')
 const cypress = require('./cli')
 
 const oneHour = humanInterval('1 hour')
-const threeMinutes = humanInterval('3 minutes')
+const fiveMinutes = humanInterval('5 minutes')
 
 const run = () => {
   return cypress.run({
@@ -15,7 +15,7 @@ const run = () => {
       video: false,
     },
   })
-  .timeout(threeMinutes)
+  .timeout(fiveMinutes)
   .then((res) => {
     if (res.totalFailed === 0) {
       return run()
