@@ -150,7 +150,7 @@ module.exports = {
 
     webContents.debugger.on "message", onMessage
 
-    webContents.debugger.once "detach"
+    webContents.debugger.once "detach", ->
       # on detach, write out the HAR
       chc.fromLog("http://cypress-full-internal-HAR", log)
       .then (har) ->
