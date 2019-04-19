@@ -28,7 +28,7 @@ try
   app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required")
 
   app.commandLine.appendSwitch("log-net-log", "/tmp/artifacts/#{Number(new Date())}-net-log.json")
-  app.commandLine.appendSwitch("remote-debugging-port", "13425")
+  app.commandLine.appendSwitch("net-log-capture-mode", "IncludeSocketBytes")
 
   if os.platform() is "linux"
     app.disableHardwareAcceleration()

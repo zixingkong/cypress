@@ -149,6 +149,18 @@ module.exports = {
         params
       })
 
+      if method == 'Network.responseReceived' # the chrome events don't include the body, attach it manually if we want it in the HAR
+        debug("getting response body for #{params.requestId}")
+        webContents.debugger.sendCommand 'Network.getResponseBody', {
+          requestId: params.requestId
+        }, (err, result) ->
+          debug("received response body for #{params.requestId}")
+          result.requestId = params.requestId
+          log.push({
+            method: 'Network.getResponseBody',
+            params: result
+          })
+
     debug('har capturer attached')
 
     webContents.debugger.on "message", onMessage
@@ -192,7 +204,7 @@ module.exports = {
     new Promise (resolve) ->
       webContents.session.setProxy({
         proxyRules: proxyServer
-        ## this should really only be necessary when 
+        ## this should really only be necessary when
         ## running Chromium versions >= 72
         ## https://github.com/cypress-io/cypress/issues/1872
         proxyBypassRules: "<-loopback>"
