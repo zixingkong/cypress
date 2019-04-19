@@ -21,7 +21,7 @@ const run = () => {
       return run()
     }
 
-    return res
+    process.exit(res.totalFailed)
   })
   .catch(Promise.TimeoutError, (err) => {
     console.log('exiting after 5 minute timeout')
