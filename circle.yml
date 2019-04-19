@@ -747,71 +747,71 @@ jobs:
 linux-workflow: &linux-workflow
   jobs:
     - build
-    - lint:
-        name: Linux lint
-        requires:
-          - build
-    - lint-typescript:
-        requires:
-          - build
+    # - lint:
+    #     name: Linux lint
+    #     requires:
+    #       - build
+    # - lint-typescript:
+    #     requires:
+    #       - build
     # unit, integration and e2e tests
-    - unit-tests:
-        requires:
-          - build
-    - server-unit-tests:
-        requires:
-          - build
-    - server-integration-tests:
-        requires:
-          - build
-    - server-performance-tests:
-        requires:
-          - build
-    - server-e2e-tests-1:
-        requires:
-          - build
-    - server-e2e-tests-2:
-        requires:
-          - build
-    - server-e2e-tests-3:
-        requires:
-          - build
-    - server-e2e-tests-4:
-        requires:
-          - build
-    - server-e2e-tests-5:
-        requires:
-          - build
-    - server-e2e-tests-6:
-        requires:
-          - build
-    - server-e2e-tests-7:
-        requires:
-          - build
-    - server-e2e-tests-8:
-        requires:
-          - build
-    - driver-integration-tests-3x:
-        requires:
-          - build
-    - desktop-gui-integration-tests-2x:
-        requires:
-          - build
-    - reporter-integration-tests:
-        requires:
-          - build
-    - run-launcher:
-        requires:
-          - build
-    # various testing scenarios, like building full binary
-    # and testing it on a real project
-    - test-against-staging:
-        filters:
-          branches:
-            only:
-              - develop
-        requires:
-          - build
+    # - unit-tests:
+    #     requires:
+    #       - build
+    # - server-unit-tests:
+    #     requires:
+    #       - build
+    # - server-integration-tests:
+    #     requires:
+    #       - build
+    # - server-performance-tests:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-1:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-2:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-3:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-4:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-5:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-6:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-7:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-8:
+    #     requires:
+    #       - build
+    # - driver-integration-tests-3x:
+    #     requires:
+    #       - build
+    # - desktop-gui-integration-tests-2x:
+    #     requires:
+    #       - build
+    # - reporter-integration-tests:
+    #     requires:
+    #       - build
+    # - run-launcher:
+    #     requires:
+    #       - build
+    # # various testing scenarios, like building full binary
+    # # and testing it on a real project
+    # - test-against-staging:
+    #     filters:
+    #       branches:
+    #         only:
+    #           - develop
+    #     requires:
+    #       - build
     - run-flaky-network-tests-until-fail:
         filters:
           branches:
@@ -918,14 +918,6 @@ mac-workflow: &mac-workflow
           - Mac NPM package
           - Mac binary
 
-    - run-flaky-network-tests-until-fail:
-        filters:
-          branches:
-            only:
-              - debug-proxy-flake-w-electron-2
-        requires:
-          - Mac build
-
     - test-binary-against-staging:
         name: Test Mac binary against staging
         executor: mac
@@ -939,5 +931,5 @@ mac-workflow: &mac-workflow
 workflows:
   linux:
     <<: *linux-workflow
-  mac:
-    <<: *mac-workflow
+  # mac:
+  #   <<: *mac-workflow
