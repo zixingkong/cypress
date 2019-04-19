@@ -10,7 +10,7 @@ const fiveMinutes = humanInterval('5 minutes')
 const run = () => {
   return cypress.run({
     project: '/tmp/repo',
-    dev: true
+    dev: true,
   })
   .timeout(fiveMinutes)
   .then((res) => {
