@@ -149,7 +149,7 @@ module.exports = {
         params
       })
 
-      if method == 'Network.responseReceived' # the chrome events don't include the body, attach it manually if we want it in the HAR
+      if method == 'Network.loadingFinished' # the chrome events don't include the body, attach it manually if we want it in the HAR
         debug("getting response body for #{params.requestId}")
         webContents.debugger.sendCommand 'Network.getResponseBody', {
           requestId: params.requestId
@@ -170,9 +170,12 @@ module.exports = {
       debug("debugger detaching")
       chc.fromLog("http://cypress-full-internal-HAR", log)
       .then (har) ->
-        path = "/tmp/artifacts/#{Number(new Date())}-har.json"
-        debug("writing har to #{path}")
-        fs.writeJson(path, log)
+        now = Number(new Date())
+        harPath = "/tmp/artifacts/#{now}-har.json"
+        cdpPath = "/tmp/artifacts/#{now}-cdp-log.json"
+        debug("writing har to #{harPath}")
+        fs.writeJson(harPath, har)
+        fs.writeJson(cdpPath, log)
 
         log = []
 
