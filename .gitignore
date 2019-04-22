@@ -64,4 +64,3 @@ scripts/support
 package-lock.json
 yarn.lock
 binary-url.json
-packages/driver/test/cypress/integration/e2e

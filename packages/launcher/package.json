@@ -21,7 +21,6 @@
     "lint-js": "bin-up eslint --fix *.js",
     "lint-ts": "tslint --project . --fix --format stylish lib/*.ts lib/**/*.ts",
     "format-ts": "prettier --no-semi --single-quote --write lib/*.ts lib/**/*.ts",
-    "build": "bin-up tsc --project .",
     "build-js": "bin-up tsc --project .",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
   },
