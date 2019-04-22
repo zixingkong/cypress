@@ -19,6 +19,8 @@ defaults: &defaults
     COLUMNS: 100
     LINES: 24
 
+    DEBUG_COLORS: false
+
 executors:
   # the Docker image with Cypress dependencies and Chrome browser
   cy-doc:
@@ -384,6 +386,8 @@ jobs:
           command: $(npm bin)/wait-on http://localhost:3500
           working_directory: packages/driver
       - run:
+          environment:
+            DEBUG: cypress:*
           command: |
             CYPRESS_KONFIG_ENV=production \
             CYPRESS_RECORD_KEY=$PACKAGES_RECORD_KEY \
@@ -518,12 +522,48 @@ jobs:
           background: true
       - run:
           name: Run Kitchensink example project
+          environment:
+            DEBUG: cypress:*
           command: |
             CYPRESS_PROJECT_ID=$TEST_KITCHENSINK_PROJECT_ID \
             CYPRESS_RECORD_KEY=$TEST_KITCHENSINK_RECORD_KEY \
             CYPRESS_ENV=staging \
             CYPRESS_video=false \
             npm run cypress:run -- --project /tmp/repo --record
+
+  "run-flaky-network-tests-until-fail":
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Cloning test project
+          command: git clone https://github.com/cypress-io/cypress-example-kitchensink.git /tmp/repo
+      - run:
+          name: Install prod dependencies
+          command: npm install --production
+          working_directory: /tmp/repo
+      - run:
+          name: Example server
+          command: npm start
+          working_directory: /tmp/repo
+          background: true
+      - run: mkdir /tmp/artifacts
+      - run:
+          name: Run flake test forever
+          environment:
+            DEBUG: cypress:*
+          command: |
+            set +e # don't exit on non-0 status code, so we can still shuffle artifacts around after failure
+            CYPRESS_ENV=staging \
+            CY_NET_PROFILE=1 \
+            node flaky.js 2>&1 | tee /tmp/artifacts/output.txt
+            export EXIT_CODE=$?
+            mv /tmp/net-profiler-* /tmp/artifacts/
+            mv /tmp/repo/cypress/videos /tmp/artifacts/videos
+            exit $EXIT_CODE
+      - store_artifacts:
+          path: /tmp/artifacts
 
   "test-against-staging":
     <<: *defaults
@@ -705,74 +745,83 @@ jobs:
           background: true
       - run:
           working_directory: /tmp/kitchensink
+          environment:
+            DEBUG: cypress:*
           command: npm run e2e
 
 linux-workflow: &linux-workflow
   jobs:
     - build
-    - lint:
-        name: Linux lint
-        requires:
-          - build
-    - lint-typescript:
-        requires:
-          - build
+    # - lint:
+    #     name: Linux lint
+    #     requires:
+    #       - build
+    # - lint-typescript:
+    #     requires:
+    #       - build
     # unit, integration and e2e tests
-    - unit-tests:
-        requires:
-          - build
-    - server-unit-tests:
-        requires:
-          - build
-    - server-integration-tests:
-        requires:
-          - build
-    - server-performance-tests:
-        requires:
-          - build
-    - server-e2e-tests-1:
-        requires:
-          - build
-    - server-e2e-tests-2:
-        requires:
-          - build
-    - server-e2e-tests-3:
-        requires:
-          - build
-    - server-e2e-tests-4:
-        requires:
-          - build
-    - server-e2e-tests-5:
-        requires:
-          - build
-    - server-e2e-tests-6:
-        requires:
-          - build
-    - server-e2e-tests-7:
-        requires:
-          - build
-    - server-e2e-tests-8:
-        requires:
-          - build
-    - driver-integration-tests-3x:
-        requires:
-          - build
-    - desktop-gui-integration-tests-2x:
-        requires:
-          - build
-    - reporter-integration-tests:
-        requires:
-          - build
-    - run-launcher:
-        requires:
-          - build
-    # various testing scenarios, like building full binary
-    # and testing it on a real project
-    - test-against-staging:
+    # - unit-tests:
+    #     requires:
+    #       - build
+    # - server-unit-tests:
+    #     requires:
+    #       - build
+    # - server-integration-tests:
+    #     requires:
+    #       - build
+    # - server-performance-tests:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-1:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-2:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-3:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-4:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-5:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-6:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-7:
+    #     requires:
+    #       - build
+    # - server-e2e-tests-8:
+    #     requires:
+    #       - build
+    # - driver-integration-tests-3x:
+    #     requires:
+    #       - build
+    # - desktop-gui-integration-tests-2x:
+    #     requires:
+    #       - build
+    # - reporter-integration-tests:
+    #     requires:
+    #       - build
+    # - run-launcher:
+    #     requires:
+    #       - build
+    # # various testing scenarios, like building full binary
+    # # and testing it on a real project
+    # - test-against-staging:
+    #     filters:
+    #       branches:
+    #         only:
+    #           - develop
+    #     requires:
+    #       - build
+    - run-flaky-network-tests-until-fail:
         filters:
           branches:
             only:
-              - develop
+              - debug-proxy-flake-w-electron-2
         requires:
           - build
     - test-kitchensink-against-staging:
@@ -887,5 +936,5 @@ mac-workflow: &mac-workflow
 workflows:
   linux:
     <<: *linux-workflow
-  mac:
-    <<: *mac-workflow
+  # mac:
+  #   <<: *mac-workflow

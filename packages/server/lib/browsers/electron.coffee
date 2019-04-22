@@ -1,7 +1,9 @@
 _             = require("lodash")
 EE            = require("events")
 Promise       = require("bluebird")
+chc           = require("chrome-har-capturer")
 debug         = require("debug")("cypress:server:browsers:electron")
+fs            = require("../util/fs")
 menu          = require("../gui/menu")
 Windows       = require("../gui/windows")
 appData       = require("../util/app_data")
@@ -89,8 +91,9 @@ module.exports = {
 
     Promise
     .try =>
-      if options.show is false
-        @_attachDebugger(win.webContents)
+
+      @_attachDebugger(win.webContents)
+      @_attachHarCapturer(win.webContents)
 
       if ua = options.userAgent
         @_setUserAgent(win.webContents, ua)
@@ -123,6 +126,62 @@ module.exports = {
 
     webContents.debugger.sendCommand("Console.enable")
 
+  _attachHarCapturer: (webContents) ->
+    log = []
+    debug('attaching har capturer')
+    onMessage = (event, method, params) ->
+      # https://github.com/cyrus-and/chrome-har-capturer#fromlogurl-log-options
+      if not [
+        "Page.domContentEventFired",
+        "Page.loadEventFired",
+        "Network.requestWillBeSent",
+        "Network.dataReceived",
+        "Network.responseReceived",
+        "Network.resourceChangedPriority",
+        "Network.loadingFinished",
+        "Network.loadingFailed"
+      ].includes(method)
+        return
+
+      debug("pushing #{method} event to har")
+      log.push({
+        method
+        params
+      })
+
+      if method == 'Network.loadingFinished' # the chrome events don't include the body, attach it manually if we want it in the HAR
+        debug("getting response body for #{params.requestId}")
+        webContents.debugger.sendCommand 'Network.getResponseBody', {
+          requestId: params.requestId
+        }, (err, result) ->
+          debug("received response body for #{params.requestId}")
+          result.requestId = params.requestId
+          log.push({
+            method: 'Network.getResponseBody',
+            params: result
+          })
+
+    debug('har capturer attached')
+
+    webContents.debugger.on "message", onMessage
+
+    webContents.debugger.once "detach", ->
+      # on detach, write out the HAR
+      debug("debugger detaching")
+      chc.fromLog("http://cypress-full-internal-HAR", log)
+      .then (har) ->
+        now = Number(new Date())
+        harPath = "/tmp/artifacts/#{now}-har.json"
+        cdpPath = "/tmp/artifacts/#{now}-cdp-log.json"
+        debug("writing har to #{harPath}")
+        fs.writeJson(harPath, har)
+        fs.writeJson(cdpPath, log)
+
+        log = []
+
+    webContents.debugger.sendCommand('Network.enable')
+    webContents.debugger.sendCommand('Page.enable')
+
   _getPartition: (options) ->
     if options.isTextTerminal
       ## create dynamic persisted run
@@ -148,7 +207,7 @@ module.exports = {
     new Promise (resolve) ->
       webContents.session.setProxy({
         proxyRules: proxyServer
-        ## this should really only be necessary when 
+        ## this should really only be necessary when
         ## running Chromium versions >= 72
         ## https://github.com/cypress-io/cypress/issues/1872
         proxyBypassRules: "<-loopback>"
