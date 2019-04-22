@@ -7,6 +7,7 @@ import { getProxyForUrl } from 'proxy-from-env'
 import tls from 'tls'
 import url from 'url'
 import { getAddress } from './connect'
+import { setNoDelay } from './socket'
 
 const debug = debugModule('cypress:network:agent')
 const CRLF = '\r\n'
@@ -168,17 +169,24 @@ class HttpAgent extends http.Agent {
 
   createSocket (req: http.ClientRequest, options: http.RequestOptions, cb: http.SocketCallback) {
     debug('createsocket with opts.href %s', options.href)
+
+    const onSocket = (err, socket) => {
+      setNoDelay(socket)
+
+      return cb(err, socket)
+    }
+
     if (process.env.HTTP_PROXY) {
       const proxy = getProxyForUrl(options.href)
 
       if (proxy) {
         options.proxy = proxy
 
-        return this._createProxiedSocket(req, <RequestOptionsWithProxy>options, cb)
+        return this._createProxiedSocket(req, <RequestOptionsWithProxy>options, onSocket)
       }
     }
 
-    super.createSocket(req, options, cb)
+    super.createSocket(req, options, onSocket)
   }
 
   _createProxiedSocket (req: http.ClientRequest, options: RequestOptionsWithProxy, cb: http.SocketCallback) {

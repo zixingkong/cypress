@@ -1,5 +1,7 @@
 _             = require("lodash")
+os            = require("os")
 EE            = require("events")
+path          = require("path")
 Promise       = require("bluebird")
 chc           = require("chrome-har-capturer")
 debug         = require("debug")("cypress:server:browsers:electron")
@@ -89,11 +91,12 @@ module.exports = {
     if options.show
       menu.set({withDevTools: true})
 
+    spec = _.last(url.split("/"))
+
     Promise
     .try =>
-
       @_attachDebugger(win.webContents)
-      @_attachHarCapturer(win.webContents)
+      @_attachHarCapturer(win.webContents, spec)
 
       if ua = options.userAgent
         @_setUserAgent(win.webContents, ua)
@@ -126,7 +129,7 @@ module.exports = {
 
     webContents.debugger.sendCommand("Console.enable")
 
-  _attachHarCapturer: (webContents) ->
+  _attachHarCapturer: (webContents, spec) ->
     log = []
     debug('attaching har capturer')
     onMessage = (event, method, params) ->
@@ -151,15 +154,20 @@ module.exports = {
 
       if method == 'Network.loadingFinished' # the chrome events don't include the body, attach it manually if we want it in the HAR
         debug("getting response body for #{params.requestId}")
+
+        obj = {
+          method: 'Network.getResponseBody',
+        }
+
+        log.push(obj)
+
         webContents.debugger.sendCommand 'Network.getResponseBody', {
           requestId: params.requestId
         }, (err, result) ->
           debug("received response body for #{params.requestId}")
+
           result.requestId = params.requestId
-          log.push({
-            method: 'Network.getResponseBody',
-            params: result
-          })
+          obj.params = result
 
     debug('har capturer attached')
 
@@ -168,14 +176,20 @@ module.exports = {
     webContents.debugger.once "detach", ->
       # on detach, write out the HAR
       debug("debugger detaching")
+
       chc.fromLog("http://cypress-full-internal-HAR", log)
       .then (har) ->
         now = Number(new Date())
-        harPath = "/tmp/artifacts/#{now}-har.json"
-        cdpPath = "/tmp/artifacts/#{now}-cdp-log.json"
+
+        tmpDir = process.env.CIRCLE_ARTIFACTS or os.tmpdir()
+
+        harPath = path.join(tmpDir, spec, "#{now}-har.json")
+        cdpPath = path.join(tmpDir, spec, "#{now}-cdp-log.json")
+
         debug("writing har to #{harPath}")
-        fs.writeJson(harPath, har)
-        fs.writeJson(cdpPath, log)
+
+        fs.outputJson(harPath, har)
+        fs.outputJson(cdpPath, log)
 
         log = []
 

@@ -55,6 +55,51 @@ niv.install("react-dom@15.6.1")
       res.type("pdf")
       res.send(bytes)
 
+  app.get "/slow_response.html", (req, res) ->
+    res.socket.setNoDelay(true)
+
+    res.write("""
+    <html>
+      <body>
+        socket.html
+
+        <div id="replace">replace me</div>
+
+        <script type="text/javascript">
+          (function(){
+            debugger
+            const el = document.getElementById('replace')
+
+            el.innerHTML = 'replaced by script slow_response.js'
+          })()
+        </script>
+      </body>
+    </html>
+    """)
+
+  app.get "/slow_response.js", (req, res) ->
+    res.socket.setNoDelay(true)
+
+    console.log("WRITING FIRST BYTES OF slow_response.js")
+
+    # res.type("js")
+    # res.flushHeaders()
+
+    # w = res.write("""
+    #   (function(){
+    #     debugger
+    #     const el = document.getElementById('replace')
+
+    #     el.innerHTML = 'replaced by script slow_response.js'
+    #   })()
+    # """)
+
+    setTimeout ->
+      req.socket.destroy()
+    , 2000
+
+    # console.log("FIRST BYTES returned", w)
+
   app.get "/basic_auth", (req, res) ->
     user = auth(req)
 
@@ -91,7 +136,13 @@ niv.install("react-dom@15.6.1")
     .status(500)
     .send("<html><body>server error</body></html>")
 
-  app.use(express.static(path.join(__dirname, "..", "cypress")))
+  app.use(express.static(path.join(__dirname, "..", "cypress"), {
+    setHeaders: (res, path, stat) ->
+      if /socket\.html/.test(path)
+        res.on "finish", ->
+          process.exit(0)
+    })
+  )
 
   app.use(require("errorhandler")())
 

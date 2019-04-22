@@ -13,7 +13,7 @@ check        = require("check-more-types")
 httpsProxy   = require("@packages/https-proxy")
 compression  = require("compression")
 debug        = require("debug")("cypress:server:server")
-agent        = require("@packages/network").agent
+network      = require("@packages/network")
 cors         = require("./util/cors")
 uri          = require("./util/uri")
 origin       = require("./util/origin")
@@ -34,7 +34,11 @@ fileServer   = require("./file_server")
 DEFAULT_DOMAIN_NAME    = "localhost"
 fullyQualifiedRe       = /^https?:\/\//
 
+{ agent, socket } = network
+
 setProxiedUrl = (req) ->
+  socket.setNoDelay(req.socket)
+
   ## bail if we've already proxied the url
   return if req.proxiedUrl
 
@@ -591,13 +595,13 @@ class Server
           socket.end(response)
 
       proxy.ws(req, socket, head, {
+        agent
         secure: false
         target: {
           host: hostname
           port: port
           protocol: protocol
         }
-        agent: agent
       }, onProxyErr)
     else
       ## we can't do anything with this socket

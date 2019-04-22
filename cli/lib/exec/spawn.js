@@ -12,9 +12,16 @@ const { throwFormErrorText, errors } = require('../errors')
 
 const isXlibOrLibudevRe = /^(?:Xlib|libudev)/
 const isHighSierraWarningRe = /\*\*\* WARNING/
+const isGpuWarningRe = /GL_INVALID_FRAMEBUFFER_OPERATION/
+
+const warnings = [isXlibOrLibudevRe, isHighSierraWarningRe, isGpuWarningRe]
 
 function isPlatform (platform) {
   return os.platform() === platform
+}
+
+function isWarningLine (str) {
+  return _.some(warnings, _.matches(str))
 }
 
 function needsStderrPiped (needsXvfb) {
@@ -105,7 +112,7 @@ module.exports = {
           const str = data.toString()
 
           // bail if this is warning line garbage
-          if (isXlibOrLibudevRe.test(str) || isHighSierraWarningRe.test(str)) {
+          if (isWarningLine(str)) {
             return
           }
 

@@ -231,6 +231,12 @@ module.exports = {
           .pipe(thr)
           .on("error", onError)
 
+        str.on "data", (d) ->
+          debug("got data from body %o", {
+            url: remoteUrl,
+            data: d.toString("utf8")
+          })
+
         return str.pipe(thr)
 
     endWithResponseErr = (err) ->
@@ -266,6 +272,11 @@ module.exports = {
         }
       })
 
+      debug("request errored error %o", {
+        url: remoteUrl
+        stack: err.stack
+      })
+
       str.end(getErrorHtml(err))
 
     onResponse = (str, incomingRes) =>
@@ -283,6 +294,7 @@ module.exports = {
         return "partial"
 
       wantsSecurityRemoved = do ->
+        return false
         ## we want to remove security IF we're doing a full injection
         ## on the response or its a request for any javascript script tag
         config.modifyObstructiveCode and (
@@ -366,9 +378,35 @@ module.exports = {
           base64 = Buffer.from(a.username + ":" + a.password).toString("base64")
           req.headers["authorization"] = "Basic #{base64}"
 
+      onRqError = (err) ->
+        debug("rq errored %o", {
+          url: remoteUrl
+          code: err.code
+          stack: err.stack
+        })
+
+        req.socket.destroy()
+
       rq = request.create(opts)
 
-      rq.on("error", endWithResponseErr)
+      rq.on("error", onRqError)
+
+      rq.on "socket", (socket) ->
+        _.each ["close", "connect", "data", "drain", "end", "lookup"], (evt) ->
+          socket.on evt, (params...) ->
+            debug("socket event: '#{evt}' with args %o", { params })
+
+        socket.on "error", (err) ->
+          debug("socket error: %o", {
+            url: remoteUrl
+            stack: err.stack
+          })
+
+          onRqError(err)
+
+        debug("got socket %o", {
+          url: remoteUrl
+        })
 
       rq.on "response", (incomingRes) ->
         onResponse(rq, incomingRes)
@@ -381,6 +419,8 @@ module.exports = {
       ## like SSE, but also on any regular ol'
       ## http request
       req.on "aborted", ->
+        debug("request aborted", { url: remoteUrl })
+
         rq.abort()
 
       ## proxy the request body, content-type, headers

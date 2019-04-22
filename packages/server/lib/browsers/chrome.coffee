@@ -62,7 +62,7 @@ defaultArgs = [
   ## as much as 30 seconds. If you VNC in and open dev tools or
   ## click on a button, it'll "instantly" work. with this
   ## option enabled, it will time out some of our tests in circle
-  # "--disable-background-networking"
+  "--disable-background-networking"
   "--disable-web-resources"
   "--safebrowsing-disable-auto-update"
   "--safebrowsing-disable-download-protection"
