@@ -157,6 +157,9 @@ class Server
 
       @_server  = http.createServer(app)
 
+      debug("old keepalivetimeout:", @_server.keepAliveTimeout)
+      @_server.keepAliveTimeout = 0
+
       allowDestroy(@_server)
 
       onError = (err) =>
