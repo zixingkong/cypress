@@ -48,10 +48,9 @@ describe "lib/socket", ->
         @server.startWebsockets(@automation, @cfg, @options)
         @socket = @server._socket
 
-        done = _.once(done)
-
         ## when our real client connects then we're done
         @socket.io.on "connection", (socket) =>
+          debugger
           @socketClient = socket
           done()
 
@@ -65,13 +64,14 @@ describe "lib/socket", ->
           path: socketIoRoute
           transports: ["websocket"]
         })
+
       return
 
     afterEach ->
       @client.disconnect()
 
     context "on(automation:request)", ->
-      describe "#onAutomation", ->
+      describe.only "#onAutomation", ->
         before ->
           global.chrome = {
             cookies: {
@@ -93,12 +93,15 @@ describe "lib/socket", ->
 
         beforeEach (done) ->
           @socket.io.on "connection", (@extClient) =>
+            debugger
             @extClient.on "automation:client:connected", ->
+              debugger
               done()
 
           extension.connect(@cfg.proxyUrl, @cfg.socketIoRoute, socketIo.client)
 
         afterEach ->
+          debugger
           @extClient.disconnect()
 
         after ->
@@ -150,14 +153,6 @@ describe "lib/socket", ->
               ]
             })
             done()
-
-        it "throws trying to clear namespaced cookie"
-
-        it "throws trying to set a namespaced cookie"
-
-        it "throws trying to get a namespaced cookie"
-
-        it "throws when automation:response has an error in it"
 
         it "throws when no clients connected to automation", (done) ->
           @extClient.disconnect()

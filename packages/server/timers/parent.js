@@ -64,6 +64,8 @@ function fix () {
   function clear (id) {
     log('clearing timer id %d from queue %o', id, queue)
 
+    log('clear called from %o', { stack: new Error().stack })
+
     delete queue[id]
   }
 
