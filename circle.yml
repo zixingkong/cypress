@@ -259,7 +259,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run all test-unit -- --package server
+      - run: DEBUG=cypress:server:timers ./untilfail.sh "npm run all test-unit -- --package server --spec test/unit/timers_spec.coffee"
       - store_test_results:
           path: /tmp/cypress
 
