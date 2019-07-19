@@ -131,6 +131,23 @@ controllers = {
 
   load304: (req, res) ->
     res.type('html').end('<img src="/static/javascript-logo.png"/>')
+
+  keepAliveRedirect: (req, res) ->
+    res.writeHead(301, {
+      Location: "/keep-alive-redirect-2"
+      "Content-Length": 0
+    })
+    ## using an amazing hack to flush headers without writing any data
+    ## https://michaelheap.com/force-flush-headers-using-the-http-module-for-nodejs/
+    res.socket.write(res._header);
+    res._headerSent = true;
+    res.socket.destroy()
+
+  keepAliveRedirect2: (req, res) ->
+    res.writeHead(200, {
+      "Content-Type": "text/html"
+    })
+    res.end('it works')
 }
 
 describe "e2e network error handling", ->
@@ -164,6 +181,8 @@ describe "e2e network error handling", ->
           app.get "/works-third-time/:id", controllers.worksThirdTime
           app.get "/works-third-time-else-500/:id", controllers.worksThirdTimeElse500
           app.post "/print-body-third-time", controllers.printBodyThirdTime
+          app.get "/keep-alive-redirect", controllers.keepAliveRedirect
+          app.get "/keep-alive-redirect-2", controllers.keepAliveRedirect2
 
           app.get "/load-304.html", controllers.load304
           app.get "/load-img-net-error.html", controllers.loadImgNetError
@@ -308,11 +327,13 @@ describe "e2e network error handling", ->
         expectedExitCode: 1
       })
 
-    it "tests run as expected", ->
+    it.only "tests run as expected", ->
       e2e.exec(@, {
         spec: "network_error_handling_spec.js"
         video: false
         expectedExitCode: 2
+        exit: false
+        headed: true
       }).then ({ stdout }) ->
         expect(stdout).to.contain('1) network error handling cy.visit() retries fails after retrying 5x:')
         expect(stdout).to.contain('CypressError: cy.visit() failed trying to load:')

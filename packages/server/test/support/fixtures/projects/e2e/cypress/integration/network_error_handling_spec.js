@@ -1,5 +1,11 @@
 describe('network error handling', function () {
   context('cy.visit() retries', function () {
+    it.only('keepalive', function() {
+      cy.visit({
+        url: '/keep-alive-redirect'
+      })
+    })
+
     it('fails after retrying 5x', function () {
       cy.visit({
         url: '/immediate-reset?visit',
