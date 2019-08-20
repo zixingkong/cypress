@@ -99,8 +99,8 @@ class $Cypress
 
     ## set domainName but allow us to turn
     ## off this feature in testing
-    if d = config.remote?.domainName
-      document.domain = d
+    if o = config.remote?.origin
+      document.domain = o.match(/\/\/([^:/]+)/)[1]
 
     ## a few static props for the host OS, browser
     ## and the current version of Cypress

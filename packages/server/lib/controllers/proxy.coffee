@@ -199,7 +199,7 @@ module.exports = {
         rewrite = (body) ->
           ## transparently decode their body to a node string and then re-encode
           nodeCharset = getNodeCharsetFromResponse(headers, body)
-          body = rewriter.html(iconv.decode(body, nodeCharset), remoteState.domainName, wantsInjection, wantsSecurityRemoved)
+          body = rewriter.html(iconv.decode(body, nodeCharset), (if remoteState.origin then remoteState.origin.match(/\/\/([^:/]+)/)[1] else remoteState.domainName), wantsInjection, wantsSecurityRemoved)
           iconv.encode(body, nodeCharset)
 
         ## TODO: we can probably move this to the new

@@ -26,7 +26,7 @@ module.exports = {
       .then (js) =>
         res.render iframePath, {
           title:        @getTitle(test)
-          domain:       getRemoteState().domainName
+          domain:       if getRemoteState().origin then getRemoteState().origin.match(/\/\/([^:/]+)/)[1] else getRemoteState().domainName
           # stylesheets:  @getStylesheets(config)
           javascripts:  js
           specs:        specs
