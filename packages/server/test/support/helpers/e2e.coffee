@@ -501,6 +501,7 @@ module.exports = e2e = {
     new Promise (resolve, reject) ->
       sp = cp.spawn "node", args, {
         uid: options.uid
+        shell: true
         env: _.chain(process.env)
         .omit("CYPRESS_DEBUG")
         .extend({

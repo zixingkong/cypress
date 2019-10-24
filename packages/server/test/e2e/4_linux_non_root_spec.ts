@@ -4,7 +4,7 @@ import randomstring from 'randomstring'
 const e2e = require('../support/helpers/e2e')
 
 function createUser (username) {
-  return execa.shell(`adduser --disabled-password --gecos "" --home /home/person --force-badname ${username}`)
+  return execa.shell(`adduser --disabled-password --gecos "" --home /home/person --force-badname --group root ${username}`)
   .then(({ stdout }) => {
     return new RegExp(`new user .${username}. \\((\\d+)\\)`).exec(stdout)[1]
   })
@@ -24,6 +24,7 @@ describe('e2e linux non-root spec', function () {
     spec: 'spec.ts',
     expectedExitCode: 0,
     snapshot: true,
+    useCli: true,
     onRun (exec) {
       const username = `cy-${randomstring.generate({ length: 10 })}`
 
@@ -33,6 +34,7 @@ describe('e2e linux non-root spec', function () {
 
         return exec({
           uid,
+          shell: true,
         })
       })
     },
