@@ -46,12 +46,6 @@ $(() => {
     $(e.currentTarget).addClass('hidden')
   })
 
-  // listen to contextmenu to demonstrate logic on right click command
-  $('.rightclick-action-div').on('contextmenu', (e) => {
-    $('.rightclick-action-input-hidden').removeClass('hidden').focus()
-    $(e.currentTarget).addClass('hidden')
-  })
-
   // listen to focus to demonstrate logic on focus command
   $('.action-focus').on('focus', (e) => {
     $(e.currentTarget).addClass('focus')
