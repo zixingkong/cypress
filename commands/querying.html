@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Kitchen Sink | Cypress Example" />
     <meta name="author" content="Cypress.io" />
-    <meta name="copyright" content="Cypress.io Copyright (c) 2017" />
+    <meta name="copyright" content="Cypress.io, Inc" />
 
     <title>Cypress.io: Kitchen Sink</title>
 
@@ -105,7 +105,7 @@
       <div id="querying">
         <div class="row">
           <div class="col-xs-7">
-            <h4><a href="https://on.cypress.io/get">cy.get()</a></h4>
+            <h4 id="get"><a href="https://on.cypress.io/get">cy.get()</a></h4>
             <p>
               To query for the button, use the
               <a href="https://on.cypress.io/get"><code>cy.get()</code></a>
@@ -179,7 +179,7 @@ cy.get('[data-test-id="test-example"]')
 
         <div class="row">
           <div class="col-xs-7">
-            <h4><a href="https://on.cypress.io/contains">cy.contains()</a></h4>
+            <h4 id="contains"><a href="https://on.cypress.io/contains">cy.contains()</a></h4>
             <p>
               We can find elements by their content using
               <a href="https://on.cypress.io/contains"
@@ -223,7 +223,7 @@ cy.get('.query-button')
           <div class="col-xs-12"><hr /></div>
 
           <div class="col-xs-7">
-            <h4><a href="https://on.cypress.io/within">.within()</a></h4>
+            <h4 id="within"><a href="https://on.cypress.io/within">.within()</a></h4>
             <p>
               We can find elements within a specific DOM element
               <a href="https://on.cypress.io/within"><code>.within()</code></a>
@@ -262,7 +262,7 @@ cy.get('.query-button')
           <div class="col-xs-12"><hr /></div>
 
           <div class="col-xs-7">
-            <h4><a href="https://on.cypress.io/root">cy.root()</a></h4>
+            <h4 id="root"><a href="https://on.cypress.io/root">cy.root()</a></h4>
             <p>
               We can find the root DOM element<a
                 href="https://on.cypress.io/root"
@@ -292,7 +292,7 @@ cy.get('.query-ul').within(() => {
 
         <div class="row">
           <div class="col-xs-7">
-            <h4><a href="https://on.cypress.io/best-practices#Selecting-Elements">Best Practices: Selecting elements</a></h4>
+            <h4 id="best-practices"><a href="https://on.cypress.io/best-practices#Selecting-Elements">Best Practices: Selecting elements</a></h4>
             <p>
               Prefer dedicated <code>data-cy</code> or <code>data-test</code> attributes to CSS class names and element IDs.
               See detailed discussion at <a href="https://on.cypress.io/best-practices#Selecting-Elements">Best Practices: Selecting elements</a>
@@ -333,6 +333,6 @@ cy.get('.query-ul').within(() => {
     <script src="/assets/js/vendor/jquery-1.12.0.min.cbb11b58.js"></script>
     <script src="/assets/js/vendor/bootstrap.min.c5b5b2fa.js"></script>
     <script src="/assets/js/vendor/highlight.pack.4cbe7783.js"></script>
-    <script src="/assets/js/scripts.b93bdaaf.js"></script>
+    <script src="/assets/js/scripts.7455aea6.js"></script>
   </body>
 </html>

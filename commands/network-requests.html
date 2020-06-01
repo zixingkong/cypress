@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Kitchen Sink | Cypress Example">
   <meta name="author" content="Cypress.io">
-  <meta name="copyright" content="Cypress.io Copyright (c) 2017">
+  <meta name="copyright" content="Cypress.io, Inc">
 
   <title>Cypress.io: Kitchen Sink</title>
 
@@ -72,7 +72,7 @@
       <div class="row">
 
         <div class="col-xs-7">
-          <h4><a href="https://on.cypress.io/server">cy.server()</a></h4>
+          <h4 id="server"><a href="https://on.cypress.io/server">cy.server()</a></h4>
           <p>To control the behavior of network requests and responses, use the <a href="https://on.cypress.io/server"><code>cy.server()</code></a> command.</p>
           <pre><code class="javascript">cy.server().should((server) => {
   // the default options on server
@@ -110,7 +110,7 @@ cy.server({
         <div class="col-xs-12"><hr></div>
 
         <div class="col-xs-7">
-          <h4><a href="https://on.cypress.io/request">cy.request()</a></h4>
+          <h4 id="request"><a href="https://on.cypress.io/request">cy.request()</a></h4>
           <p>To make an XHR request, use the <a href="https://on.cypress.io/request"><code>cy.request()</code></a> command.</p>
           <pre><code class="javascript">cy.request('https://jsonplaceholder.cypress.io/comments')
   .should((response) => {
@@ -137,9 +137,12 @@ cy.request('https://jsonplaceholder.cypress.io/users?_limit=1')
   .then((response) => {
     expect(response).property('status').to.equal(201) // new entity created
     expect(response).property('body').to.contain({
-      id: 101, // there are already 100 posts, so new entity gets id 101
       title: 'Cypress Test Runner',
     })
+    // we don't know the exact post id - only that it will be > 100
+    // since JSONPlaceholder has built-in 100 posts
+    expect(response.body).property('id').to.be.a('number')
+      .and.to.be.gt(100)
     // we don't know the user id here - since it was in above closure
     // so in this test just confirm that the property is there
     expect(response.body).property('userId').to.be.a('number')
@@ -178,7 +181,7 @@ cy.request('https://jsonplaceholder.cypress.io/users?_limit=1')
         <div class="col-xs-12"><hr></div>
 
         <div class="col-xs-7">
-          <h4><a href="https://on.cypress.io/route">cy.route()</a></h4>
+          <h4 id="route"><a href="https://on.cypress.io/route">cy.route()</a></h4>
           <p>To route responses to matching requests, use the <a href="https://on.cypress.io/route"><code>cy.route()</code></a> command.</p>
           <pre><code class="javascript">let message = 'whoa, this comment does not exist'
 cy.server()
@@ -246,6 +249,6 @@ cy.get('.network-put-comment').should('contain', message)</code></pre>
   <script src="/assets/js/vendor/jquery-1.12.0.min.cbb11b58.js"></script>
   <script src="/assets/js/vendor/bootstrap.min.c5b5b2fa.js"></script>
   <script src="/assets/js/vendor/highlight.pack.4cbe7783.js"></script>
-  <script src="/assets/js/scripts.b93bdaaf.js"></script>
+  <script src="/assets/js/scripts.7455aea6.js"></script>
 </body>
 </html>
