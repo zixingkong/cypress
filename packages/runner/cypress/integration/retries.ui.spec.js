@@ -107,7 +107,11 @@ describe('runner/cypress retries.ui.spec', { viewportWidth: 600, viewportHeight:
 
           stub = cy.stub().callsFake(cyReject(() => {
             attempt++
-            expect(cy.$$('.attempt-item > .is-open').length).to.equal(attempt)
+
+            const $attemptCollapsible = cy.$$(attemptTag(attempt))
+            .parentsUntil('.collapsible').last().parent()
+
+            expect($attemptCollapsible).have.class('is-open')
           }))
 
           autCypress.Screenshot.onAfterScreenshot = stub
