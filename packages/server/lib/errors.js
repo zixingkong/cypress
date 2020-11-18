@@ -901,9 +901,16 @@ const getMsgByType = function (type, arg1 = {}, arg2, arg3) {
         The \`experimentalShadowDomSupport\` configuration option was removed in Cypress version \`5.2.0\`. It is no longer necessary when utilizing the \`includeShadowDom\` option.
 
         You can safely remove this option from your config.`
+    case 'EXPERIMENTAL_FETCH_POLYFILL_DEPRECATED':
+      return stripIndent`\
+        The \`experimentalFetchPolyfill\` configuration option was deprecated in Cypress version \`6.0.0\`. It will be removed in a future release.
+
+        Consider using \`cy.http()\` to intercept fetch calls instead.
+
+        https://on.cypress.io/http`
     case 'EXPERIMENTAL_NETWORK_STUBBING_REMOVED':
       return stripIndent`\
-        The \`experimentalNetworkStubbing\` configuration option was removed in Cypress version \`6.0.0\`. 
+        The \`experimentalNetworkStubbing\` configuration option was removed in Cypress version \`6.0.0\`.
         It is no longer necessary for using \`cy.http()\` (formerly \`cy.route2()\`).
 
         You can safely remove this option from your config.`
@@ -920,7 +927,7 @@ const getMsgByType = function (type, arg1 = {}, arg2, arg3) {
     case 'INVALID_CONFIG_OPTION':
       return stripIndent`\
         ${arg1.map((arg) => `\`${arg}\` is not a valid configuration option`)}
-        
+
         https://on.cypress.io/configuration
         `
     default:

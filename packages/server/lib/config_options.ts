@@ -71,7 +71,6 @@ export const options = [
     isExperimental: true,
   }, {
     name: 'experimentalFetchPolyfill',
-    defaultValue: false,
     validation: v.isBoolean,
     isExperimental: true,
   }, {
@@ -271,7 +270,18 @@ export const options = [
   },
 ]
 
-export const breakingOptions = [
+type BreakingOption = {
+  // Breaking config key
+  name: string
+  // Error or warning key
+  errorKey: string
+  // If this is a renamed config key, this is the new name
+  newName?: string
+  // Set to `true` to only throw a warning, not an error
+  isWarning?: boolean
+}
+
+export const breakingOptions: BreakingOption[] = [
   {
     name: 'blacklistHosts',
     errorKey: 'RENAMED_CONFIG_OPTION',
@@ -283,6 +293,10 @@ export const breakingOptions = [
   }, {
     name: 'experimentalShadowDomSupport',
     errorKey: 'EXPERIMENTAL_SHADOW_DOM_REMOVED',
+    isWarning: true,
+  }, {
+    name: 'experimentalFetchPolyfill',
+    errorKey: 'EXPERIMENTAL_FETCH_POLYFILL_DEPRECATED',
     isWarning: true,
   }, {
     name: 'experimentalNetworkStubbing',
