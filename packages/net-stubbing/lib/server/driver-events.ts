@@ -20,7 +20,7 @@ import CyServer from '@packages/server'
 
 const debug = Debug('cypress:net-stubbing:server:driver-events')
 
-async function _onRouteAdded (state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.AddRoute) {
+async function _createRoute (state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.AddRoute) {
   const routeMatcher = _restoreMatcherOptionsTypes(options.routeMatcher)
   const { staticResponse } = options
 
@@ -69,13 +69,21 @@ export function _restoreMatcherOptionsTypes (options: AnnotatedRouteMatcherOptio
   return ret
 }
 
+function _setRouteDisabled (state: NetStubbingState, { handlerId, disabled }: NetEventFrames.SetRouteDisabled) {
+  const route = _.find(state.routes, { handlerId })
+
+  if (route) {
+    route.disabled = disabled
+  }
+}
+
 type OnNetEventOpts = {
   eventName: string
   state: NetStubbingState
   socket: CyServer.Socket
   getFixture: GetFixtureFn
   args: any[]
-  frame: NetEventFrames.AddRoute | NetEventFrames.HttpRequestContinue | NetEventFrames.HttpResponseContinue
+  frame: NetEventFrames.AddRoute | NetEventFrames.SetRouteDisabled | NetEventFrames.HttpRequestContinue | NetEventFrames.HttpResponseContinue
 }
 
 export async function onNetEvent (opts: OnNetEventOpts): Promise<any> {
@@ -84,8 +92,10 @@ export async function onNetEvent (opts: OnNetEventOpts): Promise<any> {
   debug('received driver event %o', { eventName, args })
 
   switch (eventName) {
-    case 'route:added':
-      return _onRouteAdded(state, getFixture, <NetEventFrames.AddRoute>frame)
+    case 'create:route':
+      return _createRoute(state, getFixture, <NetEventFrames.AddRoute>frame)
+    case 'set:route:disabled':
+      return _setRouteDisabled(state, <NetEventFrames.SetRouteDisabled>frame)
     case 'http:request:continue':
       return onRequestContinue(state, <NetEventFrames.HttpRequestContinue>frame, socket)
     case 'http:response:continue':

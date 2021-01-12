@@ -31,7 +31,7 @@ describe('network stubbing', { retries: 2 }, function () {
     beforeEach(function () {
       // we don't use cy.spy() because it causes an infinite loop with logging events
       this.sandbox = sinon.createSandbox()
-      this.emit = this.sandbox.spy(Cypress, 'emit').withArgs('backend:request', 'net', 'route:added')
+      this.emit = this.sandbox.spy(Cypress, 'emit').withArgs('backend:request', 'net', 'create:route')
 
       this.testRoute = function (options, handler, expectedEvent, expectedRoute) {
         cy.intercept(options, handler).then(function () {
@@ -39,7 +39,7 @@ describe('network stubbing', { retries: 2 }, function () {
           const route = state('routes')[handlerId!]
 
           expectedEvent.handlerId = handlerId
-          expect(this.emit).to.be.calledWith('backend:request', 'net', 'route:added', expectedEvent)
+          expect(this.emit).to.be.calledWith('backend:request', 'net', 'create:route', expectedEvent)
 
           expect(route.handler).to.deep.eq(expectedRoute.handler)
           expect(route.options).to.deep.eq(expectedRoute.options)

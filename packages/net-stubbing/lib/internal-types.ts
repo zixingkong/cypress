@@ -58,6 +58,11 @@ export declare namespace NetEventFrames {
     handlerId?: string
   }
 
+  export interface SetRouteDisabled {
+    handlerId: string
+    disabled: boolean
+  }
+
   interface BaseHttp {
     requestId: string
     routeHandlerId: string

@@ -17,6 +17,7 @@ export interface BackendRoute {
   hasInterceptor: boolean
   staticResponse?: BackendStaticResponse
   getFixture: GetFixtureFn
+  disabled?: boolean
 }
 
 export interface BackendRequest {
