@@ -51,7 +51,7 @@ export type AnnotatedRouteMatcherOptions = RouteMatcherOptionsGeneric<AnnotatedS
 /** Types for messages between driver and server */
 
 export declare namespace NetEventFrames {
-  export interface AddRoute {
+  export interface CreateRoute {
     routeMatcher: AnnotatedRouteMatcherOptions
     staticResponse?: BackendStaticResponse
     hasInterceptor: boolean

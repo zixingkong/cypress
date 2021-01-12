@@ -53,6 +53,12 @@ export const InterceptRequest: RequestMiddleware = function () {
     return this.next()
   }
 
+  route.hitCount++
+
+  if (route.routeMatcher.times && route.hitCount >= route.routeMatcher.times) {
+    route.disabled = true
+  }
+
   const requestId = _.uniqueId('interceptedRequest')
 
   debug('intercepting request %o', { requestId, route, req: _.pick(this.req, 'url') })

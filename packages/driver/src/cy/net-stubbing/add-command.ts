@@ -67,7 +67,7 @@ function annotateMatcherOptionsTypes (options: RouteMatcherOptions) {
     }
   })
 
-  const noAnnotationRequiredFields: (keyof RouteMatcherOptions)[] = ['https', 'port', 'matchUrlAgainstPath']
+  const noAnnotationRequiredFields: (keyof RouteMatcherOptions)[] = ['https', 'port', 'matchUrlAgainstPath', 'times']
 
   _.extend(ret, _.pick(options, noAnnotationRequiredFields))
 
@@ -213,7 +213,7 @@ export function addCommand (Commands, Cypress: Cypress.Cypress, cy: Cypress.cy, 
     return Cypress.log(obj)
   }
 
-  function addRoute (matcher: RouteMatcherOptions, handler?: RouteHandler) {
+  function createRoute (matcher: RouteMatcherOptions, handler?: RouteHandler) {
     const handlerId = getUniqueId()
 
     const alias = cy.getNextAlias()
@@ -256,7 +256,7 @@ export function addCommand (Commands, Cypress: Cypress.Cypress, cy: Cypress.cy, 
       routeMatcher.headers = lowercaseFieldNames(routeMatcher.headers)
     }
 
-    const frame: NetEventFrames.AddRoute = {
+    const frame: NetEventFrames.CreateRoute = {
       handlerId,
       hasInterceptor,
       routeMatcher,
@@ -322,7 +322,7 @@ export function addCommand (Commands, Cypress: Cypress.Cypress, cy: Cypress.cy, 
       $errUtils.throwErrByPath('net_stubbing.intercept.invalid_route_matcher', { args: { message, matcher: routeMatcherOptions } })
     }
 
-    return addRoute(routeMatcherOptions, handler as RouteHandler)
+    return createRoute(routeMatcherOptions, handler as RouteHandler)
     .then(() => null)
   }
 

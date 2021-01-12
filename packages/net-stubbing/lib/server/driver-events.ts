@@ -20,7 +20,7 @@ import CyServer from '@packages/server'
 
 const debug = Debug('cypress:net-stubbing:server:driver-events')
 
-async function _createRoute (state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.AddRoute) {
+async function _createRoute (state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.CreateRoute) {
   const routeMatcher = _restoreMatcherOptionsTypes(options.routeMatcher)
   const { staticResponse } = options
 
@@ -31,6 +31,7 @@ async function _createRoute (state: NetStubbingState, getFixture: GetFixtureFn, 
   const route: BackendRoute = {
     routeMatcher,
     getFixture,
+    hitCount: 0,
     ..._.omit(options, 'routeMatcher'), // skip the user's un-annotated routeMatcher
   }
 
@@ -62,7 +63,7 @@ export function _restoreMatcherOptionsTypes (options: AnnotatedRouteMatcherOptio
     _.set(ret, field, value)
   })
 
-  const noAnnotationRequiredFields: (keyof AnnotatedRouteMatcherOptions)[] = ['https', 'port', 'matchUrlAgainstPath']
+  const noAnnotationRequiredFields: (keyof AnnotatedRouteMatcherOptions)[] = ['https', 'port', 'matchUrlAgainstPath', 'times']
 
   _.extend(ret, _.pick(options, noAnnotationRequiredFields))
 
@@ -83,7 +84,7 @@ type OnNetEventOpts = {
   socket: CyServer.Socket
   getFixture: GetFixtureFn
   args: any[]
-  frame: NetEventFrames.AddRoute | NetEventFrames.SetRouteDisabled | NetEventFrames.HttpRequestContinue | NetEventFrames.HttpResponseContinue
+  frame: NetEventFrames.CreateRoute | NetEventFrames.SetRouteDisabled | NetEventFrames.HttpRequestContinue | NetEventFrames.HttpResponseContinue
 }
 
 export async function onNetEvent (opts: OnNetEventOpts): Promise<any> {
@@ -93,7 +94,7 @@ export async function onNetEvent (opts: OnNetEventOpts): Promise<any> {
 
   switch (eventName) {
     case 'create:route':
-      return _createRoute(state, getFixture, <NetEventFrames.AddRoute>frame)
+      return _createRoute(state, getFixture, <NetEventFrames.CreateRoute>frame)
     case 'set:route:disabled':
       return _setRouteDisabled(state, <NetEventFrames.SetRouteDisabled>frame)
     case 'http:request:continue':
