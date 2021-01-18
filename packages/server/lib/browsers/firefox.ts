@@ -298,6 +298,7 @@ const defaultPreferences = {
   'media.getusermedia.insecure.enabled': true,
 
   'marionette.log.level': launcherDebug.log.enabled ? 'Debug' : undefined,
+  'remote.log.level': launcherDebug.log.enabled ? 'trace' : undefined,
 
   // where to download files
   // 0: desktop
