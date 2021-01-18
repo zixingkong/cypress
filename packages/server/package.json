@@ -9,7 +9,7 @@
     "codecov": "codecov",
     "dev": "node index.js",
     "docker": "cd ../.. && WORKING_DIR=/packages/server ./scripts/run-docker-local.sh",
-    "postinstall": "true || patch-package",
+    "postinstall": "patch-package",
     "repl": "node repl.js",
     "start": "node ../../scripts/cypress open --dev --global",
     "test": "node ./test/scripts/run.js",
@@ -20,6 +20,7 @@
     "test-watch": "./test/support/watch test"
   },
   "dependencies": {
+    "@benmalka/foxdriver": "0.4.1",
     "@cypress/commit-info": "2.2.0",
     "@cypress/get-windows-proxy": "1.6.1",
     "@cypress/icons": "0.7.0",
@@ -58,7 +59,6 @@
     "firefox-profile": "4.0.0",
     "fix-path": "3.0.0",
     "fluent-ffmpeg": "2.1.2",
-    "foxdriver": "0.1.2",
     "fs-extra": "8.1.0",
     "get-port": "5.1.1",
     "getos": "3.2.1",
@@ -193,7 +193,7 @@
   "productName": "Cypress",
   "workspaces": {
     "nohoist": [
-      "foxdriver"
+      "@benmalka/foxdriver"
     ]
   },
   "optionalDependencies": {

@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Marionette from 'marionette-client'
 import { Command } from 'marionette-client/lib/marionette/message.js'
 import util from 'util'
-import Foxdriver from 'foxdriver'
+import Foxdriver from '@benmalka/foxdriver'
 import * as protocol from './protocol'
 
 const errors = require('../errors')
@@ -21,6 +21,13 @@ let timings = {
 
 const getTabId = (tab) => {
   return _.get(tab, 'browsingContextID')
+}
+
+const isNotInternalFirefoxRequest = (cause) => {
+  return (cause &&
+    cause.loadingDocumentUri &&
+    !cause.loadingDocumentUri.startsWith('moz-extension://')
+  )
 }
 
 const getDelayMsForRetry = (i) => {
@@ -93,20 +100,6 @@ const attachToTabMemory = Bluebird.method((tab) => {
   })
 })
 
-const foxdriverDebug = Debug('foxdriver')
-
-const debugNetwork = async (tab) => {
-  const { network } = tab
-
-  await tab.attach()
-
-  foxdriverDebug('debugging requests for %o', tab)
-
-  network.on('request', (req) => foxdriverDebug('request: %o', req))
-
-  await network.startListeners()
-}
-
 const logGcDetails = () => {
   const reducedTimings = {
     ...timings,
@@ -177,10 +170,14 @@ export default {
     marionettePort,
     foxdriverPort,
   }) {
-    return Bluebird.all([
+    return Bluebird.join(
       this.setupFoxdriver(foxdriverPort),
-      this.setupMarionette(extensions, url, marionettePort),
-    ])
+      this.setupMarionette(extensions, marionettePort),
+      (_, navigateToUrlFn) => {
+        return navigateToUrlFn(url)
+      },
+    )
+    .return(null)
   },
 
   async setupFoxdriver (port) {
@@ -198,10 +195,28 @@ export default {
       debug('received error from foxdriver connection, ignoring %o', err)
     })
 
-    const tabs = await browser.listTabs()
+    // use for debugging in devtools
+    // global.browser = browser
 
-    // await debugNetwork(browser)
-    await Bluebird.map(tabs, debugNetwork)
+    const { processDescriptor } = await browser.request('getProcess', { id: 0 })
+
+    const actors = await browser.client.makeRequest({ to: processDescriptor.actor, type: 'getTarget' })
+
+    browser.setActors(actors.process)
+
+    const network = browser._get('console', 'network')
+
+    network.on('request', (req) => {
+      const { cause } = req
+
+      // filter out all internal firefox network events...
+      if (isNotInternalFirefoxRequest(cause)) {
+        // debugger
+        debug('got FF request %o', req)
+      }
+    })
+
+    await network.startListeners()
 
     forceGcCc = () => {
       let gcDuration; let ccDuration
@@ -252,7 +267,7 @@ export default {
     }
   },
 
-  async setupMarionette (extensions, url, port) {
+  async setupMarionette (extensions, port) {
     await protocol._connectAsync({
       host: '127.0.0.1',
       port,
@@ -283,40 +298,46 @@ export default {
       }
     }
 
-    await driver.connect()
+    return driver.connect()
     .catch(onError('connection'))
+    .then(() => {
+      return new Bluebird((resolve, reject) => {
+        const _onError = (from) => {
+          return onError(from, reject)
+        }
 
-    await new Bluebird((resolve, reject) => {
-      const _onError = (from) => {
-        return onError(from, reject)
-      }
+        const { tcp } = driver
 
-      const { tcp } = driver
+        tcp.socket.on('error', _onError('Socket'))
+        tcp.client.on('error', _onError('CommandStream'))
 
-      tcp.socket.on('error', _onError('Socket'))
-      tcp.client.on('error', _onError('CommandStream'))
-
-      sendMarionette({
-        name: 'WebDriver:NewSession',
-        parameters: { acceptInsecureCerts: true },
-      }).then(() => {
-        return Bluebird.all(_.map(extensions, (path) => {
-          return sendMarionette({
-            name: 'Addon:Install',
-            parameters: { path, temporary: true },
-          })
-        }))
-      })
-      .then(() => {
         return sendMarionette({
-          name: 'WebDriver:Navigate',
-          parameters: { url },
+          name: 'WebDriver:NewSession',
+          parameters: { acceptInsecureCerts: true },
         })
-      })
-      .then(resolve)
-      .catch(_onError('commands'))
-    })
+        .then(() => {
+          return Bluebird.map(extensions, (path) => {
+            return sendMarionette({
+              name: 'Addon:Install',
+              parameters: { path, temporary: true },
+            })
+          })
+        })
+        .then(() => {
+          // resolve with the final function to
+          // navigate to the URL
+          const navigateToUrl = (url) => {
+            return sendMarionette({
+              name: 'WebDriver:Navigate',
+              parameters: { url },
+            })
+          }
 
+          return resolve(navigateToUrl)
+        })
+        .catch(_onError('commands'))
+      })
+    })
     // even though Marionette is not used past this point, we have to keep the session open
     // or else `acceptInsecureCerts` will cease to apply and SSL validation prompts will appear.
   },
