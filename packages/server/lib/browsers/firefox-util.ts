@@ -93,6 +93,20 @@ const attachToTabMemory = Bluebird.method((tab) => {
   })
 })
 
+const foxdriverDebug = Debug('foxdriver')
+
+const debugNetwork = async (tab) => {
+  const { network } = tab
+
+  await tab.attach()
+
+  foxdriverDebug('debugging requests for %o', tab)
+
+  network.on('request', (req) => foxdriverDebug('request: %o', req))
+
+  await network.startListeners()
+}
+
 const logGcDetails = () => {
   const reducedTimings = {
     ...timings,
@@ -184,6 +198,11 @@ export default {
       debug('received error from foxdriver connection, ignoring %o', err)
     })
 
+    const tabs = await browser.listTabs()
+
+    // await debugNetwork(browser)
+    await Bluebird.map(tabs, debugNetwork)
+
     forceGcCc = () => {
       let gcDuration; let ccDuration
 
@@ -220,12 +239,11 @@ export default {
       debug('forcing GC and CC...')
 
       return getPrimaryTab(browser)
-      .then((tab) => {
-        return attachToTabMemory(tab)
-        .then(gc(tab))
-        .then(cc(tab))
-      })
-      .then(() => {
+      .then(async (tab) => {
+        await attachToTabMemory(tab)
+        await gc(tab)
+        await cc(tab)
+
         debug('forced GC and CC completed %o', { ccDuration, gcDuration })
       })
       .tapCatch((err) => {
