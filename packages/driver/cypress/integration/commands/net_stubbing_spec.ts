@@ -1051,6 +1051,29 @@ describe('network stubbing', { retries: 2 }, function () {
       })
     })
 
+    // @see https://github.com/cypress-io/cypress/issues/14446
+    it('should delay the same amount on every response', () => {
+      const delayMs = 250
+
+      const testDelay = () => {
+        const start = Date.now()
+
+        return $.get('/timeout').then((responseText) => {
+          expect(Date.now() - start).to.be.closeTo(delayMs, 50)
+          expect(responseText).to.eq('foo')
+        })
+      }
+
+      cy.intercept('/timeout', {
+        statusCode: 200,
+        body: 'foo',
+        delayMs,
+      }).as('get')
+      .then(() => testDelay()).wait('@get')
+      .then(() => testDelay()).wait('@get')
+      .then(() => testDelay()).wait('@get')
+    })
+
     context('body parsing', function () {
       it('automatically parses JSON request bodies', function () {
         const p = Promise.defer()
@@ -2511,6 +2534,23 @@ describe('network stubbing', { retries: 2 }, function () {
         })
 
         cy.wait('@netAlias').its('response.body').should('equal', 'my value')
+      })
+
+      // https://github.com/cypress-io/cypress/issues/14444
+      it('can use dot in request alias', () => {
+        cy.intercept('/users', (req) => {
+          req.alias = 'get.url'
+          req.reply('foo')
+        })
+
+        cy.window().then((win) => {
+          const xhr = new win.XMLHttpRequest()
+
+          xhr.open('GET', '/users')
+          xhr.send()
+        })
+
+        cy.wait('@get.url')
       })
     })
   })
