@@ -14,7 +14,7 @@ const debug = makeDebug('cypress:rollup-dev-server')
  * Inject HMR runtime into each bundle, since Nollup
  * does not do this.
  */
-function injectHmrPlugin (): Plugin {
+function injectHmrPlugin(): Plugin {
   return {
     name: 'MyPlugin',
     transform: (code) => {
@@ -40,22 +40,20 @@ interface NollupDevServer {
   server: http.Server
 }
 
-export async function start (devServerOptions: StartDevServer): Promise<NollupDevServer> {
+export async function start(devServerOptions: StartDevServer): Promise<NollupDevServer> {
   console.log('OBject', Object.keys(devServerOptions.options))
-  const rollupConfigObj = typeof devServerOptions.rollupConfig === 'string'
-    ? await loadConfigFile(devServerOptions.rollupConfig).then((configResult) => configResult.options)
-    : devServerOptions.rollupConfig
+  const rollupConfigObj =
+    typeof devServerOptions.rollupConfig === 'string'
+      ? await loadConfigFile(devServerOptions.rollupConfig).then((configResult) => configResult.options)
+      : devServerOptions.rollupConfig
 
   debug('Resolved rollup config options', rollupConfigObj)
 
-  const config = devServerOptions.options.specs
-  .map<RollupOptions>((spec) => {
+  const config = devServerOptions.options.specs.map<RollupOptions>((spec) => {
     return {
       ...rollupConfigObj,
       input: spec.absolute,
-      plugins: (rollupConfigObj.plugins || []).concat(
-        injectHmrPlugin(),
-      ),
+      plugins: (rollupConfigObj.plugins || []).concat(injectHmrPlugin()),
     }
   })
 
@@ -65,23 +63,23 @@ export async function start (devServerOptions: StartDevServer): Promise<NollupDe
   const server = http.createServer(app)
   const contentBase = resolve(__dirname, projectRoot)
   /* random port between 3000 and 23000 */
-  const port = parseInt(((Math.random() * 20000) + 3000).toFixed(0), 10)
+  const port = parseInt((Math.random() * 20000 + 3000).toFixed(0), 10)
 
-  const nollup = NollupDevMiddleware(app, config, {
-    contentBase,
-    port,
-    publicPath: devServerPublicPathRoute,
-    hot: true,
-  }, server)
+  const nollup = NollupDevMiddleware(
+    app,
+    config,
+    {
+      contentBase,
+      port,
+      publicPath: devServerPublicPathRoute,
+      hot: true,
+    },
+    server
+  )
 
   app.use(nollup)
 
-  makeHtmlPlugin(
-    projectRoot,
-    supportFile,
-    app,
-    devServerPublicPathRoute,
-  )
+  makeHtmlPlugin(projectRoot, supportFile, app, devServerPublicPathRoute)
 
   return {
     port,

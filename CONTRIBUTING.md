@@ -108,23 +108,23 @@ Also, your proposed solution may not be compatible with the direction we want to
 
 ## Common issues
 
-Label | Description | Main issue | Issues
---- | --- | --- | ---
-browser detection | Local browser is not detected | [8541](https://github.com/cypress-io/cypress/issues/8541) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20browser%20detection), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+browser+detection%22+is%3Aclosed)
-cross-origin | Getting cross-origin error | [944](https://github.com/cypress-io/cypress/issues/944) |[open](https://github.com/cypress-io/cypress/labels/topic%3A%20cross-origin%20%E2%A4%AD), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+cross-origin+%E2%A4%AD%22+is%3Aclosed)
-cy.request | Issues related to cy.request command | [1647](https://github.com/cypress-io/cypress/issues/1647) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20cy.request), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+cy.request%22+is%3Aclosed)
-fixtures | Fixture loading and usage | | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20fixtures), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+fixtures%22+is%3Aclosed)
-hooks | Issues related to hooks | [4703](https://github.com/cypress-io/cypress/issues/4703), [665](https://github.com/cypress-io/cypress/issues/665) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20hooks%20%E2%86%AA), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+hooks+%E2%86%AA%22+is%3Aclosed)
-iframes | Working with iframes | [136](https://github.com/cypress-io/cypress/issues/136) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20iframes), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+iframes%22+is%3Aclosed)
-installation | Cypress cannot be downloaded or installed | [8392](https://github.com/cypress-io/cypress/issues/8392) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20installation), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+installation%22+is%3Aclosed)
-network | Controlling network requests | [3427](https://github.com/cypress-io/cypress/issues/3427), [3083](https://github.com/cypress-io/cypress/issues/3083), [1773](https://github.com/cypress-io/cypress/issues/1773) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20network), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+network%22+is%3Aclosed)
-performance | Slow loading, slow network, etc | [1305](https://github.com/cypress-io/cypress/issues/1305) | [open](https://github.com/cypress-io/cypress/labels/type%3A%20performance%20%F0%9F%8F%83%E2%80%8D%E2%99%80%EF%B8%8F), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22type%3A+performance+%F0%9F%8F%83%E2%80%8D%E2%99%80%EF%B8%8F%22+is%3Aclosed)
-screenshots | Taking image screenshots | [2102](https://github.com/cypress-io/cypress/issues/2102) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20screenshots%20%F0%9F%93%B8), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+screenshots+%F0%9F%93%B8%22+is%3Aclosed)
-scrolling | Scrolling elements into view | [871](https://github.com/cypress-io/cypress/issues/871) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20scrolling%20%E2%86%95%EF%B8%8F), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+scrolling+%E2%86%95%EF%B8%8F%22+is%3Aclosed)
-spec execution | Running all specs or some specs in some specific order | [390](https://github.com/cypress-io/cypress/issues/390) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20spec%20execution) | [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+spec+execution%22+is%3Aclosed)
-test execution | Running tests inside a single spec | [2908](https://github.com/cypress-io/cypress/issues/2908) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20test%20execution), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+test+execution%22+is%3Aclosed)
-typescript | Transpiling or bundling TypeScript | [7435](https://github.com/cypress-io/cypress/issues/7435) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20typescript), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+typescript%22+is%3Aclosed)
-video | Problems with video recordings | [2522](https://github.com/cypress-io/cypress/issues/2522) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20video%20%F0%9F%93%B9), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+video+%F0%9F%93%B9%22+is%3Aclosed)
+| Label             | Description                                            | Main issue                                                                                                                                                                      | Issues                                                                                                                                                                                                                                                               |
+| ----------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| browser detection | Local browser is not detected                          | [8541](https://github.com/cypress-io/cypress/issues/8541)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20browser%20detection), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+browser+detection%22+is%3Aclosed)                                                                   |
+| cross-origin      | Getting cross-origin error                             | [944](https://github.com/cypress-io/cypress/issues/944)                                                                                                                         | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20cross-origin%20%E2%A4%AD), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+cross-origin+%E2%A4%AD%22+is%3Aclosed)                                                         |
+| cy.request        | Issues related to cy.request command                   | [1647](https://github.com/cypress-io/cypress/issues/1647)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20cy.request), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+cy.request%22+is%3Aclosed)                                                                                   |
+| fixtures          | Fixture loading and usage                              |                                                                                                                                                                                 | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20fixtures), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+fixtures%22+is%3Aclosed)                                                                                       |
+| hooks             | Issues related to hooks                                | [4703](https://github.com/cypress-io/cypress/issues/4703), [665](https://github.com/cypress-io/cypress/issues/665)                                                              | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20hooks%20%E2%86%AA), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+hooks+%E2%86%AA%22+is%3Aclosed)                                                                       |
+| iframes           | Working with iframes                                   | [136](https://github.com/cypress-io/cypress/issues/136)                                                                                                                         | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20iframes), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+iframes%22+is%3Aclosed)                                                                                         |
+| installation      | Cypress cannot be downloaded or installed              | [8392](https://github.com/cypress-io/cypress/issues/8392)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20installation), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+installation%22+is%3Aclosed)                                                                               |
+| network           | Controlling network requests                           | [3427](https://github.com/cypress-io/cypress/issues/3427), [3083](https://github.com/cypress-io/cypress/issues/3083), [1773](https://github.com/cypress-io/cypress/issues/1773) | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20network), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+network%22+is%3Aclosed)                                                                                         |
+| performance       | Slow loading, slow network, etc                        | [1305](https://github.com/cypress-io/cypress/issues/1305)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/type%3A%20performance%20%F0%9F%8F%83%E2%80%8D%E2%99%80%EF%B8%8F), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22type%3A+performance+%F0%9F%8F%83%E2%80%8D%E2%99%80%EF%B8%8F%22+is%3Aclosed) |
+| screenshots       | Taking image screenshots                               | [2102](https://github.com/cypress-io/cypress/issues/2102)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20screenshots%20%F0%9F%93%B8), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+screenshots+%F0%9F%93%B8%22+is%3Aclosed)                                                     |
+| scrolling         | Scrolling elements into view                           | [871](https://github.com/cypress-io/cypress/issues/871)                                                                                                                         | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20scrolling%20%E2%86%95%EF%B8%8F), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+scrolling+%E2%86%95%EF%B8%8F%22+is%3Aclosed)                                             |
+| spec execution    | Running all specs or some specs in some specific order | [390](https://github.com/cypress-io/cypress/issues/390)                                                                                                                         | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20spec%20execution)                                                                                                                                                                                     | [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+spec+execution%22+is%3Aclosed) |
+| test execution    | Running tests inside a single spec                     | [2908](https://github.com/cypress-io/cypress/issues/2908)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20test%20execution), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+test+execution%22+is%3Aclosed)                                                                         |
+| typescript        | Transpiling or bundling TypeScript                     | [7435](https://github.com/cypress-io/cypress/issues/7435)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20typescript), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+typescript%22+is%3Aclosed)                                                                                   |
+| video             | Problems with video recordings                         | [2522](https://github.com/cypress-io/cypress/issues/2522)                                                                                                                       | [open](https://github.com/cypress-io/cypress/labels/topic%3A%20video%20%F0%9F%93%B9), [closed](https://github.com/cypress-io/cypress/issues?q=label%3A%22topic%3A+video+%F0%9F%93%B9%22+is%3Aclosed)                                                                 |
 
 ## Triaging Issues
 
@@ -132,7 +132,7 @@ When an issue is opened in [cypress](https://github.com/cypress-io/cypress), we 
 
 ### Is this a question?
 
-Some opened issue are questions, not bug reports or feature requests. Issues are reserved for potential bugs or feature requests *only*. If this is the case, you should:
+Some opened issue are questions, not bug reports or feature requests. Issues are reserved for potential bugs or feature requests _only_. If this is the case, you should:
 
 - Explain that issues in our GitHub repo are reserved for potential bugs or feature requests and that the issue will be closed since it appears to be neither a bug nor a feature request.
 - Guide them to existing resources where their questions can be asked like our [community chat](https://on.cypress.io/chat), our [documentation](https://docs.cypress.io), or [Stack Overflow](https://stackoverflow.com/questions/tagged/cypress).
@@ -203,7 +203,7 @@ The best way to determine the validity of a bug is to recreate it yourself. Foll
 
 #### 1. You can not recreate the bug
 
- If you cannot recreate the situation happening you should:
+If you cannot recreate the situation happening you should:
 
 - Thank them for their contribution.
 - Explain that there is not enough information to reproduce the bug. Provide information on how you went about recreating the scenario, if you’re able. Note your OS, Browser, Cypress version and any other information.
@@ -247,7 +247,6 @@ Some issues are resolved by the community, by giving some guidance or a workarou
 - Explain that you are closing the issue as resolved and that they can comment if they are still having the issue and we will consider reopening it.
 - Close the issue.
 
-
 ## Writing Documentation
 
 Cypress documentation lives in a separate repository with its own dependencies and build tools.
@@ -269,36 +268,36 @@ Private packages generally live within the [`packages`](./packages) directory an
 
 Here is a list of the core packages in this repository with a short description, located within the [`packages`](./packages) directory:
 
- | Folder Name                           | Package Name            | Purpose                                                                      |
- | :------------------------------------ | :---------------------- | :--------------------------------------------------------------------------- |
- | [cli](./cli)                          | `cypress`               | The command-line tool that is packaged as an `npm` module.                   |
- | [desktop-gui](./packages/desktop-gui) | `@packages/desktop-gui` | The front-end code for the Cypress Desktop GUI.                              |
- | [driver](./packages/driver)           | `@packages/driver`      | The code that is used to drive the behavior of the API commands.             |
- | [electron](./packages/electron)       | `@packages/electron`    | The Cypress implementation of Electron.                                      |
- | [example](./packages/example)         | `@packages/example`     | Our example kitchen-sink application.                                        |
- | [extension](./packages/extension)     | `@packages/extension`   | The Cypress Chrome browser extension                                         |
- | [https-proxy](./packages/https-proxy) | `@packages/https-proxy` | This does https proxy for handling http certs and traffic.                   |
- | [launcher](./packages/launcher)       | `@packages/launcher`    | Finds and launches browsers installed on your system.                        |
- | [reporter](./packages/reporter)       | `@packages/reporter`    | The reporter shows the running results of the tests (The Command Log UI).    |
- | [root](./packages/root)               | `@packages/root`        | Dummy package pointing at the root of the repository.                        |
- | [runner](./packages/runner)           | `@packages/runner`      | The runner is the minimal "chrome" around the user's application under test. |
- | [server](./packages/server)           | `@packages/server`      | The <3 of Cypress. This orchestrates everything. The backend node process.   |
- | [socket](./packages/socket)           | `@packages/socket`      | A wrapper around socket.io to provide common libraries.                      |
- | [static](./packages/static)           | `@packages/static`      | Serves static assets used in the Cypress GUI.                                |
- | [ts](./packages/ts)                   | `@packages/ts`          | A centralized version of typescript.                                         |
- 
+| Folder Name                           | Package Name            | Purpose                                                                      |
+| :------------------------------------ | :---------------------- | :--------------------------------------------------------------------------- |
+| [cli](./cli)                          | `cypress`               | The command-line tool that is packaged as an `npm` module.                   |
+| [desktop-gui](./packages/desktop-gui) | `@packages/desktop-gui` | The front-end code for the Cypress Desktop GUI.                              |
+| [driver](./packages/driver)           | `@packages/driver`      | The code that is used to drive the behavior of the API commands.             |
+| [electron](./packages/electron)       | `@packages/electron`    | The Cypress implementation of Electron.                                      |
+| [example](./packages/example)         | `@packages/example`     | Our example kitchen-sink application.                                        |
+| [extension](./packages/extension)     | `@packages/extension`   | The Cypress Chrome browser extension                                         |
+| [https-proxy](./packages/https-proxy) | `@packages/https-proxy` | This does https proxy for handling http certs and traffic.                   |
+| [launcher](./packages/launcher)       | `@packages/launcher`    | Finds and launches browsers installed on your system.                        |
+| [reporter](./packages/reporter)       | `@packages/reporter`    | The reporter shows the running results of the tests (The Command Log UI).    |
+| [root](./packages/root)               | `@packages/root`        | Dummy package pointing at the root of the repository.                        |
+| [runner](./packages/runner)           | `@packages/runner`      | The runner is the minimal "chrome" around the user's application under test. |
+| [server](./packages/server)           | `@packages/server`      | The <3 of Cypress. This orchestrates everything. The backend node process.   |
+| [socket](./packages/socket)           | `@packages/socket`      | A wrapper around socket.io to provide common libraries.                      |
+| [static](./packages/static)           | `@packages/static`      | Serves static assets used in the Cypress GUI.                                |
+| [ts](./packages/ts)                   | `@packages/ts`          | A centralized version of typescript.                                         |
+
 Public packages live within the [`npm`](./npm) folder and are standalone modules that get independently published to npm under the `@cypress/` namespace. These packages generally contain extensions, plugins, or other packages that are complementary to, yet independent of, the main Cypress app.
 
 Here is a list of the npm packages in this repository:
 
- | Folder Name                                            | Package Name                       | Purpose                                                                      |
- | :----------------------------------------------------- | :--------------------------------- | :--------------------------------------------------------------------------- |
- | [eslint-plugin-dev](./npm/eslint-plugin-dev)           | `@cypress/eslint-plugin-dev`       | Eslint plugin for internal development.                                      |
- | [react](./npm/react)                                   | `@cypress/react`                   | Cypress component testing for React.                                         |
- | [vue](./npm/vue)                                       | `@cypress/vue`                     | Cypress component testing for Vue.                                           |
- | [webpack-preprocessor](./npm/webpack-preprocessor)     | `@cypress/webpack-preprocessor`    | Cypress preprocessor for bundling JavaScript via webpack.                    |
+| Folder Name                                        | Package Name                    | Purpose                                                   |
+| :------------------------------------------------- | :------------------------------ | :-------------------------------------------------------- |
+| [eslint-plugin-dev](./npm/eslint-plugin-dev)       | `@cypress/eslint-plugin-dev`    | Eslint plugin for internal development.                   |
+| [react](./npm/react)                               | `@cypress/react`                | Cypress component testing for React.                      |
+| [vue](./npm/vue)                                   | `@cypress/vue`                  | Cypress component testing for Vue.                        |
+| [webpack-preprocessor](./npm/webpack-preprocessor) | `@cypress/webpack-preprocessor` | Cypress preprocessor for bundling JavaScript via webpack. |
 
-We try to tag all issues with a `pkg/` or `npm/` tag describing the appropriate package the work is required in. For public packages, we use their qualified package name: For example, issues relating to the  webpack preprocessor are tagged under [`npm: @cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress/labels/npm%3A%20%40cypress%2Fwebpack-preprocessor) label and issues related to the `driver` package are tagged with the [`pkg/driver`](https://github.com/cypress-io/cypress/labels/pkg%2Fdriver) label.
+We try to tag all issues with a `pkg/` or `npm/` tag describing the appropriate package the work is required in. For public packages, we use their qualified package name: For example, issues relating to the webpack preprocessor are tagged under [`npm: @cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress/labels/npm%3A%20%40cypress%2Fwebpack-preprocessor) label and issues related to the `driver` package are tagged with the [`pkg/driver`](https://github.com/cypress-io/cypress/labels/pkg%2Fdriver) label.
 
 ### Requirements
 
@@ -311,13 +310,16 @@ The project utilizes [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspac
 > **⚠ Running on Windows?**
 >
 > Many of the NPM scripts used during development use commands designed for a Linux-like shell.If you are running a Windows operating system, you may encounter many commands that are not working. To fix this behavior, you have to set a Linux-like shell as the default `npm` script shell. If you have Git for Windows installed, you can set Git Bash as the default script shell by using the following command:
+>
 > ```bash
 > yarn config set script-shell "C:\\Program Files (x86)\\git\\bin\\bash.exe"
 > ```
+>
 > Git Bash may be installed in `Program Files`, if so, use the following command:
->```bash
+>
+> ```bash
 > yarn config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
->```
+> ```
 
 **Install all dependencies:**
 
@@ -463,7 +465,7 @@ When adding links to outside resources within the Cypress Test Runner (including
 This is to ensure that links do not go dead in older versions of Cypress when the location of the link has changed. To add a new link:
 
 - Make up a new slug for the linked resource like `https://on.cypress.io/my-special-link`.
-- Open a PR adding the new slug in [links.yml](https://github.com/cypress-io/cypress-services/blob/develop/packages/on/data/links.yml) with the href of the resource it should redirect to. *Note: this requires access to the internal [cypress-services](https://github.com/cypress-io/cypress-services) repo which is only granted to employees. If you're an outside contributor and need a link reroute added, please comment in the relevant PR asking for assistance.*
+- Open a PR adding the new slug in [links.yml](https://github.com/cypress-io/cypress-services/blob/develop/packages/on/data/links.yml) with the href of the resource it should redirect to. _Note: this requires access to the internal [cypress-services](https://github.com/cypress-io/cypress-services) repo which is only granted to employees. If you're an outside contributor and need a link reroute added, please comment in the relevant PR asking for assistance._
 - Wait for the PR to be reviewed and **deployed** from [cypress-services](https://github.com/cypress-io/cypress-services). This is required before your changes can be merged into the `cypress` project.
 
 ### Tests
@@ -509,7 +511,7 @@ $ export CYPRESS_CACHE_FOLDER=./cypress-cache
 $ yarn add https://cdn.cypress.io/beta/npm/.../cypress.tgz
 ```
 
-Note that unzipping the Linux binary inside a Docker container onto a mapped volume drive is *slow*. But once this is done you can modify the application resource folder in the local folder `/tmp/test-folder/node_modules/cypress/cypress-cache/3.3.0/Cypress/resources/app` to debug issues.
+Note that unzipping the Linux binary inside a Docker container onto a mapped volume drive is _slow_. But once this is done you can modify the application resource folder in the local folder `/tmp/test-folder/node_modules/cypress/cypress-cache/3.3.0/Cypress/resources/app` to debug issues.
 
 ### Packages
 
@@ -553,7 +555,7 @@ Independent packages are automatically released when code is merged into `master
 - Prefix the title of the Pull Request using [semantic-release](https://github.com/semantic-release/semantic-release)'s format as defined [here](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type). For example, if your PR is fixing a bug, you should prefix the PR title with `fix:`.
 - Fill out the [Pull Request Template](./.github/PULL_REQUEST_TEMPLATE.md) completely within the body of the PR. If you feel some areas are not relevant add `N/A` as opposed to deleting those sections. PR's will not be reviewed if this template is not filled in.
 - Please check the "Allow edits from maintainers" checkbox when submitting your PR. This will make it easier for the maintainers to make minor adjustments, to help with tests or any other changes we may need.
-![Allow edits from maintainers checkbox](https://user-images.githubusercontent.com/1271181/31393427-b3105d44-ada9-11e7-80f2-0dac51e3919e.png)
+  ![Allow edits from maintainers checkbox](https://user-images.githubusercontent.com/1271181/31393427-b3105d44-ada9-11e7-80f2-0dac51e3919e.png)
 
 ### Dependencies
 

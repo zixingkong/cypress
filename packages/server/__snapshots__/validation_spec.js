@@ -22,58 +22,62 @@ exports['null instead of a number'] = `
 Expected \`test\` to be one of these values: 1, 2, 3. Instead the value was: \`null\`
 `
 
-exports['lib/util/validation #isValidBrowser passes valid browsers and forms error messages for invalid ones isValidBrowser 1'] = {
-  "name": "isValidBrowser",
-  "behavior": [
+exports[
+  'lib/util/validation #isValidBrowser passes valid browsers and forms error messages for invalid ones isValidBrowser 1'
+] = {
+  name: 'isValidBrowser',
+  behavior: [
     {
-      "given": {
-        "name": "Chrome",
-        "displayName": "Chrome Browser",
-        "family": "chromium",
-        "path": "/path/to/chrome",
-        "version": "1.2.3",
-        "majorVersion": 1
+      given: {
+        name: 'Chrome',
+        displayName: 'Chrome Browser',
+        family: 'chromium',
+        path: '/path/to/chrome',
+        version: '1.2.3',
+        majorVersion: 1,
       },
-      "expect": true
+      expect: true,
     },
     {
-      "given": {
-        "name": "FF",
-        "displayName": "Firefox",
-        "family": "firefox",
-        "path": "/path/to/firefox",
-        "version": "1.2.3",
-        "majorVersion": "1"
+      given: {
+        name: 'FF',
+        displayName: 'Firefox',
+        family: 'firefox',
+        path: '/path/to/firefox',
+        version: '1.2.3',
+        majorVersion: '1',
       },
-      "expect": true
+      expect: true,
     },
     {
-      "given": {
-        "name": "Electron",
-        "displayName": "Electron",
-        "family": "chromium",
-        "path": "",
-        "version": "99.101.3",
-        "majorVersion": 99
+      given: {
+        name: 'Electron',
+        displayName: 'Electron',
+        family: 'chromium',
+        path: '',
+        version: '99.101.3',
+        majorVersion: 99,
       },
-      "expect": true
+      expect: true,
     },
     {
-      "given": {
-        "name": "No display name",
-        "family": "chromium"
+      given: {
+        name: 'No display name',
+        family: 'chromium',
       },
-      "expect": "Expected `displayName` to be a non-empty string. Instead the value was: `{\"name\":\"No display name\",\"family\":\"chromium\"}`"
+      expect:
+        'Expected `displayName` to be a non-empty string. Instead the value was: `{"name":"No display name","family":"chromium"}`',
     },
     {
-      "given": {
-        "name": "bad family",
-        "displayName": "Bad family browser",
-        "family": "unknown family"
+      given: {
+        name: 'bad family',
+        displayName: 'Bad family browser',
+        family: 'unknown family',
       },
-      "expect": "Expected `family` to be either chromium or firefox. Instead the value was: `{\"name\":\"bad family\",\"displayName\":\"Bad family browser\",\"family\":\"unknown family\"}`"
-    }
-  ]
+      expect:
+        'Expected `family` to be either chromium or firefox. Instead the value was: `{"name":"bad family","displayName":"Bad family browser","family":"unknown family"}`',
+    },
+  ],
 }
 
 exports['undefined browsers'] = `

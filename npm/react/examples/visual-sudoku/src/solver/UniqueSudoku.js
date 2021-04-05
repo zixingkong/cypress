@@ -343,11 +343,7 @@ export const getUniqueSudoku = (difficulty, e) => {
   /**
    * Pass the generated solution and get a unique Sudoku from it!
    */
-  temporaryInitArray = _generateUniqueSudoku(
-    temporarySolvedArray,
-    difficulty,
-    e,
-  )
+  temporaryInitArray = _generateUniqueSudoku(temporarySolvedArray, difficulty, e)
 
   return [temporaryInitArray, temporarySolvedArray]
 }

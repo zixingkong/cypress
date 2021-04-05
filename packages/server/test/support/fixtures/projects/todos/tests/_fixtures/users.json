@@ -1,7 +1,10 @@
-[{
-  "id": 1,
-  "name": "brian"
-},{
-  "id": 2,
-  "name": "jennifer"
-}]
+[
+  {
+    "id": 1,
+    "name": "brian"
+  },
+  {
+    "id": 2,
+    "name": "jennifer"
+  }
+]

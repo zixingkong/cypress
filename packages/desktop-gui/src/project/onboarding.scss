@@ -36,7 +36,6 @@
     a {
       border-bottom: 1px dotted lighten($brand-primary, 30%);
     }
-
   }
 
   .helper-line {
@@ -44,7 +43,7 @@
     position: inherit;
   }
 
-  h6  {
+  h6 {
     margin-top: 30px;
     font-weight: bold;
     font-size: 14px;
@@ -68,8 +67,7 @@
       font-size: 13.5px;
       -webkit-padding-start: 0;
 
-
-      &>li {
+      & > li {
         position: relative;
         margin: 3px 0;
 
@@ -88,16 +86,15 @@
           overflow: auto;
         }
 
-        &>ul {
+        & > ul {
           padding-left: 20px;
         }
       }
-
     }
 
-    &>ul {
+    & > ul {
       margin-bottom: 0;
-      &>li {
+      & > li {
         margin-bottom: 0;
         padding-left: 10px;
       }
@@ -105,7 +102,7 @@
 
     .new-item:after {
       color: lighten($pass, 5%);
-      content: "+";
+      content: '+';
       position: absolute;
       top: 0;
       left: 10px;

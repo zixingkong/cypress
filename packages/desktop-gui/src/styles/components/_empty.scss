@@ -1,4 +1,5 @@
-.empty, .well-message {
+.empty,
+.well-message {
   height: 100%;
   text-align: center;
 
@@ -13,15 +14,16 @@
   }
 }
 
-.empty-no-runs, .empty-log-in {
+.empty-no-runs,
+.empty-log-in {
   h4 {
-    color: #272B2F;
+    color: #272b2f;
     font-family: $font-title;
     font-size: 24px;
   }
 
   h5 {
-    color: #272B2F;
+    color: #272b2f;
     font-family: $font-title;
     font-size: 18px;
     font-weight: 400;
@@ -30,7 +32,7 @@
   p {
     font-size: 11px;
     margin-top: 10px;
-    color: #272B2F;
+    color: #272b2f;
     font-weight: 200;
   }
 }

@@ -34,7 +34,7 @@ module.exports = (on, config) => {
   const screenshotsTaken = []
   let browserArgs = null
 
-  function getCachedImage (name) {
+  function getCachedImage(name) {
     const cachedImage = cache[name]
 
     if (cachedImage) return Promise.resolve(cachedImage)
@@ -76,22 +76,21 @@ module.exports = (on, config) => {
   })
 
   on('task', {
-    'returns:undefined' () {},
+    'returns:undefined'() {},
 
-    'errors' (message) {
+    errors(message) {
       throw new Error(message)
     },
 
-    'plugins:crash' (message) {
+    'plugins:crash'(message) {
       console.log('\nPURPOSEFULLY CRASHING THE PLUGIN PROCESS FROM TEST')
       process.exit(1)
     },
 
-    'ensure:pixel:color' ({ name, colors, devicePixelRatio }) {
+    'ensure:pixel:color'({ name, colors, devicePixelRatio }) {
       const imagePath = path.join(__dirname, '..', 'screenshots', `${name}.png`)
 
-      return Jimp.read(imagePath)
-      .then((image) => {
+      return Jimp.read(imagePath).then((image) => {
         _.each(colors, ({ coords, color }) => {
           let [x, y] = coords
 
@@ -103,7 +102,11 @@ module.exports = (on, config) => {
           const { r, g, b } = pixels
 
           if (!_.isEqual(color, [r, g, b])) {
-            throw new Error(`The pixel color at coords: [${x}, ${y}] does not match the expected pixel color. The color was [${r}, ${g}, ${b}] and was expected to be [${color.join(', ')}].`)
+            throw new Error(
+              `The pixel color at coords: [${x}, ${y}] does not match the expected pixel color. The color was [${r}, ${g}, ${b}] and was expected to be [${color.join(
+                ', '
+              )}].`
+            )
           }
         })
 
@@ -111,27 +114,22 @@ module.exports = (on, config) => {
       })
     },
 
-    'compare:screenshots' ({ a, b, devicePixelRatio, blackout = false }) {
-      function isBlack (rgba) {
+    'compare:screenshots'({ a, b, devicePixelRatio, blackout = false }) {
+      function isBlack(rgba) {
         return `${rgba.r}${rgba.g}${rgba.b}` === '000'
       }
 
       const comparePath = path.join(__dirname, '..', 'screenshots', `${b}.png`)
 
-      return Promise.all([
-        getCachedImage(a),
-        Jimp.read(comparePath),
-      ])
-      .spread((originalImage, compareImage) => {
+      return Promise.all([getCachedImage(a), Jimp.read(comparePath)]).spread((originalImage, compareImage) => {
         const blackout1XCoord = 11 * devicePixelRatio
         const blackout2XCoord = 31 * devicePixelRatio
         const blackoutYCoord = 11 * devicePixelRatio
 
         if (
-          blackout && (
-            !isBlack(Jimp.intToRGBA(compareImage.getPixelColor(blackout1XCoord, blackoutYCoord))) ||
-            !isBlack(Jimp.intToRGBA(compareImage.getPixelColor(blackout2XCoord, blackoutYCoord)))
-          )
+          blackout &&
+          (!isBlack(Jimp.intToRGBA(compareImage.getPixelColor(blackout1XCoord, blackoutYCoord))) ||
+            !isBlack(Jimp.intToRGBA(compareImage.getPixelColor(blackout2XCoord, blackoutYCoord))))
         ) {
           throw new Error('Blackout not present!')
         }
@@ -144,21 +142,22 @@ module.exports = (on, config) => {
       })
     },
 
-    'check:screenshot:size' ({ name, width, height, devicePixelRatio }) {
-      return Jimp.read(path.join(__dirname, '..', 'screenshots', name))
-      .then((image) => {
+    'check:screenshot:size'({ name, width, height, devicePixelRatio }) {
+      return Jimp.read(path.join(__dirname, '..', 'screenshots', name)).then((image) => {
         width = width * devicePixelRatio
         height = height * devicePixelRatio
 
         if (image.bitmap.width !== width || image.bitmap.height !== height) {
-          throw new Error(`Screenshot does not match dimensions! Expected: ${width} x ${height} but got ${image.bitmap.width} x ${image.bitmap.height}`)
+          throw new Error(
+            `Screenshot does not match dimensions! Expected: ${width} x ${height} but got ${image.bitmap.width} x ${image.bitmap.height}`
+          )
         }
 
         return null
       })
     },
 
-    'record:fast_visit_spec' ({ percentiles, url, browser, currentRetry }) {
+    'record:fast_visit_spec'({ percentiles, url, browser, currentRetry }) {
       percentiles.forEach(([percent, percentile]) => {
         console.log(`${percent}%\t of visits to ${url} finished in less than ${percentile}ms`)
       })
@@ -174,23 +173,22 @@ module.exports = (on, config) => {
         }, {}),
       }
 
-      return performance.track('fast_visit_spec percentiles', data)
-      .return(null)
+      return performance.track('fast_visit_spec percentiles', data).return(null)
     },
 
-    'get:screenshots:taken' () {
+    'get:screenshots:taken'() {
       return screenshotsTaken
     },
 
-    'get:browser:args' () {
+    'get:browser:args'() {
       return browserArgs
     },
 
-    'get:config:value' (key) {
+    'get:config:value'(key) {
       return config[key]
     },
 
-    'assert:http:max:header:size' (expectedBytes) {
+    'assert:http:max:header:size'(expectedBytes) {
       expect(http.maxHeaderSize).to.eq(expectedBytes)
 
       return null

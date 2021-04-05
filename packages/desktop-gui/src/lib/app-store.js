@@ -12,25 +12,25 @@ class AppStore {
   @observable proxyBypassList
   @observable proxySource
 
-  constructor () {
+  constructor() {
     if (window.Cypress) {
       window.AppStore = this // for testing
     }
   }
 
-  @computed get displayVersion () {
+  @computed get displayVersion() {
     return this.isDev ? `${updateStore.version} (dev)` : updateStore.version
   }
 
-  @computed get isDev () {
+  @computed get isDev() {
     return this.cypressEnv === 'development'
   }
 
-  @computed get isGlobalMode () {
+  @computed get isGlobalMode() {
     return !this.projectRoot
   }
 
-  @action set (props) {
+  @action set(props) {
     if (props.cypressEnv != null) this.cypressEnv = props.cypressEnv
 
     if (props.os != null) this.os = props.os
@@ -42,12 +42,12 @@ class AppStore {
     this.proxySource = props.proxySource || this.proxySource
   }
 
-  @action setLocalInstallNoticeDismissed (isDismissed) {
+  @action setLocalInstallNoticeDismissed(isDismissed) {
     this.localInstallNoticeDismissed = isDismissed
     localData.set('local-install-notice-dimissed', isDismissed)
   }
 
-  @action setError (err) {
+  @action setError(err) {
     this.error = err
   }
 }

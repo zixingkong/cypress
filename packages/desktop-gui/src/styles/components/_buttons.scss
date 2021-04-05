@@ -3,13 +3,15 @@
   font-weight: 500;
   color: white;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: #242424;
     color: white;
   }
 
-  &:active, &:focus {
-    outline: 0
+  &:active,
+  &:focus {
+    outline: 0;
   }
 }
 
@@ -17,13 +19,15 @@
   background-color: #3385d4;
   border-color: #3385d4;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: darken(#3385d4, 10%);
     border-color: darken(#3385d4, 10%);
   }
 
-  &:active, &:focus {
-    outline: 0
+  &:active,
+  &:focus {
+    outline: 0;
   }
 }
 

@@ -19,7 +19,7 @@ describe('Playground', () => {
         <CypressLogo size="medium" />
         <br />
         <CypressLogo size="large" />
-      </>,
+      </>
     )
   })
 
@@ -39,8 +39,7 @@ describe('Playground', () => {
             inputRef.current.focus()
           }}
           onChange={(event) => setValue(event.target.value)}
-        >
-        </SearchInput>
+        ></SearchInput>
       )
     }
 
@@ -51,7 +50,7 @@ describe('Playground', () => {
         {/* <Wrapper placeholder="Find components..." prefixIcon="coffee"/> */}
         <br />
         {/* <Wrapper placeholder="Find components..." prefixIcon="search" suffixIcon="times"/> */}
-      </>,
+      </>
     )
 
     cy.get('input').should('exist')
@@ -62,12 +61,6 @@ describe('Playground', () => {
     cy.get('input').first().type('Hello World!').clear().type('WHATS UP ⚡️')
     cy.get('input').first().should('contain.value', '⚡️')
 
-    cy.get('input')
-    .click()
-    .type('hello')
-    .get('[data-testid=close]')
-    .click()
-    .get('input')
-    .should('be.focused')
+    cy.get('input').click().type('hello').get('[data-testid=close]').click().get('input').should('be.focused')
   })
 })

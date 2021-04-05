@@ -22,17 +22,17 @@ const runTests = async (dir) => {
 
     if (dir !== __dirname) {
       console.log(`Running yarn install in project ${dir}`)
-      await execa('yarn', ['install', '--frozen-lockfile'], { stdout: 'inherit' })
+      await execa('yarn', ['install', '--frozen-lockfile'], {
+        stdout: 'inherit',
+      })
     }
 
     console.log(`Running yarn test in project ${dir}`)
-    await execa('yarn', [
-      'test',
-      '--reporter',
-      'cypress-circleci-reporter',
-      '--reporter-options',
-      `resultsDir=${testResultsDestination}`,
-    ], { stdout: 'inherit' })
+    await execa(
+      'yarn',
+      ['test', '--reporter', 'cypress-circleci-reporter', '--reporter-options', `resultsDir=${testResultsDestination}`],
+      { stdout: 'inherit' }
+    )
   } catch (e) {
     if (e.stdout) {
       console.error(e.stdout)

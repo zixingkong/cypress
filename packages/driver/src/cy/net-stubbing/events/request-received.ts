@@ -1,13 +1,6 @@
 import _ from 'lodash'
 
-import {
-  Route,
-  Interception,
-  CyHttpMessages,
-  StaticResponse,
-  SERIALIZABLE_REQ_PROPS,
-  NetEventFrames,
-} from '../types'
+import { Route, Interception, CyHttpMessages, StaticResponse, SERIALIZABLE_REQ_PROPS, NetEventFrames } from '../types'
 import { parseJsonBody } from './utils'
 import {
   validateStaticResponse,
@@ -18,8 +11,12 @@ import $errUtils from '../../../cypress/error_utils'
 import { HandlerFn } from './'
 import Bluebird from 'bluebird'
 
-export const onRequestReceived: HandlerFn<NetEventFrames.HttpRequestReceived> = (Cypress, frame, { getRoute, emitNetEvent }) => {
-  function getRequestLog (route: Route, request: Omit<Interception, 'log'>) {
+export const onRequestReceived: HandlerFn<NetEventFrames.HttpRequestReceived> = (
+  Cypress,
+  frame,
+  { getRoute, emitNetEvent }
+) => {
+  function getRequestLog(route: Route, request: Omit<Interception, 'log'>) {
     return Cypress.log({
       name: 'xhr',
       displayName: 'req',
@@ -71,7 +68,7 @@ export const onRequestReceived: HandlerFn<NetEventFrames.HttpRequestReceived> = 
 
   const userReq: CyHttpMessages.IncomingHttpRequest = {
     ...req,
-    reply (responseHandler, maybeBody?, maybeHeaders?) {
+    reply(responseHandler, maybeBody?, maybeHeaders?) {
       if (resolved) {
         return $errUtils.throwErrByPath('net_stubbing.request_handling.reply_called_after_resolved')
       }
@@ -108,13 +105,13 @@ export const onRequestReceived: HandlerFn<NetEventFrames.HttpRequestReceived> = 
 
       return sendContinueFrame()
     },
-    redirect (location, statusCode = 302) {
+    redirect(location, statusCode = 302) {
       userReq.reply({
         headers: { location },
         statusCode,
       })
     },
-    destroy () {
+    destroy() {
       userReq.reply({
         forceNetworkError: true,
       }) // TODO: this misnomer is a holdover from XHR, should be numRequests
@@ -181,47 +178,49 @@ export const onRequestReceived: HandlerFn<NetEventFrames.HttpRequestReceived> = 
   return Bluebird.try(() => {
     return handler(userReq)
   })
-  .catch((err) => {
-    $errUtils.throwErrByPath('net_stubbing.request_handling.cb_failed', {
-      args: {
-        err,
-        req,
-        route: route.options,
-      },
-      errProps: {
-        appendToStack: {
-          title: 'From request callback',
-          content: err.stack,
+    .catch((err) => {
+      $errUtils.throwErrByPath('net_stubbing.request_handling.cb_failed', {
+        args: {
+          err,
+          req,
+          route: route.options,
         },
-      },
-    })
-  })
-  .timeout(timeout)
-  .catch(Bluebird.TimeoutError, (err) => {
-    if (Cypress.state('test') !== curTest) {
-      // active test has changed, ignore the timeout
-      return
-    }
-
-    $errUtils.throwErrByPath('net_stubbing.request_handling.cb_timeout', { args: { timeout, req, route: route.options } })
-  })
-  .finally(() => {
-    resolved = true
-  })
-  .then(() => {
-    if (userReq.alias) {
-      Cypress.state('aliasedRequests').push({
-        alias: userReq.alias,
-        request: request as Interception,
+        errProps: {
+          appendToStack: {
+            title: 'From request callback',
+            content: err.stack,
+          },
+        },
       })
+    })
+    .timeout(timeout)
+    .catch(Bluebird.TimeoutError, (err) => {
+      if (Cypress.state('test') !== curTest) {
+        // active test has changed, ignore the timeout
+        return
+      }
 
-      delete userReq.alias
-    }
+      $errUtils.throwErrByPath('net_stubbing.request_handling.cb_timeout', {
+        args: { timeout, req, route: route.options },
+      })
+    })
+    .finally(() => {
+      resolved = true
+    })
+    .then(() => {
+      if (userReq.alias) {
+        Cypress.state('aliasedRequests').push({
+          alias: userReq.alias,
+          request: request as Interception,
+        })
 
-    if (!replyCalled) {
-      // handler function resolved without resolving request, pass on
-      continueFrame.tryNextRoute = true
-      sendContinueFrame()
-    }
-  })
+        delete userReq.alias
+      }
+
+      if (!replyCalled) {
+        // handler function resolved without resolving request, pass on
+        continueFrame.tryNextRoute = true
+        sendContinueFrame()
+      }
+    })
 }

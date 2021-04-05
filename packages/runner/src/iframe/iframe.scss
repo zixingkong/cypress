@@ -69,7 +69,8 @@
     animation: flash-iframe-border 1.5s linear infinite;
 
     @keyframes flash-iframe-border {
-      0%, 100% {
+      0%,
+      100% {
         border-color: #4997e4;
       }
 

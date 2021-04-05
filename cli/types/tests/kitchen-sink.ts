@@ -4,12 +4,14 @@
 // and should not repeat them
 
 // extra code that is not in the kitchensink that type checks edge cases
-cy.wrap('foo').then(subject => {
-  subject // $ExpectType string
-  return cy.wrap(subject)
-}).then(subject => {
-  subject // $ExpectType string
-})
+cy.wrap('foo')
+  .then((subject) => {
+    subject // $ExpectType string
+    return cy.wrap(subject)
+  })
+  .then((subject) => {
+    subject // $ExpectType string
+  })
 
 const result = Cypress.minimatch('/users/1/comments', '/users/*/comments', {
   matchBase: true,
@@ -29,13 +31,13 @@ cy.server().should((server) => {
 cy.visit('https://www.acme.com/', {
   auth: {
     username: 'wile',
-    password: 'coyote'
-  }
+    password: 'coyote',
+  },
 })
 
 const serverOptions: Partial<Cypress.ServerOptions> = {
   delay: 100,
-  ignore: () => true
+  ignore: () => true,
 }
 
 cy.server(serverOptions)
@@ -48,11 +50,11 @@ Cypress.browser // $ExpectType Browser
 
 // stubbing window.alert type on "Cypress" should
 // work with plain function or with a Sinon stub
-Cypress.on('window:alert', () => { })
+Cypress.on('window:alert', () => {})
 Cypress.on('window:alert', cy.spy())
 Cypress.on('window:alert', cy.stub())
 // same for a single test
-cy.on('window:alert', () => { })
+cy.on('window:alert', () => {})
 cy.on('window:alert', cy.spy())
 cy.on('window:alert', cy.stub())
 
@@ -66,10 +68,10 @@ cy.wrap(stub).should('be.calledOnce')
 
 namespace EventInterfaceTests {
   // window:confirm stubbing
-  Cypress.on('window:confirm', () => { })
+  Cypress.on('window:confirm', () => {})
   Cypress.on('window:confirm', cy.spy())
   Cypress.on('window:confirm', cy.stub())
-  cy.on('window:confirm', () => { })
+  cy.on('window:confirm', () => {})
   cy.on('window:confirm', cy.spy())
   cy.on('window:confirm', cy.stub())
 
@@ -81,9 +83,9 @@ namespace EventInterfaceTests {
 
 // specifying HTTP method directly in the options object
 cy.request({
-  url: "http://localhost:3000/myressource",
-  method: "POST",
-  body: {}
+  url: 'http://localhost:3000/myressource',
+  method: 'POST',
+  body: {},
 }).then((resp) => {
   resp // $ExpectType Response
   resp.redirectedToUrl // $ExpectType string | undefined
@@ -93,46 +95,46 @@ cy.request({
 // specify query parameters
 // https://github.com/cypress-io/cypress/issues/2305
 cy.request({
-  url: "http://localhost:3000/myressource",
+  url: 'http://localhost:3000/myressource',
   qs: {
-    param: 'someValue'
-  }
+    param: 'someValue',
+  },
 })
 
 // if you want a separate variable, you need specify its type
 // otherwise TSC does not cast string "POST" as HttpMethod
 // https://github.com/cypress-io/cypress/issues/2093
 const opts: Partial<Cypress.RequestOptions> = {
-  url: "http://localhost:3000/myressource",
-  method: "POST",
-  body: {}
+  url: 'http://localhost:3000/myressource',
+  method: 'POST',
+  body: {},
 }
 cy.request(opts)
 
 // you can cast just the "method" property
 const opts2 = {
-  url: "http://localhost:3000/myressource",
-  method: "POST" as Cypress.HttpMethod,
-  body: {}
+  url: 'http://localhost:3000/myressource',
+  method: 'POST' as Cypress.HttpMethod,
+  body: {},
 }
 cy.request(opts2)
 
 const obj = {
-  foo: () => { }
+  foo: () => {},
 }
 cy.spy(obj, 'foo').as('my-spy')
 
 // use path-based access for nested structures
 cy.wrap({
   foo: {
-    bar: 1
-  }
+    bar: 1,
+  },
 }).its('foo.bar')
 
 cy.wrap({
   foo: {
-    quux: () => 2
-  }
+    quux: () => 2,
+  },
 }).invoke('foo.quux')
 
 // different clearLocalStorage signatures
@@ -142,13 +144,12 @@ cy.clearLocalStorage('todos', { log: false })
 cy.clearLocalStorage({ log: false })
 
 namespace BlobTests {
-  Cypress.Blob.imgSrcToDataURL('/some/path', undefined, 'anonymous')
-    .then((dateUrl) => {
-      dateUrl // $ExpectType string
+  Cypress.Blob.imgSrcToDataURL('/some/path', undefined, 'anonymous').then((dateUrl) => {
+    dateUrl // $ExpectType string
   })
 }
 
-cy.window().then(window => {
+cy.window().then((window) => {
   window // $ExpectType AUTWindow
 
   window.eval('1')

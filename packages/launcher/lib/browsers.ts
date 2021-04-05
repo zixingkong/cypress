@@ -93,12 +93,7 @@ export const browsers: Browser[] = [
 ]
 
 /** starts a found browser and opens URL if given one */
-export function launch (
-  browser: FoundBrowser,
-  url: string,
-  args: string[] = [],
-  defaultBrowserEnv = {},
-) {
+export function launch(browser: FoundBrowser, url: string, args: string[] = [], defaultBrowserEnv = {}) {
   log('launching browser %o', { browser, url })
 
   if (!browser.path) {
@@ -115,7 +110,10 @@ export function launch (
   // but only if it's not already set by the environment
   const env = Object.assign({}, defaultBrowserEnv, process.env)
 
-  const proc = cp.spawn(browser.path, args, { stdio: ['ignore', 'pipe', 'pipe'], env })
+  const proc = cp.spawn(browser.path, args, {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env,
+  })
 
   proc.stdout.on('data', (buf) => {
     log('%s stdout: %s', browser.name, String(buf).trim())

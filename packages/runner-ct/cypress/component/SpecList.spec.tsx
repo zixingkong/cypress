@@ -69,13 +69,16 @@ describe('SpecList', () => {
 
     mount(<Subject />, { styles })
 
-    cy.get('div').contains('dog.spec.tsx').click().then(() => {
-      expect(selectStub).to.have.been.calledWith({
-        type: 'file',
-        relative: 'qux/dog.spec.tsx',
-        name: 'dog.spec.tsx',
+    cy.get('div')
+      .contains('dog.spec.tsx')
+      .click()
+      .then(() => {
+        expect(selectStub).to.have.been.calledWith({
+          type: 'file',
+          relative: 'qux/dog.spec.tsx',
+          name: 'dog.spec.tsx',
+        })
       })
-    })
   })
 
   it('closes a folder', () => {
@@ -86,9 +89,12 @@ describe('SpecList', () => {
     cy.get('div').contains('dog.spec.tsx').should('exist')
 
     // qux folder contains dog.spec.tsx. If we close it, it should not exist anymore.
-    cy.get('div').contains('qux').click().then(() => {
-      cy.get('div').contains('dog.spec.tsx').should('not.exist')
-    })
+    cy.get('div')
+      .contains('qux')
+      .click()
+      .then(() => {
+        cy.get('div').contains('dog.spec.tsx').should('not.exist')
+      })
   })
 
   it('navigates with arrow keys', () => {

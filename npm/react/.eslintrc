@@ -1,13 +1,6 @@
 {
-  "plugins": [
-    "cypress",
-    "@cypress/dev"
-  ],
-  "extends": [
-    "plugin:@cypress/dev/general",
-    "plugin:@cypress/dev/tests",
-    "plugin:@cypress/dev/react"
-  ],
+  "plugins": ["cypress", "@cypress/dev"],
+  "extends": ["plugin:@cypress/dev/general", "plugin:@cypress/dev/tests", "plugin:@cypress/dev/react"],
   "parser": "@typescript-eslint/parser",
   "env": {
     "cypress/globals": true
@@ -23,27 +16,19 @@
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".tsx"]
       }
     ]
   },
   "overrides": [
     {
-      "files": [
-        "lib/*"
-      ],
+      "files": ["lib/*"],
       "rules": {
         "no-console": 1
       }
     },
     {
-      "files": [
-        "**/*.json"
-      ],
+      "files": ["**/*.json"],
       "rules": {
         "quotes": "off",
         "comma-dangle": "off"

@@ -32,7 +32,7 @@
     font-size: 20px;
   }
 
-  &>p {
+  & > p {
     margin: 10px 0;
     color: #636668;
     font-size: 14px;
@@ -59,7 +59,7 @@
 
 .project-drop {
   align-items: center;
-  background: #F6F7F8;
+  background: #f6f7f8;
   border: dashed 2px #e3e4e5;
   border-radius: 5px;
   display: flex;
@@ -70,9 +70,9 @@
   height: 150px;
 
   .fa-stack {
-  width: 3em;
-  height: 3em;
-  line-height: 3em;
+    width: 3em;
+    height: 3em;
+    line-height: 3em;
   }
 
   .fas {
@@ -86,18 +86,20 @@
       font-size: 1.2em;
     }
 
-    &[class*="fa-plus"] {
+    &[class*='fa-plus'] {
       position: relative;
       color: #fff;
       top: 3px;
     }
   }
 
-  p>a {
+  p > a {
     border-bottom: 1px dotted lighten($brand-primary, 30%);
     color: lighten($brand-primary, 12%);
 
-    &:hover, &:focus, &:active {
+    &:hover,
+    &:focus,
+    &:active {
       text-decoration: none;
       cursor: pointer !important;
     }
@@ -109,7 +111,7 @@
   }
 
   &.is-dragging-over {
-    background: #F6F7F8;
+    background: #f6f7f8;
     border: 2px solid lighten($brand-primary, 30%);
   }
 }

@@ -67,6 +67,8 @@ describe('rollup-file install template', () => {
   })
 
   it('correctly generates plugins config when webpack config path is provided', () => {
-    snapshotPluginsAstCode(RollupTemplate, { rollupConfigPath: '/config/rollup.config.js' })
+    snapshotPluginsAstCode(RollupTemplate, {
+      rollupConfigPath: '/config/rollup.config.js',
+    })
   })
 })

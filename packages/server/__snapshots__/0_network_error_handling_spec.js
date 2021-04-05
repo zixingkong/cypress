@@ -265,7 +265,9 @@ exports['e2e network error handling Cypress does not delay a 304 Not Modified be
 
 `
 
-exports['e2e network error handling Cypress does not delay a 304 Not Modified behind a proxy with transfer-encoding: chunked 1'] = `
+exports[
+  'e2e network error handling Cypress does not delay a 304 Not Modified behind a proxy with transfer-encoding: chunked 1'
+] = `
 
 ====================================================================================================
 

@@ -9,7 +9,7 @@ describe('cy.spread', { defaultCommandTimeout: 0 }, () => {
 
   it('exception', () => {
     cy.wrap([1, 2, 3]).spread(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 

@@ -4,7 +4,7 @@ const outsideError = require('../../../../server/test/support/fixtures/projects/
 
 describe('exception failures', () => {
   it('in spec file', () => {
-    ({}).bar()
+    ;({}.bar())
   })
 
   it('in file outside project', () => {

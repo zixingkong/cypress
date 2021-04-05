@@ -34,135 +34,147 @@ module.exports = function (Commands, Cypress, cy, state) {
     }
   })
 
-  return Commands.addAll({ type: 'utility' }, {
-    clock (subject, now, methods, options = {}) {
-      let userOptions = options
-      const ctx = this
+  return Commands.addAll(
+    { type: 'utility' },
+    {
+      clock(subject, now, methods, options = {}) {
+        let userOptions = options
+        const ctx = this
 
-      if (clock) {
-        return clock
-      }
-
-      if (_.isDate(now)) {
-        now = now.getTime()
-      }
-
-      if (_.isObject(now)) {
-        userOptions = now
-        now = undefined
-      }
-
-      if (_.isObject(methods) && !_.isArray(methods)) {
-        userOptions = methods
-        methods = undefined
-      }
-
-      if (now != null && !_.isNumber(now)) {
-        $errUtils.throwErrByPath('clock.invalid_1st_arg', { args: { arg: JSON.stringify(now) } })
-      }
-
-      if (methods != null && !(_.isArray(methods) && _.every(methods, _.isString))) {
-        $errUtils.throwErrByPath('clock.invalid_2nd_arg', { args: { arg: JSON.stringify(methods) } })
-      }
-
-      options = _.defaults({}, userOptions, {
-        log: true,
-      })
-
-      const log = (name, message, snapshot = true, consoleProps = {}) => {
-        if (!options.log) {
-          return
+        if (clock) {
+          return clock
         }
 
-        const details = clock.details()
-        const logNow = details.now
-        const logMethods = details.methods.slice()
-
-        return Cypress.log({
-          name,
-          message: message ? message : '',
-          type: 'parent',
-          end: true,
-          snapshot,
-          consoleProps () {
-            return _.extend({
-              'Now': logNow,
-              'Methods replaced': logMethods,
-            }, consoleProps)
-          },
-        })
-      }
-
-      clock = $Clock.create(state('window'), now, methods)
-
-      const { tick } = clock
-
-      clock.tick = function (ms, options = {}) {
-        if ((ms != null) && !_.isNumber(ms)) {
-          $errUtils.throwErrByPath('tick.invalid_argument', { args: { arg: JSON.stringify(ms) } })
+        if (_.isDate(now)) {
+          now = now.getTime()
         }
 
-        if (ms == null) {
-          ms = 0
+        if (_.isObject(now)) {
+          userOptions = now
+          now = undefined
         }
 
-        let theLog
+        if (_.isObject(methods) && !_.isArray(methods)) {
+          userOptions = methods
+          methods = undefined
+        }
 
-        if (options.log !== false) {
-          theLog = log('tick', `${ms}ms`, false, {
-            'Now': clock.details().now + ms,
-            'Ticked': `${ms} milliseconds`,
+        if (now != null && !_.isNumber(now)) {
+          $errUtils.throwErrByPath('clock.invalid_1st_arg', {
+            args: { arg: JSON.stringify(now) },
           })
         }
 
-        if (theLog) {
-          theLog.snapshot('before', { next: 'after' })
+        if (methods != null && !(_.isArray(methods) && _.every(methods, _.isString))) {
+          $errUtils.throwErrByPath('clock.invalid_2nd_arg', {
+            args: { arg: JSON.stringify(methods) },
+          })
         }
 
-        const ret = tick.apply(this, [ms])
+        options = _.defaults({}, userOptions, {
+          log: true,
+        })
 
-        if (theLog) {
-          theLog.snapshot().end()
+        const log = (name, message, snapshot = true, consoleProps = {}) => {
+          if (!options.log) {
+            return
+          }
+
+          const details = clock.details()
+          const logNow = details.now
+          const logMethods = details.methods.slice()
+
+          return Cypress.log({
+            name,
+            message: message ? message : '',
+            type: 'parent',
+            end: true,
+            snapshot,
+            consoleProps() {
+              return _.extend(
+                {
+                  Now: logNow,
+                  'Methods replaced': logMethods,
+                },
+                consoleProps
+              )
+            },
+          })
         }
 
-        return ret
-      }
+        clock = $Clock.create(state('window'), now, methods)
 
-      const { restore } = clock
+        const { tick } = clock
 
-      clock.restore = function (options = {}) {
-        const ret = restore.apply(this, [options])
+        clock.tick = function (ms, options = {}) {
+          if (ms != null && !_.isNumber(ms)) {
+            $errUtils.throwErrByPath('tick.invalid_argument', {
+              args: { arg: JSON.stringify(ms) },
+            })
+          }
 
-        if (options.log !== false) {
-          log('restore')
+          if (ms == null) {
+            ms = 0
+          }
+
+          let theLog
+
+          if (options.log !== false) {
+            theLog = log('tick', `${ms}ms`, false, {
+              Now: clock.details().now + ms,
+              Ticked: `${ms} milliseconds`,
+            })
+          }
+
+          if (theLog) {
+            theLog.snapshot('before', { next: 'after' })
+          }
+
+          const ret = tick.apply(this, [ms])
+
+          if (theLog) {
+            theLog.snapshot().end()
+          }
+
+          return ret
         }
 
-        ctx.clock = null
+        const { restore } = clock
 
-        clock = null
+        clock.restore = function (options = {}) {
+          const ret = restore.apply(this, [options])
+
+          if (options.log !== false) {
+            log('restore')
+          }
+
+          ctx.clock = null
+
+          clock = null
+
+          state('clock', clock)
+
+          return ret
+        }
+
+        log('clock')
 
         state('clock', clock)
 
-        return ret
-      }
+        ctx.clock = clock
 
-      log('clock')
+        return clock
+      },
 
-      state('clock', clock)
+      tick(subject, ms, options = {}) {
+        if (!clock) {
+          $errUtils.throwErrByPath('tick.no_clock')
+        }
 
-      ctx.clock = clock
+        clock.tick(ms, options)
 
-      return clock
-    },
-
-    tick (subject, ms, options = {}) {
-      if (!clock) {
-        $errUtils.throwErrByPath('tick.no_clock')
-      }
-
-      clock.tick(ms, options)
-
-      return clock
-    },
-  })
+        return clock
+      },
+    }
+  )
 }

@@ -12,16 +12,19 @@ import studioRecorder from '../studio/studio-recorder'
 import Header from './header'
 import Studio from '../studio/studio'
 
-const getState = (props) => _.extend({
-  defaults: {},
-  updateWindowDimensions: sinon.spy(),
-}, props)
+const getState = (props) =>
+  _.extend(
+    {
+      defaults: {},
+      updateWindowDimensions: sinon.spy(),
+    },
+    props
+  )
 
-const propsWithState = (stateProps, configProps = {}) =>
-  ({
-    state: getState(stateProps),
-    config: configProps,
-  })
+const propsWithState = (stateProps, configProps = {}) => ({
+  state: getState(stateProps),
+  config: configProps,
+})
 
 describe('<Header />', () => {
   beforeEach(() => {
@@ -90,7 +93,9 @@ describe('<Header />', () => {
 
       mount(<Header {...props} />)
       selectorPlaygroundModel.isOpen = true
-      expect(props.state.updateWindowDimensions).to.be.calledWith({ headerHeight: 42 })
+      expect(props.state.updateWindowDimensions).to.be.calledWith({
+        headerHeight: 42,
+      })
     })
 
     it('does not show tooltip if selector playground is open', () => {

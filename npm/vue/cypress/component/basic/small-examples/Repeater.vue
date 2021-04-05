@@ -10,8 +10,8 @@ export default {
   data() {
     return {
       item: '',
-    };
+    }
   },
-};
+}
 </script>
 <style></style>

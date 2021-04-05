@@ -52,12 +52,18 @@ const Footer = observer(() => {
   }
 
   return (
-    <footer className={cs('footer', { 'update-available': updateStore.updateAvailable })}>
-      <button className='version' onClick={showModal} disabled={!updateStore.updateAvailable}>
-        <i className='update-indicator fas fa-arrow-alt-circle-up' />
+    <footer
+      className={cs('footer', {
+        'update-available': updateStore.updateAvailable,
+      })}
+    >
+      <button className="version" onClick={showModal} disabled={!updateStore.updateAvailable}>
+        <i className="update-indicator fas fa-arrow-alt-circle-up" />
         Version {appStore.displayVersion}
       </button>
-      <button className='open-changelog' onClick={openChangelog}>Changelog</button>
+      <button className="open-changelog" onClick={openChangelog}>
+        Changelog
+      </button>
       <UpdateModal show={state.showingModal} onClose={state.hideModal} />
       <UpdateNotice onOpenUpdatesModal={showModalWithReleaseNotes} />
     </footer>

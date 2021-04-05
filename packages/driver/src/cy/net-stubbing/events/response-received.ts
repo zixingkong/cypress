@@ -1,10 +1,6 @@
 import _ from 'lodash'
 
-import {
-  CyHttpMessages,
-  SERIALIZABLE_RES_PROPS,
-  NetEventFrames,
-} from '@packages/net-stubbing/lib/types'
+import { CyHttpMessages, SERIALIZABLE_RES_PROPS, NetEventFrames } from '@packages/net-stubbing/lib/types'
 import {
   validateStaticResponse,
   parseStaticResponseShorthand,
@@ -16,7 +12,11 @@ import { HandlerFn } from './'
 import Bluebird from 'bluebird'
 import { parseJsonBody } from './utils'
 
-export const onResponseReceived: HandlerFn<NetEventFrames.HttpResponseReceived> = (Cypress, frame, { getRoute, getRequest, emitNetEvent }) => {
+export const onResponseReceived: HandlerFn<NetEventFrames.HttpResponseReceived> = (
+  Cypress,
+  frame,
+  { getRoute, getRequest, emitNetEvent }
+) => {
   const { res, requestId, routeHandlerId } = frame
   const request = getRequest(frame.routeHandlerId, frame.requestId)
 
@@ -66,7 +66,7 @@ export const onResponseReceived: HandlerFn<NetEventFrames.HttpResponseReceived> 
 
   const userRes: CyHttpMessages.IncomingHttpResponse = {
     ...res,
-    send (staticResponse?, maybeBody?, maybeHeaders?) {
+    send(staticResponse?, maybeBody?, maybeHeaders?) {
       if (resolved) {
         return $errUtils.throwErrByPath('net_stubbing.response_handling.send_called_after_resolved', { args: { res } })
       }
@@ -96,12 +96,12 @@ export const onResponseReceived: HandlerFn<NetEventFrames.HttpResponseReceived> 
 
       return sendContinueFrame()
     },
-    delay (delay) {
+    delay(delay) {
       continueFrame.delay = delay
 
       return this
     },
-    throttle (throttleKbps) {
+    throttle(throttleKbps) {
       continueFrame.throttleKbps = throttleKbps
 
       return this
@@ -118,45 +118,45 @@ export const onResponseReceived: HandlerFn<NetEventFrames.HttpResponseReceived> 
   return Bluebird.try(() => {
     return request.responseHandler!(userRes)
   })
-  .catch((err) => {
-    $errUtils.throwErrByPath('net_stubbing.response_handling.cb_failed', {
-      args: {
-        err,
-        req: request.request,
-        route: _.get(getRoute(routeHandlerId), 'options'),
-        res,
-      },
-      errProps: {
-        appendToStack: {
-          title: 'From response callback',
-          content: err.stack,
+    .catch((err) => {
+      $errUtils.throwErrByPath('net_stubbing.response_handling.cb_failed', {
+        args: {
+          err,
+          req: request.request,
+          route: _.get(getRoute(routeHandlerId), 'options'),
+          res,
         },
-      },
+        errProps: {
+          appendToStack: {
+            title: 'From response callback',
+            content: err.stack,
+          },
+        },
+      })
     })
-  })
-  .timeout(timeout)
-  .catch(Bluebird.TimeoutError, (err) => {
-    if (Cypress.state('test') !== curTest) {
-      // active test has changed, ignore the timeout
-      return
-    }
+    .timeout(timeout)
+    .catch(Bluebird.TimeoutError, (err) => {
+      if (Cypress.state('test') !== curTest) {
+        // active test has changed, ignore the timeout
+        return
+      }
 
-    $errUtils.throwErrByPath('net_stubbing.response_handling.cb_timeout', {
-      args: {
-        timeout,
-        req: request.request,
-        route: _.get(getRoute(routeHandlerId), 'options'),
-        res,
-      },
+      $errUtils.throwErrByPath('net_stubbing.response_handling.cb_timeout', {
+        args: {
+          timeout,
+          req: request.request,
+          route: _.get(getRoute(routeHandlerId), 'options'),
+          res,
+        },
+      })
     })
-  })
-  .then(() => {
-    if (!sendCalled) {
-      // user did not call send, send response
-      userRes.send()
-    }
-  })
-  .finally(() => {
-    resolved = true
-  })
+    .then(() => {
+      if (!sendCalled) {
+        // user did not call send, send response
+        userRes.send()
+      }
+    })
+    .finally(() => {
+      resolved = true
+    })
 }

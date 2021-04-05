@@ -69,26 +69,31 @@ const testPackageStaticAssets = async (options = {}) => {
     minLineCount: 0,
   })
 
-  const foundAssets = await globAsync(opts.assetGlob)
-  .map(async (path) => {
+  const foundAssets = await globAsync(opts.assetGlob).map(async (path) => {
     const fileStr = (await fs.readFile(path)).toString()
 
     opts.goodStrings.forEach((str) => {
       const [passed, count, atLeast] = includesString(fileStr, str)
 
-      la(passed, stripIndent`
+      la(
+        passed,
+        stripIndent`
       Error in ${path}: expected to find at least ${atLeast} strings of ${chalk.bold(str)}
       contained: ${count}
-    `)
+    `
+      )
     })
 
     opts.badStrings.forEach((str) => {
       const [passed, count, atLeast] = includesString(fileStr, str)
 
-      la(!passed, stripIndent`
+      la(
+        !passed,
+        stripIndent`
         Error in ${path}: expected ${chalk.bold('not')} to find more than ${atLeast - 1} strings of ${chalk.bold(str)}
         contained: ${count}
-      `)
+      `
+      )
     })
 
     opts.testAssetStrings.forEach(([testFn, errorMsg]) => {
@@ -98,18 +103,26 @@ const testPackageStaticAssets = async (options = {}) => {
     if (opts.minLineCount) {
       const lineCount = (fileStr.match(/\n/g) || '').length + 1
 
-      la(lineCount > opts.minLineCount, stripIndent`
-      Error in ${chalk.red(path)}: Detected this file was minified, having fewer than ${opts.minLineCount} lines of code.
+      la(
+        lineCount > opts.minLineCount,
+        stripIndent`
+      Error in ${chalk.red(path)}: Detected this file was minified, having fewer than ${
+          opts.minLineCount
+        } lines of code.
       Minified code takes longer to inspect in browser Devtools, so we should leave it un-minified.
-      `)
+      `
+      )
     }
 
     return path
   })
 
-  la(!!foundAssets.length, stripIndent`
+  la(
+    !!foundAssets.length,
+    stripIndent`
   expected assets to be found in ${chalk.green(opts.assetGlob)}
-  `)
+  `
+  )
 }
 
 module.exports = {
@@ -117,10 +130,10 @@ module.exports = {
   testPackageStaticAssets,
 }
 
-function includesCount (string, subString) {
+function includesCount(string, subString) {
   string += ''
   subString += ''
-  if (subString.length <= 0) return (string.length + 1)
+  if (subString.length <= 0) return string.length + 1
 
   let n = 0
   let pos = 0

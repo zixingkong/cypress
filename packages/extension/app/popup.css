@@ -24,22 +24,20 @@ ul {
   padding-left: 10px;
   list-style: none;
   overflow: auto;
-
 }
 
-ul>li {
+ul > li {
   float: left;
   margin-right: 15px;
 }
 
-ul>li>a {
-  color: #0061AB;
+ul > li > a {
+  color: #0061ab;
   outline: 0;
   font-size: 90%;
 }
 
-
-ul>li>a:hover {
+ul > li > a:hover {
   color: #555;
   outline: 0;
 }

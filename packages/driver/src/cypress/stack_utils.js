@@ -7,7 +7,13 @@ const { codeFrameColumns } = require('@babel/code-frame')
 
 const $utils = require('./utils')
 const $sourceMapUtils = require('./source_map_utils')
-const { getStackLines, replacedStack, stackWithoutMessage, splitStack, unsplitStack } = require('@packages/server/lib/util/stack_utils')
+const {
+  getStackLines,
+  replacedStack,
+  stackWithoutMessage,
+  splitStack,
+  unsplitStack,
+} = require('@packages/server/lib/util/stack_utils')
 
 const whitespaceRegex = /^(\s*)*/
 const stackLineRegex = /^\s*(at )?.*@?\(?.*\:\d+\:\d+\)?$/
@@ -21,8 +27,8 @@ const hasCrossFrameStacks = (specWindow) => {
     return stack.replace(/^.*\n/, '')
   }
 
-  const topStack = normalize((new Error()).stack)
-  const specStack = normalize((new specWindow.Error()).stack)
+  const topStack = normalize(new Error().stack)
+  const specStack = normalize(new specWindow.Error().stack)
 
   return topStack === specStack
 }
@@ -119,7 +125,9 @@ const captureUserInvocationStack = (ErrorConstructor, userInvocationStack) => {
 
     // if browser natively supports Error.captureStackTrace, use it (chrome) (must be bound)
     // otherwise use our polyfill on top.Error
-    const captureStackTrace = ErrorConstructor.captureStackTrace ? ErrorConstructor.captureStackTrace.bind(ErrorConstructor) : Error.captureStackTrace
+    const captureStackTrace = ErrorConstructor.captureStackTrace
+      ? ErrorConstructor.captureStackTrace.bind(ErrorConstructor)
+      : Error.captureStackTrace
 
     captureStackTrace(newErr, captureUserInvocationStack)
 

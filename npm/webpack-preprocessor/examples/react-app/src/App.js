@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
 import './App.css'
 
-export function Todo ({ todo, index, toggleTodo, removeTodo }) {
+export function Todo({ todo, index, toggleTodo, removeTodo }) {
   const toggleText = todo.isCompleted ? 'Redo' : 'Complete'
 
   return (
-    <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-    >
+    <div className="todo" style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}>
       {todo.text}
 
       <div>
         <button onClick={() => toggleTodo(index)}>{toggleText}</button>
-        <button data-cy="remove" onClick={() => removeTodo(index)}>x</button>
+        <button data-cy="remove" onClick={() => removeTodo(index)}>
+          x
+        </button>
       </div>
     </div>
   )
 }
 
-function TodoForm ({ addTodo }) {
+function TodoForm({ addTodo }) {
   const [value, setValue] = useState('')
 
   const handleSubmit = (e) => {
@@ -32,12 +31,7 @@ function TodoForm ({ addTodo }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <input type="text" className="input" value={value} onChange={(e) => setValue(e.target.value)} />
     </form>
   )
 }
@@ -53,7 +47,7 @@ export const toggleOneTodo = (todos, index) => {
   return newTodos
 }
 
-function App () {
+function App() {
   const [todos, setTodos] = useState([
     {
       text: 'Learn about React',
@@ -96,15 +90,7 @@ function App () {
     <div className="app">
       <div className="todo-list">
         {todos.map((todo, index) => {
-          return (
-            <Todo
-              key={index}
-              index={index}
-              todo={todo}
-              toggleTodo={toggleTodo}
-              removeTodo={removeTodo}
-            />
-          )
+          return <Todo key={index} index={index} todo={todo} toggleTodo={toggleTodo} removeTodo={removeTodo} />
         })}
         <TodoForm addTodo={addTodo} />
       </div>

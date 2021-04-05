@@ -50,11 +50,11 @@ let Cypress
 const eventManager = {
   reporterBus,
 
-  getCypress () {
+  getCypress() {
     return Cypress
   },
 
-  addGlobalListeners (state, connectionInfo) {
+  addGlobalListeners(state, connectionInfo) {
     const rerun = () => {
       if (!this) {
         // if the tests have been reloaded
@@ -65,12 +65,19 @@ const eventManager = {
       return this._reRun(state)
     }
 
-    ws.emit('is:automation:client:connected', connectionInfo, action('automationEnsured', (isConnected) => {
-      state.automation = isConnected ? automation.CONNECTED : automation.MISSING
-      ws.on('automation:disconnected', action('automationDisconnected', () => {
-        state.automation = automation.DISCONNECTED
-      }))
-    }))
+    ws.emit(
+      'is:automation:client:connected',
+      connectionInfo,
+      action('automationEnsured', (isConnected) => {
+        state.automation = isConnected ? automation.CONNECTED : automation.MISSING
+        ws.on(
+          'automation:disconnected',
+          action('automationDisconnected', () => {
+            state.automation = automation.DISCONNECTED
+          })
+        )
+      })
+    )
 
     ws.on('change:to:url', (url) => {
       window.location.href = url
@@ -150,7 +157,7 @@ const eventManager = {
 
     reporterBus.on('runner:restart', rerun)
 
-    function sendEventIfSnapshotProps (logId, event) {
+    function sendEventIfSnapshotProps(logId, event) {
       if (!Cypress) return
 
       const snapshotProps = Cypress.runner.getSnapshotPropsForLogById(logId)
@@ -280,13 +287,13 @@ const eventManager = {
     })
   },
 
-  start (config) {
+  start(config) {
     if (config.socketId) {
       ws.emit('app:connect', config.socketId)
     }
   },
 
-  setup (config) {
+  setup(config) {
     Cypress = this.Cypress = $Cypress.create(config)
 
     // expose Cypress globally
@@ -297,13 +304,13 @@ const eventManager = {
     ws.emit('watch:test:file', config.spec)
   },
 
-  isBrowser (browserName) {
+  isBrowser(browserName) {
     if (!this.Cypress) return false
 
     return this.Cypress.isBrowser(browserName)
   },
 
-  initialize ($autIframe, config) {
+  initialize($autIframe, config) {
     performance.mark('initialize-start')
 
     return Cypress.initialize({
@@ -359,7 +366,7 @@ const eventManager = {
     })
   },
 
-  _addListeners () {
+  _addListeners() {
     Cypress.on('message', (msg, data, cb) => {
       ws.emit('client:request', msg, data, cb)
     })
@@ -473,7 +480,7 @@ const eventManager = {
     })
   },
 
-  _runDriver (state) {
+  _runDriver(state) {
     performance.mark('run-s')
     Cypress.run(() => {
       performance.mark('run-e')
@@ -492,12 +499,12 @@ const eventManager = {
     })
   },
 
-  stop () {
+  stop() {
     localBus.removeAllListeners()
     ws.off()
   },
 
-  _reRun (state) {
+  _reRun(state) {
     if (!Cypress) return
 
     state.setIsLoading(true)
@@ -509,8 +516,7 @@ const eventManager = {
     studioRecorder.setInactive()
     selectorPlaygroundModel.setOpen(false)
 
-    return this._restart()
-    .then(() => {
+    return this._restart().then(() => {
       // this probably isn't 100% necessary
       // since Cypress will fall out of scope
       // but we want to be aggressive here
@@ -521,14 +527,14 @@ const eventManager = {
     })
   },
 
-  _restart () {
+  _restart() {
     return new Promise((resolve) => {
       reporterBus.once('reporter:restarted', resolve)
       reporterBus.emit('reporter:restart:test:run')
     })
   },
 
-  _restoreStudioFromState (state) {
+  _restoreStudioFromState(state) {
     if (state.studioTestId) {
       studioRecorder.setTestId(state.studioTestId)
     }
@@ -542,7 +548,7 @@ const eventManager = {
     }
   },
 
-  _initializeStudio (config) {
+  _initializeStudio(config) {
     if (studioRecorder.hasRunnableId) {
       studioRecorder.startLoading()
 
@@ -564,7 +570,7 @@ const eventManager = {
     }
   },
 
-  _interceptStudio (displayProps) {
+  _interceptStudio(displayProps) {
     if (studioRecorder.isActive) {
       displayProps.hookId = studioRecorder.hookId
 
@@ -577,56 +583,56 @@ const eventManager = {
     return displayProps
   },
 
-  emit (event, ...args) {
+  emit(event, ...args) {
     localBus.emit(event, ...args)
   },
 
-  on (event, ...args) {
+  on(event, ...args) {
     localBus.on(event, ...args)
   },
 
-  notifyRunningSpec (specFile) {
+  notifyRunningSpec(specFile) {
     ws.emit('spec:changed', specFile)
   },
 
-  focusTests () {
+  focusTests() {
     ws.emit('focus:tests')
   },
 
-  snapshotUnpinned () {
+  snapshotUnpinned() {
     this._unpinSnapshot()
     this._hideSnapshot()
     reporterBus.emit('reporter:snapshot:unpinned')
   },
 
-  _unpinSnapshot () {
+  _unpinSnapshot() {
     localBus.emit('unpin:snapshot')
   },
 
-  _hideSnapshot () {
+  _hideSnapshot() {
     localBus.emit('hide:snapshot')
   },
 
-  launchBrowser (browser) {
+  launchBrowser(browser) {
     ws.emit('reload:browser', window.location.toString(), browser && browser.name)
   },
 
   // clear all the cypress specific cookies
   // whenever our app starts
   // and additional when we stop running our tests
-  _clearAllCookies () {
+  _clearAllCookies() {
     if (!Cypress) return
 
     Cypress.Cookies.clearCypressCookies()
   },
 
-  _setUnload () {
+  _setUnload() {
     if (!Cypress) return
 
     Cypress.Cookies.setCy('unload', true)
   },
 
-  saveState (state) {
+  saveState(state) {
     ws.emit('save:app:state', state)
   },
 }

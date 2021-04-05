@@ -33,13 +33,13 @@
 <script>
 export default {
   name: 'TranslatedMessage',
-  data () {
+  data() {
     return { locale: 'en' }
   },
   watch: {
-    locale (val) {
+    locale(val) {
       this.$i18n.locale = val
-    }
-  }
+    },
+  },
 }
 </script>

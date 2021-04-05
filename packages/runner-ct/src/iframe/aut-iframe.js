@@ -9,12 +9,12 @@ import blankContents from './blank-contents'
 import selectorPlaygroundModel from '../selector-playground/selector-playground-model'
 
 export default class AutIframe {
-  constructor (config) {
+  constructor(config) {
     this.config = config
     this.debouncedToggleSelectorPlayground = _.debounce(this.toggleSelectorPlayground, 300)
   }
 
-  create () {
+  create() {
     this.$iframe = $('<iframe>', {
       id: `Your App: '${this.config.projectName}'`,
       class: 'aut-iframe',
@@ -23,7 +23,7 @@ export default class AutIframe {
     return this.$iframe
   }
 
-  showBlankContents () {
+  showBlankContents() {
     this._showContents(blankContents())
   }
 
@@ -31,23 +31,23 @@ export default class AutIframe {
     this._showContents(visitFailure(props))
   }
 
-  _showContents (contents) {
+  _showContents(contents) {
     this._body().html(contents)
   }
 
-  _contents () {
+  _contents() {
     return this.$iframe && this.$iframe.contents()
   }
 
-  _window () {
+  _window() {
     return this.$iframe.prop('contentWindow')
   }
 
-  _document () {
+  _document() {
     return this.$iframe.prop('contentDocument')
   }
 
-  _body () {
+  _body() {
     return this._contents() && this._contents().find('body')
   }
 
@@ -77,7 +77,7 @@ export default class AutIframe {
     this.debouncedToggleSelectorPlayground(selectorPlaygroundModel.isEnabled)
   }
 
-  _replaceHtmlAttrs ($html, htmlAttrs) {
+  _replaceHtmlAttrs($html, htmlAttrs) {
     let oldAttrs = {}
 
     // remove all attributes
@@ -97,7 +97,7 @@ export default class AutIframe {
     })
   }
 
-  _replaceHeadStyles (styles = []) {
+  _replaceHeadStyles(styles = []) {
     const $head = this._contents().find('head')
     const existingStyles = $head.find('link[rel="stylesheet"],style')
 
@@ -121,7 +121,7 @@ export default class AutIframe {
     }
   }
 
-  _replaceLink ($head, existingStyle, style) {
+  _replaceLink($head, existingStyle, style) {
     const linkTag = this._linkTag(style)
 
     if (!existingStyle) {
@@ -137,7 +137,7 @@ export default class AutIframe {
     }
   }
 
-  _replaceStyle ($head, existingStyle, style) {
+  _replaceStyle($head, existingStyle, style) {
     const styleTag = this._styleTag(style)
 
     if (existingStyle) {
@@ -149,17 +149,17 @@ export default class AutIframe {
     }
   }
 
-  _insertBodyStyles ($body, styles = []) {
+  _insertBodyStyles($body, styles = []) {
     _.each(styles, (style) => {
       $body.append(style.href ? this._linkTag(style) : this._styleTag(style))
     })
   }
 
-  _linkTag (style) {
+  _linkTag(style) {
     return `<link rel="stylesheet" href="${style.href}" />`
   }
 
-  _styleTag (style) {
+  _styleTag(style) {
     return `<style>${style}</style>`
   }
 
@@ -297,7 +297,7 @@ export default class AutIframe {
     }
   }
 
-  toggleSelectorHighlight (isShowingHighlight) {
+  toggleSelectorHighlight(isShowingHighlight) {
     if (!isShowingHighlight) {
       this._clearHighlight()
 
@@ -326,7 +326,7 @@ export default class AutIframe {
     })
   }
 
-  getElements (cypressDom) {
+  getElements(cypressDom) {
     const { selector, method } = selectorPlaygroundModel
     const $contents = this._contents()
 
@@ -340,7 +340,7 @@ export default class AutIframe {
     })
   }
 
-  printSelectorElementsToConsole () {
+  printSelectorElementsToConsole() {
     logger.clearLog()
 
     const Cypress = eventManager.getCypress()

@@ -23,7 +23,10 @@ module.exports = (on, config) => {
         {
           test: /\.(js|jsx|mjs|ts|tsx)$/,
           loader: 'babel-loader',
-          options: { ...babelConfig, cacheDirectory: path.resolve(__dirname, '.babel-cache') },
+          options: {
+            ...babelConfig,
+            cacheDirectory: path.resolve(__dirname, '.babel-cache'),
+          },
         },
       ],
     },

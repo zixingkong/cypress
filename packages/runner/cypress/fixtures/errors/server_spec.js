@@ -3,63 +3,69 @@ import { abortXhr, sendXhr } from './setup'
 describe('cy.server', { defaultCommandTimeout: 0 }, () => {
   it('onAbort assertion failure', () => {
     cy.server({
-      onAbort () {
+      onAbort() {
         expect('actual').to.equal('expected')
       },
     })
-    .route('/foo')
-    .window().then(abortXhr('/foo'))
+      .route('/foo')
+      .window()
+      .then(abortXhr('/foo'))
   })
 
   it('onAbort exception', () => {
     cy.server({
-      onAbort () {
-        ({}).bar()
+      onAbort() {
+        ;({}.bar())
       },
     })
-    .route('/foo')
-    .window().then(abortXhr('/foo'))
+      .route('/foo')
+      .window()
+      .then(abortXhr('/foo'))
   })
 
   it('onRequest assertion failure', () => {
     cy.server({
-      onRequest () {
+      onRequest() {
         expect('actual').to.equal('expected')
       },
     })
-    .route('/foo')
-    .window().then(sendXhr('/foo'))
+      .route('/foo')
+      .window()
+      .then(sendXhr('/foo'))
   })
 
   it('onRequest exception', () => {
     cy.server({
-      onRequest () {
-        ({}).bar()
+      onRequest() {
+        ;({}.bar())
       },
     })
-    .route('/foo')
-    .window().then(sendXhr('/foo'))
+      .route('/foo')
+      .window()
+      .then(sendXhr('/foo'))
   })
 
   it('onResponse assertion failure', () => {
     cy.server({
-      onResponse () {
+      onResponse() {
         expect('actual').to.equal('expected')
       },
     })
-    .route('/json-content-type')
-    .window().then(sendXhr('/json-content-type'))
-    .wait(10000)
+      .route('/json-content-type')
+      .window()
+      .then(sendXhr('/json-content-type'))
+      .wait(10000)
   })
 
   it('onResponse exception', () => {
     cy.server({
-      onResponse () {
-        ({}).bar()
+      onResponse() {
+        ;({}.bar())
       },
     })
-    .route('/json-content-type')
-    .window().then(sendXhr('/json-content-type'))
-    .wait(10000)
+      .route('/json-content-type')
+      .window()
+      .then(sendXhr('/json-content-type'))
+      .wait(10000)
   })
 })

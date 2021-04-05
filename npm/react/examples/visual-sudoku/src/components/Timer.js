@@ -6,7 +6,7 @@ import moment from 'moment'
  * React component for the Timer in Status Section.
  * Uses the 'useEffect' hook to update the timer every minute.
  */
-export const Timer = props => {
+export const Timer = (props) => {
   let [currentTime, setCurrentTime] = useState(moment())
   let { timeGameStarted, won } = useSudokuContext()
 

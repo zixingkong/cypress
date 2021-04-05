@@ -3,11 +3,7 @@ import { StyleOptions } from './mount'
 /**
  * Insert links to external style resources.
  */
-function insertStylesheets (
-  stylesheets: string[],
-  document: Document,
-  el: HTMLElement | null,
-) {
+function insertStylesheets(stylesheets: string[], document: Document, el: HTMLElement | null) {
   stylesheets.forEach((href) => {
     const link = document.createElement('link')
 
@@ -21,7 +17,7 @@ function insertStylesheets (
 /**
  * Inserts a single stylesheet element
  */
-function insertStyles (styles: string[], document: Document, el: HTMLElement | null) {
+function insertStyles(styles: string[], document: Document, el: HTMLElement | null) {
   styles.forEach((style) => {
     const styleElement = document.createElement('style')
 
@@ -30,12 +26,7 @@ function insertStyles (styles: string[], document: Document, el: HTMLElement | n
   })
 }
 
-function insertSingleCssFile (
-  cssFilename: string,
-  document: Document,
-  el: HTMLElement | null,
-  log?: boolean,
-) {
+function insertSingleCssFile(cssFilename: string, document: Document, el: HTMLElement | null, log?: boolean) {
   return cy.readFile(cssFilename, { log }).then((css) => {
     const style = document.createElement('style')
 
@@ -48,12 +39,7 @@ function insertSingleCssFile (
  * Reads the given CSS file from local file system
  * and adds the loaded style text as an element.
  */
-function insertLocalCssFiles (
-  cssFilenames: string[],
-  document: Document,
-  el: HTMLElement | null,
-  log?: boolean,
-) {
+function insertLocalCssFiles(cssFilenames: string[], document: Document, el: HTMLElement | null, log?: boolean) {
   return Cypress.Promise.mapSeries(cssFilenames, (cssFilename) => {
     return insertSingleCssFile(cssFilename, document, el, log)
   })
@@ -66,7 +52,7 @@ function insertLocalCssFiles (
 export const injectStylesBeforeElement = (
   options: Partial<StyleOptions & { log: boolean }>,
   document: Document,
-  el: HTMLElement | null,
+  el: HTMLElement | null
 ) => {
   if (!el) return
 

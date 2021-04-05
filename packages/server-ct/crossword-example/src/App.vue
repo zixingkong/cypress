@@ -5,20 +5,20 @@
     </Nav>
 
     <main>
-      <router-view class="router-view"/>
+      <router-view class="router-view" />
     </main>
   </div>
 </template>
 
 <script>
-  import Nav from './components/Nav'
+import Nav from './components/Nav'
 
-  export default {
-    components: { Nav },
-    created() {
-      console.log(this.$store, this.$router)
-    },
-  }
+export default {
+  components: { Nav },
+  created() {
+    console.log(this.$store, this.$router)
+  },
+}
 </script>
 <style lang="scss">
 body {

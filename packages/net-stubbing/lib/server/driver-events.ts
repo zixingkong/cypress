@@ -1,26 +1,15 @@
 import _ from 'lodash'
 import Debug from 'debug'
-import {
-  NetStubbingState,
-  GetFixtureFn,
-  BackendRoute,
-} from './types'
-import {
-  AnnotatedRouteMatcherOptions,
-  NetEventFrames,
-  RouteMatcherOptions,
-} from '../types'
-import {
-  getAllStringMatcherFields,
-  setResponseFromFixture,
-} from './util'
+import { NetStubbingState, GetFixtureFn, BackendRoute } from './types'
+import { AnnotatedRouteMatcherOptions, NetEventFrames, RouteMatcherOptions } from '../types'
+import { getAllStringMatcherFields, setResponseFromFixture } from './util'
 import { onRequestContinue } from './intercept-request'
 import { onResponseContinue } from './intercept-response'
 import CyServer from '@packages/server'
 
 const debug = Debug('cypress:net-stubbing:server:driver-events')
 
-async function _onRouteAdded (state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.AddRoute) {
+async function _onRouteAdded(state: NetStubbingState, getFixture: GetFixtureFn, options: NetEventFrames.AddRoute) {
   const routeMatcher = _restoreMatcherOptionsTypes(options.routeMatcher)
   const { staticResponse } = options
 
@@ -37,7 +26,7 @@ async function _onRouteAdded (state: NetStubbingState, getFixture: GetFixtureFn,
   state.routes.push(route)
 }
 
-export function _restoreMatcherOptionsTypes (options: AnnotatedRouteMatcherOptions) {
+export function _restoreMatcherOptionsTypes(options: AnnotatedRouteMatcherOptions) {
   const stringMatcherFields = getAllStringMatcherFields(options)
 
   const ret: RouteMatcherOptions = {}
@@ -78,7 +67,7 @@ type OnNetEventOpts = {
   frame: NetEventFrames.AddRoute | NetEventFrames.HttpRequestContinue | NetEventFrames.HttpResponseContinue
 }
 
-export async function onNetEvent (opts: OnNetEventOpts): Promise<any> {
+export async function onNetEvent(opts: OnNetEventOpts): Promise<any> {
   const { state, socket, getFixture, args, eventName, frame } = opts
 
   debug('received driver event %o', { eventName, args })

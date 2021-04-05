@@ -6,10 +6,6 @@ Thats why in tests we also need to wrap our component with the same provider as 
 
 ```js
 const localizedMount = (node, { locale }) => {
-  mount(
-    <I18nextProvider i18n={i18n.cloneInstance({ lng: locale })}>
-      {node}
-    </I18nextProvider>,
-  )
+  mount(<I18nextProvider i18n={i18n.cloneInstance({ lng: locale })}>{node}</I18nextProvider>)
 }
 ```

@@ -39,22 +39,40 @@ export const itHandlesFileOpening = ({ getRunner, selector, file, stackTrace = f
     })
 
     it('opens in preferred opener', () => {
-      cy.get(selector).first().click().then(() => {
-        expect(getRunner().emit).to.be.calledWith('open:file', {
-          where: editor,
-          ...file,
+      cy.get(selector)
+        .first()
+        .click()
+        .then(() => {
+          expect(getRunner().emit).to.be.calledWith('open:file', {
+            where: editor,
+            ...file,
+          })
         })
-      })
     })
   })
 
   describe('when user has not already set opener and opens file', () => {
     const availableEditors = [
-      { id: 'computer', name: 'On Computer', isOther: false, openerId: 'computer' },
+      {
+        id: 'computer',
+        name: 'On Computer',
+        isOther: false,
+        openerId: 'computer',
+      },
       { id: 'atom', name: 'Atom', isOther: false, openerId: 'atom' },
       { id: 'vim', name: 'Vim', isOther: false, openerId: 'vim' },
-      { id: 'sublime', name: 'Sublime Text', isOther: false, openerId: 'sublime' },
-      { id: 'vscode', name: 'Visual Studio Code', isOther: false, openerId: 'vscode' },
+      {
+        id: 'sublime',
+        name: 'Sublime Text',
+        isOther: false,
+        openerId: 'sublime',
+      },
+      {
+        id: 'vscode',
+        name: 'Visual Studio Code',
+        isOther: false,
+        openerId: 'vscode',
+      },
       { id: 'other', name: 'Other', isOther: true, openerId: '' },
     ]
 
@@ -84,15 +102,15 @@ export const itHandlesFileOpening = ({ getRunner, selector, file, stackTrace = f
     // the changes to the path don't bubble up correctly. this only happens
     // in the Cypress test and not when running the actual app
     it.skip('updates "Other" path when typed into', () => {
-      cy.contains('Other').find('input[type="text"]').type('/absolute/path/to/foo.js')
-      .should('have.value', '/absolute/path/to/foo.js')
+      cy.contains('Other')
+        .find('input[type="text"]')
+        .type('/absolute/path/to/foo.js')
+        .should('have.value', '/absolute/path/to/foo.js')
     })
 
     describe('when editor is not selected', () => {
       it('disables submit button', () => {
-        cy.contains('Set preference and open file')
-        .should('have.class', 'is-disabled')
-        .click()
+        cy.contains('Set preference and open file').should('have.class', 'is-disabled').click()
 
         cy.wrap(getRunner().emit).should('not.to.be.calledWith', 'set:user:editor')
         cy.wrap(getRunner().emit).should('not.to.be.calledWith', 'open:file')
@@ -110,9 +128,7 @@ export const itHandlesFileOpening = ({ getRunner, selector, file, stackTrace = f
       })
 
       it('disables submit button', () => {
-        cy.contains('Set preference and open file')
-        .should('have.class', 'is-disabled')
-        .click()
+        cy.contains('Set preference and open file').should('have.class', 'is-disabled').click()
 
         cy.wrap(getRunner().emit).should('not.to.be.calledWith', 'set:user:editor')
         cy.wrap(getRunner().emit).should('not.to.be.calledWith', 'open:file')

@@ -12,12 +12,8 @@
       "request": "launch",
       "name": "test: active",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "test-debug-package"
-      ],
-      "args": [
-        "${file}"
-      ],
+      "runtimeArgs": ["test-debug-package"],
+      "args": ["${file}"],
       "port": 5566,
       "console": "integratedTerminal"
     },
@@ -33,9 +29,7 @@
       "name": "dev-debug",
       "port": 5566,
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "dev-debug"
-      ]
+      "runtimeArgs": ["dev-debug"]
     }
   ],
   "compounds": [

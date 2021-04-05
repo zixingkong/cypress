@@ -256,7 +256,22 @@ describe('src/cypress/location', () => {
   context('.create', () => {
     it('returns an object literal', () => {
       const obj = Location.create(urls.cypress, urls.signin)
-      const keys = ['auth', 'authObj', 'hash', 'href', 'host', 'hostname', 'origin', 'pathname', 'port', 'protocol', 'search', 'toString', 'originPolicy', 'superDomain']
+      const keys = [
+        'auth',
+        'authObj',
+        'hash',
+        'href',
+        'host',
+        'hostname',
+        'origin',
+        'pathname',
+        'port',
+        'protocol',
+        'search',
+        'toString',
+        'originPolicy',
+        'superDomain',
+      ]
 
       expect(obj).to.have.keys(keys)
     })
@@ -278,7 +293,9 @@ describe('src/cypress/location', () => {
     })
 
     it('merges params into a URL', function () {
-      this.url('http://example.com/a', 'http://example.com/a?foo=bar', { foo: 'bar' })
+      this.url('http://example.com/a', 'http://example.com/a?foo=bar', {
+        foo: 'bar',
+      })
     })
 
     it('overrides existing queryparams', function () {

@@ -1,11 +1,6 @@
 {
-  "plugins": [
-    "@cypress/dev"
-  ],
-  "extends": [
-    "plugin:@cypress/dev/general",
-    "plugin:@cypress/dev/tests"
-  ],
+  "plugins": ["@cypress/dev"],
+  "extends": ["plugin:@cypress/dev/general", "plugin:@cypress/dev/tests"],
   "rules": {
     "prefer-spread": "off",
     "prefer-rest-params": "off",

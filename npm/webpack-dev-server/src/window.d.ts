@@ -3,6 +3,6 @@
  */
 export declare global {
   interface Window {
-    Cypress: Cypress.Cypress;
+    Cypress: Cypress.Cypress
   }
 }

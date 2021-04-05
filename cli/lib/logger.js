@@ -4,7 +4,7 @@ const chalk = require('chalk')
 let logs = []
 
 const logLevel = () => {
-  return (process.env.npm_config_loglevel || 'notice')
+  return process.env.npm_config_loglevel || 'notice'
 }
 
 const error = (...messages) => {

@@ -1,6 +1,9 @@
 const _ = require('lodash')
 
-const createErrorResult = (errorMessage) => ({ isValid: false, error: new Error(errorMessage) })
+const createErrorResult = (errorMessage) => ({
+  isValid: false,
+  error: new Error(errorMessage),
+})
 const createSuccessResult = () => ({ isValid: true })
 
 const validate = (func, arg, errorMessage) => {
@@ -26,7 +29,7 @@ const eventValidators = {
   'before:spec': isFunction,
   'dev-server:start': isFunction,
   'file:preprocessor': isFunction,
-  'task': isObject,
+  task: isObject,
 }
 
 const validateEvent = (event, handler, config) => {

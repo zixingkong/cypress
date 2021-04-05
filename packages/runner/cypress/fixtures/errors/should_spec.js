@@ -9,46 +9,44 @@ describe('cy.should', { defaultCommandTimeout: 0 }, () => {
 
   it('callback exception', () => {
     cy.wrap({}).should(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 
   it('standard assertion failure', () => {
-    cy.wrap({})
-    .should('have.property', 'foo')
+    cy.wrap({}).should('have.property', 'foo')
   })
 
   it('after multiple', () => {
-    cy.wrap({ foo: 'foo' }).should('have.property', 'foo')
-    .should('equal', 'bar')
+    cy.wrap({ foo: 'foo' }).should('have.property', 'foo').should('equal', 'bar')
   })
 
   it('after multiple callbacks exception', () => {
     cy.wrap({ foo: 'foo' })
-    .should(() => {
-      expect(true).to.be.true
-    })
-    .should(() => {
-      ({}).bar()
-    })
+      .should(() => {
+        expect(true).to.be.true
+      })
+      .should(() => {
+        ;({}.bar())
+      })
   })
 
   it('after multiple callbacks assertion failure', () => {
     cy.wrap({ foo: 'foo' })
-    .should(() => {
-      expect(true).to.be.true
-    })
-    .should(() => {
-      expect('actual').to.equal('expected')
-    })
+      .should(() => {
+        expect(true).to.be.true
+      })
+      .should(() => {
+        expect('actual').to.equal('expected')
+      })
   })
 
   it('after callback success assertion failure', () => {
     cy.wrap({})
-    .should(() => {
-      expect(true).to.be.true
-    })
-    .should('have.property', 'foo')
+      .should(() => {
+        expect(true).to.be.true
+      })
+      .should('have.property', 'foo')
   })
 
   it('command failure after success', () => {

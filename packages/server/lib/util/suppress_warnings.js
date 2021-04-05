@@ -33,7 +33,13 @@ const suppress = () => {
       return
     }
 
-    debug('suppressed emitWarning from node: %o', { process, warning, type, code, args })
+    debug('suppressed emitWarning from node: %o', {
+      process,
+      warning,
+      type,
+      code,
+      args,
+    })
   }
 }
 

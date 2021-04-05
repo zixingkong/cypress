@@ -14,11 +14,12 @@ $active-color: $brand-01;
   padding: 0;
 }
 
-.top, .bottom {
+.top,
+.bottom {
   display: grid;
   list-style-type: none;
   row-gap: 0.5rem;
-  grid-template-rows: repeat(auto-fit, 48px)
+  grid-template-rows: repeat(auto-fit, 48px);
 }
 
 .top {
@@ -45,12 +46,11 @@ $active-color: $brand-01;
     display: block;
     background: transparent;
   }
-  
 }
 
 .active {
   color: $active-color;
-  
+
   &:before {
     background: $brand-01;
   }
@@ -58,7 +58,6 @@ $active-color: $brand-01;
 
 .inactive {
   :hover {
-    
     color: $active-color;
   }
 }

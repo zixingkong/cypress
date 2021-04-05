@@ -8,7 +8,7 @@
 
 ![Example component test](images/dynamic.gif)
 
-- How is this different from [Enzyme](https://github.com/airbnb/enzyme) or [RTL](https://testing-library.com/docs/react-testing-library/intro)? It is similar in functionality BUT runs the component in the real browser with full power of Cypress E2E test runner: [live GUI, full API, screen recording, CI support, cross-platform](https://www.cypress.io/features/), and [visual testing](https://on.cypress.io/visual-testing). 
+- How is this different from [Enzyme](https://github.com/airbnb/enzyme) or [RTL](https://testing-library.com/docs/react-testing-library/intro)? It is similar in functionality BUT runs the component in the real browser with full power of Cypress E2E test runner: [live GUI, full API, screen recording, CI support, cross-platform](https://www.cypress.io/features/), and [visual testing](https://on.cypress.io/visual-testing).
 - If you like using `@testing-library/react`, you can use `@testing-library/cypress` for the same `findBy`, `queryBy` commands, see one of the examples in the list below
 - Read [My Vision for Component Tests in Cypress](https://glebbahmutov.com/blog/my-vision-for-component-tests/) by Gleb Bahmutov
 
@@ -271,9 +271,7 @@ const todo = {
   title: 'Write more tests',
 }
 mount(<Todo todo={todo} />, {
-  stylesheets: [
-    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-  ],
+  stylesheets: ['https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'],
 })
 ```
 
@@ -301,16 +299,14 @@ You may also specify the `ReactDOM` package to use. This can be useful in comple
 import ReactDom from 'react-dom'
 
 mount(<Todo todo={todo} />, {
-  stylesheets: [
-    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-  ],
-  ReactDom
+  stylesheets: ['https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'],
+  ReactDom,
 })
 ```
 
 ## Code coverage
 
-In order to use code coverage you can follow the instructions from [docs](https://github.com/cypress-io/code-coverage). In most of cases you need to install 2 dependencies: 
+In order to use code coverage you can follow the instructions from [docs](https://github.com/cypress-io/code-coverage). In most of cases you need to install 2 dependencies:
 
 ```
 npm i @cypress/code-coverage babel-plugin-istanbul
@@ -354,7 +350,7 @@ const mock = jest.fn()
 const { getByRole } = render(
   <button style={{ pointerEvents: 'none' }} onClick={mock}>
     text
-  </button>,
+  </button>
 )
 // Jest happily clicks
 fireEvent.click(getByRole('button'))

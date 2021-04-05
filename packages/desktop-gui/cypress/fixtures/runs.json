@@ -42,11 +42,7 @@
           ],
           "lifecycle": 15
         },
-        "title": [
-          "Projects",
-          "lists projects",
-          "displays all"
-        ],
+        "title": ["Projects", "lists projects", "displays all"],
         "videoTimestamp": 1000,
         "wallClockDuration": 1234,
         "wallClockStartedAt": "2018-02-01T20:14:19.323Z"
@@ -70,11 +66,7 @@
           ],
           "lifecycle": 15
         },
-        "title": [
-          "Users List",
-          "lists users",
-          "displays users roles <select />"
-        ],
+        "title": ["Users List", "lists users", "displays users roles <select />"],
         "videoTimestamp": 1000,
         "wallClockDuration": 1234,
         "wallClockStartedAt": "2018-02-01T20:14:19.323Z"

@@ -1,18 +1,9 @@
-import {
-  getAllFolders,
-  makeFileHierarchy,
-  TreeNode,
-} from './makeFileHierarchy'
+import { getAllFolders, makeFileHierarchy, TreeNode } from './makeFileHierarchy'
 import { expect } from 'chai'
 
 describe('makeFileHierarchy', () => {
   it('getAllFolders', () => {
-    const files: string[] = [
-      'forOfStatement.js',
-      'foo/y/bar.js',
-      'foo/bar',
-      'a/b/c',
-    ]
+    const files: string[] = ['forOfStatement.js', 'foo/y/bar.js', 'foo/bar', 'a/b/c']
     const actual = getAllFolders(files)
 
     expect(actual).to.have.members(['foo', 'foo/y', 'foo/bar', 'a', 'a/b', 'a/b/c'])
@@ -54,13 +45,7 @@ describe('makeFileHierarchy', () => {
   })
 
   it('works for a complex case', () => {
-    const files: string[] = [
-      'forOfStatement.js',
-      'x',
-      'x/y/z',
-      'a/b/c/test1.js',
-      'a/b/c/d/test2.js',
-    ]
+    const files: string[] = ['forOfStatement.js', 'x', 'x/y/z', 'a/b/c/test1.js', 'a/b/c/d/test2.js']
     const actual = makeFileHierarchy(files)
 
     const expected: TreeNode[] = [

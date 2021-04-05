@@ -39,7 +39,6 @@ jobs:
           # Find all available fields JIRA_BASE_URL/rest/api/3/field
           fields: '{"customfield_10032": "${{ github.event.pull_request.html_url }}"}'
 
-
       # https://github.com/actions/github-script
       - name: Add comment to GitHub PR
         if: github.event.label.name == 'internal-priority'
@@ -52,4 +51,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Internal Jira issue: [${{ steps.create_jira_internal_priority_issue.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create_jira_internal_priority_issue.outputs.issue }})'
-            }) 
+            })

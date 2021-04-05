@@ -3,30 +3,20 @@ import { concatStream, httpUtils } from '@packages/network'
 import Debug from 'debug'
 import { Readable, PassThrough } from 'stream'
 
-import {
-  ResponseMiddleware,
-} from '@packages/proxy'
-import {
-  NetStubbingState,
-} from './types'
-import {
-  CyHttpMessages,
-  NetEventFrames,
-  SERIALIZABLE_RES_PROPS,
-} from '../types'
-import {
-  emit,
-  sendStaticResponse,
-  setResponseFromFixture,
-  getBodyStream,
-} from './util'
+import { ResponseMiddleware } from '@packages/proxy'
+import { NetStubbingState } from './types'
+import { CyHttpMessages, NetEventFrames, SERIALIZABLE_RES_PROPS } from '../types'
+import { emit, sendStaticResponse, setResponseFromFixture, getBodyStream } from './util'
 
 const debug = Debug('cypress:net-stubbing:server:intercept-response')
 
 export const InterceptResponse: ResponseMiddleware = function () {
   const backendRequest = this.netStubbingState.requests[this.req.requestId]
 
-  debug('InterceptResponse %o', { req: _.pick(this.req, 'url'), backendRequest })
+  debug('InterceptResponse %o', {
+    req: _.pick(this.req, 'url'),
+    backendRequest,
+  })
 
   if (!backendRequest) {
     // original request was not intercepted, nothing to do
@@ -69,13 +59,14 @@ export const InterceptResponse: ResponseMiddleware = function () {
     if (httpUtils.responseMustHaveEmptyBody(this.req, this.incomingRes)) {
       resolve('')
     } else {
-      this.incomingResStream.pipe(concatStream((resBody) => {
-        resolve(resBody)
-      }))
+      this.incomingResStream.pipe(
+        concatStream((resBody) => {
+          resolve(resBody)
+        })
+      )
     }
-  })
-  .then((body) => {
-    const pt = this.incomingResStream = new PassThrough()
+  }).then((body) => {
+    const pt = (this.incomingResStream = new PassThrough())
 
     pt.end(body)
 
@@ -91,7 +82,7 @@ export const InterceptResponse: ResponseMiddleware = function () {
   })
 }
 
-export async function onResponseContinue (state: NetStubbingState, frame: NetEventFrames.HttpResponseContinue) {
+export async function onResponseContinue(state: NetStubbingState, frame: NetEventFrames.HttpResponseContinue) {
   const backendRequest = state.requests[frame.requestId]
 
   if (typeof backendRequest === 'undefined') {
@@ -100,7 +91,10 @@ export async function onResponseContinue (state: NetStubbingState, frame: NetEve
 
   const { res } = backendRequest
 
-  debug('_onResponseContinue %o', { backendRequest: _.omit(backendRequest, 'res.body'), frame: _.omit(frame, 'res.body') })
+  debug('_onResponseContinue %o', {
+    backendRequest: _.omit(backendRequest, 'res.body'),
+    frame: _.omit(frame, 'res.body'),
+  })
 
   const throttleKbps = _.get(frame, 'staticResponse.throttleKbps') || frame.throttleKbps
   const delay = _.get(frame, 'staticResponse.delay') || frame.delay

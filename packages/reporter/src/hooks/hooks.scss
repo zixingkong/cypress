@@ -2,7 +2,7 @@
   .hooks-container {
     margin: 5px 0 5px 5px;
     padding-left: 10px;
-    border-left: 1px dotted #DDD;
+    border-left: 1px dotted #ddd;
 
     .hook-item {
       margin-bottom: 5px;
@@ -45,7 +45,7 @@
       }
 
       .hook-failed-message {
-        color: #E94F5F;
+        color: #e94f5f;
         display: none;
       }
 
@@ -55,7 +55,8 @@
         display: none;
         padding: 4px 10px;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           background-color: rgba(186, 186, 186, 0.2);
           outline: none;
           text-decoration: none;

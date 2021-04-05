@@ -60,10 +60,10 @@ $colors: (
 // .bg- color utilities
 
 @each $name, $color in $colors {
-  .text-#{"" + $name} {
+  .text-#{'' + $name} {
     color: $color;
   }
-  .bg-#{"" + $name} {
+  .bg-#{'' + $name} {
     background-color: $color;
   }
 }
@@ -130,9 +130,9 @@ $accent-02: #e6ff1e;
 
 // --- Font Families
 
-$font-stack-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-stack-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
 // --- Text Sizes/Scale
 
@@ -254,7 +254,8 @@ $shadow-none: none;
 }
 
 // probably should leave this for the consumer to set?
-body, html {
+body,
+html {
   font-size: $text-m;
   font-family: $font-stack-sans;
 }

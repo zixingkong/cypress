@@ -9,11 +9,11 @@
 import ChildComponent from './Child.vue'
 
 export default {
-  data () {
+  data() {
     return {}
   },
   components: {
-      ChildComponent
-  }
+    ChildComponent,
+  },
 }
 </script>

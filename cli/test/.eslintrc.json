@@ -3,7 +3,5 @@
     "lib": true,
     "sinon": true
   },
-  "extends": [
-    "plugin:@cypress/dev/tests"
-  ]
+  "extends": ["plugin:@cypress/dev/tests"]
 }

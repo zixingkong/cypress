@@ -63,14 +63,9 @@ export const FileComponent: React.FC<FileComponentProps> = (props) => {
   const inlineIconProps = ext && icons[ext]
 
   return (
-    <div
-      onClick={() => props.onClick(props.item)}
-    >
+    <div onClick={() => props.onClick(props.item)}>
       <InlineIcon {...inlineIconProps} />
-      <NameWithHighlighting
-        item={props.item}
-        indexes={props.indexes}
-      />
+      <NameWithHighlighting item={props.item} indexes={props.indexes} />
     </div>
   )
 }
@@ -81,10 +76,7 @@ export const FolderComponent: React.FC<FolderComponentProps> = (props) => {
   return (
     <div onClick={props.onClick}>
       <InlineIcon {...inlineIconProps} />
-      <NameWithHighlighting
-        item={props.item}
-        indexes={props.indexes}
-      />
+      <NameWithHighlighting item={props.item} indexes={props.indexes} />
     </div>
   )
 }
@@ -95,29 +87,23 @@ export const getExt = (path: string) => {
   return extensionMatches ? extensionMatches[1] : ''
 }
 
-export const NameWithHighlighting: React.FC<{ item: TreeNode, indexes: number[] }> = (props) => {
+export const NameWithHighlighting: React.FC<{
+  item: TreeNode
+  indexes: number[]
+}> = (props) => {
   // key/value map for perf
-  const map = props.indexes.reduce<Record<number, string>>((acc, curr, idx) => ({ ...acc, [curr]: `${curr}-${idx}` }), {})
+  const map = props.indexes.reduce<Record<number, string>>(
+    (acc, curr, idx) => ({ ...acc, [curr]: `${curr}-${idx}` }),
+    {}
+  )
 
   const absolutePathHighlighted = props.item.relative.split('').map<JSX.Element | string>((char, idx) => {
-    return (
-      <React.Fragment key={map[idx]}>
-        {map[idx] ? (
-          <b>
-            {char}
-          </b>
-        ) : char}
-      </React.Fragment>
-    )
+    return <React.Fragment key={map[idx]}>{map[idx] ? <b>{char}</b> : char}</React.Fragment>
   })
 
   const nameOnly = absolutePathHighlighted.slice(absolutePathHighlighted.length - props.item.name.length)
 
-  return (
-    <span key={props.item.relative}>
-      {nameOnly}
-    </span>
-  )
+  return <span key={props.item.relative}>{nameOnly}</span>
 }
 
 export const FileTree: React.FC<FileTreeProps> = (props) => {
@@ -129,16 +115,11 @@ export const FileTree: React.FC<FileTreeProps> = (props) => {
       return
     }
 
-    return (
-      <FileTree
-        {...props}
-        depth={props.depth + 1}
-        files={props.openFolders[item.relative] ? item.files : []}
-      />
-    )
+    return <FileTree {...props} depth={props.depth + 1} files={props.openFolders[item.relative] ? item.files : []} />
   }
 
-  const checkMatch = (item: TreeNode, matches: NodeWithMatch[]) => matches.find((match) => match.relative.startsWith(item.relative))
+  const checkMatch = (item: TreeNode, matches: NodeWithMatch[]) =>
+    matches.find((match) => match.relative.startsWith(item.relative))
 
   const renderFolder = (item: FolderNode) => {
     const render = (indexes: number[]) => (
@@ -167,12 +148,7 @@ export const FileTree: React.FC<FileTreeProps> = (props) => {
 
   const renderFile = (item: FileNode) => {
     const render = (indexes: number[]) => (
-      <FileComponent
-        depth={props.depth}
-        indexes={indexes}
-        item={item}
-        onClick={props.onFileClick}
-      />
+      <FileComponent depth={props.depth} indexes={indexes} item={item} onClick={props.onFileClick} />
     )
 
     // if no search entered we just show all the specs.
@@ -191,33 +167,28 @@ export const FileTree: React.FC<FileTreeProps> = (props) => {
 
   return (
     <ul className={styles && styles.ul}>
-      {
-        props.files.map((item) => {
-          return (
-            <React.Fragment key={item.relative}>
-              <a
-                data-item={item.relative}
-                style={{
-                  marginLeft: `-${20 * props.depth}px`,
-                  width: `calc(100% + (20px * ${props.depth}))`,
-                }}
-                className={cs(styles.a, {
-                  [styles.isSelected]: item.relative === props.selectedFile,
-                })}
-                tabIndex={0}
-              >
-                <li
-                  style={{ marginLeft: `${20 * props.depth}px` }}
-                  className={styles.li}
-                >
-                  {item.type === 'folder' ? renderFolder(item) : renderFile(item)}
-                </li>
-              </a>
-              {fileTree(item)}
-            </React.Fragment>
-          )
-        })
-      }
+      {props.files.map((item) => {
+        return (
+          <React.Fragment key={item.relative}>
+            <a
+              data-item={item.relative}
+              style={{
+                marginLeft: `-${20 * props.depth}px`,
+                width: `calc(100% + (20px * ${props.depth}))`,
+              }}
+              className={cs(styles.a, {
+                [styles.isSelected]: item.relative === props.selectedFile,
+              })}
+              tabIndex={0}
+            >
+              <li style={{ marginLeft: `${20 * props.depth}px` }} className={styles.li}>
+                {item.type === 'folder' ? renderFolder(item) : renderFile(item)}
+              </li>
+            </a>
+            {fileTree(item)}
+          </React.Fragment>
+        )
+      })}
     </ul>
   )
 }
@@ -265,7 +236,7 @@ export const SpecList: React.FC<SpecListProps> = (props) => {
   React.useLayoutEffect(() => {
     const openFoldersTmp: Record<string, boolean> = {}
 
-    function walk (nodes: TreeNode[]) {
+    function walk(nodes: TreeNode[]) {
       for (const node of nodes) {
         if (node.type === 'folder') {
           // only update with newly created folders.
@@ -305,7 +276,7 @@ export const SpecList: React.FC<SpecListProps> = (props) => {
     // flatten *visible* files/folders. This means if a folder is closed, we do
     // not include the contents - this is for keyboard navigation, and we only want
     // to navigate to files or folders that are visible in the UI.
-    function flatten (nodes: TreeNode[]) {
+    function flatten(nodes: TreeNode[]) {
       for (const node of nodes) {
         if (node.type === 'folder') {
           // only update with newly created folders.
@@ -384,15 +355,11 @@ export const SpecList: React.FC<SpecListProps> = (props) => {
   }
 
   return (
-    <nav
-      className={cs(props.className, styles.nav)}
-      data-cy='specs-list'
-      onKeyDown={handleKeyDown}
-    >
+    <nav className={cs(props.className, styles.nav)} data-cy="specs-list" onKeyDown={handleKeyDown}>
       <SearchInput
         value={search}
-        placeholder='Find spec...'
-        prefixIcon='search'
+        placeholder="Find spec..."
+        prefixIcon="search"
         inputRef={props.searchRef}
         onChange={(e) => setSearch(e.currentTarget.value)}
         onSuffixClicked={() => setSearch('')}

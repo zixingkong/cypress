@@ -7,10 +7,7 @@
   "env": {
     "reactDevtools": true
   },
-  "ignoreTestFiles": [
-    "**/__snapshots__/*",
-    "**/__image_snapshots__/*"
-  ],
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "componentFolder": "src",
   "fixturesFolder": false
 }

@@ -3,7 +3,11 @@ import { NetEventFrames } from '@packages/net-stubbing/lib/types'
 import { errByPath, makeErrFromObj } from '../../../cypress/error_utils'
 import { HandlerFn } from './'
 
-export const onRequestComplete: HandlerFn<NetEventFrames.HttpRequestComplete> = (Cypress, frame, { failCurrentTest, getRequest, getRoute }) => {
+export const onRequestComplete: HandlerFn<NetEventFrames.HttpRequestComplete> = (
+  Cypress,
+  frame,
+  { failCurrentTest, getRequest, getRoute }
+) => {
   const request = getRequest(frame.routeHandlerId, frame.requestId)
 
   if (!request) {

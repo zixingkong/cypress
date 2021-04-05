@@ -5,14 +5,15 @@ import cypress from 'cypress'
 cypress.run // $ExpectType (options?: Partial<CypressRunOptions> | undefined) => Promise<CypressRunResult | CypressFailedRunResult>
 cypress.open // $ExpectType (options?: Partial<CypressOpenOptions> | undefined) => Promise<void>
 cypress.run({
-  tag: 'production,nightly'
+  tag: 'production,nightly',
 })
-cypress.run({}).then(results => {
+cypress.run({}).then((results) => {
   results // $ExpectType CypressRunResult | CypressFailedRunResult
 })
-cypress.run().then(results => {
+cypress.run().then((results) => {
   results // $ExpectType CypressRunResult | CypressFailedRunResult
-  if ('runs' in results) { // results is CypressRunResult
+  if ('runs' in results) {
+    // results is CypressRunResult
     results.runUrl // $ExpectType string | undefined
   } else {
     results.failures // $ExpectType number
@@ -23,18 +24,18 @@ cypress.open() // $ExpectType Promise<void>
 cypress.run() // $ExpectType Promise<CypressRunResult | CypressFailedRunResult>
 
 cypress.open({
-  configFile: false
+  configFile: false,
 })
 
 cypress.run({
-  configFile: "abc123"
+  configFile: 'abc123',
 })
 
 // provide only some config options
 const runConfig: Cypress.ConfigOptions = {
   baseUrl: 'http://localhost:8080',
   env: {
-    login: false
+    login: false,
   },
 }
 cypress.run({ config: runConfig })
@@ -44,7 +45,7 @@ cypress.run({}).then((results) => {
 })
 
 // the caller can determine if Cypress ran or failed to launch
-cypress.run().then(results => {
+cypress.run().then((results) => {
   if (results.status === 'failed') {
     results // $ExpectType CypressFailedRunResult
   } else {

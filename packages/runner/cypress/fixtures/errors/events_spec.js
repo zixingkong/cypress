@@ -11,7 +11,7 @@ describe('event handlers', { defaultCommandTimeout: 0 }, () => {
 
   it('event exception', () => {
     cy.on('window:load', () => {
-      ({}).bar()
+      ;({}.bar())
     })
 
     cy.visit('http://localhost:1919')
@@ -27,7 +27,7 @@ describe('event handlers', { defaultCommandTimeout: 0 }, () => {
 
   it('fail handler exception', () => {
     cy.on('fail', () => {
-      ({}).bar()
+      ;({}.bar())
     })
 
     cy.get('#does-not-exist')

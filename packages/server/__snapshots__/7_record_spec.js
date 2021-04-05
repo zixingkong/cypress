@@ -934,7 +934,9 @@ https://on.cypress.io/run-group-name-not-unique
 
 `
 
-exports['e2e record api interaction errors create run unknown 422 errors and exits when there is an unknown 422 response 1'] = `
+exports[
+  'e2e record api interaction errors create run unknown 422 errors and exits when there is an unknown 422 response 1'
+] = `
 We encountered an unexpected error talking to our servers.
 
 There is likely something wrong with the request.
@@ -955,7 +957,9 @@ StatusCodeError: 422
 
 `
 
-exports['e2e record api interaction errors create run 500 does not proceed and exits with error when parallelizing 1'] = `
+exports[
+  'e2e record api interaction errors create run 500 does not proceed and exits with error when parallelizing 1'
+] = `
 We encountered an unexpected error talking to our servers.
 
 Because you passed the --parallel flag, this run cannot proceed because it requires a valid response from our servers.
@@ -969,7 +973,9 @@ StatusCodeError: 500 - "Internal Server Error"
 
 `
 
-exports['e2e record api interaction errors create instance 500 does not proceed and exits with error when parallelizing and creating instance 1'] = `
+exports[
+  'e2e record api interaction errors create instance 500 does not proceed and exits with error when parallelizing and creating instance 1'
+] = `
 
 ====================================================================================================
 
@@ -997,7 +1003,9 @@ StatusCodeError: 500 - "Internal Server Error"
 
 `
 
-exports['e2e record api interaction errors update instance 500 does not proceed and exits with error when parallelizing and updating instance 1'] = `
+exports[
+  'e2e record api interaction errors update instance 500 does not proceed and exits with error when parallelizing and updating instance 1'
+] = `
 
 ====================================================================================================
 
@@ -1236,7 +1244,9 @@ This error will not alter the exit code.
 
 `
 
-exports['e2e record api interaction errors create run 402 - free plan exceeds monthly private tests errors and exits when on free plan and over recorded runs limit 1'] = `
+exports[
+  'e2e record api interaction errors create run 402 - free plan exceeds monthly private tests errors and exits when on free plan and over recorded runs limit 1'
+] = `
 You've exceeded the limit of private test results under your free plan this month. The limit is 500 private test results.
 
 To continue recording tests this month you must upgrade your account. Please visit your billing to upgrade to another billing plan.
@@ -1245,7 +1255,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction errors create run 402 - parallel feature not available in plan errors and exits when attempting parallel run when not available in plan 1'] = `
+exports[
+  'e2e record api interaction errors create run 402 - parallel feature not available in plan errors and exits when attempting parallel run when not available in plan 1'
+] = `
 Parallelization is not included under your current billing plan.
 
 To run your tests in parallel, please visit your billing and upgrade to another plan with parallelization.
@@ -1254,7 +1266,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction errors create run 402 - unknown error errors and exits when there\'s an unknown 402 error 1'] = `
+exports[
+  "e2e record api interaction errors create run 402 - unknown error errors and exits when there's an unknown 402 error 1"
+] = `
 We encountered an unexpected error talking to our servers.
 
 There is likely something wrong with the request.
@@ -1271,7 +1285,9 @@ StatusCodeError: 402
 
 `
 
-exports['e2e record api interaction errors create run 402 - free plan exceeds monthly tests errors and exits when on free plan and over recorded tests limit 1'] = `
+exports[
+  'e2e record api interaction errors create run 402 - free plan exceeds monthly tests errors and exits when on free plan and over recorded tests limit 1'
+] = `
 You've exceeded the limit of test results under your free plan this month. The limit is 500 test results.
 
 To continue recording tests this month you must upgrade your account. Please visit your billing to upgrade to another billing plan.
@@ -1280,7 +1296,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction errors create run 402 - grouping feature not available in plan errors and exits when attempting parallel run when not available in plan 1'] = `
+exports[
+  'e2e record api interaction errors create run 402 - grouping feature not available in plan errors and exits when attempting parallel run when not available in plan 1'
+] = `
 Grouping is not included under your current billing plan.
 
 To run your tests with groups, please visit your billing and upgrade to another plan with grouping.
@@ -1289,7 +1307,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings grace period - grouping feature warns when using parallel feature 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings grace period - grouping feature warns when using parallel feature 1'
+] = `
 Grouping is not included under your free plan.
 
 Your plan is now in a grace period, which means your tests will still run with groups until 2999-12-31. Please upgrade your plan to continue running your tests with groups in the future.
@@ -1369,7 +1389,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings grace period - parallel feature warns when using parallel feature 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings grace period - parallel feature warns when using parallel feature 1'
+] = `
 Parallelization is not included under your free plan.
 
 Your plan is now in a grace period, which means your tests will still run in parallel until 2999-12-31. Please upgrade your plan to continue running your tests in parallel in the future.
@@ -1535,249 +1557,256 @@ Details:
 
 exports['e2e record passing passes 2'] = [
   {
-    "stats": {
-      "suites": 1,
-      "tests": 2,
-      "passes": 0,
-      "pending": 0,
-      "skipped": 1,
-      "failures": 1,
-      "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockEndedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockDuration": 1234
+    stats: {
+      suites: 1,
+      tests: 2,
+      passes: 0,
+      pending: 0,
+      skipped: 1,
+      failures: 1,
+      wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+      wallClockEndedAt: '2018-02-01T20:14:19.323Z',
+      wallClockDuration: 1234,
     },
-    "tests": [
+    tests: [
       {
-        "clientId": "r3",
-        "state": "failed",
-        "displayError": "Error: foo\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `record fails`\n      [stack trace lines]",
-        "attempts": [
+        clientId: 'r3',
+        state: 'failed',
+        displayError:
+          'Error: foo\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `record fails`\n      [stack trace lines]',
+        attempts: [
           {
-            "state": "failed",
-            "error": {
-              "name": "Error",
-              "message": "foo\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `record fails`",
-              "stack": "[stack trace lines]",
-              "codeFrame": {
-                "line": 3,
-                "column": 11,
-                "originalFile": "cypress/integration/record_fail_spec.js",
-                "relativeFile": "cypress/integration/record_fail_spec.js",
-                "absoluteFile": "/foo/bar/.projects/e2e/cypress/integration/record_fail_spec.js",
-                "frame": "  1 | describe('record fails', () => {\n  2 |   beforeEach(() => {\n> 3 |     throw new Error('foo')\n    |           ^\n  4 |   })\n  5 | \n  6 |   it('fails 1', () => {})",
-                "language": "js"
-              }
+            state: 'failed',
+            error: {
+              name: 'Error',
+              message:
+                'foo\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `record fails`',
+              stack: '[stack trace lines]',
+              codeFrame: {
+                line: 3,
+                column: 11,
+                originalFile: 'cypress/integration/record_fail_spec.js',
+                relativeFile: 'cypress/integration/record_fail_spec.js',
+                absoluteFile: '/foo/bar/.projects/e2e/cypress/integration/record_fail_spec.js',
+                frame:
+                  "  1 | describe('record fails', () => {\n  2 |   beforeEach(() => {\n> 3 |     throw new Error('foo')\n    |           ^\n  4 |   })\n  5 | \n  6 |   it('fails 1', () => {})",
+                language: 'js',
+              },
             },
-            "timings": {
-              "lifecycle": 100,
-              "before each": [
+            timings: {
+              lifecycle: 100,
+              'before each': [
                 {
-                  "hookId": "h1",
-                  "fnDuration": 400,
-                  "afterFnDuration": 200
-                }
-              ]
+                  hookId: 'h1',
+                  fnDuration: 400,
+                  afterFnDuration: 200,
+                },
+              ],
             },
-            "failedFromHookId": "h1",
-            "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-            "wallClockDuration": 1234,
-            "videoTimestamp": 9999
-          }
-        ]
+            failedFromHookId: 'h1',
+            wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+            wallClockDuration: 1234,
+            videoTimestamp: 9999,
+          },
+        ],
       },
       {
-        "clientId": "r4",
-        "state": "skipped",
-        "displayError": null,
-        "attempts": [
+        clientId: 'r4',
+        state: 'skipped',
+        displayError: null,
+        attempts: [
           {
-            "state": "skipped",
-            "error": null,
-            "timings": null,
-            "failedFromHookId": null,
-            "wallClockStartedAt": null,
-            "wallClockDuration": null,
-            "videoTimestamp": null
-          }
-        ]
-      }
+            state: 'skipped',
+            error: null,
+            timings: null,
+            failedFromHookId: null,
+            wallClockStartedAt: null,
+            wallClockDuration: null,
+            videoTimestamp: null,
+          },
+        ],
+      },
     ],
-    "exception": null,
-    "video": true,
-    "screenshots": [
+    exception: null,
+    video: true,
+    screenshots: [
       {
-        "screenshotId": "some-random-id",
-        "name": null,
-        "testId": "r3",
-        "testAttemptIndex": 0,
-        "takenAt": "2018-02-01T20:14:19.323Z",
-        "height": 720,
-        "width": 1280
-      }
+        screenshotId: 'some-random-id',
+        name: null,
+        testId: 'r3',
+        testAttemptIndex: 0,
+        takenAt: '2018-02-01T20:14:19.323Z',
+        height: 720,
+        width: 1280,
+      },
     ],
-    "reporterStats": {
-      "suites": 1,
-      "tests": 1,
-      "passes": 0,
-      "pending": 0,
-      "failures": 1,
-      "start": "2018-02-01T20:14:19.323Z",
-      "end": "2018-02-01T20:14:19.323Z",
-      "duration": 1234
-    }
+    reporterStats: {
+      suites: 1,
+      tests: 1,
+      passes: 0,
+      pending: 0,
+      failures: 1,
+      start: '2018-02-01T20:14:19.323Z',
+      end: '2018-02-01T20:14:19.323Z',
+      duration: 1234,
+    },
   },
   {
-    "stats": {
-      "suites": 1,
-      "tests": 2,
-      "passes": 1,
-      "pending": 1,
-      "skipped": 0,
-      "failures": 0,
-      "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockEndedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockDuration": 1234
+    stats: {
+      suites: 1,
+      tests: 2,
+      passes: 1,
+      pending: 1,
+      skipped: 0,
+      failures: 0,
+      wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+      wallClockEndedAt: '2018-02-01T20:14:19.323Z',
+      wallClockDuration: 1234,
     },
-    "tests": [
+    tests: [
       {
-        "clientId": "r3",
-        "state": "passed",
-        "displayError": null,
-        "attempts": [
+        clientId: 'r3',
+        state: 'passed',
+        displayError: null,
+        attempts: [
           {
-            "state": "passed",
-            "error": null,
-            "timings": {
-              "lifecycle": 100,
-              "test": {
-                "fnDuration": 400,
-                "afterFnDuration": 200
-              }
+            state: 'passed',
+            error: null,
+            timings: {
+              lifecycle: 100,
+              test: {
+                fnDuration: 400,
+                afterFnDuration: 200,
+              },
             },
-            "failedFromHookId": null,
-            "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-            "wallClockDuration": 1234,
-            "videoTimestamp": 9999
-          }
-        ]
+            failedFromHookId: null,
+            wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+            wallClockDuration: 1234,
+            videoTimestamp: 9999,
+          },
+        ],
       },
       {
-        "clientId": "r4",
-        "state": "pending",
-        "displayError": null,
-        "attempts": [
+        clientId: 'r4',
+        state: 'pending',
+        displayError: null,
+        attempts: [
           {
-            "state": "pending",
-            "error": null,
-            "timings": null,
-            "failedFromHookId": null,
-            "wallClockStartedAt": null,
-            "wallClockDuration": null,
-            "videoTimestamp": null
-          }
-        ]
-      }
+            state: 'pending',
+            error: null,
+            timings: null,
+            failedFromHookId: null,
+            wallClockStartedAt: null,
+            wallClockDuration: null,
+            videoTimestamp: null,
+          },
+        ],
+      },
     ],
-    "exception": null,
-    "video": true,
-    "screenshots": [
+    exception: null,
+    video: true,
+    screenshots: [
       {
-        "screenshotId": "some-random-id",
-        "name": "yay it passes",
-        "testId": "r3",
-        "testAttemptIndex": 0,
-        "takenAt": "2018-02-01T20:14:19.323Z",
-        "height": 1022,
-        "width": 400
-      }
+        screenshotId: 'some-random-id',
+        name: 'yay it passes',
+        testId: 'r3',
+        testAttemptIndex: 0,
+        takenAt: '2018-02-01T20:14:19.323Z',
+        height: 1022,
+        width: 400,
+      },
     ],
-    "reporterStats": {
-      "suites": 1,
-      "tests": 2,
-      "passes": 1,
-      "pending": 1,
-      "failures": 0,
-      "start": "2018-02-01T20:14:19.323Z",
-      "end": "2018-02-01T20:14:19.323Z",
-      "duration": 1234
-    }
+    reporterStats: {
+      suites: 1,
+      tests: 2,
+      passes: 1,
+      pending: 1,
+      failures: 0,
+      start: '2018-02-01T20:14:19.323Z',
+      end: '2018-02-01T20:14:19.323Z',
+      duration: 1234,
+    },
   },
   {
-    "stats": {
-      "suites": 0,
-      "tests": 1,
-      "passes": 0,
-      "pending": 0,
-      "skipped": 0,
-      "failures": 1,
-      "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockEndedAt": "2018-02-01T20:14:19.323Z",
-      "wallClockDuration": 1234
+    stats: {
+      suites: 0,
+      tests: 1,
+      passes: 0,
+      pending: 0,
+      skipped: 0,
+      failures: 1,
+      wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+      wallClockEndedAt: '2018-02-01T20:14:19.323Z',
+      wallClockDuration: 1234,
     },
-    "tests": [
+    tests: [
       {
-        "clientId": "r2",
-        "state": "failed",
-        "displayError": "Error: The following error originated from your test code, not from Cypress.\n\n  > instantly fails\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.\n      [stack trace lines]",
-        "attempts": [
+        clientId: 'r2',
+        state: 'failed',
+        displayError:
+          'Error: The following error originated from your test code, not from Cypress.\n\n  > instantly fails\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.\n      [stack trace lines]',
+        attempts: [
           {
-            "state": "failed",
-            "error": {
-              "name": "Error",
-              "message": "The following error originated from your test code, not from Cypress.\n\n  > instantly fails\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.",
-              "stack": "[stack trace lines]",
-              "codeFrame": {
-                "line": 1,
-                "column": 7,
-                "originalFile": "cypress/integration/record_uncaught_spec.js",
-                "relativeFile": "cypress/integration/record_uncaught_spec.js",
-                "absoluteFile": "/foo/bar/.projects/e2e/cypress/integration/record_uncaught_spec.js",
-                "frame": "> 1 | throw new Error('instantly fails')\n    |       ^\n  2 | ",
-                "language": "js"
-              }
+            state: 'failed',
+            error: {
+              name: 'Error',
+              message:
+                'The following error originated from your test code, not from Cypress.\n\n  > instantly fails\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.',
+              stack: '[stack trace lines]',
+              codeFrame: {
+                line: 1,
+                column: 7,
+                originalFile: 'cypress/integration/record_uncaught_spec.js',
+                relativeFile: 'cypress/integration/record_uncaught_spec.js',
+                absoluteFile: '/foo/bar/.projects/e2e/cypress/integration/record_uncaught_spec.js',
+                frame: "> 1 | throw new Error('instantly fails')\n    |       ^\n  2 | ",
+                language: 'js',
+              },
             },
-            "timings": {
-              "lifecycle": 100,
-              "test": {
-                "fnDuration": 400,
-                "afterFnDuration": 200
-              }
+            timings: {
+              lifecycle: 100,
+              test: {
+                fnDuration: 400,
+                afterFnDuration: 200,
+              },
             },
-            "failedFromHookId": null,
-            "wallClockStartedAt": "2018-02-01T20:14:19.323Z",
-            "wallClockDuration": 1234,
-            "videoTimestamp": 9999
-          }
-        ]
-      }
+            failedFromHookId: null,
+            wallClockStartedAt: '2018-02-01T20:14:19.323Z',
+            wallClockDuration: 1234,
+            videoTimestamp: 9999,
+          },
+        ],
+      },
     ],
-    "exception": null,
-    "video": true,
-    "screenshots": [
+    exception: null,
+    video: true,
+    screenshots: [
       {
-        "screenshotId": "some-random-id",
-        "name": null,
-        "testId": "r2",
-        "testAttemptIndex": 0,
-        "takenAt": "2018-02-01T20:14:19.323Z",
-        "height": 720,
-        "width": 1280
-      }
+        screenshotId: 'some-random-id',
+        name: null,
+        testId: 'r2',
+        testAttemptIndex: 0,
+        takenAt: '2018-02-01T20:14:19.323Z',
+        height: 720,
+        width: 1280,
+      },
     ],
-    "reporterStats": {
-      "suites": 0,
-      "tests": 1,
-      "passes": 0,
-      "pending": 0,
-      "failures": 1,
-      "start": "2018-02-01T20:14:19.323Z",
-      "end": "2018-02-01T20:14:19.323Z",
-      "duration": 1234
-    }
-  }
+    reporterStats: {
+      suites: 0,
+      tests: 1,
+      passes: 0,
+      pending: 0,
+      failures: 1,
+      start: '2018-02-01T20:14:19.323Z',
+      end: '2018-02-01T20:14:19.323Z',
+      duration: 1234,
+    },
+  },
 ]
 
-exports['e2e record api interaction warnings create run warnings grace period - over private tests limit warns when over private test results 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings grace period - over private tests limit warns when over private test results 1'
+] = `
 You've exceeded the limit of private test results under your free plan this month. The limit is 500 private test results.
 
 Your plan is now in a grace period, which means your tests will still be recorded until 2999-12-31. Please upgrade your plan to continue recording tests on the Cypress Dashboard in the future.
@@ -1857,7 +1886,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings grace period - over tests limit warns when over test results 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings grace period - over tests limit warns when over test results 1'
+] = `
 You've exceeded the limit of test results under your free plan this month. The limit is 500 test results.
 
 Your plan is now in a grace period, which means you will have the full benefits of your current plan until 2999-12-31.
@@ -1939,7 +1970,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings paid plan - over private tests limit warns when over private test results 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings paid plan - over private tests limit warns when over private test results 1'
+] = `
 You've exceeded the limit of test results under your current billing plan this month. The limit is 500 private test results.
 
 To continue getting the full benefits of your current plan, please visit your billing to upgrade.
@@ -2019,7 +2052,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings paid plan - over tests limit warns when over test results 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings paid plan - over tests limit warns when over test results 1'
+] = `
 You've exceeded the limit of test results under your current billing plan this month. The limit is 500 test results.
 
 To continue getting the full benefits of your current plan, please visit your billing to upgrade.
@@ -2099,7 +2134,9 @@ https://on.cypress.io/dashboard/organizations/org-id-1234/billing
 
 `
 
-exports['e2e record api interaction warnings create run warnings free plan - over tests limit v2 warns when over test results 1'] = `
+exports[
+  'e2e record api interaction warnings create run warnings free plan - over tests limit v2 warns when over test results 1'
+] = `
 You've exceeded the limit of test results under your free billing plan this month. The limit is 500 test results.
 
 To continue getting the full benefits of your current plan, please visit your billing to upgrade.

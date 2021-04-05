@@ -62,7 +62,10 @@ describe('App', () => {
   it('rerenders the crossword when you go to another day', async () => {
     const crosswordWrapper = wrapper.find('[data-testid=crossword]')
 
-    fillCrossword(crosswordWrapper.findAll('input').wrappers, { partially: true, crossword })
+    fillCrossword(crosswordWrapper.findAll('input').wrappers, {
+      partially: true,
+      crossword,
+    })
 
     await wrapper.vm.$nextTick()
 
@@ -80,7 +83,10 @@ describe('App', () => {
   it('resets the crossword correctly after you fill it in', async () => {
     const crosswordWrapper = wrapper.find('[data-testid=crossword]')
 
-    fillCrossword(crosswordWrapper.findAll('input').wrappers, { crossword, partially: true })
+    fillCrossword(crosswordWrapper.findAll('input').wrappers, {
+      crossword,
+      partially: true,
+    })
 
     await wrapper.vm.$nextTick()
 

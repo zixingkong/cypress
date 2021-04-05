@@ -12,7 +12,7 @@ if (supportPath) {
   importsToLoad.unshift(() => import(/* @vite-ignore */ supportPath))
 }
 
-const CypressInstance = window.Cypress = parent.Cypress
+const CypressInstance = (window.Cypress = parent.Cypress)
 
 if (!CypressInstance) {
   throw new Error('Tests cannot run without a reference to Cypress!')
@@ -32,7 +32,10 @@ CypressInstance.on('test:before:run', () => {
   // leave the error overlay alone if it exists
   if (document.body.querySelectorAll('vite-error-overlay').length) {
     // make the error more readable by giving it more space
-    Cypress.action('cy:viewport:changed', { viewportWidth: 1000, viewportHeight: 500 })
+    Cypress.action('cy:viewport:changed', {
+      viewportWidth: 1000,
+      viewportHeight: 500,
+    })
 
     return
   }

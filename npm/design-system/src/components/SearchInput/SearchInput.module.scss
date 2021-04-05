@@ -29,7 +29,8 @@ $icon-size: $text-xs;
 $icon-negative-margin: calc(#{$icon-size} * (-4 / 3));
 $icon-margin: calc(#{$icon-size} / 3);
 
-.prefix, .suffix {
+.prefix,
+.suffix {
   @include quick-transition(color);
   position: absolute;
   font-size: $icon-size;
@@ -51,12 +52,13 @@ $icon-margin: calc(#{$icon-size} / 3);
   margin: 1rem;
   align-items: center;
 
-  &:active, &:focus-within {
+  &:active,
+  &:focus-within {
     .searchInput {
       border-bottom: 1px solid $active-color;
     }
     .prefix {
       color: $active-color;
     }
-  }  
+  }
 }

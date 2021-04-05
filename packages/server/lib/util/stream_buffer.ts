@@ -4,14 +4,17 @@ import stream from 'stream'
 
 const debug = debugModule('cypress:server:stream_buffer')
 
-function streamBuffer (initialSize = 2048) {
+function streamBuffer(initialSize = 2048) {
   let buffer: Buffer | null = Buffer.allocUnsafe(initialSize)
   let bytesWritten = 0
   let finished = false
 
   const onWrite = (chunk, enc, cb) => {
     if (finished || !chunk || !buffer) {
-      debug('received write after deleting buffer, ignoring %o', { chunkLength: chunk && chunk.length, enc })
+      debug('received write after deleting buffer, ignoring %o', {
+        chunkLength: chunk && chunk.length,
+        enc,
+      })
 
       return cb()
     }
@@ -34,7 +37,10 @@ function streamBuffer (initialSize = 2048) {
       buffer = newBuffer
     }
 
-    debug('appending chunk to buffer %o', { bytesWritten, chunkLength: chunk.length })
+    debug('appending chunk to buffer %o', {
+      bytesWritten,
+      chunkLength: chunk.length,
+    })
 
     bytesWritten += chunk.copy(buffer, bytesWritten)
 
@@ -53,7 +59,7 @@ function streamBuffer (initialSize = 2048) {
   class StreamBuffer extends stream.Writable {
     private readers: stream.Readable[] = []
 
-    public createReadStream () {
+    public createReadStream() {
       let bytesRead = 0
       const readerId = _.uniqueId('reader')
 
@@ -72,7 +78,11 @@ function streamBuffer (initialSize = 2048) {
           const bytesLength = bytes.length
 
           debug('reading unread bytes from buffer %o', {
-            readerId, bytesRead, bytesWritten, chunkLength, readChunkLength: bytesLength,
+            readerId,
+            bytesRead,
+            bytesWritten,
+            chunkLength,
+            readChunkLength: bytesLength,
           })
 
           bytesRead += bytesLength
@@ -86,7 +96,7 @@ function streamBuffer (initialSize = 2048) {
 
         // if it's finished and there are no unread bytes, EOF
         if (finished) {
-        // cleanup listeners that were added
+          // cleanup listeners that were added
           writeable.removeListener('chunk', onRead)
           writeable.removeListener('finish', onRead)
 
@@ -117,14 +127,14 @@ function streamBuffer (initialSize = 2048) {
 
       return readable
     }
-    unpipeAll () {
+    unpipeAll() {
       buffer = null // aggressive GC
       _.invokeMap(this.readers, 'unpipe')
     }
-    _buffer () {
+    _buffer() {
       return buffer
     }
-    _finished () {
+    _finished() {
       return finished
     }
   }

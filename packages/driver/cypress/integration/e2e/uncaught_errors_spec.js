@@ -89,13 +89,15 @@ describe('uncaught errors', () => {
       done()
     })
 
-    cy
-    .visit('/fixtures/jquery.html')
-    .window().then((win) => {
-      return win.$('button:first').on('click', () => {
-        throw new Error('uncaught click error')
+    cy.visit('/fixtures/jquery.html')
+      .window()
+      .then((win) => {
+        return win.$('button:first').on('click', () => {
+          throw new Error('uncaught click error')
+        })
       })
-    }).get('button:first').click()
+      .get('button:first')
+      .click()
   })
 
   it('logs error on page load when new page has uncaught exception', function (done) {
@@ -133,13 +135,13 @@ describe('uncaught errors', () => {
       done()
     })
 
-    cy
-    .visit('/fixtures/jquery.html')
-    .window().then((win) => {
-      return win.$('<a href=\'/fixtures/visit_error.html\'>visit</a>')
-      .appendTo(win.document.body)
-    })
-    .contains('visit').click()
+    cy.visit('/fixtures/jquery.html')
+      .window()
+      .then((win) => {
+        return win.$("<a href='/fixtures/visit_error.html'>visit</a>").appendTo(win.document.body)
+      })
+      .contains('visit')
+      .click()
 
     cy.url().should('include', 'visit_error.html')
   })
@@ -169,12 +171,14 @@ describe('uncaught errors', () => {
       return false
     })
 
-    cy
-    .visit('/fixtures/jquery.html')
-    .window().then((win) => {
-      return win.$('button:first').on('click', () => {
-        throw 'string error'
+    cy.visit('/fixtures/jquery.html')
+      .window()
+      .then((win) => {
+        return win.$('button:first').on('click', () => {
+          throw 'string error'
+        })
       })
-    }).get('button:first').click()
+      .get('button:first')
+      .click()
   })
 })

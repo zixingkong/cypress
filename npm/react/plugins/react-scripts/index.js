@@ -3,7 +3,10 @@ const findReactScriptsWebpackConfig = require('./findReactScriptsWebpackConfig')
 
 module.exports = (on, config) => {
   on('dev-server:start', async (options) => {
-    return startDevServer({ options, webpackConfig: findReactScriptsWebpackConfig(config) })
+    return startDevServer({
+      options,
+      webpackConfig: findReactScriptsWebpackConfig(config),
+    })
   })
 
   config.env.reactDevtools = true

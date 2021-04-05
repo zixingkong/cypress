@@ -13,7 +13,7 @@ it('passes given value', () => {
   mount(
     <ThemeContext.Provider value="mocked">
       <Toolbar />
-    </ThemeContext.Provider>,
+    </ThemeContext.Provider>
   )
   // confirm "mocked" value is passed to the Toolbar
 })

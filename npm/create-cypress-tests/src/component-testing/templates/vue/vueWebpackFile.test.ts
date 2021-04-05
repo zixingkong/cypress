@@ -44,9 +44,7 @@ describe('vue webpack-file install template', () => {
       }),
     })
 
-    const { success, payload } = VueWebpackTemplate.test(
-      '/some/deep/folder',
-    )
+    const { success, payload } = VueWebpackTemplate.test('/some/deep/folder')
 
     expect(success).to.equal(true)
     expect(payload?.webpackConfigPath).to.equal('/somewhere/configs/webpack.js')
@@ -69,6 +67,8 @@ describe('vue webpack-file install template', () => {
   })
 
   it('correctly generates plugins config when webpack config path is provided', () => {
-    snapshotPluginsAstCode(VueWebpackTemplate, { webpackConfigPath: '/build/webpack.config.js' })
+    snapshotPluginsAstCode(VueWebpackTemplate, {
+      webpackConfigPath: '/build/webpack.config.js',
+    })
   })
 })

@@ -76,7 +76,7 @@ module.exports = (Commands, Cypress, cy, state) => {
   }
 
   Commands.addAll({
-    title (options = {}) {
+    title(options = {}) {
       const userOptions = options
 
       options = _.defaults({}, userOptions, { log: true })
@@ -98,7 +98,7 @@ module.exports = (Commands, Cypress, cy, state) => {
       return resolveTitle()
     },
 
-    window (options = {}) {
+    window(options = {}) {
       const userOptions = options
 
       options = _.defaults({}, userOptions, { log: true })
@@ -111,7 +111,9 @@ module.exports = (Commands, Cypress, cy, state) => {
         const window = state('window')
 
         if (!window) {
-          $errUtils.throwErrByPath('window.iframe_undefined', { onFail: options._log })
+          $errUtils.throwErrByPath('window.iframe_undefined', {
+            onFail: options._log,
+          })
         }
 
         return window
@@ -120,9 +122,7 @@ module.exports = (Commands, Cypress, cy, state) => {
       // wrap retrying into its own
       // separate function
       const retryWindow = () => {
-        return Promise
-        .try(getWindow)
-        .catch((err) => {
+        return Promise.try(getWindow).catch((err) => {
           options.error = err
 
           return cy.retry(retryWindow, options)
@@ -140,7 +140,7 @@ module.exports = (Commands, Cypress, cy, state) => {
       return verifyAssertions()
     },
 
-    document (options = {}) {
+    document(options = {}) {
       const userOptions = options
 
       options = _.defaults({}, userOptions, { log: true })
@@ -163,9 +163,7 @@ module.exports = (Commands, Cypress, cy, state) => {
       // wrap retrying into its own
       // separate function
       const retryDocument = () => {
-        return Promise
-        .try(getDocument)
-        .catch((err) => {
+        return Promise.try(getDocument).catch((err) => {
           options.error = err
 
           return cy.retry(retryDocument, options)
@@ -183,7 +181,7 @@ module.exports = (Commands, Cypress, cy, state) => {
       return verifyAssertions()
     },
 
-    viewport (presetOrWidth, heightOrOrientation, options = {}) {
+    viewport(presetOrWidth, heightOrOrientation, options = {}) {
       const userOptions = options
 
       if (_.isObject(heightOrOrientation)) {
@@ -203,7 +201,7 @@ module.exports = (Commands, Cypress, cy, state) => {
 
         options._log = Cypress.log({
           timeout: options.timeout,
-          consoleProps () {
+          consoleProps() {
             const obj = {}
 
             if (isPreset) {
@@ -219,7 +217,9 @@ module.exports = (Commands, Cypress, cy, state) => {
       }
 
       const throwErrBadArgs = () => {
-        return $errUtils.throwErrByPath('viewport.bad_args', { onFail: options._log })
+        return $errUtils.throwErrByPath('viewport.bad_args', {
+          onFail: options._log,
+        })
       }
 
       const widthAndHeightAreValidNumbers = (width, height) => {
@@ -235,7 +235,9 @@ module.exports = (Commands, Cypress, cy, state) => {
       }
 
       if (_.isString(presetOrWidth) && _.isBlank(presetOrWidth)) {
-        $errUtils.throwErrByPath('viewport.empty_string', { onFail: options._log })
+        $errUtils.throwErrByPath('viewport.empty_string', {
+          onFail: options._log,
+        })
       } else if (_.isString(presetOrWidth)) {
         const getPresetDimensions = (preset) => {
           try {
@@ -275,20 +277,21 @@ module.exports = (Commands, Cypress, cy, state) => {
           }
         }
 
-        [width, height] = dimensions
+        ;[width, height] = dimensions
       } else if (widthAndHeightAreValidNumbers(presetOrWidth, heightOrOrientation)) {
         width = presetOrWidth
         height = heightOrOrientation
 
         if (!widthAndHeightAreWithinBounds(width, height)) {
-          $errUtils.throwErrByPath('viewport.dimensions_out_of_range', { onFail: options._log })
+          $errUtils.throwErrByPath('viewport.dimensions_out_of_range', {
+            onFail: options._log,
+          })
         }
       } else {
         throwErrBadArgs()
       }
 
-      return setViewportAndSynchronize(width, height)
-      .then((viewport) => {
+      return setViewportAndSynchronize(width, height).then((viewport) => {
         if (options._log) {
           options._log.set(viewport)
         }
@@ -296,6 +299,5 @@ module.exports = (Commands, Cypress, cy, state) => {
         return null
       })
     },
-
   })
 }

@@ -5,6 +5,6 @@
     "baseUrl": ".",
     "paths": {
       "@paths/*": ["paths-example-dir/*"]
-    },
-  },
+    }
+  }
 }

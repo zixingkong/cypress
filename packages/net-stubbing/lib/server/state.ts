@@ -1,11 +1,11 @@
 import { noop } from 'lodash'
 import { NetStubbingState } from './types'
 
-export function state (): NetStubbingState {
+export function state(): NetStubbingState {
   return {
     requests: {},
     routes: [],
-    reset () {
+    reset() {
       // clean up requests that are still pending
       for (const requestId in this.requests) {
         const { res } = this.requests[requestId]

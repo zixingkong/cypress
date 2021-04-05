@@ -44,13 +44,11 @@ But if you still want to test the page component, make sure that it will be moun
 But still you can call them manually:
 
 ```js
-IndexPage.getInitialProps().then(props => {
+IndexPage.getInitialProps().then((props) => {
   mount(<IndexPage {...props} />)
 })
 
-cy.contains(
-  '`.getInitialProps()` was called and passed props to this component',
-)
+cy.contains('`.getInitialProps()` was called and passed props to this component')
 ```
 
 Find more examples in [Page.spec.jsx](./cypress/components/Page.spec.jsx).
@@ -88,7 +86,7 @@ const router = {
 mount(
   <RouterContext.Provider value={router}>
     <YourComponent />
-  </RouterContext.Provider>,
+  </RouterContext.Provider>
 )
 ```
 

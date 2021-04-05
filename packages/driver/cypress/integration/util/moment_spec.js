@@ -3,7 +3,9 @@ context('#moment', () => {
     cy.stub(Cypress.utils, 'warning')
 
     Cypress.moment()
-    expect(Cypress.utils.warning).to.be.calledWith('`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.')
+    expect(Cypress.utils.warning).to.be.calledWith(
+      '`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.'
+    )
   })
 
   it('still has other moment properties', () => {
@@ -16,13 +18,17 @@ context('#moment', () => {
     cy.stub(Cypress.utils, 'warning')
 
     Cypress.moment.duration()
-    expect(Cypress.utils.warning).to.be.calledWith('`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.')
+    expect(Cypress.utils.warning).to.be.calledWith(
+      '`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.'
+    )
   })
 
   it('logs deprecation warning when using isDate', () => {
     cy.stub(Cypress.utils, 'warning')
 
     Cypress.moment.isDate()
-    expect(Cypress.utils.warning).to.be.calledWith('`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.')
+    expect(Cypress.utils.warning).to.be.calledWith(
+      '`Cypress.moment` has been deprecated and will be removed in a future release. Consider migrating to a different datetime formatter.'
+    )
   })
 })

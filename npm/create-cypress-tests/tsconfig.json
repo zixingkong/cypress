@@ -12,19 +12,10 @@
     "resolveJsonModule": true,
     "module": "CommonJS",
     "target": "ES2018",
-    "types": [
-      "node",
-    ],
-    "lib": [
-      "ES2018"
-    ],
+    "types": ["node"],
+    "lib": ["ES2018"],
     "noImplicitAny": true
   },
-  "exclude": [
-    "./src/**/*.test.ts",
-    "node_modules"
-  ],
-  "include": [
-    "./src/**/*.ts",
-  ]
+  "exclude": ["./src/**/*.test.ts", "node_modules"],
+  "include": ["./src/**/*.ts"]
 }

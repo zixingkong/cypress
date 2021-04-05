@@ -19,7 +19,7 @@
       margin-top: 10px;
     }
 
-    a>code {
+    a > code {
       color: #1079c3;
 
       &:hover {
@@ -58,7 +58,7 @@
     margin-bottom: 0;
     line-height: 16px;
 
-    &>td {
+    & > td {
       padding: 2px 8px;
       font-size: 13px;
     }
@@ -77,8 +77,8 @@
       color: #000;
     }
 
-    ol[role="tree"] {
-        > li > div{
+    ol[role='tree'] {
+      > li > div {
         display: none;
       }
     }
@@ -88,7 +88,7 @@
       display: inline-block;
       line-height: 1;
       padding: 2px;
-      border-bottom: 1px solid transparent
+      border-bottom: 1px solid transparent;
     }
 
     .key-value-pair-value:hover {
@@ -100,14 +100,19 @@
     }
   }
 
-  .envFile, .env, .config, .cli, .plugin, .default {
+  .envFile,
+  .env,
+  .config,
+  .cli,
+  .plugin,
+  .default {
     font-family: $font-mono;
     padding: 2px;
   }
 
   .envFile {
     background-color: #fdf3e3;
-    color: #7B4804;
+    color: #7b4804;
   }
 
   .env {
@@ -117,19 +122,18 @@
 
   .config {
     background-color: #cdedff;
-    color: #0C5263;
+    color: #0c5263;
   }
 
   .cli {
     background-color: #fce7e9;
-    color: #A21313;
+    color: #a21313;
   }
 
   .plugin {
     background-color: #f0e7fc;
     color: #134aa2;
   }
-
 }
 
 .settings-wrapper {
@@ -229,7 +233,8 @@
   margin-top: 15px;
 }
 
-.proxy-table, .node-table {
+.proxy-table,
+.node-table {
   width: 100%;
 
   th:first-child {
@@ -237,10 +242,11 @@
   }
 
   .no-bypass {
-    opacity: .8;
+    opacity: 0.8;
   }
 
-  td, th {
+  td,
+  th {
     padding: 3px;
   }
 }
@@ -286,12 +292,12 @@
       margin-left: auto;
     }
   }
-  
+
   .experiment-header {
     display: flex;
     align-items: center;
   }
-  
+
   .experiment-status-sign {
     margin-left: auto;
     color: #9d9ea9;

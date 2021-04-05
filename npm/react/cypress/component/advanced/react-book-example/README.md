@@ -9,7 +9,5 @@ See file [./src/components/ProductsList.spec.js](./src/components/ProductsList.s
 ```js
 // find a single instance with prop
 // <AProduct name={'Second item'} />
-cy.react('AProduct', { name: 'Second item' })
-  .should('be.visible')
-  .and('have.text', 'Second item')
+cy.react('AProduct', { name: 'Second item' }).should('be.visible').and('have.text', 'Second item')
 ```

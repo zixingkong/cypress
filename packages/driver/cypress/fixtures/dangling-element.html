@@ -13,20 +13,20 @@
     const freeze = (object, property, value) => {
       Object.defineProperty(object, property, {
         configurable: true,
-        get () {
+        get() {
           return value
         },
-        set (v) {
+        set(v) {
           // eslint-disable-next-line no-console
           console.warn(`tried to set frozen property ${property} with ${v}`)
         },
       })
     }
 
-    // If you want to see what's going on here visually, 
+    // If you want to see what's going on here visually,
     // check https://github.com/cypress-io/cypress/pull/6787
 
-    // 1. What vue does by default: 
+    // 1. What vue does by default:
     // Create component and append it to the DOM tree.
     const parent = document.getElementsByTagName('body')[0]
 

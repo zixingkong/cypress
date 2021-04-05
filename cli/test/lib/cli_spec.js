@@ -102,11 +102,7 @@ describe('cli', () => {
     }
 
     const sanitizePlatform = (text) => {
-      return text
-      .split(os.eol)
-      .map(replacePlatform)
-      .map(replaceCypressVersion)
-      .join(os.eol)
+      return text.split(os.eol).map(replacePlatform).map(replaceCypressVersion).join(os.eol)
     }
 
     it('allows and warns when staging environment', () => {
@@ -129,9 +125,7 @@ describe('cli', () => {
         filter: ['code', 'stderr'],
       }
 
-      return execa('bin/cypress', ['help'], options)
-      .then(sanitizePlatform)
-      .then(snapshot)
+      return execa('bin/cypress', ['help'], options).then(sanitizePlatform).then(snapshot)
     })
   })
 
@@ -154,10 +148,7 @@ describe('cli', () => {
     describe('individual package versions', () => {
       beforeEach(() => {
         sinon.stub(util, 'pkgVersion').returns('1.2.3')
-        sinon
-        .stub(state, 'getBinaryPkgAsync')
-        .withArgs(binaryDir)
-        .resolves({
+        sinon.stub(state, 'getBinaryPkgAsync').withArgs(binaryDir).resolves({
           version: 'X.Y.Z',
           electronVersion: '10.9.8',
           electronNodeVersion: '7.7.7',
@@ -197,9 +188,7 @@ describe('cli', () => {
       })
 
       it('handles not found bundled Node version', (done) => {
-        state.getBinaryPkgAsync
-        .withArgs(binaryDir)
-        .resolves({
+        state.getBinaryPkgAsync.withArgs(binaryDir).resolves({
           version: 'X.Y.Z',
           electronVersion: '10.9.8',
         })
@@ -214,10 +203,7 @@ describe('cli', () => {
 
     it('reports package version', (done) => {
       sinon.stub(util, 'pkgVersion').returns('1.2.3')
-      sinon
-      .stub(state, 'getBinaryPkgAsync')
-      .withArgs(binaryDir)
-      .resolves({
+      sinon.stub(state, 'getBinaryPkgAsync').withArgs(binaryDir).resolves({
         version: 'X.Y.Z',
       })
 
@@ -483,14 +469,23 @@ describe('cli', () => {
 
     it('calls run with space-separated --tag and --spec', () => {
       this.exec('run --tag a b c d e f g --spec h i j k l')
-      expect(run.start).to.be.calledWith({ tag: 'a,b,c,d,e,f,g', spec: 'h,i,j,k,l' })
+      expect(run.start).to.be.calledWith({
+        tag: 'a,b,c,d,e,f,g',
+        spec: 'h,i,j,k,l',
+      })
       this.exec('run --dev bang --tag foo bar baz -P ./ --spec fizz buzz --headed false')
-      expect(run.start).to.be.calledWithMatch({ tag: 'foo,bar,baz', spec: 'fizz,buzz' })
+      expect(run.start).to.be.calledWithMatch({
+        tag: 'foo,bar,baz',
+        spec: 'fizz,buzz',
+      })
     })
 
     it('removes stray double quotes from --ci-build-id and --group', () => {
       this.exec('run --ci-build-id "123" --group "staging"')
-      expect(run.start).to.be.calledWith({ ciBuildId: '123', group: 'staging' })
+      expect(run.start).to.be.calledWith({
+        ciBuildId: '123',
+        group: 'staging',
+      })
     })
   })
 

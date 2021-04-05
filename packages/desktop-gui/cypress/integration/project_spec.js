@@ -6,7 +6,7 @@ describe('Project', function () {
     cy.fixture('projects_statuses').as('projectStatuses')
 
     cy.visitIndex().then((win) => {
-      ({ start: this.start, ipc: this.ipc } = win.App)
+      ;({ start: this.start, ipc: this.ipc } = win.App)
 
       cy.stub(this.ipc, 'getOptions').resolves({ projectRoot: '/foo/bar' })
       cy.stub(this.ipc, 'getCurrentUser').resolves(this.user)
@@ -41,13 +41,20 @@ describe('Project', function () {
 
     it('gets project status', function () {
       cy.shouldBeOnProjectSpecs().then(() => {
-        expect(this.ipc.getProjectStatus).to.be.calledWith({ id: this.config.projectId, path: '/foo/bar' })
+        expect(this.ipc.getProjectStatus).to.be.calledWith({
+          id: this.config.projectId,
+          path: '/foo/bar',
+        })
       })
     })
 
     it('logs out user when getting project status returns 401', function () {
       cy.shouldBeOnProjectSpecs().then(() => {
-        this.getProjectStatus.reject({ name: '', message: '', statusCode: 401 })
+        this.getProjectStatus.reject({
+          name: '',
+          message: '',
+          statusCode: 401,
+        })
       })
 
       cy.shouldBeLoggedOut()

@@ -5,7 +5,7 @@ Cypress.Commands.add('failAssertion', () => {
 })
 
 Cypress.Commands.add('failException', () => {
-  ({}).bar()
+  ;({}.bar())
 })
 
 Cypress.Commands.add('failCommand', () => {

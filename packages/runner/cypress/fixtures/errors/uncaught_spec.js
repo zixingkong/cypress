@@ -14,7 +14,7 @@ describe('uncaught errors', { defaultCommandTimeout: 0 }, () => {
 
   it('async exception', () => {
     setTimeout(() => {
-      ({}).bar()
+      ;({}.bar())
     })
 
     cy.wait(10000)
@@ -22,7 +22,7 @@ describe('uncaught errors', { defaultCommandTimeout: 0 }, () => {
 
   it('async exception with done', (done) => {
     setTimeout(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 })

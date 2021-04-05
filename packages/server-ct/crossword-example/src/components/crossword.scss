@@ -1,6 +1,7 @@
 $cellSize: calc(2rem * var(--scale, 1));
 
-.crossword-board, .crossword-skeleton {
+.crossword-board,
+.crossword-skeleton {
   margin: 0 auto;
   display: grid;
   position: relative;
@@ -52,10 +53,10 @@ $cellSize: calc(2rem * var(--scale, 1));
 
     display: inline-block;
 
-    font-size: .6rem;
+    font-size: 0.6rem;
 
-    top: .2rem;
-    right: .2rem;
+    top: 0.2rem;
+    right: 0.2rem;
 
     color: #666;
   }

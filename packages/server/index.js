@@ -36,7 +36,7 @@ process.traceDeprecation = true
 
 require('./lib/util/suppress_warnings').suppress()
 
-function launchOrFork () {
+function launchOrFork() {
   const nodeOptions = require('./lib/util/node_options')
 
   if (nodeOptions.needsOptions()) {

@@ -18,15 +18,7 @@
     "registered": "2015-06-14T09:51:54 +04:00",
     "latitude": -67.622862,
     "longitude": 31.920801,
-    "tags": [
-      "nulla",
-      "irure",
-      "veniam",
-      "irure",
-      "occaecat",
-      "occaecat",
-      "voluptate"
-    ],
+    "tags": ["nulla", "irure", "veniam", "irure", "occaecat", "occaecat", "voluptate"],
     "friends": [
       {
         "id": 0,
@@ -63,15 +55,7 @@
     "registered": "2014-06-09T03:39:52 +04:00",
     "latitude": -67.95672,
     "longitude": 133.768301,
-    "tags": [
-      "est",
-      "deserunt",
-      "cupidatat",
-      "id",
-      "nisi",
-      "non",
-      "in"
-    ],
+    "tags": ["est", "deserunt", "cupidatat", "id", "nisi", "non", "in"],
     "friends": [
       {
         "id": 0,
@@ -108,15 +92,7 @@
     "registered": "2014-11-27T11:13:51 +05:00",
     "latitude": 37.239519,
     "longitude": -122.836031,
-    "tags": [
-      "aliquip",
-      "laborum",
-      "ad",
-      "incididunt",
-      "elit",
-      "excepteur",
-      "cupidatat"
-    ],
+    "tags": ["aliquip", "laborum", "ad", "incididunt", "elit", "excepteur", "cupidatat"],
     "friends": [
       {
         "id": 0,
@@ -153,15 +129,7 @@
     "registered": "2014-10-26T10:00:43 +04:00",
     "latitude": 50.770122,
     "longitude": -47.955738,
-    "tags": [
-      "culpa",
-      "ad",
-      "ullamco",
-      "enim",
-      "mollit",
-      "do",
-      "in"
-    ],
+    "tags": ["culpa", "ad", "ullamco", "enim", "mollit", "do", "in"],
     "friends": [
       {
         "id": 0,
@@ -198,15 +166,7 @@
     "registered": "2014-07-06T08:54:32 +04:00",
     "latitude": 2.745302,
     "longitude": 150.415071,
-    "tags": [
-      "esse",
-      "qui",
-      "mollit",
-      "eu",
-      "mollit",
-      "magna",
-      "commodo"
-    ],
+    "tags": ["esse", "qui", "mollit", "eu", "mollit", "magna", "commodo"],
     "friends": [
       {
         "id": 0,
@@ -243,15 +203,7 @@
     "registered": "2015-07-22T08:24:28 +04:00",
     "latitude": 58.737286,
     "longitude": 32.151048,
-    "tags": [
-      "cupidatat",
-      "nisi",
-      "est",
-      "proident",
-      "proident",
-      "pariatur",
-      "occaecat"
-    ],
+    "tags": ["cupidatat", "nisi", "est", "proident", "proident", "pariatur", "occaecat"],
     "friends": [
       {
         "id": 0,
@@ -288,15 +240,7 @@
     "registered": "2014-08-27T11:18:17 +04:00",
     "latitude": -87.298376,
     "longitude": 13.501312,
-    "tags": [
-      "velit",
-      "veniam",
-      "adipisicing",
-      "in",
-      "nulla",
-      "fugiat",
-      "fugiat"
-    ],
+    "tags": ["velit", "veniam", "adipisicing", "in", "nulla", "fugiat", "fugiat"],
     "friends": [
       {
         "id": 0,
@@ -333,15 +277,7 @@
     "registered": "2014-09-08T02:32:20 +04:00",
     "latitude": 76.430321,
     "longitude": 91.90827,
-    "tags": [
-      "deserunt",
-      "mollit",
-      "irure",
-      "qui",
-      "id",
-      "id",
-      "non"
-    ],
+    "tags": ["deserunt", "mollit", "irure", "qui", "id", "id", "non"],
     "friends": [
       {
         "id": 0,
@@ -378,15 +314,7 @@
     "registered": "2014-05-04T03:39:40 +04:00",
     "latitude": 66.388885,
     "longitude": 136.396908,
-    "tags": [
-      "esse",
-      "occaecat",
-      "culpa",
-      "laboris",
-      "do",
-      "est",
-      "culpa"
-    ],
+    "tags": ["esse", "occaecat", "culpa", "laboris", "do", "est", "culpa"],
     "friends": [
       {
         "id": 0,
@@ -423,15 +351,7 @@
     "registered": "2014-08-19T10:49:14 +04:00",
     "latitude": -49.261269,
     "longitude": 41.549484,
-    "tags": [
-      "officia",
-      "nulla",
-      "esse",
-      "exercitation",
-      "irure",
-      "est",
-      "eu"
-    ],
+    "tags": ["officia", "nulla", "esse", "exercitation", "irure", "est", "eu"],
     "friends": [
       {
         "id": 0,
@@ -468,15 +388,7 @@
     "registered": "2014-07-20T10:42:42 +04:00",
     "latitude": 4.702653,
     "longitude": -150.72246,
-    "tags": [
-      "do",
-      "elit",
-      "eiusmod",
-      "aliqua",
-      "ad",
-      "enim",
-      "dolor"
-    ],
+    "tags": ["do", "elit", "eiusmod", "aliqua", "ad", "enim", "dolor"],
     "friends": [
       {
         "id": 0,
@@ -513,15 +425,7 @@
     "registered": "2015-07-05T02:04:21 +04:00",
     "latitude": 59.277198,
     "longitude": 100.879655,
-    "tags": [
-      "exercitation",
-      "non",
-      "Lorem",
-      "reprehenderit",
-      "cillum",
-      "sint",
-      "labore"
-    ],
+    "tags": ["exercitation", "non", "Lorem", "reprehenderit", "cillum", "sint", "labore"],
     "friends": [
       {
         "id": 0,
@@ -558,15 +462,7 @@
     "registered": "2014-12-26T02:19:11 +05:00",
     "latitude": -81.738438,
     "longitude": -28.057486,
-    "tags": [
-      "nostrud",
-      "eu",
-      "culpa",
-      "officia",
-      "velit",
-      "ullamco",
-      "culpa"
-    ],
+    "tags": ["nostrud", "eu", "culpa", "officia", "velit", "ullamco", "culpa"],
     "friends": [
       {
         "id": 0,
@@ -603,15 +499,7 @@
     "registered": "2014-12-23T08:37:48 +05:00",
     "latitude": -84.343696,
     "longitude": 40.028942,
-    "tags": [
-      "pariatur",
-      "sit",
-      "labore",
-      "duis",
-      "Lorem",
-      "eiusmod",
-      "consequat"
-    ],
+    "tags": ["pariatur", "sit", "labore", "duis", "Lorem", "eiusmod", "consequat"],
     "friends": [
       {
         "id": 0,
@@ -648,15 +536,7 @@
     "registered": "2015-08-19T09:07:01 +04:00",
     "latitude": 86.29143,
     "longitude": 23.205785,
-    "tags": [
-      "esse",
-      "aliqua",
-      "enim",
-      "ut",
-      "aute",
-      "sint",
-      "sunt"
-    ],
+    "tags": ["esse", "aliqua", "enim", "ut", "aute", "sint", "sunt"],
     "friends": [
       {
         "id": 0,
@@ -693,15 +573,7 @@
     "registered": "2014-08-20T11:19:36 +04:00",
     "latitude": -53.309834,
     "longitude": -145.836061,
-    "tags": [
-      "ad",
-      "adipisicing",
-      "in",
-      "aliqua",
-      "fugiat",
-      "irure",
-      "consectetur"
-    ],
+    "tags": ["ad", "adipisicing", "in", "aliqua", "fugiat", "irure", "consectetur"],
     "friends": [
       {
         "id": 0,
@@ -738,15 +610,7 @@
     "registered": "2015-02-05T11:12:53 +05:00",
     "latitude": 49.010817,
     "longitude": -59.495046,
-    "tags": [
-      "ex",
-      "nostrud",
-      "incididunt",
-      "mollit",
-      "non",
-      "dolor",
-      "ipsum"
-    ],
+    "tags": ["ex", "nostrud", "incididunt", "mollit", "non", "dolor", "ipsum"],
     "friends": [
       {
         "id": 0,
@@ -783,15 +647,7 @@
     "registered": "2015-05-10T06:09:24 +04:00",
     "latitude": 60.626327,
     "longitude": 121.999925,
-    "tags": [
-      "duis",
-      "ipsum",
-      "et",
-      "tempor",
-      "consequat",
-      "tempor",
-      "aliquip"
-    ],
+    "tags": ["duis", "ipsum", "et", "tempor", "consequat", "tempor", "aliquip"],
     "friends": [
       {
         "id": 0,
@@ -828,15 +684,7 @@
     "registered": "2014-01-09T08:19:31 +05:00",
     "latitude": -7.606937,
     "longitude": 155.671399,
-    "tags": [
-      "magna",
-      "occaecat",
-      "et",
-      "ut",
-      "sint",
-      "exercitation",
-      "pariatur"
-    ],
+    "tags": ["magna", "occaecat", "et", "ut", "sint", "exercitation", "pariatur"],
     "friends": [
       {
         "id": 0,
@@ -873,15 +721,7 @@
     "registered": "2014-07-11T03:50:33 +04:00",
     "latitude": -52.994786,
     "longitude": 77.89445,
-    "tags": [
-      "cupidatat",
-      "fugiat",
-      "sint",
-      "cupidatat",
-      "mollit",
-      "voluptate",
-      "laboris"
-    ],
+    "tags": ["cupidatat", "fugiat", "sint", "cupidatat", "mollit", "voluptate", "laboris"],
     "friends": [
       {
         "id": 0,
@@ -918,15 +758,7 @@
     "registered": "2014-11-06T12:14:55 +05:00",
     "latitude": -32.774291,
     "longitude": -119.146911,
-    "tags": [
-      "ipsum",
-      "velit",
-      "adipisicing",
-      "minim",
-      "id",
-      "anim",
-      "ut"
-    ],
+    "tags": ["ipsum", "velit", "adipisicing", "minim", "id", "anim", "ut"],
     "friends": [
       {
         "id": 0,
@@ -963,15 +795,7 @@
     "registered": "2014-06-18T06:14:13 +04:00",
     "latitude": 21.527616,
     "longitude": -124.730552,
-    "tags": [
-      "aute",
-      "veniam",
-      "aliquip",
-      "ad",
-      "quis",
-      "pariatur",
-      "incididunt"
-    ],
+    "tags": ["aute", "veniam", "aliquip", "ad", "quis", "pariatur", "incididunt"],
     "friends": [
       {
         "id": 0,
@@ -1008,15 +832,7 @@
     "registered": "2014-06-25T03:31:24 +04:00",
     "latitude": -86.518291,
     "longitude": 52.010589,
-    "tags": [
-      "proident",
-      "est",
-      "consectetur",
-      "adipisicing",
-      "cupidatat",
-      "pariatur",
-      "nostrud"
-    ],
+    "tags": ["proident", "est", "consectetur", "adipisicing", "cupidatat", "pariatur", "nostrud"],
     "friends": [
       {
         "id": 0,
@@ -1053,15 +869,7 @@
     "registered": "2014-05-03T11:58:26 +04:00",
     "latitude": 34.680294,
     "longitude": 59.392909,
-    "tags": [
-      "occaecat",
-      "excepteur",
-      "cillum",
-      "sunt",
-      "pariatur",
-      "fugiat",
-      "ullamco"
-    ],
+    "tags": ["occaecat", "excepteur", "cillum", "sunt", "pariatur", "fugiat", "ullamco"],
     "friends": [
       {
         "id": 0,
@@ -1098,15 +906,7 @@
     "registered": "2015-06-25T12:09:02 +04:00",
     "latitude": 82.567972,
     "longitude": 93.403111,
-    "tags": [
-      "aliquip",
-      "laboris",
-      "exercitation",
-      "proident",
-      "reprehenderit",
-      "nisi",
-      "incididunt"
-    ],
+    "tags": ["aliquip", "laboris", "exercitation", "proident", "reprehenderit", "nisi", "incididunt"],
     "friends": [
       {
         "id": 0,
@@ -1143,15 +943,7 @@
     "registered": "2014-10-31T08:10:15 +04:00",
     "latitude": 62.871972,
     "longitude": 10.789261,
-    "tags": [
-      "irure",
-      "deserunt",
-      "laboris",
-      "sit",
-      "aliquip",
-      "est",
-      "deserunt"
-    ],
+    "tags": ["irure", "deserunt", "laboris", "sit", "aliquip", "est", "deserunt"],
     "friends": [
       {
         "id": 0,
@@ -1188,15 +980,7 @@
     "registered": "2015-03-09T08:34:21 +04:00",
     "latitude": -62.683342,
     "longitude": -105.518396,
-    "tags": [
-      "aliquip",
-      "excepteur",
-      "ipsum",
-      "mollit",
-      "laboris",
-      "incididunt",
-      "qui"
-    ],
+    "tags": ["aliquip", "excepteur", "ipsum", "mollit", "laboris", "incididunt", "qui"],
     "friends": [
       {
         "id": 0,
@@ -1233,15 +1017,7 @@
     "registered": "2015-02-27T04:00:13 +05:00",
     "latitude": 34.811174,
     "longitude": 177.96953,
-    "tags": [
-      "et",
-      "est",
-      "culpa",
-      "laborum",
-      "enim",
-      "amet",
-      "qui"
-    ],
+    "tags": ["et", "est", "culpa", "laborum", "enim", "amet", "qui"],
     "friends": [
       {
         "id": 0,
@@ -1278,15 +1054,7 @@
     "registered": "2014-10-13T12:46:14 +04:00",
     "latitude": 82.627223,
     "longitude": -24.639078,
-    "tags": [
-      "anim",
-      "velit",
-      "ad",
-      "deserunt",
-      "nulla",
-      "est",
-      "pariatur"
-    ],
+    "tags": ["anim", "velit", "ad", "deserunt", "nulla", "est", "pariatur"],
     "friends": [
       {
         "id": 0,
@@ -1323,15 +1091,7 @@
     "registered": "2015-03-18T03:39:55 +04:00",
     "latitude": -59.562076,
     "longitude": -173.748114,
-    "tags": [
-      "cillum",
-      "occaecat",
-      "non",
-      "reprehenderit",
-      "proident",
-      "mollit",
-      "adipisicing"
-    ],
+    "tags": ["cillum", "occaecat", "non", "reprehenderit", "proident", "mollit", "adipisicing"],
     "friends": [
       {
         "id": 0,
@@ -1368,15 +1128,7 @@
     "registered": "2014-07-03T12:18:16 +04:00",
     "latitude": -71.611747,
     "longitude": 72.746394,
-    "tags": [
-      "et",
-      "veniam",
-      "cupidatat",
-      "veniam",
-      "aute",
-      "exercitation",
-      "incididunt"
-    ],
+    "tags": ["et", "veniam", "cupidatat", "veniam", "aute", "exercitation", "incididunt"],
     "friends": [
       {
         "id": 0,
@@ -1413,15 +1165,7 @@
     "registered": "2015-03-18T11:55:29 +04:00",
     "latitude": 89.227044,
     "longitude": 35.950895,
-    "tags": [
-      "magna",
-      "pariatur",
-      "laboris",
-      "amet",
-      "fugiat",
-      "do",
-      "cillum"
-    ],
+    "tags": ["magna", "pariatur", "laboris", "amet", "fugiat", "do", "cillum"],
     "friends": [
       {
         "id": 0,
@@ -1458,15 +1202,7 @@
     "registered": "2014-04-25T08:46:54 +04:00",
     "latitude": -66.435847,
     "longitude": -83.839868,
-    "tags": [
-      "ut",
-      "fugiat",
-      "anim",
-      "exercitation",
-      "laboris",
-      "velit",
-      "proident"
-    ],
+    "tags": ["ut", "fugiat", "anim", "exercitation", "laboris", "velit", "proident"],
     "friends": [
       {
         "id": 0,
@@ -1503,15 +1239,7 @@
     "registered": "2014-11-08T04:16:02 +05:00",
     "latitude": -18.188007,
     "longitude": -167.21827,
-    "tags": [
-      "adipisicing",
-      "qui",
-      "ad",
-      "proident",
-      "reprehenderit",
-      "sit",
-      "excepteur"
-    ],
+    "tags": ["adipisicing", "qui", "ad", "proident", "reprehenderit", "sit", "excepteur"],
     "friends": [
       {
         "id": 0,
@@ -1548,15 +1276,7 @@
     "registered": "2015-10-12T05:00:49 +04:00",
     "latitude": 78.336024,
     "longitude": 126.236628,
-    "tags": [
-      "ex",
-      "eu",
-      "eu",
-      "ullamco",
-      "mollit",
-      "laboris",
-      "id"
-    ],
+    "tags": ["ex", "eu", "eu", "ullamco", "mollit", "laboris", "id"],
     "friends": [
       {
         "id": 0,
@@ -1593,15 +1313,7 @@
     "registered": "2014-04-21T02:45:42 +04:00",
     "latitude": 45.593708,
     "longitude": 169.461344,
-    "tags": [
-      "dolore",
-      "exercitation",
-      "laborum",
-      "ullamco",
-      "consectetur",
-      "sit",
-      "ea"
-    ],
+    "tags": ["dolore", "exercitation", "laborum", "ullamco", "consectetur", "sit", "ea"],
     "friends": [
       {
         "id": 0,
@@ -1638,15 +1350,7 @@
     "registered": "2014-06-11T11:33:15 +04:00",
     "latitude": -75.415723,
     "longitude": 56.727136,
-    "tags": [
-      "sint",
-      "proident",
-      "veniam",
-      "dolore",
-      "officia",
-      "minim",
-      "velit"
-    ],
+    "tags": ["sint", "proident", "veniam", "dolore", "officia", "minim", "velit"],
     "friends": [
       {
         "id": 0,
@@ -1683,15 +1387,7 @@
     "registered": "2015-04-01T11:35:20 +04:00",
     "latitude": 52.516978,
     "longitude": -33.971549,
-    "tags": [
-      "Lorem",
-      "aliqua",
-      "cupidatat",
-      "dolore",
-      "laborum",
-      "ullamco",
-      "laboris"
-    ],
+    "tags": ["Lorem", "aliqua", "cupidatat", "dolore", "laborum", "ullamco", "laboris"],
     "friends": [
       {
         "id": 0,
@@ -1728,15 +1424,7 @@
     "registered": "2014-03-11T05:06:37 +04:00",
     "latitude": -18.557724,
     "longitude": -154.729005,
-    "tags": [
-      "magna",
-      "proident",
-      "occaecat",
-      "pariatur",
-      "laborum",
-      "in",
-      "irure"
-    ],
+    "tags": ["magna", "proident", "occaecat", "pariatur", "laborum", "in", "irure"],
     "friends": [
       {
         "id": 0,
@@ -1773,15 +1461,7 @@
     "registered": "2015-06-15T03:44:04 +04:00",
     "latitude": -16.395328,
     "longitude": 99.673985,
-    "tags": [
-      "anim",
-      "minim",
-      "dolore",
-      "officia",
-      "sit",
-      "qui",
-      "reprehenderit"
-    ],
+    "tags": ["anim", "minim", "dolore", "officia", "sit", "qui", "reprehenderit"],
     "friends": [
       {
         "id": 0,
@@ -1818,15 +1498,7 @@
     "registered": "2014-10-11T08:32:36 +04:00",
     "latitude": 35.048254,
     "longitude": 34.910802,
-    "tags": [
-      "irure",
-      "ea",
-      "consectetur",
-      "veniam",
-      "pariatur",
-      "amet",
-      "proident"
-    ],
+    "tags": ["irure", "ea", "consectetur", "veniam", "pariatur", "amet", "proident"],
     "friends": [
       {
         "id": 0,
@@ -1863,15 +1535,7 @@
     "registered": "2014-05-07T09:36:36 +04:00",
     "latitude": -18.184321,
     "longitude": 3.453322,
-    "tags": [
-      "sit",
-      "cillum",
-      "minim",
-      "non",
-      "officia",
-      "velit",
-      "adipisicing"
-    ],
+    "tags": ["sit", "cillum", "minim", "non", "officia", "velit", "adipisicing"],
     "friends": [
       {
         "id": 0,
@@ -1908,15 +1572,7 @@
     "registered": "2014-10-18T02:20:54 +04:00",
     "latitude": -58.387851,
     "longitude": -25.310519,
-    "tags": [
-      "eiusmod",
-      "enim",
-      "non",
-      "anim",
-      "occaecat",
-      "mollit",
-      "eu"
-    ],
+    "tags": ["eiusmod", "enim", "non", "anim", "occaecat", "mollit", "eu"],
     "friends": [
       {
         "id": 0,
@@ -1953,15 +1609,7 @@
     "registered": "2015-02-25T10:25:47 +05:00",
     "latitude": 18.861271,
     "longitude": -37.78864,
-    "tags": [
-      "esse",
-      "non",
-      "excepteur",
-      "esse",
-      "in",
-      "qui",
-      "nisi"
-    ],
+    "tags": ["esse", "non", "excepteur", "esse", "in", "qui", "nisi"],
     "friends": [
       {
         "id": 0,
@@ -1998,15 +1646,7 @@
     "registered": "2014-11-30T10:24:11 +05:00",
     "latitude": -32.869858,
     "longitude": 18.022726,
-    "tags": [
-      "exercitation",
-      "exercitation",
-      "exercitation",
-      "elit",
-      "id",
-      "consectetur",
-      "eiusmod"
-    ],
+    "tags": ["exercitation", "exercitation", "exercitation", "elit", "id", "consectetur", "eiusmod"],
     "friends": [
       {
         "id": 0,
@@ -2043,15 +1683,7 @@
     "registered": "2014-12-26T08:45:17 +05:00",
     "latitude": 86.701952,
     "longitude": 84.302255,
-    "tags": [
-      "cupidatat",
-      "magna",
-      "sit",
-      "qui",
-      "ipsum",
-      "minim",
-      "deserunt"
-    ],
+    "tags": ["cupidatat", "magna", "sit", "qui", "ipsum", "minim", "deserunt"],
     "friends": [
       {
         "id": 0,
@@ -2088,15 +1720,7 @@
     "registered": "2014-03-13T11:39:33 +04:00",
     "latitude": 36.626746,
     "longitude": 72.409037,
-    "tags": [
-      "id",
-      "minim",
-      "officia",
-      "incididunt",
-      "enim",
-      "quis",
-      "qui"
-    ],
+    "tags": ["id", "minim", "officia", "incididunt", "enim", "quis", "qui"],
     "friends": [
       {
         "id": 0,
@@ -2133,15 +1757,7 @@
     "registered": "2014-04-27T01:11:11 +04:00",
     "latitude": 23.643514,
     "longitude": -91.382711,
-    "tags": [
-      "enim",
-      "qui",
-      "exercitation",
-      "aliqua",
-      "nostrud",
-      "adipisicing",
-      "nostrud"
-    ],
+    "tags": ["enim", "qui", "exercitation", "aliqua", "nostrud", "adipisicing", "nostrud"],
     "friends": [
       {
         "id": 0,
@@ -2178,15 +1794,7 @@
     "registered": "2015-06-04T11:55:48 +04:00",
     "latitude": -31.340785,
     "longitude": 131.867051,
-    "tags": [
-      "dolor",
-      "et",
-      "voluptate",
-      "do",
-      "magna",
-      "ullamco",
-      "velit"
-    ],
+    "tags": ["dolor", "et", "voluptate", "do", "magna", "ullamco", "velit"],
     "friends": [
       {
         "id": 0,
@@ -2223,15 +1831,7 @@
     "registered": "2015-06-23T03:40:30 +04:00",
     "latitude": 58.598819,
     "longitude": 115.792542,
-    "tags": [
-      "et",
-      "id",
-      "culpa",
-      "duis",
-      "nisi",
-      "adipisicing",
-      "aliqua"
-    ],
+    "tags": ["et", "id", "culpa", "duis", "nisi", "adipisicing", "aliqua"],
     "friends": [
       {
         "id": 0,
@@ -2268,15 +1868,7 @@
     "registered": "2015-09-29T10:52:17 +04:00",
     "latitude": 81.660353,
     "longitude": 84.926141,
-    "tags": [
-      "irure",
-      "labore",
-      "non",
-      "adipisicing",
-      "pariatur",
-      "nostrud",
-      "veniam"
-    ],
+    "tags": ["irure", "labore", "non", "adipisicing", "pariatur", "nostrud", "veniam"],
     "friends": [
       {
         "id": 0,
@@ -2313,15 +1905,7 @@
     "registered": "2014-12-26T12:02:59 +05:00",
     "latitude": 1.784383,
     "longitude": 71.555687,
-    "tags": [
-      "proident",
-      "minim",
-      "duis",
-      "ea",
-      "nulla",
-      "deserunt",
-      "mollit"
-    ],
+    "tags": ["proident", "minim", "duis", "ea", "nulla", "deserunt", "mollit"],
     "friends": [
       {
         "id": 0,
@@ -2358,15 +1942,7 @@
     "registered": "2015-07-22T09:41:15 +04:00",
     "latitude": -2.548085,
     "longitude": 153.706069,
-    "tags": [
-      "consectetur",
-      "cupidatat",
-      "mollit",
-      "do",
-      "commodo",
-      "magna",
-      "minim"
-    ],
+    "tags": ["consectetur", "cupidatat", "mollit", "do", "commodo", "magna", "minim"],
     "friends": [
       {
         "id": 0,
@@ -2403,15 +1979,7 @@
     "registered": "2014-05-04T04:56:13 +04:00",
     "latitude": 26.675021,
     "longitude": 171.772527,
-    "tags": [
-      "aliquip",
-      "magna",
-      "nisi",
-      "aliquip",
-      "consectetur",
-      "commodo",
-      "qui"
-    ],
+    "tags": ["aliquip", "magna", "nisi", "aliquip", "consectetur", "commodo", "qui"],
     "friends": [
       {
         "id": 0,
@@ -2448,15 +2016,7 @@
     "registered": "2014-11-01T09:19:22 +04:00",
     "latitude": 34.423383,
     "longitude": -124.512556,
-    "tags": [
-      "commodo",
-      "aliquip",
-      "commodo",
-      "eiusmod",
-      "anim",
-      "officia",
-      "magna"
-    ],
+    "tags": ["commodo", "aliquip", "commodo", "eiusmod", "anim", "officia", "magna"],
     "friends": [
       {
         "id": 0,
@@ -2493,15 +2053,7 @@
     "registered": "2014-11-14T06:25:04 +05:00",
     "latitude": -70.113887,
     "longitude": 169.51376,
-    "tags": [
-      "quis",
-      "duis",
-      "eu",
-      "amet",
-      "ex",
-      "consectetur",
-      "eu"
-    ],
+    "tags": ["quis", "duis", "eu", "amet", "ex", "consectetur", "eu"],
     "friends": [
       {
         "id": 0,
@@ -2538,15 +2090,7 @@
     "registered": "2014-07-10T01:09:18 +04:00",
     "latitude": -76.172113,
     "longitude": -175.578699,
-    "tags": [
-      "deserunt",
-      "aute",
-      "sunt",
-      "tempor",
-      "nostrud",
-      "velit",
-      "magna"
-    ],
+    "tags": ["deserunt", "aute", "sunt", "tempor", "nostrud", "velit", "magna"],
     "friends": [
       {
         "id": 0,
@@ -2583,15 +2127,7 @@
     "registered": "2015-05-09T07:59:38 +04:00",
     "latitude": -38.999887,
     "longitude": 20.615422,
-    "tags": [
-      "eiusmod",
-      "ex",
-      "non",
-      "fugiat",
-      "sint",
-      "officia",
-      "culpa"
-    ],
+    "tags": ["eiusmod", "ex", "non", "fugiat", "sint", "officia", "culpa"],
     "friends": [
       {
         "id": 0,
@@ -2628,15 +2164,7 @@
     "registered": "2014-03-01T06:51:00 +05:00",
     "latitude": -68.793596,
     "longitude": -109.844529,
-    "tags": [
-      "ipsum",
-      "proident",
-      "veniam",
-      "mollit",
-      "irure",
-      "aliquip",
-      "ipsum"
-    ],
+    "tags": ["ipsum", "proident", "veniam", "mollit", "irure", "aliquip", "ipsum"],
     "friends": [
       {
         "id": 0,
@@ -2673,15 +2201,7 @@
     "registered": "2014-09-28T04:11:47 +04:00",
     "latitude": 47.795483,
     "longitude": -34.296471,
-    "tags": [
-      "est",
-      "proident",
-      "consectetur",
-      "adipisicing",
-      "id",
-      "minim",
-      "labore"
-    ],
+    "tags": ["est", "proident", "consectetur", "adipisicing", "id", "minim", "labore"],
     "friends": [
       {
         "id": 0,
@@ -2718,15 +2238,7 @@
     "registered": "2014-03-26T04:49:08 +04:00",
     "latitude": -38.051803,
     "longitude": -70.90126,
-    "tags": [
-      "sit",
-      "eu",
-      "amet",
-      "dolor",
-      "est",
-      "adipisicing",
-      "exercitation"
-    ],
+    "tags": ["sit", "eu", "amet", "dolor", "est", "adipisicing", "exercitation"],
     "friends": [
       {
         "id": 0,
@@ -2763,15 +2275,7 @@
     "registered": "2014-04-19T05:26:01 +04:00",
     "latitude": 22.143976,
     "longitude": -169.340466,
-    "tags": [
-      "sunt",
-      "non",
-      "velit",
-      "aute",
-      "commodo",
-      "eiusmod",
-      "consequat"
-    ],
+    "tags": ["sunt", "non", "velit", "aute", "commodo", "eiusmod", "consequat"],
     "friends": [
       {
         "id": 0,
@@ -2808,15 +2312,7 @@
     "registered": "2014-01-29T10:35:55 +05:00",
     "latitude": 66.519992,
     "longitude": -163.678599,
-    "tags": [
-      "laborum",
-      "aliqua",
-      "nulla",
-      "nisi",
-      "mollit",
-      "ex",
-      "ipsum"
-    ],
+    "tags": ["laborum", "aliqua", "nulla", "nisi", "mollit", "ex", "ipsum"],
     "friends": [
       {
         "id": 0,
@@ -2853,15 +2349,7 @@
     "registered": "2015-05-27T12:10:40 +04:00",
     "latitude": -43.359524,
     "longitude": 163.913806,
-    "tags": [
-      "dolor",
-      "sunt",
-      "dolore",
-      "ipsum",
-      "elit",
-      "veniam",
-      "tempor"
-    ],
+    "tags": ["dolor", "sunt", "dolore", "ipsum", "elit", "veniam", "tempor"],
     "friends": [
       {
         "id": 0,
@@ -2898,15 +2386,7 @@
     "registered": "2015-08-19T02:03:26 +04:00",
     "latitude": -60.432874,
     "longitude": 132.98848,
-    "tags": [
-      "elit",
-      "dolor",
-      "laboris",
-      "sit",
-      "exercitation",
-      "consequat",
-      "velit"
-    ],
+    "tags": ["elit", "dolor", "laboris", "sit", "exercitation", "consequat", "velit"],
     "friends": [
       {
         "id": 0,
@@ -2943,15 +2423,7 @@
     "registered": "2014-05-07T05:26:18 +04:00",
     "latitude": 22.659729,
     "longitude": 93.262588,
-    "tags": [
-      "qui",
-      "officia",
-      "fugiat",
-      "et",
-      "enim",
-      "ut",
-      "Lorem"
-    ],
+    "tags": ["qui", "officia", "fugiat", "et", "enim", "ut", "Lorem"],
     "friends": [
       {
         "id": 0,
@@ -2988,15 +2460,7 @@
     "registered": "2015-02-25T12:00:44 +05:00",
     "latitude": 8.230019,
     "longitude": -28.464768,
-    "tags": [
-      "id",
-      "ipsum",
-      "ullamco",
-      "elit",
-      "ad",
-      "quis",
-      "cillum"
-    ],
+    "tags": ["id", "ipsum", "ullamco", "elit", "ad", "quis", "cillum"],
     "friends": [
       {
         "id": 0,
@@ -3033,15 +2497,7 @@
     "registered": "2015-02-23T02:44:45 +05:00",
     "latitude": -78.608983,
     "longitude": -151.612726,
-    "tags": [
-      "ipsum",
-      "dolore",
-      "mollit",
-      "ea",
-      "officia",
-      "veniam",
-      "ullamco"
-    ],
+    "tags": ["ipsum", "dolore", "mollit", "ea", "officia", "veniam", "ullamco"],
     "friends": [
       {
         "id": 0,
@@ -3078,15 +2534,7 @@
     "registered": "2014-02-10T10:09:57 +05:00",
     "latitude": 71.14851,
     "longitude": 43.52753,
-    "tags": [
-      "voluptate",
-      "Lorem",
-      "nisi",
-      "do",
-      "pariatur",
-      "nostrud",
-      "do"
-    ],
+    "tags": ["voluptate", "Lorem", "nisi", "do", "pariatur", "nostrud", "do"],
     "friends": [
       {
         "id": 0,
@@ -3123,15 +2571,7 @@
     "registered": "2014-03-23T12:17:39 +04:00",
     "latitude": 20.039288,
     "longitude": -79.292952,
-    "tags": [
-      "sint",
-      "pariatur",
-      "Lorem",
-      "consectetur",
-      "quis",
-      "culpa",
-      "sunt"
-    ],
+    "tags": ["sint", "pariatur", "Lorem", "consectetur", "quis", "culpa", "sunt"],
     "friends": [
       {
         "id": 0,

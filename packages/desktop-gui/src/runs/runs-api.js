@@ -9,18 +9,19 @@ const isPolling = () => {
 const loadRuns = (runsStore) => {
   runsStore.setLoading(true)
 
-  ipc.getRuns()
-  .then((runs) => {
-    runsStore.setRuns(runs)
+  ipc
+    .getRuns()
+    .then((runs) => {
+      runsStore.setRuns(runs)
 
-    return null
-  })
-  .catch(ipc.isUnauthed, ipc.handleUnauthed)
-  .catch((err) => {
-    runsStore.setError(err)
+      return null
+    })
+    .catch(ipc.isUnauthed, ipc.handleUnauthed)
+    .catch((err) => {
+      runsStore.setError(err)
 
-    return null
-  })
+      return null
+    })
 
   return null
 }

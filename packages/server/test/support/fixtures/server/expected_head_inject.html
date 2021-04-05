@@ -1,17 +1,21 @@
 <html>
   <head prefix="og: foo">
-    <script type='text/javascript'>
-      document.domain = 'google.com';
+    <script type="text/javascript">
+      document.domain = 'google.com'
 
-      var Cypress = window.Cypress = parent.Cypress;
+      var Cypress = (window.Cypress = parent.Cypress)
 
-        if (!Cypress) {
-          throw new Error('Something went terribly wrong and we cannot proceed. We expected to find the global Cypress in the parent window but it is missing!. This should never happen and likely is a bug. Please open an issue!');
-        };
+      if (!Cypress) {
+        throw new Error(
+          'Something went terribly wrong and we cannot proceed. We expected to find the global Cypress in the parent window but it is missing!. This should never happen and likely is a bug. Please open an issue!'
+        )
+      }
 
-      Cypress.action('app:window:before:load', window);
+      Cypress.action('app:window:before:load', window)
     </script>
-    <meta name="foo" content="bar">
+    <meta name="foo" content="bar" />
   </head>
-  <body>hello from bar!</body>
+  <body>
+    hello from bar!
+  </body>
 </html>

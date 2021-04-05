@@ -16,33 +16,38 @@ const onServer = function (app) {
   app.get('/gzip-bad.html', (req, res) => {
     const buf = fs.readFileSync(Fixtures.path('server/gzip-bad.html.gz'))
 
-    return res.set({
-      'content-type': 'text/html',
-      'content-encoding': 'gzip',
-    })
-    .send(buf)
+    return res
+      .set({
+        'content-type': 'text/html',
+        'content-encoding': 'gzip',
+      })
+      .send(buf)
   })
 
   return app.get('/gzip-bad.js', (req, res) => {
     const buf = fs.readFileSync(Fixtures.path('server/gzip-bad.html.gz'))
 
-    return res.set({
-      'content-type': 'application/javascript',
-      'content-encoding': 'gzip',
-    })
-    .send(buf)
+    return res
+      .set({
+        'content-type': 'application/javascript',
+        'content-encoding': 'gzip',
+      })
+      .send(buf)
   })
 }
 
 describe('e2e js error handling', () => {
   e2e.setup({
-    servers: [{
-      port: 1122,
-      static: true,
-    }, {
-      port: 1123,
-      onServer,
-    }],
+    servers: [
+      {
+        port: 1122,
+        static: true,
+      },
+      {
+        port: 1123,
+        onServer,
+      },
+    ],
   })
 
   e2e.it('fails', {

@@ -25,19 +25,21 @@ const stripPort = (url) => {
 export class HttpBuffers {
   buffer: Optional<HttpBuffer> = undefined
 
-  reset (): void {
+  reset(): void {
     debug('resetting buffers')
 
     delete this.buffer
   }
 
-  set (obj) {
+  set(obj) {
     obj = _.cloneDeep(obj)
     obj.url = stripPort(obj.url)
     obj.originalUrl = stripPort(obj.originalUrl)
 
     if (this.buffer) {
-      debug('warning: overwriting existing buffer...', { buffer: _.pick(this.buffer, 'url') })
+      debug('warning: overwriting existing buffer...', {
+        buffer: _.pick(this.buffer, 'url'),
+      })
     }
 
     debug('setting buffer %o', _.pick(obj, 'url'))
@@ -45,13 +47,13 @@ export class HttpBuffers {
     this.buffer = obj
   }
 
-  get (str): Optional<HttpBuffer> {
+  get(str): Optional<HttpBuffer> {
     if (this.buffer && this.buffer.url === stripPort(str)) {
       return this.buffer
     }
   }
 
-  take (str): Optional<HttpBuffer> {
+  take(str): Optional<HttpBuffer> {
     const foundBuffer = this.get(str)
 
     if (foundBuffer) {

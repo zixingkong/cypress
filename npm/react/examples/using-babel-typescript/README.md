@@ -66,8 +66,7 @@ import Component from './Component'
 import * as calc from './calc'
 describe('Component', () => {
   it('mocks call from the component', () => {
-    cy.stub(calc, 'getRandomNumber')
-      .returns(777)
+    cy.stub(calc, 'getRandomNumber').returns(777)
     mount(<Component />)
   })
 })

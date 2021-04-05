@@ -16,19 +16,12 @@ const banner = `
  */
 `
 
-function createEntry (options) {
-  const {
-    format,
-    input,
-    isBrowser,
-  } = options
+function createEntry(options) {
+  const { format, input, isBrowser } = options
 
   const config = {
     input,
-    external: [
-      'react',
-      'react-dom',
-    ],
+    external: ['react', 'react-dom'],
     plugins: [
       peerDepsExternal(),
       resolve(),
@@ -37,9 +30,7 @@ function createEntry (options) {
       postcss({ writeDefinitions: false }),
       image(),
       copy({
-        assets: [
-          './index.scss',
-        ],
+        assets: ['./index.scss'],
       }),
     ],
     output: {
@@ -78,7 +69,7 @@ function createEntry (options) {
           module: format === 'cjs' ? 'es2015' : 'esnext',
         },
       },
-    }),
+    })
   )
 
   return config

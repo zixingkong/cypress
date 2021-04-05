@@ -11,14 +11,14 @@
  * or additional methods to "cy" or "cy.<command>()" chained value,
  * declare them and TypeScript will merge new definitions with existing ones.
  * @see https://on.cypress.io/typescript#Types-for-custom-commands
-*/
+ */
 declare namespace Cypress {
   interface cy {
     /**
      * We have added a label property to "cy" object.
      * @example console.log(cy.myLabel)
-    */
-    myLabel: string,
+     */
+    myLabel: string
     /**
      * Definition for a custom command "login" that was added separately
      * using `Cypress.Commands.add('login', (username, password) => {...})`.

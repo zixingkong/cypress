@@ -12,7 +12,7 @@ describe('typescript', { defaultCommandTimeout: 0 }, () => {
 
   it('exception', () => {
     // @ts-ignore
-    ({}).bar()
+    ;({}.bar())
   })
 
   it('command failure', () => {

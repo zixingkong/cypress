@@ -4,9 +4,7 @@ export const getCommandLogWithText = (command, type = 'method') => {
   // Open current test if not already open, so we can find the command log
   cy.$$('.runnable-active .collapsible:not(.is-open) .collapsible-header', top.document).click()
 
-  return cy
-  .$$(`.runnable-active .command-${type}:contains(${command})`, top.document)
-  .closest('.command')
+  return cy.$$(`.runnable-active .command-${type}:contains(${command})`, top.document).closest('.command')
 }
 
 export const findReactInstance = function (dom) {
@@ -15,14 +13,11 @@ export const findReactInstance = function (dom) {
 
   if (internalInstance == null) return null
 
-  return internalInstance._debugOwner
-    ? internalInstance._debugOwner.stateNode
-    : internalInstance.return.stateNode
+  return internalInstance._debugOwner ? internalInstance._debugOwner.stateNode : internalInstance.return.stateNode
 }
 
 export const clickCommandLog = (sel, type) => {
-  return cy.wait(10)
-  .then(() => {
+  return cy.wait(10).then(() => {
     return withMutableReporterState(() => {
       const commandLogEl = getCommandLogWithText(sel, type)
       const reactCommandInstance = findReactInstance(commandLogEl[0])
@@ -33,9 +28,7 @@ export const clickCommandLog = (sel, type) => {
 
       reactCommandInstance.props.appState.isRunning = false
 
-      $(commandLogEl).find('.command-wrapper')
-      .click()
-      .get(0).scrollIntoView()
+      $(commandLogEl).find('.command-wrapper').click().get(0).scrollIntoView()
 
       // make sure command was pinned, otherwise throw a better error message
       expect(cy.$$('.runnable-active .command-pin', top.document).length, 'command should be pinned').ok
@@ -50,8 +43,7 @@ export const withMutableReporterState = (fn) => {
 
   currentTestLog.props.model._isOpen = true
 
-  return Promise.try(fn)
-  .then(() => {
+  return Promise.try(fn).then(() => {
     top.Runner.configureMobx({ enforceActions: 'always' })
   })
 }
@@ -78,23 +70,19 @@ export const attachListeners = (listenerArr) => {
 
 const getAllFn = (...aliases) => {
   if (aliases.length > 1) {
-    return getAllFn((_.isArray(aliases[1]) ? aliases[1] : aliases[1].split(' ')).map((alias) => `@${aliases[0]}:${alias}`).join(' '))
+    return getAllFn(
+      (_.isArray(aliases[1]) ? aliases[1] : aliases[1].split(' ')).map((alias) => `@${aliases[0]}:${alias}`).join(' ')
+    )
   }
 
   return Promise.all(
     aliases[0].split(' ').map((alias) => {
       return cy.now('get', alias)
-    }),
+    })
   )
 }
 
-export const keyEvents = [
-  'keydown',
-  'keyup',
-  'keypress',
-  'input',
-  'textInput',
-]
+export const keyEvents = ['keydown', 'keyup', 'keypress', 'input', 'textInput']
 
 export const attachKeyListeners = attachListeners(keyEvents)
 
@@ -108,7 +96,10 @@ export const trimInnerText = ($el) => {
 export const expectCaret = (start, end) => {
   return ($el) => {
     end = end == null ? start : end
-    expect(Cypress.dom.getSelectionBounds($el.get(0))).to.deep.eq({ start, end })
+    expect(Cypress.dom.getSelectionBounds($el.get(0))).to.deep.eq({
+      start,
+      end,
+    })
   }
 }
 

@@ -63,8 +63,7 @@ describe('lib/config', () => {
     it('sets projectRoot', function () {
       this.setup({}, { foo: 'bar' })
 
-      return config.get(this.projectRoot)
-      .then((obj) => {
+      return config.get(this.projectRoot).then((obj) => {
         expect(obj.projectRoot).to.eq(this.projectRoot)
 
         expect(obj.env).to.deep.eq({ foo: 'bar' })
@@ -74,8 +73,7 @@ describe('lib/config', () => {
     it('sets projectName', function () {
       this.setup({}, { foo: 'bar' })
 
-      return config.get(this.projectRoot)
-      .then((obj) => {
+      return config.get(this.projectRoot).then((obj) => {
         expect(obj.projectName).to.eq('project')
       })
     })
@@ -86,8 +84,7 @@ describe('lib/config', () => {
 
       this.setup(settings, envSettings)
 
-      return config.get(this.projectRoot)
-      .then(() => {
+      return config.get(this.projectRoot).then(() => {
         expect(settings).to.deep.equal({ foo: 'bar' })
         expect(envSettings).to.deep.equal({ baz: 'qux' })
       })
@@ -99,22 +96,19 @@ describe('lib/config', () => {
       })
 
       it('can override default port', function () {
-        return config.get(this.projectRoot, { port: 8080 })
-        .then((obj) => {
+        return config.get(this.projectRoot, { port: 8080 }).then((obj) => {
           expect(obj.port).to.eq(8080)
         })
       })
 
       it('updates browserUrl', function () {
-        return config.get(this.projectRoot, { port: 8080 })
-        .then((obj) => {
+        return config.get(this.projectRoot, { port: 8080 }).then((obj) => {
           expect(obj.browserUrl).to.eq('http://localhost:8080/__/')
         })
       })
 
       it('updates proxyUrl', function () {
-        return config.get(this.projectRoot, { port: 8080 })
-        .then((obj) => {
+        return config.get(this.projectRoot, { port: 8080 }).then((obj) => {
           expect(obj.proxyUrl).to.eq('http://localhost:8080')
         })
       })
@@ -127,12 +121,14 @@ describe('lib/config', () => {
         }
 
         this.expectValidationFails = (errorMessage = 'validation error') => {
-          return config.get(this.projectRoot)
-          .then(() => {
-            throw new Error('should throw validation error')
-          }).catch((err) => {
-            expect(err.message).to.include(errorMessage)
-          })
+          return config
+            .get(this.projectRoot)
+            .then(() => {
+              throw new Error('should throw validation error')
+            })
+            .catch((err) => {
+              expect(err.message).to.include(errorMessage)
+            })
         }
       })
 
@@ -171,7 +167,7 @@ describe('lib/config', () => {
           this.setup({ animationDistanceThreshold: { foo: 'bar' } })
           this.expectValidationFails('be a number')
 
-          return this.expectValidationFails('the value was: \`{"foo":"bar"}\`')
+          return this.expectValidationFails('the value was: `{"foo":"bar"}`')
         })
       })
 
@@ -252,7 +248,9 @@ describe('lib/config', () => {
 
         it('fails if nested property is incorrect', function () {
           this.setup({ component: { baseUrl: false } })
-          this.expectValidationFails('Expected `component.baseUrl` to be a fully qualified URL (starting with `http://` or `https://`).')
+          this.expectValidationFails(
+            'Expected `component.baseUrl` to be a fully qualified URL (starting with `http://` or `https://`).'
+          )
 
           return this.expectValidationFails('the value was: `false`')
         })
@@ -276,7 +274,11 @@ describe('lib/config', () => {
         })
 
         it('fails if nested property is incorrect', function () {
-          this.setup({ e2e: { animationDistanceThreshold: 'this is definitely not a number' } })
+          this.setup({
+            e2e: {
+              animationDistanceThreshold: 'this is definitely not a number',
+            },
+          })
           this.expectValidationFails('Expected `e2e.animationDistanceThreshold` to be a number')
 
           return this.expectValidationFails('the value was: `"this is definitely not a number"`')
@@ -284,7 +286,9 @@ describe('lib/config', () => {
 
         it('fails if nested property is incorrect', function () {
           this.setup({ component: { baseUrl: false } })
-          this.expectValidationFails('Expected `component.baseUrl` to be a fully qualified URL (starting with `http://` or `https://`).')
+          this.expectValidationFails(
+            'Expected `component.baseUrl` to be a fully qualified URL (starting with `http://` or `https://`).'
+          )
 
           return this.expectValidationFails('the value was: `false`')
         })
@@ -313,7 +317,7 @@ describe('lib/config', () => {
         })
 
         it('fails if not an object', function () {
-          this.setup({ env: 'not an object that\'s for sure' })
+          this.setup({ env: "not an object that's for sure" })
 
           return this.expectValidationFails('a plain object')
         })
@@ -826,7 +830,8 @@ describe('lib/config', () => {
       })
 
       context('retries', () => {
-        const retriesError = 'a positive number or null or an object with keys "openMode" and "runMode" with values of numbers or nulls'
+        const retriesError =
+          'a positive number or null or an object with keys "openMode" and "runMode" with values of numbers or nulls'
 
         // need to keep the const here or it'll get stripped by the build
         // eslint-disable-next-line no-unused-vars
@@ -970,11 +975,12 @@ describe('lib/config', () => {
       this.defaults = (prop, value, cfg = {}, options = {}) => {
         cfg.projectRoot = '/foo/bar/'
 
-        return config.mergeDefaults(cfg, options)
-        .then(R.prop(prop))
-        .then((result) => {
-          expect(result).to.deep.eq(value)
-        })
+        return config
+          .mergeDefaults(cfg, options)
+          .then(R.prop(prop))
+          .then((result) => {
+            expect(result).to.deep.eq(value)
+          })
       }
     })
 
@@ -991,7 +997,9 @@ describe('lib/config', () => {
     })
 
     it('browserUrl=http://localhost:2020/__/', function () {
-      return this.defaults('browserUrl', 'http://localhost:2020/__/', { port: 2020 })
+      return this.defaults('browserUrl', 'http://localhost:2020/__/', {
+        port: 2020,
+      })
     })
 
     it('proxyUrl=http://localhost:2020', function () {
@@ -1159,48 +1167,47 @@ describe('lib/config', () => {
     })
 
     it('hosts={}', function () {
-      return this.defaults('hosts', {
-        foo: 'bar',
-        baz: 'quux',
-      }, {
-        hosts: {
+      return this.defaults(
+        'hosts',
+        {
           foo: 'bar',
           baz: 'quux',
         },
-      })
+        {
+          hosts: {
+            foo: 'bar',
+            baz: 'quux',
+          },
+        }
+      )
     })
 
     it('resets numTestsKeptInMemory to 0 when runMode', () => {
-      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true })
-      .then((cfg) => {
+      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true }).then((cfg) => {
         expect(cfg.numTestsKeptInMemory).to.eq(0)
       })
     })
 
     it('resets watchForFileChanges to false when runMode', () => {
-      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true })
-      .then((cfg) => {
+      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true }).then((cfg) => {
         expect(cfg.watchForFileChanges).to.be.false
       })
     })
 
     it('can override morgan in options', () => {
-      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { morgan: false })
-      .then((cfg) => {
+      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { morgan: false }).then((cfg) => {
         expect(cfg.morgan).to.be.false
       })
     })
 
     it('can override isTextTerminal in options', () => {
-      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true })
-      .then((cfg) => {
+      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { isTextTerminal: true }).then((cfg) => {
         expect(cfg.isTextTerminal).to.be.true
       })
     })
 
     it('can override socketId in options', () => {
-      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { socketId: 1234 })
-      .then((cfg) => {
+      return config.mergeDefaults({ projectRoot: '/foo/bar/' }, { socketId: 1234 }).then((cfg) => {
         expect(cfg.socketId).to.eq(1234)
       })
     })
@@ -1218,8 +1225,7 @@ describe('lib/config', () => {
         },
       }
 
-      return config.mergeDefaults(obj)
-      .then((cfg) => {
+      return config.mergeDefaults(obj).then((cfg) => {
         expect(cfg.env).to.deep.eq({
           foo: 'bar',
           bar: 'baz',
@@ -1249,8 +1255,7 @@ describe('lib/config', () => {
         },
       }
 
-      return config.mergeDefaults(obj, options)
-      .then((cfg) => {
+      return config.mergeDefaults(obj, options).then((cfg) => {
         expect(cfg.env).to.deep.eq({
           host: 'localhost',
           user: 'brian',
@@ -1313,8 +1318,7 @@ describe('lib/config', () => {
           port: 1234,
         }
 
-        return config.mergeDefaults(obj, options)
-        .then((cfg) => {
+        return config.mergeDefaults(obj, options).then((cfg) => {
           expect(cfg.resolved).to.deep.eq({
             animationDistanceThreshold: { value: 5, from: 'default' },
             baseUrl: { value: null, from: 'default' },
@@ -1332,12 +1336,18 @@ describe('lib/config', () => {
             experimentalSourceRewriting: { value: false, from: 'default' },
             experimentalStudio: { value: false, from: 'default' },
             fileServerFolder: { value: '', from: 'default' },
-            firefoxGcInterval: { value: { openMode: null, runMode: 1 }, from: 'default' },
+            firefoxGcInterval: {
+              value: { openMode: null, runMode: 1 },
+              from: 'default',
+            },
             fixturesFolder: { value: 'cypress/fixtures', from: 'default' },
             hosts: { value: null, from: 'default' },
             ignoreTestFiles: { value: '*.hot-update.js', from: 'default' },
             includeShadowDom: { value: false, from: 'default' },
-            integrationFolder: { value: 'cypress/integration', from: 'default' },
+            integrationFolder: {
+              value: 'cypress/integration',
+              from: 'default',
+            },
             modifyObstructiveCode: { value: true, from: 'default' },
             nodeVersion: { value: 'default', from: 'default' },
             numTestsKeptInMemory: { value: 50, from: 'default' },
@@ -1351,7 +1361,10 @@ describe('lib/config', () => {
             responseTimeout: { value: 30000, from: 'default' },
             retries: { value: { runMode: 0, openMode: 0 }, from: 'default' },
             screenshotOnRunFailure: { value: true, from: 'default' },
-            screenshotsFolder: { value: 'cypress/screenshots', from: 'default' },
+            screenshotsFolder: {
+              value: 'cypress/screenshots',
+              from: 'default',
+            },
             supportFile: { value: 'cypress/support', from: 'default' },
             taskTimeout: { value: 60000, from: 'default' },
             testFiles: { value: '**/*.*', from: 'default' },
@@ -1395,8 +1408,7 @@ describe('lib/config', () => {
           },
         }
 
-        return config.mergeDefaults(obj, options)
-        .then((cfg) => {
+        return config.mergeDefaults(obj, options).then((cfg) => {
           expect(cfg.resolved).to.deep.eq({
             animationDistanceThreshold: { value: 5, from: 'default' },
             baseUrl: { value: 'http://localhost:8080', from: 'config' },
@@ -1435,12 +1447,18 @@ describe('lib/config', () => {
               },
             },
             fileServerFolder: { value: '', from: 'default' },
-            firefoxGcInterval: { value: { openMode: null, runMode: 1 }, from: 'default' },
+            firefoxGcInterval: {
+              value: { openMode: null, runMode: 1 },
+              from: 'default',
+            },
             fixturesFolder: { value: 'cypress/fixtures', from: 'default' },
             hosts: { value: null, from: 'default' },
             ignoreTestFiles: { value: '*.hot-update.js', from: 'default' },
             includeShadowDom: { value: false, from: 'default' },
-            integrationFolder: { value: 'cypress/integration', from: 'default' },
+            integrationFolder: {
+              value: 'cypress/integration',
+              from: 'default',
+            },
             modifyObstructiveCode: { value: true, from: 'default' },
             nodeVersion: { value: 'default', from: 'default' },
             numTestsKeptInMemory: { value: 50, from: 'default' },
@@ -1454,7 +1472,10 @@ describe('lib/config', () => {
             responseTimeout: { value: 30000, from: 'default' },
             retries: { value: { runMode: 0, openMode: 0 }, from: 'default' },
             screenshotOnRunFailure: { value: true, from: 'default' },
-            screenshotsFolder: { value: 'cypress/screenshots', from: 'default' },
+            screenshotsFolder: {
+              value: 'cypress/screenshots',
+              from: 'default',
+            },
             supportFile: { value: 'cypress/support', from: 'default' },
             taskTimeout: { value: 60000, from: 'default' },
             testFiles: { value: '**/*.*', from: 'default' },
@@ -1540,8 +1561,7 @@ describe('lib/config', () => {
 
     // https://github.com/cypress-io/cypress/issues/7959
     it('resolves a single object', () => {
-      const cfg = {
-      }
+      const cfg = {}
       const obj = {
         foo: {
           bar: {
@@ -1567,7 +1587,7 @@ describe('lib/config', () => {
 
   context('_.defaultsDeep', () => {
     it('merges arrays', () => {
-    // sanity checks to confirm how Lodash merges arrays in defaultsDeep
+      // sanity checks to confirm how Lodash merges arrays in defaultsDeep
       const diffs = {
         list: [1],
       }
@@ -1807,7 +1827,7 @@ describe('lib/config', () => {
   })
 
   context('.getProcessEnvVars', () => {
-    ['cypress_', 'CYPRESS_'].forEach((key) => {
+    ;['cypress_', 'CYPRESS_'].forEach((key) => {
       it(`reduces key: ${key}`, () => {
         const obj = {
           cypress_host: 'http://localhost:8888',
@@ -1901,8 +1921,7 @@ describe('lib/config', () => {
         projectRoot: '/_test-output/path/to/project',
       }
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         expect(result).to.eql(obj)
       })
     })
@@ -1915,8 +1934,7 @@ describe('lib/config', () => {
         supportFile: 'test/unit/config_spec.js',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           supportFile: `${projectRoot}/test/unit/config_spec.js`,
@@ -1933,8 +1951,7 @@ describe('lib/config', () => {
         supportFile: 'cypress/support',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           supportFile: `${projectRoot}/cypress/support/index.js`,
@@ -1951,8 +1968,7 @@ describe('lib/config', () => {
         supportFile: 'cypress/support',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           supportFile: false,
@@ -1968,8 +1984,7 @@ describe('lib/config', () => {
         supportFile: 'does/not/exist',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .catch((err) => {
+      return config.setSupportFileAndFolder(obj).catch((err) => {
         expect(err.message).to.include('The support file is missing or invalid.')
       })
     })
@@ -1989,8 +2004,7 @@ describe('lib/config', () => {
         supportFile: 'cypress/support',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         debug('result is', result)
 
         expect(result).to.eql({
@@ -2016,8 +2030,7 @@ describe('lib/config', () => {
         supportFile: 'cypress/support.ts',
       })
 
-      return config.setSupportFileAndFolder(obj)
-      .then((result) => {
+      return config.setSupportFileAndFolder(obj).then((result) => {
         debug('result is', result)
 
         expect(result).to.eql({
@@ -2035,8 +2048,7 @@ describe('lib/config', () => {
         projectRoot: '/_test-output/path/to/project',
       }
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql(obj)
       })
     })
@@ -2049,8 +2061,7 @@ describe('lib/config', () => {
         pluginsFile: `${projectRoot}/cypress/plugins`,
       }
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           pluginsFile: `${projectRoot}/cypress/plugins/index.js`,
@@ -2066,8 +2077,7 @@ describe('lib/config', () => {
         pluginsFile: `${projectRoot}/cypress/plugins`,
       }
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           pluginsFile: `${projectRoot}/cypress/plugins/index.ts`,
@@ -2090,8 +2100,7 @@ describe('lib/config', () => {
         pluginsFile: pluginsFolder,
       }
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           pluginsFile: pluginsFilename,
@@ -2107,8 +2116,7 @@ describe('lib/config', () => {
         pluginsFile: `${projectRoot}/cypress/plugins`,
       })
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           pluginsFile: false,
@@ -2124,8 +2132,7 @@ describe('lib/config', () => {
         pluginsFile: 'does/not/exist',
       }
 
-      return config.setPluginsFile(obj)
-      .catch((err) => {
+      return config.setPluginsFile(obj).catch((err) => {
         expect(err.message).to.include('The plugins file is missing or invalid.')
       })
     })
@@ -2145,8 +2152,7 @@ describe('lib/config', () => {
         pluginsFile,
       }
 
-      return config.setPluginsFile(obj)
-      .then((result) => {
+      return config.setPluginsFile(obj).then((result) => {
         expect(result).to.eql({
           projectRoot,
           pluginsFile,
@@ -2218,7 +2224,14 @@ describe('lib/config', () => {
       expect(config.setAbsolutePaths(obj)).to.deep.eq(obj)
     })
 
-    return ['fileServerFolder', 'fixturesFolder', 'integrationFolder', 'unitFolder', 'supportFile', 'pluginsFile'].forEach((folder) => {
+    return [
+      'fileServerFolder',
+      'fixturesFolder',
+      'integrationFolder',
+      'unitFolder',
+      'supportFile',
+      'pluginsFile',
+    ].forEach((folder) => {
       it(`converts relative ${folder} to absolute path`, () => {
         const obj = {
           projectRoot: '/_test-output/path/to/project',
@@ -2244,17 +2257,18 @@ describe('lib/config', () => {
     })
 
     it('sets current Node ver if nodeVersion != system', function () {
-      return config.setNodeBinary({
-        nodeVersion: undefined,
-      })
-      .then((obj) => {
-        expect(this.findSystemNode).to.not.be.called
-
-        expect(obj).to.deep.eq({
+      return config
+        .setNodeBinary({
           nodeVersion: undefined,
-          resolvedNodeVersion: this.nodeVersion,
         })
-      })
+        .then((obj) => {
+          expect(this.findSystemNode).to.not.be.called
+
+          expect(obj).to.deep.eq({
+            nodeVersion: undefined,
+            resolvedNodeVersion: this.nodeVersion,
+          })
+        })
     })
 
     it('sets found Node ver if nodeVersion = system and findNodePathAndVersion resolves', function () {
@@ -2263,18 +2277,19 @@ describe('lib/config', () => {
         version: '1.2.3',
       })
 
-      return config.setNodeBinary({
-        nodeVersion: 'system',
-      })
-      .then((obj) => {
-        expect(this.findSystemNode).to.be.calledOnce
-
-        expect(obj).to.deep.eq({
+      return config
+        .setNodeBinary({
           nodeVersion: 'system',
-          resolvedNodeVersion: '1.2.3',
-          resolvedNodePath: '/foo/bar/node',
         })
-      })
+        .then((obj) => {
+          expect(this.findSystemNode).to.be.calledOnce
+
+          expect(obj).to.deep.eq({
+            nodeVersion: 'system',
+            resolvedNodeVersion: '1.2.3',
+            resolvedNodePath: '/foo/bar/node',
+          })
+        })
     })
 
     it('sets current Node ver and warns if nodeVersion = system and findNodePathAndVersion rejects', function () {
@@ -2283,19 +2298,23 @@ describe('lib/config', () => {
 
       this.findSystemNode.rejects(err)
 
-      return config.setNodeBinary({
-        nodeVersion: 'system',
-      }, onWarning)
-      .then((obj) => {
-        expect(this.findSystemNode).to.be.calledOnce
-        expect(onWarning).to.be.calledOnce
-        expect(obj).to.deep.eq({
-          nodeVersion: 'system',
-          resolvedNodeVersion: this.nodeVersion,
-        })
+      return config
+        .setNodeBinary(
+          {
+            nodeVersion: 'system',
+          },
+          onWarning
+        )
+        .then((obj) => {
+          expect(this.findSystemNode).to.be.calledOnce
+          expect(onWarning).to.be.calledOnce
+          expect(obj).to.deep.eq({
+            nodeVersion: 'system',
+            resolvedNodeVersion: this.nodeVersion,
+          })
 
-        expect(obj.resolvedNodePath).to.be.undefined
-      })
+          expect(obj.resolvedNodePath).to.be.undefined
+        })
     })
   })
 })

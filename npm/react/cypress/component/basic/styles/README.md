@@ -4,7 +4,7 @@ With `@cypress/react`, you can add styles to your component in three ways:
 mount(<Component />, {
   style: `CSS styles`,
   stylesheets: '/path/to/component.css',
-  cssFile: '/path/to/css/file'
+  cssFile: '/path/to/css/file',
 })
 ```
 

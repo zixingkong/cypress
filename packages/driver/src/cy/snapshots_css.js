@@ -10,9 +10,13 @@ const anyUrlInCssRe = /url\((['"])([^'"]*)\1\)/gm
 const screenStylesheetRe = /(screen|all)/
 
 const reduceText = (arr, fn) => {
-  return _.reduce(arr, ((memo, item) => {
-    return memo += fn(item)
-  }), '')
+  return _.reduce(
+    arr,
+    (memo, item) => {
+      return (memo += fn(item))
+    },
+    ''
+  )
 }
 
 const isScreenStylesheet = (stylesheet) => {
@@ -24,9 +28,13 @@ const isScreenStylesheet = (stylesheet) => {
 const getDocumentStylesheets = (doc) => {
   if (!doc) return {}
 
-  return _.transform(doc.styleSheets, (memo, stylesheet) => {
-    memo[stylesheet.href] = stylesheet
-  }, {})
+  return _.transform(
+    doc.styleSheets,
+    (memo, stylesheet) => {
+      memo[stylesheet.href] = stylesheet
+    },
+    {}
+  )
 }
 
 const makePathsAbsoluteToDocCache = new LimitedMap(50)
@@ -154,7 +162,7 @@ const create = ($$, state) => {
   }
 
   const getStyleIdsFor = (doc, $$, stylesheets, location) => {
-    let styles = $$(location).find('link[rel=\'stylesheet\'],style')
+    let styles = $$(location).find("link[rel='stylesheet'],style")
 
     styles = _.filter(styles, isScreenStylesheet)
 

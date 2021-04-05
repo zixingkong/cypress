@@ -17,11 +17,15 @@ const register = (event, callback) => {
   debug(`register event '${event}'`)
 
   if (!_.isString(event)) {
-    throw new Error(`The plugin register function must be called with an event as its 1st argument. You passed '${event}'.`)
+    throw new Error(
+      `The plugin register function must be called with an event as its 1st argument. You passed '${event}'.`
+    )
   }
 
   if (!_.isFunction(callback)) {
-    throw new Error(`The plugin register function must be called with a callback function as its 2nd argument. You passed '${callback}'.`)
+    throw new Error(
+      `The plugin register function must be called with a callback function as its 2nd argument. You passed '${callback}'.`
+    )
   }
 
   registeredEvents[event] = callback
@@ -42,9 +46,11 @@ const init = (config, options) => {
 
   // test and warn for incompatible plugin
   try {
-    const retriesPluginPath = path.dirname(resolve.sync('cypress-plugin-retries', {
-      basedir: options.projectRoot,
-    }))
+    const retriesPluginPath = path.dirname(
+      resolve.sync('cypress-plugin-retries', {
+        basedir: options.projectRoot,
+      })
+    )
 
     options.onWarning(errors.get('INCOMPATIBLE_PLUGIN_RETRIES', path.relative(options.projectRoot, retriesPluginPath)))
   } catch (e) {
@@ -95,9 +101,9 @@ const init = (config, options) => {
 
     if (inspector.url()) {
       childOptions.execArgv = _.chain(process.execArgv.slice(0))
-      .remove('--inspect-brk')
-      .push(`--inspect=${process.debugPort + 1}`)
-      .value()
+        .remove('--inspect-brk')
+        .push(`--inspect=${process.debugPort + 1}`)
+        .value()
     }
 
     pluginsProcess = cp.fork(childIndexFilename, childArguments, childOptions)

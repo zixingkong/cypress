@@ -23,8 +23,7 @@ describe('lib/server', () => {
     it('calls options.onUpgrade with req, socket head', function () {
       const onUpgrade = this.sandbox.stub()
 
-      return this.setup({ onUpgrade })
-      .then((srv) => {
+      return this.setup({ onUpgrade }).then((srv) => {
         srv._sniServer.emit('upgrade', 1, 2, 3)
 
         expect(onUpgrade).to.be.calledWith(1, 2, 3)
@@ -33,11 +32,13 @@ describe('lib/server', () => {
 
     it('calls options.onRequest with req, res', function () {
       const onRequest = this.sandbox.stub()
-      const req = { url: 'https://www.foobar.com', headers: { host: 'www.foobar.com' } }
+      const req = {
+        url: 'https://www.foobar.com',
+        headers: { host: 'www.foobar.com' },
+      }
       const res = {}
 
-      return this.setup({ onRequest })
-      .then((srv) => {
+      return this.setup({ onRequest }).then((srv) => {
         srv._sniServer.emit('request', req, res)
 
         expect(onRequest).to.be.calledWith(req, res)
@@ -62,8 +63,7 @@ describe('lib/server', () => {
         done()
       }
 
-      this.setup({ onError })
-      .then((srv) => {
+      this.setup({ onError }).then((srv) => {
         srv._makeConnection(socket, head, '8444', 'localhost')
       })
     })
@@ -87,8 +87,7 @@ describe('lib/server', () => {
         done()
       }
 
-      this.setup({ onError })
-      .then((srv) => {
+      this.setup({ onError }).then((srv) => {
         srv._makeConnection(socket, head, '443', '%7Balgolia_application_id%7D-dsn.algolia.net')
       })
     })

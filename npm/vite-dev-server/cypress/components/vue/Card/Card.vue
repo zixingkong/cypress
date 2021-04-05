@@ -17,8 +17,8 @@
 export default {
   data() {
     return {
-      content: "Scoped content!",
-    };
+      content: 'Scoped content!',
+    }
   },
-};
+}
 </script>

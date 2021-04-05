@@ -1,7 +1,9 @@
 const helpers = require('../support/helpers')
 
 const { createCypress } = helpers
-const { runIsolatedCypress } = createCypress({ config: { experimentalStudio: true } })
+const { runIsolatedCypress } = createCypress({
+  config: { experimentalStudio: true },
+})
 
 describe('studio ui', () => {
   it('launches studio ui when extending test', () => {
@@ -9,8 +11,7 @@ describe('studio ui', () => {
       state: {
         studioTestId: 'r3',
       },
-    })
-    .then(() => {
+    }).then(() => {
       cy.get('.reporter').should('have.class', 'studio-active')
       cy.get('.reporter').contains('studio commands').should('exist')
       cy.get('.reporter').contains('test 1').should('exist')
@@ -32,8 +33,7 @@ describe('studio ui', () => {
       state: {
         studioTestId: 'r5',
       },
-    })
-    .then(() => {
+    }).then(() => {
       cy.get('.runner').find('.menu-cover').should('have.class', 'menu-cover-display')
       cy.get('.runner').find('.menu-cover').should('be.visible')
 
@@ -56,8 +56,7 @@ describe('studio ui', () => {
       state: {
         studioTestId: 'r5',
       },
-    })
-    .then(() => {
+    }).then(() => {
       cy.get('.runner').find('.url-container').should('have.class', 'menu-open')
       cy.get('.runner').find('.url').should('have.class', 'input-active')
       cy.get('.runner').find('.url').should('have.value', 'the://url/')
@@ -73,8 +72,7 @@ describe('studio ui', () => {
       state: {
         studioTestId: 'r5',
       },
-    })
-    .then(() => {
+    }).then(() => {
       cy.get('.runner').find('.url').type('the://url')
       cy.get('.runner').find('.url-menu').find('.btn-submit').click()
 
@@ -88,8 +86,7 @@ describe('studio ui', () => {
       state: {
         studioTestId: 'r3',
       },
-    })
-    .then(() => {
+    }).then(() => {
       cy.get('.runner').contains('Available Commands').click()
       cy.get('reach-portal').should('exist')
       cy.get('reach-portal').find('.cancel').click()
@@ -103,8 +100,7 @@ describe('studio ui', () => {
         state: {
           studioTestId: 'r3',
         },
-      })
-      .then(() => {
+      }).then(() => {
         cy.get('.reporter').contains('test').closest('.runnable').should('have.class', 'runnable-failed')
         cy.get('.reporter').contains('Studio cannot add commands to a failing test.').should('exist')
 
@@ -119,8 +115,7 @@ describe('studio ui', () => {
         state: {
           studioTestId: 'r3',
         },
-      })
-      .then(() => {
+      }).then(() => {
         cy.get('.reporter').contains('test').closest('.runnable').should('have.class', 'runnable-failed')
         cy.get('.reporter').contains('Studio cannot add commands to a failing test.').should('exist')
 
@@ -138,8 +133,7 @@ describe('studio ui', () => {
         },
         visitUrl: 'http://localhost:3500/foo',
         visitSuccess: false,
-      })
-      .then(() => {
+      }).then(() => {
         cy.get('.runner').find('.url').type('the://url')
         cy.get('.runner').find('.url-menu').find('.btn-submit').click()
 

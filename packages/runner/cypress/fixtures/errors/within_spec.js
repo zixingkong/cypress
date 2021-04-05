@@ -9,7 +9,7 @@ describe('cy.within', { defaultCommandTimeout: 0 }, () => {
 
   it('exception', () => {
     cy.get('body').within(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 

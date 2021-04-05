@@ -21,9 +21,11 @@ export const useFuzzySort = <T, R>({ search, items, transformResult, options }: 
     const promise = fuzzysort.goAsync(lastSearchInput, items, options)
 
     promise.then((result) => {
-      return setResults(result.map((res) => {
-        return transformResult(res.obj, res.indexes)
-      }))
+      return setResults(
+        result.map((res) => {
+          return transformResult(res.obj, res.indexes)
+        })
+      )
     })
 
     return () => {

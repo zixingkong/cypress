@@ -1,10 +1,11 @@
 body {
   background-color: #ddd;
   color: #555;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 h1 {
-  color: #48484B;
+  color: #48484b;
 }
 
 .wrapper {
@@ -16,13 +17,15 @@ h1 {
   text-align: center;
 }
 
-p, ul, a {
+p,
+ul,
+a {
   font-size: 18px;
   line-height: 27px;
 }
 
 a {
-  color: #0061AB;
+  color: #0061ab;
 }
 
 img {

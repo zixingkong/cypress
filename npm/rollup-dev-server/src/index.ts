@@ -24,7 +24,7 @@ export interface ResolvedDevServerConfig {
   server: Server
 }
 
-export async function startDevServer (startDevServerArgs: StartDevServer): Promise<ResolvedDevServerConfig> {
+export async function startDevServer(startDevServerArgs: StartDevServer): Promise<ResolvedDevServerConfig> {
   const { server, port } = await createDevServer(startDevServerArgs)
 
   return new Promise(async (resolve) => {

@@ -20,7 +20,9 @@
       }
     }
 
-    p, ul, ol {
+    p,
+    ul,
+    ol {
       font-size: 1.1em;
     }
 
@@ -44,7 +46,7 @@
     }
 
     ul li {
-      list-style: disc
+      list-style: disc;
     }
 
     ol li {
@@ -56,7 +58,7 @@
     cursor: default;
     margin: 5px 0 5px 5px;
     padding-left: 10px;
-    border-left: 1px dotted #DDD;
+    border-left: 1px dotted #ddd;
   }
 
   .studio-err-wrapper {
@@ -91,7 +93,7 @@
     .runnable-err-name {
       flex-grow: 2;
       font-size: 13px;
-      line-height: 22px;;
+      line-height: 22px;
 
       i {
         font-size: 10px;

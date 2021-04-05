@@ -10,12 +10,7 @@ import {
 
 const ROOT_ID = '__cy_root'
 
-const defaultOptions: (keyof MountOptions)[] = [
-  'vue',
-  'extensions',
-  'style',
-  'stylesheets',
-]
+const defaultOptions: (keyof MountOptions)[] = ['vue', 'extensions', 'style', 'stylesheets']
 
 const registerGlobalComponents = (Vue, options) => {
   const globalComponents = Cypress._.get(options, 'extensions.components')
@@ -28,10 +23,7 @@ const registerGlobalComponents = (Vue, options) => {
 }
 
 const installFilters = (Vue, options) => {
-  const filters: VueFilters | undefined = Cypress._.get(
-    options,
-    'extensions.filters',
-  )
+  const filters: VueFilters | undefined = Cypress._.get(options, 'extensions.filters')
 
   if (Cypress._.isPlainObject(filters)) {
     Object.keys(filters).forEach((name) => {
@@ -42,10 +34,10 @@ const installFilters = (Vue, options) => {
 
 const installPlugins = (Vue, options, props) => {
   const plugins: VuePlugins =
-      Cypress._.get(props, 'plugins') ||
-      Cypress._.get(options, 'extensions.use') ||
-      Cypress._.get(options, 'extensions.plugins') ||
-      []
+    Cypress._.get(props, 'plugins') ||
+    Cypress._.get(options, 'extensions.use') ||
+    Cypress._.get(options, 'extensions.plugins') ||
+    []
 
   // @ts-ignore
   plugins.forEach((p) => {
@@ -54,9 +46,7 @@ const installPlugins = (Vue, options, props) => {
 }
 
 const installMixins = (Vue, options) => {
-  const mixins =
-    Cypress._.get(options, 'extensions.mixin') ||
-    Cypress._.get(options, 'extensions.mixins')
+  const mixins = Cypress._.get(options, 'extensions.mixin') || Cypress._.get(options, 'extensions.mixins')
 
   if (Cypress._.isArray(mixins)) {
     mixins.forEach((mixin) => {
@@ -299,7 +289,7 @@ declare global {
  * @see https://vuejs.org/v2/api/#errorHandler
  * @see https://github.com/cypress-io/cypress/issues/7910
  */
-function failTestOnVueError (err, vm, info) {
+function failTestOnVueError(err, vm, info) {
   console.error(`Vue error`)
   console.error(err)
   console.error('component:', vm)
@@ -313,7 +303,7 @@ Cypress.on('run:start', () => {
   initialInnerHtml = document.head.innerHTML
 })
 
-function registerAutoDestroy ($destroy: () => void) {
+function registerAutoDestroy($destroy: () => void) {
   Cypress.on('test:before:run', () => {
     $destroy()
     document.head.innerHTML = initialInnerHtml
@@ -335,88 +325,79 @@ enableAutoDestroy(registerAutoDestroy)
  *    cy.get('#greeting').should('be.visible')
  *  })
  */
-export const mount = (
-  component: VueComponent,
-  optionsOrProps: MountOptionsArgument = {},
-) => {
-  const options: Partial<MountOptions> = Cypress._.pick(
-    optionsOrProps,
-    defaultOptions,
-  )
-  const props: Partial<ComponentOptions> = Cypress._.omit(
-    optionsOrProps,
-    defaultOptions,
-  )
+export const mount = (component: VueComponent, optionsOrProps: MountOptionsArgument = {}) => {
+  const options: Partial<MountOptions> = Cypress._.pick(optionsOrProps, defaultOptions)
+  const props: Partial<ComponentOptions> = Cypress._.omit(optionsOrProps, defaultOptions)
 
   return cy
-  .window({
-    log: false,
-  })
-  .then((win) => {
-    const localVue = createLocalVue()
+    .window({
+      log: false,
+    })
+    .then((win) => {
+      const localVue = createLocalVue()
 
-    // @ts-ignore
-    win.Vue = localVue
-    localVue.config.errorHandler = failTestOnVueError
-
-    // set global Vue instance:
-    // 1. convenience for debugging in DevTools
-    // 2. some libraries might check for this global
-    // appIframe.contentWindow.Vue = localVue
-
-    // refresh inner Vue instance of Vuex store
-    // @ts-ignore
-    if (hasStore(component)) {
       // @ts-ignore
-      component.store = resetStoreVM(localVue, component)
-    }
+      win.Vue = localVue
+      localVue.config.errorHandler = failTestOnVueError
 
-    // @ts-ignore
-    const document: Document = cy.state('document')
+      // set global Vue instance:
+      // 1. convenience for debugging in DevTools
+      // 2. some libraries might check for this global
+      // appIframe.contentWindow.Vue = localVue
 
-    let el = document.getElementById(ROOT_ID)
+      // refresh inner Vue instance of Vuex store
+      // @ts-ignore
+      if (hasStore(component)) {
+        // @ts-ignore
+        component.store = resetStoreVM(localVue, component)
+      }
 
-    if (typeof options.stylesheets === 'string') {
-      options.stylesheets = [options.stylesheets]
-    }
+      // @ts-ignore
+      const document: Document = cy.state('document')
 
-    if (Array.isArray(options.stylesheets)) {
-      options.stylesheets.forEach((href) => {
-        const link = document.createElement('link')
+      let el = document.getElementById(ROOT_ID)
 
-        link.type = 'text/css'
-        link.rel = 'stylesheet'
-        link.href = href
-        el.append(link)
-      })
-    }
+      if (typeof options.stylesheets === 'string') {
+        options.stylesheets = [options.stylesheets]
+      }
 
-    if (options.style) {
-      const style = document.createElement('style')
+      if (Array.isArray(options.stylesheets)) {
+        options.stylesheets.forEach((href) => {
+          const link = document.createElement('link')
 
-      style.appendChild(document.createTextNode(options.style))
-      el.append(style)
-    }
+          link.type = 'text/css'
+          link.rel = 'stylesheet'
+          link.href = href
+          el.append(link)
+        })
+      }
 
-    const componentNode = document.createElement('div')
+      if (options.style) {
+        const style = document.createElement('style')
 
-    el.append(componentNode)
+        style.appendChild(document.createTextNode(options.style))
+        el.append(style)
+      }
 
-    // setup Vue instance
-    installFilters(localVue, options)
-    installMixins(localVue, options)
-    installPlugins(localVue, options, props)
-    registerGlobalComponents(localVue, options)
+      const componentNode = document.createElement('div')
 
-    props.attachTo = componentNode
+      el.append(componentNode)
 
-    const wrapper = localVue.extend(component as any)
+      // setup Vue instance
+      installFilters(localVue, options)
+      installMixins(localVue, options)
+      installPlugins(localVue, options, props)
+      registerGlobalComponents(localVue, options)
 
-    const VTUWrapper = testUtilsMount(wrapper, { localVue, ...props })
+      props.attachTo = componentNode
 
-    Cypress.vue = VTUWrapper.vm
-    Cypress.vueWrapper = VTUWrapper
-  })
+      const wrapper = localVue.extend(component as any)
+
+      const VTUWrapper = testUtilsMount(wrapper, { localVue, ...props })
+
+      Cypress.vue = VTUWrapper.vm
+      Cypress.vueWrapper = VTUWrapper
+    })
 }
 
 /**
@@ -425,9 +406,6 @@ export const mount = (
  *  import {mountCallback} from '@cypress/vue'
  *  beforeEach(mountVue(component, options))
  */
-export const mountCallback = (
-  component: VueComponent,
-  options?: MountOptionsArgument,
-) => {
+export const mountCallback = (component: VueComponent, options?: MountOptionsArgument) => {
   return () => mount(component, options)
 }

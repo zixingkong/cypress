@@ -21,15 +21,18 @@ import { CypressIncomingRequest } from '@packages/proxy'
 
 const debug = Debug('cypress:net-stubbing:server:util')
 
-export function emit (socket: CyServer.Socket, eventName: string, data: object) {
+export function emit(socket: CyServer.Socket, eventName: string, data: object) {
   if (debug.enabled) {
-    debug('sending event to driver %o', { eventName, data: _.chain(data).cloneDeep().omit('res.body').value() })
+    debug('sending event to driver %o', {
+      eventName,
+      data: _.chain(data).cloneDeep().omit('res.body').value(),
+    })
   }
 
   socket.toDriver('net:event', eventName, data)
 }
 
-export function getAllStringMatcherFields (options: RouteMatcherOptionsGeneric<any>) {
+export function getAllStringMatcherFields(options: RouteMatcherOptionsGeneric<any>) {
   return _.concat(
     _.filter(STRING_MATCHER_FIELDS, _.partial(_.has, options)),
     // add the nested DictStringMatcher values to the list of fields
@@ -45,9 +48,9 @@ export function getAllStringMatcherFields (options: RouteMatcherOptionsGeneric<a
           }
 
           return ''
-        }),
-      ),
-    ),
+        })
+      )
+    )
   )
 }
 
@@ -57,14 +60,14 @@ export function getAllStringMatcherFields (options: RouteMatcherOptionsGeneric<a
  * generating an IncomingMessage allows us to treat the response the same as any other "real"
  * HTTP response, which means the proxy layer can apply response middleware to it.
  */
-function _getFakeClientResponse (opts: {
+function _getFakeClientResponse(opts: {
   statusCode: number
   headers: {
     [k: string]: string
   }
   body: string
 }) {
-  const clientResponse = new IncomingMessage(new Socket)
+  const clientResponse = new IncomingMessage(new Socket())
 
   // be nice and infer this content-type for the user
   if (!caseInsensitiveGet(opts.headers || {}, 'content-type') && isHtml(opts.body)) {
@@ -94,7 +97,7 @@ const caseInsensitiveHas = function (obj, lowercaseProperty) {
   return false
 }
 
-export function setDefaultHeaders (req: CypressIncomingRequest, res: IncomingMessage) {
+export function setDefaultHeaders(req: CypressIncomingRequest, res: IncomingMessage) {
   const setDefaultHeader = (lowercaseHeader: string, defaultValueFn: () => string) => {
     if (!caseInsensitiveHas(res.headers, lowercaseHeader)) {
       res.headers[lowercaseHeader] = defaultValueFn()
@@ -105,14 +108,16 @@ export function setDefaultHeaders (req: CypressIncomingRequest, res: IncomingMes
   setDefaultHeader('access-control-allow-credentials', _.constant('true'))
 }
 
-export async function setResponseFromFixture (getFixtureFn: GetFixtureFn, staticResponse: BackendStaticResponse) {
+export async function setResponseFromFixture(getFixtureFn: GetFixtureFn, staticResponse: BackendStaticResponse) {
   const { fixture } = staticResponse
 
   if (!fixture) {
     return
   }
 
-  const data = await getFixtureFn(fixture.filePath, { encoding: fixture.encoding || null })
+  const data = await getFixtureFn(fixture.filePath, {
+    encoding: fixture.encoding || null,
+  })
 
   const { headers } = staticResponse
 
@@ -123,7 +128,7 @@ export async function setResponseFromFixture (getFixtureFn: GetFixtureFn, static
     _.set(staticResponse, 'headers.content-type', mimeType)
   }
 
-  function getBody (): string {
+  function getBody(): string {
     // NOTE: for backwards compatibility with cy.route
     if (data === null) {
       return JSON.stringify('')
@@ -145,7 +150,10 @@ export async function setResponseFromFixture (getFixtureFn: GetFixtureFn, static
  * @param backendRequest BackendRequest object.
  * @param staticResponse BackendStaticResponse object.
  */
-export function sendStaticResponse (backendRequest: Pick<BackendRequest, 'onError' | 'onResponse'>, staticResponse: BackendStaticResponse) {
+export function sendStaticResponse(
+  backendRequest: Pick<BackendRequest, 'onError' | 'onResponse'>,
+  staticResponse: BackendStaticResponse
+) {
   const { onError, onResponse } = backendRequest
 
   if (staticResponse.forceNetworkError) {
@@ -170,7 +178,10 @@ export function sendStaticResponse (backendRequest: Pick<BackendRequest, 'onErro
   onResponse!(incomingRes, bodyStream)
 }
 
-export function getBodyStream (body: Buffer | string | Readable | undefined, options: { delay?: number, throttleKbps?: number }): Readable {
+export function getBodyStream(
+  body: Buffer | string | Readable | undefined,
+  options: { delay?: number; throttleKbps?: number }
+): Readable {
   const { delay, throttleKbps } = options
   const pt = new PassThrough()
 

@@ -1,5 +1,5 @@
 ---
-name: "⬇️ Issue during install"
+name: '⬇️ Issue during install'
 about: Report an issue while downloading Cypress.
 title: ''
 labels: 'topic: installation'
@@ -13,14 +13,17 @@ Have a question? Start a new discussion 👉 https://github.com/cypress-io/cypre
 Fill in as much info as possible. As an open source project with a small maintainer team, it may take some time for your issue to be addressed. Please be patient and we will respond as soon as we can. 🙏 -->
 
 ### Current behavior
+
 <!-- A description including screenshots, stack traces, etc. -->
 
 ### Debug logs
+
 <!-- Include DEBUG logs setting `DEBUG=cypress:*` 👉 https://on.cypress.io/troubleshooting#Print-DEBUG-logs -->
 
 <!-- Include npm/yarn logs if applicable -->
 
 ### Download method
+
  <!-- Add version number if applicable -->
 
 - [ ] npm
@@ -29,6 +32,7 @@ Fill in as much info as possible. As an open source project with a small maintai
 - [ ] other <!--Please specify-->
 
 ### Operating System
+
  <!-- Add version number if applicable -->
 
 - [ ] Linux

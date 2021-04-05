@@ -3,14 +3,14 @@
 $box-shadow-closest: 0px 0px 5px rgba(0, 0, 0, 0.4);
 
 .app {
-    display: flex;
-    background: white;
+  display: flex;
+  background: white;
 }
 
 .appWrapper {
-    position: relative;
-    height: 100vh;
-    width: 100%;
+  position: relative;
+  height: 100vh;
+  width: 100%;
 }
 
 .appWrapperScreenshotting {
@@ -85,7 +85,7 @@ $box-shadow-closest: 0px 0px 5px rgba(0, 0, 0, 0.4);
       margin-right: 4px;
       border: none;
       background-color: transparent;
-      transition: transform .3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
 
       &.ctTogglePluginsSectionButtonOpen {
         will-change: transform;
@@ -104,7 +104,7 @@ $box-shadow-closest: 0px 0px 5px rgba(0, 0, 0, 0.4);
       justify-content: space-between;
       align-items: center;
       padding: 0 16px;
-      transition: border-bottom-color .3s ease-in-out;
+      transition: border-bottom-color 0.3s ease-in-out;
 
       :focus {
         outline: none;

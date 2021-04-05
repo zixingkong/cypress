@@ -44,9 +44,7 @@ describe('webpack-file install template', () => {
       }),
     })
 
-    const { success, payload } = WebpackTemplate.test(
-      'i/am/in/some/deep/folder',
-    )
+    const { success, payload } = WebpackTemplate.test('i/am/in/some/deep/folder')
 
     expect(success).to.equal(true)
     expect(payload?.webpackConfigPath).to.equal('/somewhere/configs/webpack.js')
@@ -69,6 +67,8 @@ describe('webpack-file install template', () => {
   })
 
   it('correctly generates plugins config when webpack config path is provided', () => {
-    snapshotPluginsAstCode(WebpackTemplate, { webpackConfigPath: '/config/webpack.config.js' })
+    snapshotPluginsAstCode(WebpackTemplate, {
+      webpackConfigPath: '/config/webpack.config.js',
+    })
   })
 })

@@ -144,9 +144,7 @@ describe('util', () => {
 
     it('converts specs array', () => {
       const options = {
-        spec: [
-          'a', 'b', 'c',
-        ],
+        spec: ['a', 'b', 'c'],
       }
 
       snapshot('spec_as_array 1', normalizeModuleOptions(options))
@@ -266,18 +264,20 @@ describe('util', () => {
     })
 
     it('does not return if dev is set and version < 12', () => {
-      expect(util.getNodeOptions({
-        dev: true,
-      }, 11)).to.be.undefined
+      expect(
+        util.getNodeOptions(
+          {
+            dev: true,
+          },
+          11
+        )
+      ).to.be.undefined
     })
   })
 
   context('.getForceTty', () => {
     it('forces when each stream is a tty', () => {
-      sinon.stub(tty, 'isatty')
-      .withArgs(0).returns(true)
-      .withArgs(1).returns(true)
-      .withArgs(2).returns(true)
+      sinon.stub(tty, 'isatty').withArgs(0).returns(true).withArgs(1).returns(true).withArgs(2).returns(true)
 
       expect(util.getForceTty()).to.deep.eq({
         FORCE_STDIN_TTY: true,
@@ -285,10 +285,7 @@ describe('util', () => {
         FORCE_STDERR_TTY: true,
       })
 
-      tty.isatty
-      .withArgs(0).returns(false)
-      .withArgs(1).returns(false)
-      .withArgs(2).returns(false)
+      tty.isatty.withArgs(0).returns(false).withArgs(1).returns(false).withArgs(2).returns(false)
 
       expect(util.getForceTty()).to.deep.eq({
         FORCE_STDIN_TTY: false,
@@ -416,8 +413,7 @@ describe('util', () => {
     it('calls os.release on non-linux', () => {
       os.platform.returns('darwin')
       os.release.returns('some-release')
-      util.getOsVersionAsync()
-      .then(() => {
+      util.getOsVersionAsync().then(() => {
         expect(os.release).to.be.called
         expect(getos).to.not.be.called
       })
@@ -425,8 +421,7 @@ describe('util', () => {
 
     it('NOT calls os.release on linux', () => {
       os.platform.returns('linux')
-      util.getOsVersionAsync()
-      .then(() => {
+      util.getOsVersionAsync().then(() => {
         expect(os.release).to.not.be.called
         expect(getos).to.be.called
       })
@@ -439,7 +434,7 @@ describe('util', () => {
     })
 
     it('keeps single quotes', () => {
-      expect(util.dequote('\'foo\'')).to.equal('\'foo\'')
+      expect(util.dequote("'foo'")).to.equal("'foo'")
     })
 
     it('keeps unbalanced double quotes', () => {
@@ -481,7 +476,7 @@ describe('util', () => {
       expect(util.getEnv('CYPRESS_FOO')).to.eql('bar')
     })
 
-    it('prefers env var over .npmrc config even if it\'s an empty string', () => {
+    it("prefers env var over .npmrc config even if it's an empty string", () => {
       process.env.CYPRESS_FOO = ''
       process.env.npm_config_CYPRESS_FOO = 'baz'
       expect(util.getEnv('CYPRESS_FOO')).to.eql('')
@@ -493,7 +488,7 @@ describe('util', () => {
       expect(util.getEnv('CYPRESS_FOO')).to.eql('bloop')
     })
 
-    it('prefers .npmrc config over package config even if it\'s an empty string', () => {
+    it("prefers .npmrc config over package config even if it's an empty string", () => {
       process.env.npm_package_config_CYPRESS_FOO = 'baz'
       process.env.npm_config_CYPRESS_FOO = ''
       expect(util.getEnv('CYPRESS_FOO')).to.eql('')
@@ -531,8 +526,8 @@ describe('util', () => {
       })
 
       it('trims but does not remove single quotes', () => {
-        process.env.FOO = '  \'bar\'  '
-        expect(util.getEnv('FOO', true)).to.equal('\'bar\'')
+        process.env.FOO = "  'bar'  "
+        expect(util.getEnv('FOO', true)).to.equal("'bar'")
       })
 
       it('keeps whitespace inside removed quotes', () => {
@@ -544,13 +539,17 @@ describe('util', () => {
 
   context('.getFileChecksum', () => {
     it('computes same hash as Hasha SHA512', () => {
-      return Promise.all([
-        util.getFileChecksum(__filename),
-        hasha.fromFile(__filename, { algorithm: 'sha512' }),
-      ]).then(([checksum, expectedChecksum]) => {
-        la(checksum === expectedChecksum, 'our computed checksum', checksum,
-          'is different from expected', expectedChecksum)
-      })
+      return Promise.all([util.getFileChecksum(__filename), hasha.fromFile(__filename, { algorithm: 'sha512' })]).then(
+        ([checksum, expectedChecksum]) => {
+          la(
+            checksum === expectedChecksum,
+            'our computed checksum',
+            checksum,
+            'is different from expected',
+            expectedChecksum
+          )
+        }
+      )
     })
   })
 

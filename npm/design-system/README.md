@@ -21,6 +21,7 @@ Let the surfaces honor accepted standards so everyone can use them.
 Let the surfaces be appropriate for the job to be done. Favor consistency over novelty, but not at the cost of functionality.
 
 ## Usage
+
 The components work with or without the global stylesheet import. The stylesheet import is used to setup global scss tokens, colors, utility classes, and typography.
 
 Component Usage:
@@ -46,13 +47,15 @@ SCSS usage:
 ```
 
 ## Development
+
 We are currently using:
-* CSS Modules for styling
-* TSX for components
-* SCSS with module support
-* Rollup to bundle
-* Cypress CT as a development environment
-* Webpack is required for Cypress CT but will soon be replaced by a rollup dev server
+
+- CSS Modules for styling
+- TSX for components
+- SCSS with module support
+- Rollup to bundle
+- Cypress CT as a development environment
+- Webpack is required for Cypress CT but will soon be replaced by a rollup dev server
 
 #### Developing locally
 
@@ -71,6 +74,7 @@ TODO: Add netlify site support and static app wrapper
 `yarn cy:run`
 
 ## TODO
+
 1. Deploy a static page demo-ing the design system
 2. Import the first component inside of RunnerCT
 3. Hook up tests to circle

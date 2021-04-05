@@ -1,11 +1,9 @@
-export function setupHooks (unmount: (opts: { log: boolean }) => void) {
+export function setupHooks(unmount: (opts: { log: boolean }) => void) {
   // When running component specs, we cannot allow "cy.visit"
   // because it will wipe out our preparation work, and does not make much sense
   // thus we overwrite "cy.visit" to throw an error
   Cypress.Commands.overwrite('visit', () => {
-    throw new Error(
-      'cy.visit from a component spec is not allowed',
-    )
+    throw new Error('cy.visit from a component spec is not allowed')
   })
 
   /**
@@ -13,7 +11,7 @@ export function setupHooks (unmount: (opts: { log: boolean }) => void) {
    * left from any previous test
    *
    */
-  function cleanupStyles () {
+  function cleanupStyles() {
     const styles = document.body.querySelectorAll('style')
 
     styles.forEach((styleElement) => {

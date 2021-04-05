@@ -23,9 +23,11 @@ const debug = Debug('cypress:server:browsers:firefox')
 // this should cover most/all file types, but if it's necessary to
 // discover more, open Firefox DevTools, download the file yourself
 // and observe the Response Headers content-type in the Network tab
-const downloadMimeTypes = Object.keys(mimeDb).filter((mimeType) => {
-  return mimeDb[mimeType].extensions?.length
-}).join(',')
+const downloadMimeTypes = Object.keys(mimeDb)
+  .filter((mimeType) => {
+    return mimeDb[mimeType].extensions?.length
+  })
+  .join(',')
 
 const defaultPreferences = {
   /**
@@ -273,8 +275,8 @@ const defaultPreferences = {
   'dom.report_all_js_exceptions': true,
   'network.captive-portal-service.enabled': false,
   'security.csp.enable': false,
-  'webdriver_accept_untrusted_certs': true,
-  'webdriver_assume_untrusted_issuer': true,
+  webdriver_accept_untrusted_certs: true,
+  webdriver_assume_untrusted_issuer: true,
   'toolkit.legacyUserProfileCustomizations.stylesheets': true,
 
   // setting to true hides system window bar, but causes weird resizing issues.
@@ -294,7 +296,7 @@ const defaultPreferences = {
   'dom.timeout.enable_budget_timer_throttling': false,
 
   // allow getUserMedia APIs on insecure domains
-  'media.devices.insecure.enabled':	true,
+  'media.devices.insecure.enabled': true,
   'media.getusermedia.insecure.enabled': true,
 
   'marionette.log.level': launcherDebug.log.enabled ? 'Debug' : undefined,
@@ -339,7 +341,7 @@ toolbar {
 
 `
 
-export function _createDetachedInstance (browserInstance: BrowserInstance): BrowserInstance {
+export function _createDetachedInstance(browserInstance: BrowserInstance): BrowserInstance {
   const detachedInstance: BrowserInstance = new EventEmitter() as BrowserInstance
 
   detachedInstance.pid = browserInstance.pid
@@ -355,7 +357,7 @@ export function _createDetachedInstance (browserInstance: BrowserInstance): Brow
   return detachedInstance
 }
 
-export async function open (browser: Browser, url, options: any = {}): Promise<BrowserInstance> {
+export async function open(browser: Browser, url, options: any = {}): Promise<BrowserInstance> {
   const defaultLaunchOptions = utils.getDefaultLaunchOptions({
     extensions: [] as string[],
     preferences: _.extend({}, defaultPreferences),
@@ -404,21 +406,14 @@ export async function open (browser: Browser, url, options: any = {}): Promise<B
     defaultLaunchOptions.preferences['general.useragent.override'] = ua
   }
 
-  const [
-    foxdriverPort,
-    marionettePort,
-  ] = await Bluebird.all([getPort(), getPort()])
+  const [foxdriverPort, marionettePort] = await Bluebird.all([getPort(), getPort()])
 
   defaultLaunchOptions.preferences['devtools.debugger.remote-port'] = foxdriverPort
   defaultLaunchOptions.preferences['marionette.port'] = marionettePort
 
   debug('available ports: %o', { foxdriverPort, marionettePort })
 
-  const [
-    cacheDir,
-    extensionDest,
-    launchOptions,
-  ] = await Bluebird.all([
+  const [cacheDir, extensionDest, launchOptions] = await Bluebird.all([
     utils.ensureCleanCache(browser, options.isTextTerminal),
     utils.writeExtension(browser, options.isTextTerminal, options.proxyUrl, options.socketIoRoute),
     utils.executeBeforeBrowserLaunch(browser, defaultLaunchOptions, options),
@@ -436,18 +431,26 @@ export async function open (browser: Browser, url, options: any = {}): Promise<B
     destinationDirectory: profileDir,
   })
 
-  debug('firefox directories %o', { path: profile.path(), cacheDir, extensionDest })
+  debug('firefox directories %o', {
+    path: profile.path(),
+    cacheDir,
+    extensionDest,
+  })
 
   const xulStorePath = path.join(profile.path(), 'xulstore.json')
 
   // if user has set custom window.sizemode pref or it's the first time launching on this profile, write to xulStore.
-  if (!await fs.pathExists(xulStorePath)) {
+  if (!(await fs.pathExists(xulStorePath))) {
     // this causes the browser to launch maximized, which chrome does by default
     // otherwise an arbitrary size will be picked for the window size
     // this will not have an effect after first launch in 'interactive' mode
     const sizemode = 'maximized'
 
-    await fs.writeJSON(xulStorePath, { 'chrome://browser/content/browser.xhtml': { 'main-window': { 'width': 1280, 'height': 1024, sizemode } } })
+    await fs.writeJSON(xulStorePath, {
+      'chrome://browser/content/browser.xhtml': {
+        'main-window': { width: 1280, height: 1024, sizemode },
+      },
+    })
   }
 
   launchOptions.preferences['browser.cache.disk.parent_directory'] = cacheDir
@@ -462,7 +465,7 @@ export async function open (browser: Browser, url, options: any = {}): Promise<B
 
   const userCSSPath = path.join(profileDir, 'chrome')
 
-  if (!await fs.pathExists(path.join(userCSSPath, 'userChrome.css'))) {
+  if (!(await fs.pathExists(path.join(userCSSPath, 'userChrome.css')))) {
     try {
       await fs.mkdir(userCSSPath)
     } catch {
@@ -483,10 +486,7 @@ export async function open (browser: Browser, url, options: any = {}): Promise<B
     await fs.writeFile(path.join(profileDir, 'chrome', 'userChrome.css'), userCss)
   }
 
-  launchOptions.args = launchOptions.args.concat([
-    '-profile',
-    profile.path(),
-  ])
+  launchOptions.args = launchOptions.args.concat(['-profile', profile.path()])
 
   debug('launch in firefox', { url, args: launchOptions.args })
 
@@ -497,10 +497,16 @@ export async function open (browser: Browser, url, options: any = {}): Promise<B
     MOZ_HEADLESS_HEIGHT: '1081',
   })
 
-  await firefoxUtil.setup({ extensions: launchOptions.extensions, url, foxdriverPort, marionettePort })
-  .catch((err) => {
-    errors.throw('FIREFOX_COULD_NOT_CONNECT', err)
-  })
+  await firefoxUtil
+    .setup({
+      extensions: launchOptions.extensions,
+      url,
+      foxdriverPort,
+      marionettePort,
+    })
+    .catch((err) => {
+      errors.throw('FIREFOX_COULD_NOT_CONNECT', err)
+    })
 
   if (os.platform() === 'win32') {
     // override the .kill method for Windows so that the detached Firefox process closes between specs

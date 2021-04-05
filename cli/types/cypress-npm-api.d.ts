@@ -37,7 +37,7 @@ declare namespace CypressCommandLine {
   interface CypressRunOptions extends CypressCommonOptions {
     /**
      * Specify different browser to run tests in, either by name or by filesystem path
-    */
+     */
     browser: string
     /**
      * Specify a unique identifier for a run to enable grouping or parallelization
@@ -170,7 +170,7 @@ declare namespace CypressCommandLine {
     title: string[]
     state: string
     body: string
-     /**
+    /**
      * Error string as it's presented in console if the test fails
      */
     displayError: string | null
@@ -188,7 +188,7 @@ declare namespace CypressCommandLine {
 
   /**
    * Information about a single "before", "beforeEach", "afterEach" and "after" hook.
-  */
+   */
   interface HookInformation {
     hookName: HookName
     title: string[]
@@ -211,7 +211,7 @@ declare namespace CypressCommandLine {
 
   /**
    * Cypress test run result for a single spec.
-  */
+   */
   interface RunResult {
     /**
      * Accurate test results collected by Cypress.
@@ -242,7 +242,7 @@ declare namespace CypressCommandLine {
     video: string | null
     /**
      * information about the spec test file.
-    */
+     */
     spec: {
       /**
        * filename like "spec.js"
@@ -250,7 +250,7 @@ declare namespace CypressCommandLine {
       name: string
       /**
        * name relative to the project root, like "cypress/integration/spec.js"
-      */
+       */
       relative: string
       /**
        * resolved filename of the spec
@@ -359,7 +359,9 @@ declare module 'cypress' {
      })
      ```
      */
-    run(options?: Partial<CypressCommandLine.CypressRunOptions>): Promise<CypressCommandLine.CypressRunResult | CypressCommandLine.CypressFailedRunResult>
+    run(
+      options?: Partial<CypressCommandLine.CypressRunOptions>
+    ): Promise<CypressCommandLine.CypressRunResult | CypressCommandLine.CypressFailedRunResult>
     /**
      * Opens Cypress GUI. Resolves with void when the
      * GUI is closed.

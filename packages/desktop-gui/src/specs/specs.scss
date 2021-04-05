@@ -87,7 +87,8 @@ $max-nesting-level: 14;
     font-size: 13px;
     color: #637eb9;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: #38589c;
       text-decoration: none;
     }
@@ -126,7 +127,8 @@ $max-nesting-level: 14;
     overflow: auto;
   }
 
-  .file, .folder {
+  .file,
+  .folder {
     .file-name,
     .folder-name {
       display: flex;
@@ -157,9 +159,9 @@ $max-nesting-level: 14;
     font-family: $font-sans;
 
     &.level-0 {
-      >div>.folder-name {
+      > div > .folder-name {
         padding: 5px 10px 5px 20px;
-        background-color: #F9F9F9;
+        background-color: #f9f9f9;
         font-weight: normal;
         text-transform: uppercase;
         border-bottom: 1px solid #eee;
@@ -194,10 +196,11 @@ $max-nesting-level: 14;
     display: flex;
 
     &.active {
-      background-color: #F5FBF7;
+      background-color: #f5fbf7;
 
-      &:hover, &:focus {
-        background-color: #F5FBF7;
+      &:hover,
+      &:focus {
+        background-color: #f5fbf7;
       }
 
       > .file-name-wrapper {
@@ -211,18 +214,21 @@ $max-nesting-level: 14;
       animation: 3s ease-in-out 1 new-spec-highlight;
 
       @keyframes new-spec-highlight {
-        0%, 100% {
+        0%,
+        100% {
           background-color: inherit;
           color: inherit;
         }
 
-        40%, 60% {
+        40%,
+        60% {
           background-color: #cdedff;
         }
       }
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: #f8f8f8;
       cursor: pointer;
 
@@ -239,7 +245,8 @@ $max-nesting-level: 14;
       font-weight: 400;
       padding: 4px 0;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: #38589c;
         text-decoration: none;
       }
@@ -261,12 +268,12 @@ $max-nesting-level: 14;
     }
   }
 
-  .list-as-table>.file {
-    &>div:first-child {
+  .list-as-table > .file {
+    & > div:first-child {
       @include responsive-width(75%);
     }
 
-    &>div:last-child {
+    & > div:last-child {
       @include responsive-width(25%);
       text-align: right;
       color: #bdc0c5;

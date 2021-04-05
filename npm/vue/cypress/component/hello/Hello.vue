@@ -4,11 +4,11 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      greeting: 'Hello'
+      greeting: 'Hello',
     }
-  }
+  },
 }
 </script>
 

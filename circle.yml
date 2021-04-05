@@ -21,7 +21,7 @@ defaults: &defaults
   executor: <<parameters.executor>>
   environment:
     ## set specific timezone
-    TZ: "/usr/share/zoneinfo/America/New_York"
+    TZ: '/usr/share/zoneinfo/America/New_York'
 
     ## store artifacts here
     CIRCLE_ARTIFACTS: /tmp/artifacts
@@ -69,7 +69,7 @@ executors:
   mac:
     macos:
       # Executor should have Node >= required version
-      xcode: "11.3.1"
+      xcode: '11.3.1'
     environment:
       PLATFORM: mac
 
@@ -103,7 +103,7 @@ commands:
     description: Install latest Google Chrome (stable)
     parameters:
       browser:
-        default: "electron"
+        default: 'electron'
         description: browser shortname to target
         type: string
     steps:
@@ -270,13 +270,13 @@ commands:
       Clones an external repo and then checks out the branch that matches the next version otherwise uses 'master' branch.
     parameters:
       repo:
-        description: "Name of the github repo to clone like: cypress-example-kitchensink"
+        description: 'Name of the github repo to clone like: cypress-example-kitchensink'
         type: string
     steps:
       - attach_workspace:
           at: ~/
       - run:
-          name: "Cloning test project: <<parameters.repo>>"
+          name: 'Cloning test project: <<parameters.repo>>'
           command: |
             git clone --depth 1 --no-single-branch https://github.com/cypress-io/<<parameters.repo>>.git /tmp/<<parameters.repo>>
             cd /tmp/<<parameters.repo>> && (git checkout $(node ./scripts/get-next-version) || true)
@@ -287,24 +287,24 @@ commands:
       and runs the new version of Cypress against it.
     parameters:
       repo:
-        description: "Name of the github repo to clone like"
+        description: 'Name of the github repo to clone like'
         type: string
-        default: "cypress-realworld-app"
+        default: 'cypress-realworld-app'
       browser:
         description: Name of the browser to use, like "electron", "chrome", "firefox"
         type: enum
-        enum: ["", "electron", "chrome", "firefox"]
-        default: ""
+        enum: ['', 'electron', 'chrome', 'firefox']
+        default: ''
       command:
         description: Test command to run to start Cypress tests
         type: string
-        default: "yarn cypress:run"
+        default: 'yarn cypress:run'
       # if the repo to clone and test is a monorepo, you can
       # run tests inside a specific subfolder
       folder:
         description: Subfolder to test in
         type: string
-        default: ""
+        default: ''
       # you can test new features in the test runner against recipes or other repos
       # by opening a pull request in those repos and running this test job
       # against a pull request number in the example repo
@@ -315,11 +315,11 @@ commands:
       wait-on:
         description: Whether to use wait-on to wait on a server to be booted
         type: string
-        default: ""
+        default: ''
       server-start-command:
         description: Server start command for repo
         type: string
-        default: "CI=true yarn start"
+        default: 'CI=true yarn start'
     steps:
       - attach_workspace:
           at: ~/
@@ -361,8 +361,8 @@ commands:
           background: true
       - run:
           condition: <<parameters.wait-on>>
-          name: "Waiting on server to boot: <<parameters.wait-on>>"
-          command: "npx wait-on <<parameters.wait-on>>"
+          name: 'Waiting on server to boot: <<parameters.wait-on>>'
+          command: 'npx wait-on <<parameters.wait-on>>'
       - when:
           condition: <<parameters.folder>>
           steps:
@@ -419,17 +419,17 @@ commands:
       and runs the new version of Cypress against it.
     parameters:
       repo:
-        description: "Name of the github repo to clone like: cypress-example-kitchensink"
+        description: 'Name of the github repo to clone like: cypress-example-kitchensink'
         type: string
       browser:
         description: Name of the browser to use, like "electron", "chrome", "firefox"
         type: enum
-        enum: ["", "electron", "chrome", "firefox"]
-        default: ""
+        enum: ['', 'electron', 'chrome', 'firefox']
+        default: ''
       command:
         description: Test command to run to start Cypress tests
         type: string
-        default: "npm run e2e"
+        default: 'npm run e2e'
       build-project:
         description: Should the project build script be executed
         type: boolean
@@ -439,7 +439,7 @@ commands:
       folder:
         description: Subfolder to test in
         type: string
-        default: ""
+        default: ''
       # you can test new features in the test runner against recipes or other repos
       # by opening a pull request in those repos and running this test job
       # against a pull request number in the example repo
@@ -450,11 +450,11 @@ commands:
       wait-on:
         description: Whether to use wait-on to wait on a server to be booted
         type: string
-        default: ""
+        default: ''
       server-start-command:
         description: Server start command for repo
         type: string
-        default: "npm start --if-present"
+        default: 'npm start --if-present'
     steps:
       - attach_workspace:
           at: ~/
@@ -496,19 +496,19 @@ commands:
       - when:
           condition: <<parameters.build-project>>
           steps:
-          - run:
-              name: Build 🏗 (maybe)
-              working_directory: /tmp/<<parameters.repo>>
-              command: |
-                [[ -f yarn.lock ]] && yarn build || npm run build --if-present
+            - run:
+                name: Build 🏗 (maybe)
+                working_directory: /tmp/<<parameters.repo>>
+                command: |
+                  [[ -f yarn.lock ]] && yarn build || npm run build --if-present
       - run:
           working_directory: /tmp/<<parameters.repo>>
           command: <<parameters.server-start-command>>
           background: true
       - run:
           condition: <<parameters.wait-on>>
-          name: "Waiting on server to boot: <<parameters.wait-on>>"
-          command: "npx wait-on <<parameters.wait-on>> --timeout 120000"
+          name: 'Waiting on server to boot: <<parameters.wait-on>>'
+          command: 'npx wait-on <<parameters.wait-on>> --timeout 120000'
       - when:
           condition: <<parameters.folder>>
           steps:
@@ -567,7 +567,7 @@ commands:
         type: string
     steps:
       - run:
-          name: "Waiting on Circle CI jobs: <<parameters.job-names>>"
+          name: 'Waiting on Circle CI jobs: <<parameters.job-names>>'
           command: node ./scripts/wait-on-circle-jobs.js --job-names="<<parameters.job-names>>"
   build-binary:
     steps:
@@ -602,7 +602,7 @@ commands:
           environment:
             DEBUG: electron-builder,electron-osx-sign*
           # notarization on Mac can take a while
-          no_output_timeout: "45m"
+          no_output_timeout: '45m'
           command: |
             . ./scripts/load-nvm.sh
             node --version
@@ -879,10 +879,10 @@ jobs:
           command: ls -la chai
           working_directory: cli/types
       - run:
-          name: "Lint types 🧹"
+          name: 'Lint types 🧹'
           command: yarn workspace cypress dtslint
       - run:
-          name: "TypeScript check 🧩"
+          name: 'TypeScript check 🧩'
           command: yarn type-check --ignore-progress
       - store-npm-logs
 
@@ -1036,7 +1036,6 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts
       - store-npm-logs
-
 
   desktop-gui-component-tests:
     <<: *defaults
@@ -1222,7 +1221,6 @@ jobs:
           working_directory: npm/design-system
       - store-npm-logs
 
-
   npm-react:
     <<: *defaults
     parallelism: 8
@@ -1244,7 +1242,6 @@ jobs:
       - store_artifacts:
           path: npm/react/test_results
       - store-npm-logs
-
 
   npm-create-cypress-tests:
     <<: *defaults
@@ -1319,7 +1316,7 @@ jobs:
           path: /tmp/cypress-example-kitchensink/cypress/videos
       - store-npm-logs
 
-  "test-kitchensink-against-staging":
+  'test-kitchensink-against-staging':
     <<: *defaults
     steps:
       - clone-repo-and-checkout-release-branch:
@@ -1343,7 +1340,7 @@ jobs:
             yarn cypress:run --project /tmp/cypress-example-kitchensink --record
       - store-npm-logs
 
-  "test-against-staging":
+  'test-against-staging':
     <<: *defaults
     steps:
       - clone-repo-and-checkout-release-branch:
@@ -1357,7 +1354,7 @@ jobs:
             yarn cypress:run --project /tmp/cypress-test-tiny --record
       - store-npm-logs
 
-  "test-binary-and-npm-against-other-projects":
+  'test-binary-and-npm-against-other-projects':
     <<: *defaults
     steps:
       # needs uploaded NPM and test binary
@@ -1394,7 +1391,7 @@ jobs:
               --provider circle
       - store-npm-logs
 
-  "test-npm-module-and-verify-binary":
+  'test-npm-module-and-verify-binary':
     <<: *defaults
     steps:
       - attach_workspace:
@@ -1546,7 +1543,7 @@ jobs:
           name: Scaffold and test examples 🏗
           working_directory: <<parameters.wd>>
           environment:
-            CYPRESS_INTERNAL_FORCE_SCAFFOLD: "1"
+            CYPRESS_INTERNAL_FORCE_SCAFFOLD: '1'
           command: |
             echo '{}' > cypress.json
             npx cypress run
@@ -1592,7 +1589,7 @@ jobs:
           command: npx cypress run
 
   # install NPM + binary zip and run against staging API
-  "test-binary-against-staging":
+  'test-binary-against-staging':
     <<: *defaults
     steps:
       - attach_workspace:
@@ -1617,7 +1614,7 @@ jobs:
             $(yarn bin)/cypress run --record
       - store-npm-logs
 
-  "test-binary-against-recipes-firefox":
+  'test-binary-against-recipes-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
@@ -1645,75 +1642,75 @@ jobs:
   #         pull_request_id: 515
   #         folder: examples/fundamentals__typescript
 
-  "test-binary-against-kitchensink":
+  'test-binary-against-kitchensink':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-kitchensink
-          browser: "electron"
+          browser: 'electron'
 
   test-binary-against-awesome-typescript-loader:
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-test-awesome-typescript-loader
-          browser: "electron"
+          browser: 'electron'
 
-  "test-binary-against-kitchensink-firefox":
+  'test-binary-against-kitchensink-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-kitchensink
           browser: firefox
 
-  "test-binary-against-kitchensink-chrome":
+  'test-binary-against-kitchensink-chrome':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-kitchensink
           browser: chrome
 
-  "test-binary-against-todomvc-firefox":
+  'test-binary-against-todomvc-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-todomvc
           browser: firefox
 
-  "test-binary-against-documentation-firefox":
+  'test-binary-against-documentation-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-documentation
           browser: firefox
-          command: "npm run cypress:run"
+          command: 'npm run cypress:run'
           wait-on: http://localhost:2222
 
-  "test-binary-against-realworld-firefox":
+  'test-binary-against-realworld-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-realworld
           browser: firefox
-          command: "npm run cypress:run"
+          command: 'npm run cypress:run'
 
-  "test-binary-against-api-testing-firefox":
+  'test-binary-against-api-testing-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-api-testing
           browser: firefox
-          command: "npm run cy:run"
+          command: 'npm run cy:run'
 
-  "test-binary-against-piechopper-firefox":
+  'test-binary-against-piechopper-firefox':
     <<: *defaults
     steps:
       - test-binary-against-repo:
           repo: cypress-example-piechopper
           browser: firefox
-          command: "npm run cypress:run"
+          command: 'npm run cypress:run'
 
-  "test-binary-against-cypress-realworld-app":
+  'test-binary-against-cypress-realworld-app':
     <<: *defaults
     executor: cy-doc-plus
     steps:
@@ -1976,8 +1973,8 @@ linux-workflow: &linux-workflow
     #       branches:
     #         only:
     #           - cli-to-module-api-7760
-        # requires:
-        #   - create-build-artifacts
+    # requires:
+    #   - create-build-artifacts
     - test-binary-against-awesome-typescript-loader:
         requires:
           - create-build-artifacts
@@ -2035,12 +2032,12 @@ linux-workflow: &linux-workflow
           - create-build-artifacts
 
     - test-binary-as-specific-user:
-        name: "test binary as a non-root user"
+        name: 'test binary as a non-root user'
         executor: non-root-docker-user
         requires:
           - create-build-artifacts
     - test-binary-as-specific-user:
-        name: "test binary as a root user"
+        name: 'test binary as a root user'
         requires:
           - create-build-artifacts
 

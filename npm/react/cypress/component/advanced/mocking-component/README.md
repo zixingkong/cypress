@@ -17,7 +17,7 @@ export default function Contact(props) {
 import Contact from './contact'
 import * as MapModule from './map'
 
-const DummyMap = props => (
+const DummyMap = (props) => (
   <div data-testid="map">
     DummyMap {props.center.lat}:{props.center.long}
   </div>
@@ -29,14 +29,7 @@ it('renders stubbed Map', () => {
 
   cy.viewport(500, 500)
   const center = { lat: 0, long: 0 }
-  mount(
-    <Contact
-      name="Joni Baez"
-      email="test@example.com"
-      site="http://test.com"
-      center={center}
-    />,
-  )
+  mount(<Contact name="Joni Baez" email="test@example.com" site="http://test.com" center={center} />)
 
   cy.contains('Contact Joni Baez via')
   // confirm DummyMap renders "0:0" passed via props

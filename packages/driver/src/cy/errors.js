@@ -13,7 +13,7 @@ const create = (state, config, log) => {
       end: true,
       snapshot: true,
       error: err,
-      consoleProps () {
+      consoleProps() {
         if (!current) return
 
         const obj = {}
@@ -23,10 +23,7 @@ const create = (state, config, log) => {
         // and we can add Applied To if there is a prev command
         // and it is a parent
         if (current.get('type') !== 'parent' && prev) {
-          const ret = $dom.isElement(prev.get('subject')) ?
-            $dom.getElements(prev.get('subject'))
-            :
-            prev.get('subject')
+          const ret = $dom.isElement(prev.get('subject')) ? $dom.getElements(prev.get('subject')) : prev.get('subject')
 
           obj['Applied To'] = ret
 
@@ -53,14 +50,16 @@ const create = (state, config, log) => {
     // error object already provided. otherwise, we create one
     // it's possible the error was thrown as a string (throw 'some error')
     // so create it in the case it's not already an object
-    err = _.isObject(err) ? err : $errUtils.errByPath('uncaught.error', {
-      source,
-      lineno,
-      // if the error was thrown as a string (throw 'some error'), `err` is
-      // the message ('some error') and message is some browser-created
-      // variant (e.g. 'Uncaught some error')
-      message: _.isString(err) ? err : message,
-    })
+    err = _.isObject(err)
+      ? err
+      : $errUtils.errByPath('uncaught.error', {
+          source,
+          lineno,
+          // if the error was thrown as a string (throw 'some error'), `err` is
+          // the message ('some error') and message is some browser-created
+          // variant (e.g. 'Uncaught some error')
+          message: _.isString(err) ? err : message,
+        })
 
     err.docsUrl = docsUrl
 

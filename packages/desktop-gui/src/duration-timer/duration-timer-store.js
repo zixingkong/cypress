@@ -8,16 +8,16 @@ class TimerStore {
   @observable timer
   @observable startTime
 
-  constructor (startTime) {
+  constructor(startTime) {
     this.timer = new Timer()
     this.startTime = dayjs(startTime)
   }
 
-  @computed get mainDisplay () {
+  @computed get mainDisplay() {
     return this.timer.display
   }
 
-  @action measure () {
+  @action measure() {
     if (!this.isRunning) return
 
     this.timer.milliseconds = dayjs().diff(this.startTime)
@@ -27,14 +27,14 @@ class TimerStore {
     }, 10)
   }
 
-  @action startTimer () {
+  @action startTimer() {
     if (this.isRunning) return
 
     this.isRunning = true
     this.measure()
   }
 
-  @action resetTimer () {
+  @action resetTimer() {
     this.timer.reset()
     this.isRunning = false
     clearTimeout(this.timerId)

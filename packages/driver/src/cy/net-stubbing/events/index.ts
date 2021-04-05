@@ -5,12 +5,16 @@ import { onResponseReceived } from './response-received'
 import { onRequestComplete } from './request-complete'
 import Bluebird from 'bluebird'
 
-export type HandlerFn<Frame extends NetEventFrames.BaseHttp> = (Cypress: Cypress.Cypress, frame: Frame, opts: {
-  getRequest: (routeHandlerId: string, requestId: string) => Interception | undefined
-  getRoute: (routeHandlerId: string) => Route | undefined
-  emitNetEvent: (eventName: string, frame: any) => Promise<void>
-  failCurrentTest: (err: Error) => void
-}) => Promise<void> | void
+export type HandlerFn<Frame extends NetEventFrames.BaseHttp> = (
+  Cypress: Cypress.Cypress,
+  frame: Frame,
+  opts: {
+    getRequest: (routeHandlerId: string, requestId: string) => Interception | undefined
+    getRoute: (routeHandlerId: string) => Route | undefined
+    emitNetEvent: (eventName: string, frame: any) => Promise<void>
+    failCurrentTest: (err: Error) => void
+  }
+) => Promise<void> | void
 
 const netEventHandlers: { [eventName: string]: HandlerFn<any> } = {
   'http:request:received': onRequestReceived,
@@ -18,14 +22,14 @@ const netEventHandlers: { [eventName: string]: HandlerFn<any> } = {
   'http:request:complete': onRequestComplete,
 }
 
-export function registerEvents (Cypress: Cypress.Cypress) {
+export function registerEvents(Cypress: Cypress.Cypress) {
   const { state } = Cypress
 
-  function getRoute (routeHandlerId) {
+  function getRoute(routeHandlerId) {
     return state('routes')[routeHandlerId]
   }
 
-  function getRequest (routeHandlerId: string, requestId: string): Interception | undefined {
+  function getRequest(routeHandlerId: string, requestId: string): Interception | undefined {
     const route = getRoute(routeHandlerId)
 
     if (route) {
@@ -35,16 +39,15 @@ export function registerEvents (Cypress: Cypress.Cypress) {
     return
   }
 
-  function emitNetEvent (eventName: string, frame: any): Promise<void> {
+  function emitNetEvent(eventName: string, frame: any): Promise<void> {
     // all messages from driver to server are wrapped in backend:request
-    return Cypress.backend('net', eventName, frame)
-    .catch((err) => {
+    return Cypress.backend('net', eventName, frame).catch((err) => {
       err.message = `An error was thrown while processing a network event: ${err.message}`
       failCurrentTest(err)
     })
   }
 
-  function failCurrentTest (err: Error) {
+  function failCurrentTest(err: Error) {
     // @ts-ignore
     // FIXME: asynchronous errors are not correctly attributed to spec when they come from `top`, must manually attribute
     err.fromSpec = true
@@ -69,8 +72,7 @@ export function registerEvents (Cypress: Cypress.Cypress) {
         emitNetEvent,
         failCurrentTest,
       })
-    })
-    .catch(failCurrentTest)
+    }).catch(failCurrentTest)
   })
 
   return { emitNetEvent }

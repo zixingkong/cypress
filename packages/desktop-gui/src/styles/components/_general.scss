@@ -40,14 +40,14 @@
     }
   }
 
-  &>span {
+  & > span {
     display: inline-block;
     position: relative;
     font-size: 13px;
 
     &:before,
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       border-bottom: 1px solid #cdd1d9;
       top: 50%;
@@ -61,9 +61,7 @@
       left: 100%;
       margin-left: 10px;
     }
-
   }
-
 }
 
 .btn:focus {
@@ -83,16 +81,30 @@ i.red {
 }
 
 i.orange {
-  color: #F5A327;
+  color: #f5a327;
 }
 
-i.errored { color: #F5A327;}
-i.failed { color: #ec6573;}
-i.noTests { color: #F5A327;}
-i.passed { color: #1CB77E;}
-i.running { color: #428BCA;}
-i.overLimit { color: #F5A327;}
-i.timedOut { color: #F5A327;}
+i.errored {
+  color: #f5a327;
+}
+i.failed {
+  color: #ec6573;
+}
+i.noTests {
+  color: #f5a327;
+}
+i.passed {
+  color: #1cb77e;
+}
+i.running {
+  color: #428bca;
+}
+i.overLimit {
+  color: #f5a327;
+}
+i.timedOut {
+  color: #f5a327;
+}
 
 .form-horizontal {
   margin-bottom: 25px;
@@ -130,24 +142,25 @@ pre.line-nums {
       content: counter(line);
       display: inline-block;
       border-right: 1px solid #414344;
-      padding: 0 .5em 0 0;
-      margin-right: .5em;
+      padding: 0 0.5em 0 0;
+      margin-right: 0.5em;
       color: #696c6d;
     }
   }
 }
 
 pre.copy-to-clipboard {
-  & > span, & > code {
+  & > span,
+  & > code {
     padding-right: 15px;
   }
-  
+
   .action-copy {
     float: right;
     color: white;
 
     &:hover {
-      color: #E2E8F0;
+      color: #e2e8f0;
     }
   }
 }

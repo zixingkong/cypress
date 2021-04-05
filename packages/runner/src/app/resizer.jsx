@@ -2,18 +2,11 @@ import { action } from 'mobx'
 import React, { Component } from 'react'
 
 class Resizer extends Component {
-  render () {
-    return (
-      <div
-        ref='resizer'
-        className='runner-resizer'
-        style={this.props.style}
-        onMouseDown={this._startResize}
-      />
-    )
+  render() {
+    return <div ref="resizer" className="runner-resizer" style={this.props.style} onMouseDown={this._startResize} />
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this._isDragging = false
 
     document.addEventListener('mousemove', this._resize)
@@ -52,7 +45,7 @@ class Resizer extends Component {
     this._isDragging = false
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener('mousemove', this._resize)
     document.removeEventListener('mouseup', this._endResize)
   }

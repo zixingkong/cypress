@@ -6,11 +6,7 @@ const MyInput = ({ inputVal, onInputChanged }) => {
 
   return (
     <>
-      <input
-        type="text"
-        value={inputVal}
-        onChange={(e) => onInputChanged(e.target.value)}
-      />
+      <input type="text" value={inputVal} onChange={(e) => onInputChanged(e.target.value)} />
       <p>You entered {inputVal} </p>
     </>
   )

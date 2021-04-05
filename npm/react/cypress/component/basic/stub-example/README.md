@@ -6,9 +6,7 @@ You can pass a [cy.stub](https://on.cypress.io/stub) as a property to the mounte
 it('calls the click prop', () => {
   const onClick = cy.stub().as('clicker')
   mount(<Clicker click={onClick} />)
-  cy.get('button')
-    .click()
-    .click()
+  cy.get('button').click().click()
   cy.get('@clicker').should('have.been.calledTwice')
 })
 ```

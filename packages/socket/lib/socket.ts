@@ -11,10 +11,12 @@ const clientSource = require.resolve('socket.io-client/dist/socket.io.js')
 export { ServerOptions }
 
 // socket.io types are incorrect
-type PatchedServerOptions = ServerOptions & { cookie: { name: string | boolean } }
+type PatchedServerOptions = ServerOptions & {
+  cookie: { name: string | boolean }
+}
 
 class SocketIOServer extends SocketIOBaseServer {
-  constructor (srv: http.Server, opts?: Partial<PatchedServerOptions>) {
+  constructor(srv: http.Server, opts?: Partial<PatchedServerOptions>) {
     // in socket.io v3, they reduced down the max buffer size
     // from 100mb to 1mb, so we reset it back to the previous value
     //
@@ -27,11 +29,7 @@ class SocketIOServer extends SocketIOBaseServer {
   }
 }
 
-export {
-  client,
-  server,
-  SocketIOServer,
-}
+export { client, server, SocketIOServer }
 
 export const getPathToClientSource = () => {
   return clientSource

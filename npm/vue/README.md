@@ -6,17 +6,19 @@
 
 > Browser-based Component Testing for Vue.js with the Open-Source [Cypress.io](https://www.cypress.io/) Test Runner ✌️🌲
 >
-**✨ New** We're growing the Cypress Community Discord. We have dedicated sections on Component Testing. 👉 [Join now](https://discord.com/invite/TmzTGUW) and let's chat!
+> **✨ New** We're growing the Cypress Community Discord. We have dedicated sections on Component Testing. 👉 [Join now](https://discord.com/invite/TmzTGUW) and let's chat!
 
 **Jump to:** [Comparison](#comparison), [Blog posts](#blog-posts), Examples: [basic](#basic-examples), [advanced](#advanced-examples), [full](#full-examples), [external](#external-examples), [Code coverage](#code-coverage), [Development](#development)
 
 ### What is @cypress/vue?
+
 This package allows you to use the [Cypress](https://www.cypress.io/) test runner to mount and test your components within Cypress. It is built on top of the [Vue Test Utils](https://github.com/vuejs/vue-test-utils) package.
 
 ![Example component test](images/dynamic.gif)
 
 ### How is this different from Vue Test Utils?
-It uses [Vue Test Utils](https://github.com/vuejs/vue-test-utils) under the hood. This is more of a replacement for node-based testing than it is replacing Vue Test Utils and its API. Instead of running your tests in node (using Jest or Mocha), the Cypress Component Testing Library runs each component in the **real browser** with full power of the Cypress Framework: [live GUI, full API, screen recording, CI support, cross-platform](https://www.cypress.io/features/). One benefit to using Cypress instead of a node-based runner is that limitations of Vue Test Utils in Node (e.g. manually awaiting Vue's internal event loop) are hidden from the user due to Cypress's retry-ability logic.  
+
+It uses [Vue Test Utils](https://github.com/vuejs/vue-test-utils) under the hood. This is more of a replacement for node-based testing than it is replacing Vue Test Utils and its API. Instead of running your tests in node (using Jest or Mocha), the Cypress Component Testing Library runs each component in the **real browser** with full power of the Cypress Framework: [live GUI, full API, screen recording, CI support, cross-platform](https://www.cypress.io/features/). One benefit to using Cypress instead of a node-based runner is that limitations of Vue Test Utils in Node (e.g. manually awaiting Vue's internal event loop) are hidden from the user due to Cypress's retry-ability logic.
 
 - If you like using `@testing-library/vue`, you can use `@testing-library/cypress` for the same `findBy`, `queryBy` commands, see one of the examples in the list below
 
@@ -108,9 +110,7 @@ const todo = {
 
 mount(Todo, {
   propsData: { todo },
-  stylesheets: [
-    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-  ],
+  stylesheets: ['https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'],
 })
 ```
 
@@ -134,9 +134,7 @@ Take a look at the first Vue v2 example:
 The code is pretty simple
 
 ```html
-<div id="app">
-  {{ message }}
-</div>
+<div id="app">{{ message }}</div>
 ```
 
 ```js
@@ -201,9 +199,7 @@ There is a list example next in the Vue docs.
 ```html
 <div id="app-4">
   <ol>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
+    <li v-for="todo in todos">{{ todo.text }}</li>
   </ol>
 </div>
 ```
@@ -212,11 +208,7 @@ There is a list example next in the Vue docs.
 var app4 = new Vue({
   el: '#app-4',
   data: {
-    todos: [
-      { text: 'Learn JavaScript' },
-      { text: 'Learn Vue' },
-      { text: 'Build something awesome' },
-    ],
+    todos: [{ text: 'Learn JavaScript' }, { text: 'Learn Vue' }, { text: 'Build something awesome' }],
   },
 })
 ```
@@ -238,11 +230,7 @@ describe('Declarative rendering', () => {
 
   function data() {
     return {
-      todos: [
-        { text: 'Learn JavaScript' },
-        { text: 'Learn Vue' },
-        { text: 'Build something awesome' },
-      ],
+      todos: [{ text: 'Learn JavaScript' }, { text: 'Learn Vue' }, { text: 'Build something awesome' }],
     }
   }
 
@@ -577,8 +565,6 @@ Repo | Description
 [vue-component-test-example](https://github.com/bahmutov/vue-component-test-example) | Scaffolded Vue CLI v3 project with added component tests, read [Write Your First Vue Component Test](https://glebbahmutov.com/blog/first-vue-component-test/).
 <!-- prettier-ignore-end -->
 
-
-
 ## Code coverage
 
 This plugin uses `babel-plugin-istanbul` to automatically instrument `.js` and `.vue` files and generates the code coverage report using dependency [cypress-io/code-coverage](https://github.com/cypress-io/code-coverage) (included). The output reports are saved in the folder "coverage" at the end of the test run.
@@ -623,7 +609,7 @@ Run Cypress with environment variable
 
 ```
 DEBUG=@cypress/vue
-``` 
+```
 
 If some deeply nested objects are abbreviated and do not print fully, set the maximum logging depth
 

@@ -17,7 +17,9 @@ webpackOptions.mode = 'development'
 
 // remove the evalDevToolPlugin which comes from the base
 // webpack config - otherwise we won't get code frames
-webpackOptions.plugins = _.reject(webpackOptions.plugins, { evalDevToolPlugin: true })
+webpackOptions.plugins = _.reject(webpackOptions.plugins, {
+  evalDevToolPlugin: true,
+})
 
 const babelLoader = _.find(webpackOptions.module.rules, (rule) => {
   return _.includes(rule.use.loader, 'babel-loader')
@@ -35,24 +37,28 @@ module.exports = (on) => {
   on('file:preprocessor', wp({ webpackOptions }))
 
   on('task', {
-    'return:arg' (arg) {
+    'return:arg'(arg) {
       return arg
     },
-    'arg:is:undefined' (arg) {
+    'arg:is:undefined'(arg) {
       if (arg === undefined) {
         return 'arg was undefined'
       }
 
       throw new Error(`Expected arg to be undefined, but it was ${arg}`)
     },
-    'wait' () {
+    wait() {
       return Promise.delay(2000)
     },
-    'create:long:file' () {
+    'create:long:file'() {
       const filePath = path.join(__dirname, '..', '_test-output', 'longtext.txt')
-      const longText = _.times(2000).map(() => {
-        return _.times(20).map(() => Math.random()).join(' ')
-      }).join('\n\n')
+      const longText = _.times(2000)
+        .map(() => {
+          return _.times(20)
+            .map(() => Math.random())
+            .join(' ')
+        })
+        .join('\n\n')
 
       fs.outputFileSync(filePath, longText)
 

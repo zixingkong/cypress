@@ -69,14 +69,14 @@ export const getStatusIcon = (status) => {
   }
 }
 
-export function stripLeadingCyDirs (spec) {
+export function stripLeadingCyDirs(spec) {
   if (!spec) return null
 
   // remove leading 'cypress/integration' from spec
   return spec.replace(cyDirRegex, '')
 }
 
-export function stripSharedDirsFromDir2 (dir1, dir2, osName) {
+export function stripSharedDirsFromDir2(dir1, dir2, osName) {
   const sep = osName === 'win32' ? '\\' : '/'
 
   const arr1 = dir1.split(sep)
@@ -84,22 +84,21 @@ export function stripSharedDirsFromDir2 (dir1, dir2, osName) {
 
   let found = false
 
-  return _
-  .chain(arr2)
-  .transform((memo, segment, index) => {
-    const segmentsFromEnd1 = arr1.slice(-(index + 1))
-    const segmentsFromBeg2 = arr2.slice(0, index + 1)
+  return _.chain(arr2)
+    .transform((memo, segment, index) => {
+      const segmentsFromEnd1 = arr1.slice(-(index + 1))
+      const segmentsFromBeg2 = arr2.slice(0, index + 1)
 
-    if (_.isEqual(segmentsFromBeg2, segmentsFromEnd1)) {
-      return found = arr2.slice(index + 1)
-    }
+      if (_.isEqual(segmentsFromBeg2, segmentsFromEnd1)) {
+        return (found = arr2.slice(index + 1))
+      }
 
-    if (found) {
-      memo.push(...found)
+      if (found) {
+        memo.push(...found)
 
-      return false
-    }
-  })
-  .join(sep)
-  .value()
+        return false
+      }
+    })
+    .join(sep)
+    .value()
 }

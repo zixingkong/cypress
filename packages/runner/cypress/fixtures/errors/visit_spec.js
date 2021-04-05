@@ -3,7 +3,7 @@ import './setup'
 describe('cy.visit', () => {
   it('onBeforeLoad assertion failure', () => {
     cy.visit('/index.html', {
-      onBeforeLoad () {
+      onBeforeLoad() {
         expect('actual').to.equal('expected')
       },
     })
@@ -11,15 +11,15 @@ describe('cy.visit', () => {
 
   it('onBeforeLoad exception', () => {
     cy.visit('/index.html', {
-      onBeforeLoad () {
-        ({}).bar()
+      onBeforeLoad() {
+        ;({}.bar())
       },
     })
   })
 
   it('onLoad assertion failure', () => {
     cy.visit('/index.html', {
-      onLoad () {
+      onLoad() {
         expect('actual').to.equal('expected')
       },
     })
@@ -27,8 +27,8 @@ describe('cy.visit', () => {
 
   it('onLoad exception', () => {
     cy.visit('/index.html', {
-      onLoad () {
-        ({}).bar()
+      onLoad() {
+        ;({}.bar())
       },
     })
   })

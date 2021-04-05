@@ -35,9 +35,7 @@ var DIFFICULTY = {
 
 // Blank character and board representation
 sudoku.BLANK_CHAR = '.'
-sudoku.BLANK_BOARD =
-  '....................................................' +
-  '.............................'
+sudoku.BLANK_BOARD = '....................................................' + '.............................'
 
 // Init
 // -------------------------------------------------------------------------
@@ -52,7 +50,7 @@ function initialize() {
 
 // Generate
 // -------------------------------------------------------------------------
-sudoku.generate = function(difficulty, unique) {
+sudoku.generate = function (difficulty, unique) {
   /* Generate a new Sudoku puzzle of a particular `difficulty`, e.g.,
 
             // Generate an "easy" sudoku puzzle
@@ -131,10 +129,7 @@ sudoku.generate = function(difficulty, unique) {
 
     // If we have at least difficulty, and the unique candidate count is
     // at least 8, return the puzzle!
-    if (
-      single_candidates.length >= difficulty &&
-      sudoku._strip_dups(single_candidates).length >= 8
-    ) {
+    if (single_candidates.length >= difficulty && sudoku._strip_dups(single_candidates).length >= 8) {
       var board = ''
       var givens_idxs = []
       for (i in SQUARES) {
@@ -154,10 +149,7 @@ sudoku.generate = function(difficulty, unique) {
         givens_idxs = sudoku._shuffle(givens_idxs)
         for (i = 0; i < nr_givens - difficulty; ++i) {
           var target = parseInt(givens_idxs[i])
-          board =
-            board.substr(0, target) +
-            sudoku.BLANK_CHAR +
-            board.substr(target + 1)
+          board = board.substr(0, target) + sudoku.BLANK_CHAR + board.substr(target + 1)
         }
       }
 
@@ -175,7 +167,7 @@ sudoku.generate = function(difficulty, unique) {
 
 // Solve
 // -------------------------------------------------------------------------
-sudoku.solve = function(board, reverse) {
+sudoku.solve = function (board, reverse) {
   /* Solve a sudoku puzzle given a sudoku `board`, i.e., an 81-character
         string of sudoku.DIGITS, 1-9, and spaces identified by '.', representing the
         squares. There must be a minimum of 17 givens. If the given board has no
@@ -220,7 +212,7 @@ sudoku.solve = function(board, reverse) {
   return false
 }
 
-sudoku.get_candidates = function(board) {
+sudoku.get_candidates = function (board) {
   /* Return all possible candidatees for each square as a grid of
         candidates, returnning `false` if a contradiction is encountered.
 
@@ -258,7 +250,7 @@ sudoku.get_candidates = function(board) {
   return rows
 }
 
-sudoku._get_candidates_map = function(board) {
+sudoku._get_candidates_map = function (board) {
   /* Get all possible candidates for each square as a map in the form
         {square: sudoku.DIGITS} using recursive constraint propagation. Return `false`
         if a contradiction is encountered
@@ -296,7 +288,7 @@ sudoku._get_candidates_map = function(board) {
   return candidate_map
 }
 
-sudoku._search = function(candidates, reverse) {
+sudoku._search = function (candidates, reverse) {
   /* Given a map of squares -> candiates, using depth-first search,
         recursively try all possible values until a solution is found, or false
         if no solution exists.
@@ -354,9 +346,7 @@ sudoku._search = function(candidates, reverse) {
 
       // TODO: Implement a non-rediculous deep copy function
       var candidates_copy = JSON.parse(JSON.stringify(candidates))
-      var candidates_next = sudoku._search(
-        sudoku._assign(candidates_copy, min_candidates_square, val),
-      )
+      var candidates_next = sudoku._search(sudoku._assign(candidates_copy, min_candidates_square, val))
 
       if (candidates_next) {
         return candidates_next
@@ -370,10 +360,7 @@ sudoku._search = function(candidates, reverse) {
 
       // TODO: Implement a non-rediculous deep copy function
       candidates_copy = JSON.parse(JSON.stringify(candidates))
-      candidates_next = sudoku._search(
-        sudoku._assign(candidates_copy, min_candidates_square, val),
-        reverse,
-      )
+      candidates_next = sudoku._search(sudoku._assign(candidates_copy, min_candidates_square, val), reverse)
 
       if (candidates_next) {
         return candidates_next
@@ -386,7 +373,7 @@ sudoku._search = function(candidates, reverse) {
   return false
 }
 
-sudoku._assign = function(candidates, square, val) {
+sudoku._assign = function (candidates, square, val) {
   /* Eliminate all values, *except* for `val`, from `candidates` at
         `square` (candidates[square]), and propagate. Return the candidates map
         when finished. If a contradiciton is found, return false.
@@ -414,7 +401,7 @@ sudoku._assign = function(candidates, square, val) {
   return candidates
 }
 
-sudoku._eliminate = function(candidates, square, val) {
+sudoku._eliminate = function (candidates, square, val) {
   /* Eliminate `val` from `candidates` at `square`, (candidates[square]),
         and propagate when values or places <= 2. Return updated candidates,
         unless a contradiction is detected, in which case, return false.
@@ -488,7 +475,7 @@ sudoku._eliminate = function(candidates, square, val) {
 // -------------------------------------------------------------------------
 // Squares, and their relationships with values, units, and peers.
 
-sudoku._get_square_vals_map = function(board) {
+sudoku._get_square_vals_map = function (board) {
   /* Return a map of squares -> values
    */
   var squares_vals_map = {}
@@ -506,7 +493,7 @@ sudoku._get_square_vals_map = function(board) {
   return squares_vals_map
 }
 
-sudoku._get_square_units_map = function(squares, units) {
+sudoku._get_square_units_map = function (squares, units) {
   /* Return a map of `squares` and their associated units (row, col, box)
    */
   var square_unit_map = {}
@@ -535,7 +522,7 @@ sudoku._get_square_units_map = function(squares, units) {
   return square_unit_map
 }
 
-sudoku._get_square_peers_map = function(squares, units_map) {
+sudoku._get_square_peers_map = function (squares, units_map) {
   /* Return a map of `squares` and their associated peers, i.e., a set of
         other squares in the square's unit.
         */
@@ -556,10 +543,7 @@ sudoku._get_square_peers_map = function(squares, units_map) {
       for (var ui in cur_unit) {
         var cur_unit_square = cur_unit[ui]
 
-        if (
-          cur_square_peers.indexOf(cur_unit_square) === -1 &&
-          cur_unit_square !== cur_square
-        ) {
+        if (cur_square_peers.indexOf(cur_unit_square) === -1 && cur_unit_square !== cur_square) {
           cur_square_peers.push(cur_unit_square)
         }
       }
@@ -572,7 +556,7 @@ sudoku._get_square_peers_map = function(squares, units_map) {
   return square_peers_map
 }
 
-sudoku._get_all_units = function(rows, cols) {
+sudoku._get_all_units = function (rows, cols) {
   /* Return a list of all units (rows, cols, boxes)
    */
   var units = []
@@ -601,7 +585,7 @@ sudoku._get_all_units = function(rows, cols) {
 
 // Conversions
 // -------------------------------------------------------------------------
-sudoku.board_string_to_grid = function(board_string) {
+sudoku.board_string_to_grid = function (board_string) {
   /* Convert a board string to a two-dimensional array
    */
   var rows = []
@@ -616,7 +600,7 @@ sudoku.board_string_to_grid = function(board_string) {
   return rows
 }
 
-sudoku.board_grid_to_string = function(board_grid) {
+sudoku.board_grid_to_string = function (board_grid) {
   /* Convert a board grid to a string
    */
   var board_string = ''
@@ -631,7 +615,7 @@ sudoku.board_grid_to_string = function(board_grid) {
 // Utility
 // -------------------------------------------------------------------------
 
-sudoku.print_board = function(board) {
+sudoku.print_board = function (board) {
   /* Print a sudoku `board` to the console.
    */
 
@@ -674,7 +658,7 @@ sudoku.print_board = function(board) {
   console.log(display_string)
 }
 
-sudoku.validate_board = function(board) {
+sudoku.validate_board = function (board) {
   /* Return if the given `board` is valid or not. If it's valid, return
         true. If it's not, return a string of the reason why it's not.
         */
@@ -686,20 +670,13 @@ sudoku.validate_board = function(board) {
 
   // Invalid board length
   if (board.length !== NR_SQUARES) {
-    return (
-      'Invalid board size. Board must be exactly ' + NR_SQUARES + ' squares.'
-    )
+    return 'Invalid board size. Board must be exactly ' + NR_SQUARES + ' squares.'
   }
 
   // Check for invalid characters
   for (var i in board) {
-    if (
-      !sudoku._in(board[i], sudoku.DIGITS) &&
-      board[i] !== sudoku.BLANK_CHAR
-    ) {
-      return (
-        'Invalid board character encountered at index ' + i + ': ' + board[i]
-      )
+    if (!sudoku._in(board[i], sudoku.DIGITS) && board[i] !== sudoku.BLANK_CHAR) {
+      return 'Invalid board character encountered at index ' + i + ': ' + board[i]
     }
   }
 
@@ -707,7 +684,7 @@ sudoku.validate_board = function(board) {
   return true
 }
 
-sudoku._cross = function(a, b) {
+sudoku._cross = function (a, b) {
   /* Cross product of all elements in `a` and `b`, e.g.,
         sudoku._cross("abc", "123") ->
         ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
@@ -721,13 +698,13 @@ sudoku._cross = function(a, b) {
   return result
 }
 
-sudoku._in = function(v, seq) {
+sudoku._in = function (v, seq) {
   /* Return if a value `v` is in sequence `seq`.
    */
   return seq.indexOf(v) !== -1
 }
 
-sudoku._first_true = function(seq) {
+sudoku._first_true = function (seq) {
   /* Return the first element in `seq` that is true. If no element is
         true, return false.
         */
@@ -739,7 +716,7 @@ sudoku._first_true = function(seq) {
   return false
 }
 
-sudoku._shuffle = function(seq) {
+sudoku._shuffle = function (seq) {
   /* Return a shuffled version of `seq`
    */
 
@@ -762,7 +739,7 @@ sudoku._shuffle = function(seq) {
   return shuffled
 }
 
-sudoku._rand_range = function(max, min) {
+sudoku._rand_range = function (max, min) {
   /* Get a random integer in the range of `min` to `max` (non inclusive).
         If `min` not defined, default to 0. If `max` not defined, throw an
         error.
@@ -776,7 +753,7 @@ sudoku._rand_range = function(max, min) {
   }
 }
 
-sudoku._strip_dups = function(seq) {
+sudoku._strip_dups = function (seq) {
   /* Strip duplicate values from `seq`
    */
   var seq_set = []
@@ -791,7 +768,7 @@ sudoku._strip_dups = function(seq) {
   return seq_set
 }
 
-sudoku._force_range = function(nr, max, min) {
+sudoku._force_range = function (nr, max, min) {
   /* Force `nr` to be within the range from `min` to, but not including,
         `max`. `min` is optional, and will default to 0. If `nr` is undefined,
         treat it as zero.

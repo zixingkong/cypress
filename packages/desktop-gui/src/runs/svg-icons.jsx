@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 
 export class IconFailurePoint extends Component {
-  render () {
+  render() {
     return (
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...this.props}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...this.props}>
         <circle cx={24.75} cy={15.375} r={1.125} fill="currentColor" />
         <path
           fillRule="evenodd"
@@ -34,26 +27,16 @@ export class IconFailurePoint extends Component {
 }
 
 export class IconSupercharge extends Component {
-  render () {
+  render() {
     return (
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...this.props}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...this.props}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"
           d="M8.25 3.75a4.5 4.5 0 000 9h19.5a4.5 4.5 0 100-9H8.25zm-6 4.5a6 6 0 016-6h19.5a6 6 0 010 12H8.25a6 6 0 01-6-6z"
           fill="currentColor"
         />
-        <path
-          d="M8.25 6.75a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"
-          fill="currentColor"
-        />
+        <path d="M8.25 6.75a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="currentColor" />
         <path
           d="M18.531 9.486l1.409-2.65M22.281 9.486l1.409-2.65M26.031 9.486l1.409-2.65"
           stroke="currentColor"
@@ -64,10 +47,7 @@ export class IconSupercharge extends Component {
           d="M27.75 17.25H8.25a4.5 4.5 0 100 9H18a.75.75 0 010 1.5H8.25a6 6 0 010-12h19.5a6.001 6.001 0 015.954 5.252c.05.41-.29.748-.704.748s-.743-.338-.812-.747a4.501 4.501 0 00-4.438-3.753z"
           fill="currentColor"
         />
-        <path
-          d="M8.25 20.25a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"
-          fill="currentColor"
-        />
+        <path d="M8.25 20.25a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="currentColor" />
         <path
           d="M18.531 22.986l1.409-2.65M22.281 22.986l1.409-2.65"
           stroke="currentColor"
@@ -86,16 +66,9 @@ export class IconSupercharge extends Component {
 }
 
 export class IconFailAlerts extends Component {
-  render () {
+  render() {
     return (
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...this.props}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...this.props}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"

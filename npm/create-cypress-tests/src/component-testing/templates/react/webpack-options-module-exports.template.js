@@ -17,7 +17,7 @@ const webpackConfig = {
         loader: 'babel-loader',
         options: { cacheDirectory: path.resolve(__dirname, '.babel-cache') },
       },
-    ]
+    ],
   },
 }
 

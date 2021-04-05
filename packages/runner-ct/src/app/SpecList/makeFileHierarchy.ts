@@ -15,7 +15,7 @@ export interface FolderNode extends BaseNode {
 
 export type TreeNode = FileNode | FolderNode
 
-export function getAllFolders (files: string[]): string[] {
+export function getAllFolders(files: string[]): string[] {
   /**
    * Returns an array of all nested directories given an array of files and folders.
    *
@@ -52,7 +52,7 @@ export function getAllFolders (files: string[]): string[] {
   return Array.from(dirs)
 }
 
-export function getAllFileNodes (files: string[]): Record<string, string[]> {
+export function getAllFileNodes(files: string[]): Record<string, string[]> {
   /**
    * Returns a key/value map of directories to contained files.
    *
@@ -90,7 +90,7 @@ export function getAllFileNodes (files: string[]): Record<string, string[]> {
   return allFileNodes
 }
 
-function charCount (str: string, letter: string) {
+function charCount(str: string, letter: string) {
   let count = 0
 
   for (let position = 0; position < str.length; position++) {
@@ -130,7 +130,7 @@ function charCount (str: string, letter: string) {
  *   }
  * ]
  */
-export function makeFileHierarchy (files: string[]): TreeNode[] {
+export function makeFileHierarchy(files: string[]): TreeNode[] {
   const allFolderNodes = getAllFolders(files)
   const allFileNodes = getAllFileNodes(files)
 
@@ -144,14 +144,17 @@ export function makeFileHierarchy (files: string[]): TreeNode[] {
     return { ...acc, [count]: [...acc[count], curr] }
   }, {})
 
-  function walk (dirs: string[], depth = 0): TreeNode[] {
+  function walk(dirs: string[], depth = 0): TreeNode[] {
     if (!dirs) {
       return []
     }
 
     return dirs.map((dir) => {
       const nestedDirs = foldersByLength[depth + 1]
-        ? walk(foldersByLength[depth + 1].filter((x) => x.startsWith(dir)), depth + 1)
+        ? walk(
+            foldersByLength[depth + 1].filter((x) => x.startsWith(dir)),
+            depth + 1
+          )
         : []
 
       const containedFileNodes = (allFileNodes[dir] || []).map<TreeNode>((file) => {

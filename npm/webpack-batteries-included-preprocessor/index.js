@@ -10,57 +10,66 @@ const getDefaultWebpackOptions = (file, options = {}) => {
       __dirname: true,
     },
     module: {
-      rules: [{
-        test: /\.mjs$/,
-        include: /node_modules/,
-        exclude: [/browserslist/],
-        type: 'javascript/auto',
-      }, {
-        test: /(\.jsx?|\.mjs)$/,
-        exclude: [/node_modules/, /browserslist/],
-        type: 'javascript/auto',
-        use: [{
-          loader: require.resolve('babel-loader'),
-          options: {
-            plugins: [
-              ...[
-                'babel-plugin-add-module-exports',
-                '@babel/plugin-proposal-class-properties',
-                '@babel/plugin-proposal-object-rest-spread',
-              ].map(require.resolve),
-              [require.resolve('@babel/plugin-transform-runtime'), {
-                absoluteRuntime: path.dirname(require.resolve('@babel/runtime/package')),
-              }],
-            ],
-            presets: [
-              [require.resolve('@babel/preset-env'), { modules: 'commonjs' }],
-              require.resolve('@babel/preset-react'),
-            ],
-          },
-        }],
-      }, {
-        test: /\.coffee$/,
-        exclude: [/node_modules/, /browserslist/],
-        loader: require.resolve('coffee-loader'),
-      }],
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          exclude: [/browserslist/],
+          type: 'javascript/auto',
+        },
+        {
+          test: /(\.jsx?|\.mjs)$/,
+          exclude: [/node_modules/, /browserslist/],
+          type: 'javascript/auto',
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                plugins: [
+                  ...[
+                    'babel-plugin-add-module-exports',
+                    '@babel/plugin-proposal-class-properties',
+                    '@babel/plugin-proposal-object-rest-spread',
+                  ].map(require.resolve),
+                  [
+                    require.resolve('@babel/plugin-transform-runtime'),
+                    {
+                      absoluteRuntime: path.dirname(require.resolve('@babel/runtime/package')),
+                    },
+                  ],
+                ],
+                presets: [
+                  [require.resolve('@babel/preset-env'), { modules: 'commonjs' }],
+                  require.resolve('@babel/preset-react'),
+                ],
+              },
+            },
+          ],
+        },
+        {
+          test: /\.coffee$/,
+          exclude: [/node_modules/, /browserslist/],
+          loader: require.resolve('coffee-loader'),
+        },
+      ],
     },
     resolve: {
       extensions: ['.js', '.json', '.jsx', '.mjs', '.coffee'],
       alias: {
-        'child_process': require.resolve('./empty'),
-        'cluster': require.resolve('./empty'),
-        'console': require.resolve('./empty'),
-        'dgram': require.resolve('./empty'),
-        'dns': require.resolve('./empty'),
-        'fs': require.resolve('./empty'),
-        'http2': require.resolve('./empty'),
-        'inspector': require.resolve('./empty'),
-        'module': require.resolve('./empty'),
-        'net': require.resolve('./empty'),
-        'perf_hooks': require.resolve('./empty'),
-        'readline': require.resolve('./empty'),
-        'repl': require.resolve('./empty'),
-        'tls': require.resolve('./empty'),
+        child_process: require.resolve('./empty'),
+        cluster: require.resolve('./empty'),
+        console: require.resolve('./empty'),
+        dgram: require.resolve('./empty'),
+        dns: require.resolve('./empty'),
+        fs: require.resolve('./empty'),
+        http2: require.resolve('./empty'),
+        inspector: require.resolve('./empty'),
+        module: require.resolve('./empty'),
+        net: require.resolve('./empty'),
+        perf_hooks: require.resolve('./empty'),
+        readline: require.resolve('./empty'),
+        repl: require.resolve('./empty'),
+        tls: require.resolve('./empty'),
       },
     },
   }
@@ -93,10 +102,12 @@ const getDefaultWebpackOptions = (file, options = {}) => {
     })
 
     config.resolve.extensions = config.resolve.extensions.concat(['.ts', '.tsx'])
-    config.resolve.plugins = [new TsconfigPathsPlugin({
-      configFile,
-      silent: true,
-    })]
+    config.resolve.plugins = [
+      new TsconfigPathsPlugin({
+        configFile,
+        silent: true,
+      }),
+    ]
   }
 
   return config
@@ -107,7 +118,11 @@ const typescriptExtensionRegex = /\.tsx?$/
 const preprocessor = (options = {}) => {
   return (file) => {
     if (!options.typescript && typescriptExtensionRegex.test(file.filePath)) {
-      return Promise.reject(new Error(`You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support.\n\nThe file: ${file.filePath}`))
+      return Promise.reject(
+        new Error(
+          `You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support.\n\nThe file: ${file.filePath}`
+        )
+      )
     }
 
     options.webpackOptions = options.webpackOptions || getDefaultWebpackOptions(file, options)

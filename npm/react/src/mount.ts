@@ -41,37 +41,25 @@ export const mount = (jsx: React.ReactNode, options: MountOptions = {}) => {
   // @ts-ignore FIXME
   const componentName = getDisplayName(jsx.type, options.alias)
   const displayName = options.alias || componentName
-  const message = options.alias
-    ? `<${componentName} ... /> as "${options.alias}"`
-    : `<${componentName} ... />`
+  const message = options.alias ? `<${componentName} ... /> as "${options.alias}"` : `<${componentName} ... />`
 
-  return cy
-  .then(injectStyles(options))
-  .then(() => {
+  return cy.then(injectStyles(options)).then(() => {
     const reactDomToUse = options.ReactDom || ReactDOM
 
     const el = document.getElementById(ROOT_ID)
 
     if (!el) {
-      throw new Error(
-        [
-          '[@cypress/react] 🔥 Hmm, cannot find root element to mount the component.',
-        ].join(' '),
-      )
+      throw new Error(['[@cypress/react] 🔥 Hmm, cannot find root element to mount the component.'].join(' '))
     }
 
     const key =
-        // @ts-ignore provide unique key to the the wrapped component to make sure we are rerendering between tests
-        (Cypress?.mocha?.getRunner()?.test?.title || '') + Math.random()
+      // @ts-ignore provide unique key to the the wrapped component to make sure we are rerendering between tests
+      (Cypress?.mocha?.getRunner()?.test?.title || '') + Math.random()
     const props = {
       key,
     }
 
-    const reactComponent = React.createElement(
-      options.strict ? React.StrictMode : React.Fragment,
-      props,
-      jsx,
-    )
+    const reactComponent = React.createElement(options.strict ? React.StrictMode : React.Fragment, props, jsx)
     // since we always surround the component with a fragment
     // let's get back the original component
     // @ts-ignore
@@ -92,17 +80,19 @@ export const mount = (jsx: React.ReactNode, options: MountOptions = {}) => {
             home: 'https://github.com/cypress-io/cypress',
           }
         },
-      }).snapshot('mounted').end()
+      })
+        .snapshot('mounted')
+        .end()
     }
 
     return (
       cy
-      .wrap(userComponent, { log: false })
-      .as(displayName)
-      // by waiting, we delaying test execution for the next tick of event loop
-      // and letting hooks and component lifecycle methods to execute mount
-      // https://github.com/bahmutov/cypress-react-unit-test/issues/200
-      .wait(0, { log: false })
+        .wrap(userComponent, { log: false })
+        .as(displayName)
+        // by waiting, we delaying test execution for the next tick of event loop
+        // and letting hooks and component lifecycle methods to execute mount
+        // https://github.com/bahmutov/cypress-react-unit-test/issues/200
+        .wait(0, { log: false })
     )
   })
 }
@@ -176,10 +166,7 @@ Cypress.on('test:before:run', () => {
  ```
  **/
 export const createMount = (defaultOptions: MountOptions) => {
-  return (
-    element: React.ReactElement,
-    options?: MountOptions,
-  ) => {
+  return (element: React.ReactElement, options?: MountOptions) => {
     return mount(element, { ...defaultOptions, ...options })
   }
 }
@@ -300,10 +287,7 @@ export declare namespace Cypress {
     ```
     **/
     // mount: (component: Symbol, alias?: string) => Chainable<void>
-    get<S = any>(
-      alias: string | symbol | Function,
-      options?: Partial<any>,
-    ): Chainable<any>
+    get<S = any>(alias: string | symbol | Function, options?: Partial<any>): Chainable<any>
   }
 }
 

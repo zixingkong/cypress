@@ -18,37 +18,19 @@
       "domainEmitter": {
         "_readableState": {
           "highWaterMark": 65536,
-          "buffer": [
-            
-          ],
+          "buffer": [],
           "length": 0,
           "pipes": {
             "domain": {
               "domain": null,
-              "_events": {
-                
-              },
+              "_events": {},
               "_maxListeners": 10,
-              "members": [
-                
-              ]
+              "members": []
             },
             "_events": {
-              "end": [
-                null,
-                null,
-                null
-              ],
-              "error": [
-                null,
-                null,
-                null
-              ],
-              "close": [
-                null,
-                null,
-                null
-              ]
+              "end": [null, null, null],
+              "error": [null, null, null],
+              "close": [null, null, null]
             },
             "_maxListeners": 10,
             "writable": true,
@@ -79,10 +61,7 @@
           "$ref": "$[\"error\"][\"domainEmitter\"][\"_readableState\"][\"pipes\"][\"domain\"]"
         },
         "_events": {
-          "end": [
-            null,
-            null
-          ]
+          "end": [null, null]
         },
         "_maxListeners": 10,
         "path": "../WebApp-Node/test/folders",

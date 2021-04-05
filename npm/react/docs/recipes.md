@@ -139,7 +139,7 @@ module.exports = (on, config) => {
     rollupPreprocessor({
       // this is the default value
       configFile: 'rollup.config.js',
-    }),
+    })
   )
 
   require('@cypress/code-coverage/task')(on, config)

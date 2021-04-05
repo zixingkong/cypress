@@ -12,19 +12,18 @@
   background-color: white;
   box-shadow: $shadow-xs;
   z-index: 1;
-  
-  input { 
+
+  input {
     width: 100%;
     font-size: 18px;
     height: 32px;
     color: #848484;
     border-radius: 6px;
-    border: 1px solid #E8E8EC;
+    border: 1px solid #e8e8ec;
     padding: 0 8px 0 16px;
 
-
     &::placeholder {
-      color: #B4B5BC;
+      color: #b4b5bc;
     }
 
     // avoid default focus outline because of input border radius

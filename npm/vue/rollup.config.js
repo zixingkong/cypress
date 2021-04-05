@@ -12,23 +12,13 @@ const banner = `
  */
 `
 
-function createEntry (options) {
-  const {
-    format,
-    input,
-    isBrowser,
-  } = options
+function createEntry(options) {
+  const { format, input, isBrowser } = options
 
   const config = {
     input,
-    external: [
-      'vue',
-      '@vue/test-utils',
-      '@cypress/webpack-dev-server',
-    ],
-    plugins: [
-      resolve({ preferBuiltins: true }), commonjs(),
-    ],
+    external: ['vue', '@vue/test-utils', '@cypress/webpack-dev-server'],
+    plugins: [resolve({ preferBuiltins: true }), commonjs()],
     output: {
       banner,
       name: 'CypressVue',
@@ -70,7 +60,7 @@ function createEntry (options) {
         },
         exclude: ['tests'],
       },
-    }),
+    })
   )
 
   return config
@@ -82,5 +72,9 @@ export default [
   createEntry({ format: 'iife', input: 'src/index.ts', isBrowser: true }),
   createEntry({ format: 'cjs', input: 'src/index.ts', isBrowser: false }),
   createEntry({ format: 'cjs', input: 'src/support.js', isBrowser: false }),
-  createEntry({ format: 'cjs', input: 'src/plugins/webpack/index.js', isBrowser: false }),
+  createEntry({
+    format: 'cjs',
+    input: 'src/plugins/webpack/index.js',
+    isBrowser: false,
+  }),
 ]

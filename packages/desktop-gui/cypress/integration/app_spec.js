@@ -46,8 +46,7 @@ describe('App', function () {
 
       setTimeout(() => {
         return this.win.foo()
-      }
-      , 0)
+      }, 0)
 
       cy.wrap({}).should(function () {
         expect(this.ipc.guiError).to.be.calledWithExactly({

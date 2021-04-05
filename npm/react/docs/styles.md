@@ -69,12 +69,8 @@ describe('footer component', () => {
     // add a section with class "todoapp" around the footer
     mount(
       <section className="todoapp">
-        <Footer
-          itemsLeft={10}
-          completedCount={2}
-          onClearCompleted={cy.stub().as('clear')}
-        />
-      </section>,
+        <Footer itemsLeft={10} completedCount={2} onClearCompleted={cy.stub().as('clear')} />
+      </section>
     )
     // component is running like a mini web app
     // we can interact with it using normal Cypress commands
@@ -122,11 +118,7 @@ it('can be passed as an option', () => {
     }
   `
   cy.mount(<Button name="Orange" orange />, { style })
-  cy.get('.orange button').should(
-    'have.css',
-    'background-color',
-    'rgb(245, 146, 62)',
-  )
+  cy.get('.orange button').should('have.css', 'background-color', 'rgb(245, 146, 62)')
 })
 ```
 
@@ -143,8 +135,6 @@ See [cypress/integration/inject-style-spec.js](cypress/integration/inject-style-
 
 ```js
 mount(<Todo todo={todo} />, {
-  stylesheets: [
-    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-  ],
+  stylesheets: ['https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'],
 })
 ```

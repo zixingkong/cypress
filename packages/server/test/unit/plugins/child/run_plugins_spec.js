@@ -14,7 +14,7 @@ const browserUtils = require(`${root}../../lib/browsers/utils`)
 const Fixtures = require(`${root}../../test/support/helpers/fixtures`)
 
 const colorCodeRe = /\[[0-9;]+m/gm
-const pathRe = /\/?([a-z0-9_-]+\/)*[a-z0-9_-]+\/([a-z_]+\.\w+)[:0-9]+/gmi
+const pathRe = /\/?([a-z0-9_-]+\/)*[a-z0-9_-]+\/([a-z_]+\.\w+)[:0-9]+/gim
 
 const deferred = () => {
   let reject
@@ -61,10 +61,7 @@ describe('lib/plugins/child/run_plugins', () => {
 
   it('sends error message if requiring pluginsFile errors', function () {
     // path for substitute is relative to lib/plugins/child/plugins_child.js
-    mockery.registerSubstitute(
-      'plugins-file',
-      Fixtures.path('server/throws_error.js'),
-    )
+    mockery.registerSubstitute('plugins-file', Fixtures.path('server/throws_error.js'))
 
     runPlugins(this.ipc, 'plugins-file', 'proj-root')
     expect(this.ipc.send).to.be.calledWith('load:error', 'PLUGINS_FILE_ERROR', 'plugins-file')
@@ -74,15 +71,14 @@ describe('lib/plugins/child/run_plugins', () => {
 
   it('sends error message if pluginsFile has syntax error', function () {
     // path for substitute is relative to lib/plugins/child/plugins_child.js
-    mockery.registerSubstitute(
-      'plugins-file',
-      Fixtures.path('server/syntax_error.js'),
-    )
+    mockery.registerSubstitute('plugins-file', Fixtures.path('server/syntax_error.js'))
 
     runPlugins(this.ipc, 'plugins-file', 'proj-root')
     expect(this.ipc.send).to.be.calledWith('load:error', 'PLUGINS_FILE_ERROR', 'plugins-file')
 
-    return snapshot(withoutColorCodes(withoutPath(this.ipc.send.lastCall.args[3].replace(/( +at[^$]+$)+/g, '[stack trace]'))))
+    return snapshot(
+      withoutColorCodes(withoutPath(this.ipc.send.lastCall.args[3].replace(/( +at[^$]+$)+/g, '[stack trace]')))
+    )
   })
 
   it('sends error message if pluginsFile does not export a function', function () {
@@ -128,7 +124,7 @@ describe('lib/plugins/child/run_plugins', () => {
     })
   })
 
-  describe('on \'load\' message', () => {
+  describe("on 'load' message", () => {
     it('sends loaded event with registrations', function () {
       const pluginsDeferred = deferred()
       const config = { projectRoot: '/project/root' }
@@ -146,9 +142,7 @@ describe('lib/plugins/child/run_plugins', () => {
 
       pluginsDeferred.resolve(config)
 
-      return Promise
-      .delay(10)
-      .then(() => {
+      return Promise.delay(10).then(() => {
         expect(this.ipc.send).to.be.calledWith('loaded', config)
         const registrations = this.ipc.send.lastCall.args[2]
 
@@ -186,9 +180,7 @@ describe('lib/plugins/child/run_plugins', () => {
 
       pluginsDeferred.resolve(config)
 
-      return Promise
-      .delay(10)
-      .then(() => {
+      return Promise.delay(10).then(() => {
         const registrations = this.ipc.send.lastCall.args[2]
 
         expect(webpackPreprocessor).to.be.calledWith({
@@ -228,9 +220,7 @@ describe('lib/plugins/child/run_plugins', () => {
 
       pluginsDeferred.resolve(config)
 
-      return Promise
-      .delay(10)
-      .then(() => {
+      return Promise.delay(10).then(() => {
         const registrations = this.ipc.send.lastCall.args[2]
 
         expect(webpackPreprocessor).not.to.be.called
@@ -298,7 +288,7 @@ describe('lib/plugins/child/run_plugins', () => {
     })
   })
 
-  describe('on \'execute\' message', () => {
+  describe("on 'execute' message", () => {
     beforeEach(function () {
       sinon.stub(preprocessor, 'wrap')
 

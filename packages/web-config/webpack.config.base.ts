@@ -18,7 +18,8 @@ const watchModeEnabled = args.includes('--watch') || args.includes('-w')
 
 // opt out of livereload with arg --no-livereload
 // eslint-disable-next-line no-console
-if (liveReloadEnabled && watchModeEnabled) console.log(chalk.gray(`\nLive Reloading is enabled. use ${chalk.bold('--no-livereload')} to disable`))
+if (liveReloadEnabled && watchModeEnabled)
+  console.log(chalk.gray(`\nLive Reloading is enabled. use ${chalk.bold('--no-livereload')} to disable`))
 
 process.env.NODE_ENV = env
 
@@ -30,7 +31,7 @@ const evalDevToolPlugin = new webpack.EvalDevToolModulePlugin({
 
 evalDevToolPlugin.evalDevToolPlugin = true
 
-function makeSassLoaders ({ modules }): RuleSetRule {
+function makeSassLoaders({ modules }): RuleSetRule {
   const exclude = [/node_modules/]
 
   if (!modules) exclude.push(/\.modules?\.s[ac]ss$/i)
@@ -51,7 +52,10 @@ function makeSassLoaders ({ modules }): RuleSetRule {
         loader: require.resolve('postcss-loader'),
         options: {
           plugins: [
-            require('autoprefixer')({ overrideBrowserslist: ['last 2 versions'], cascade: false }),
+            require('autoprefixer')({
+              overrideBrowserslist: ['last 2 versions'],
+              cascade: false,
+            }),
           ],
         },
       },
@@ -113,7 +117,7 @@ const getCommonConfig = () => {
                 [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
               ],
               presets: [
-                [require.resolve('@babel/preset-env'), { targets: { 'chrome': 63 } }],
+                [require.resolve('@babel/preset-env'), { targets: { chrome: 63 } }],
                 require.resolve('@babel/preset-react'),
                 [require.resolve('@babel/preset-typescript'), { allowNamespaces: true }],
               ],
@@ -124,9 +128,7 @@ const getCommonConfig = () => {
         {
           test: /\.s?css$/,
           exclude: /node_modules/,
-          use: [
-            { loader: MiniCSSExtractWebpackPlugin.loader },
-          ],
+          use: [{ loader: MiniCSSExtractWebpackPlugin.loader }],
         },
         makeSassLoaders({ modules: false }),
         makeSassLoaders({ modules: true }),
@@ -194,12 +196,22 @@ const getCommonConfig = () => {
       // })] :
 
       ...[
-        (env === 'production'
-          ? new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') })
-          : evalDevToolPlugin
-        ),
+        env === 'production'
+          ? new DefinePlugin({
+              'process.env.NODE_ENV': JSON.stringify('production'),
+            })
+          : evalDevToolPlugin,
       ],
-      ...(liveReloadEnabled ? [new LiveReloadPlugin({ appendScriptTag: 'true', port: 0, hostname: 'localhost', protocol: 'http' })] : []),
+      ...(liveReloadEnabled
+        ? [
+            new LiveReloadPlugin({
+              appendScriptTag: 'true',
+              port: 0,
+              hostname: 'localhost',
+              protocol: 'http',
+            }),
+          ]
+        : []),
     ],
 
     cache: true,

@@ -12,17 +12,20 @@
       window.customElementAttributeChanged = function () {}
 
       if (window.customElements) {
-        window.customElements.define('cy-custom-element', class extends HTMLElement {
-          constructor () {
-            super()
+        window.customElements.define(
+          'cy-custom-element',
+          class extends HTMLElement {
+            constructor() {
+              super()
 
-            window.customElementConstructor()
-          }
+              window.customElementConstructor()
+            }
 
-          attributeChangedCallback () {
-            window.customElementAttributeChanged()
+            attributeChangedCallback() {
+              window.customElementAttributeChanged()
+            }
           }
-        })
+        )
       }
     </script>
   </body>

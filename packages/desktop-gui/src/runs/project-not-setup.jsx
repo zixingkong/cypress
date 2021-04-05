@@ -18,55 +18,48 @@ export default class ProjectNotSetup extends Component {
     setupProjectOpen: false,
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.state.setupProjectOpen && !authStore.isAuthenticated) {
       this._openLogin()
       this.setState({ setupProjectOpen: false })
     }
   }
 
-  render () {
+  render() {
     return (
       <div className="empty">
-        {
-          this.state.setupProjectOpen && authStore.isAuthenticated ?
-            this._projectSetup()
-            :
-            this.props.isValid ?
-              this._getStartedWithCI()
-              :
-              this._invalidProject()
-        }
+        {this.state.setupProjectOpen && authStore.isAuthenticated
+          ? this._projectSetup()
+          : this.props.isValid
+          ? this._getStartedWithCI()
+          : this._invalidProject()}
       </div>
     )
   }
 
-  _getStartedWithCI () {
+  _getStartedWithCI() {
     return (
-      <div className='empty-no-runs'>
+      <div className="empty-no-runs">
         <div>
-          <DashboardBanner/>
+          <DashboardBanner />
           <h4>Connect to the Dashboard to see your recorded test results here!</h4>
           <h5>Sign up and get started for free.</h5>
-          <button
-            className='btn btn-primary btn-wide'
-            onClick={this._showSetupProject}
-          >
+          <button className="btn btn-primary btn-wide" onClick={this._showSetupProject}>
             Connect to Dashboard
           </button>
         </div>
-        <div className='what-is-dashboard'>
+        <div className="what-is-dashboard">
           <h5>What is the Dashboard?</h5>
-          <div className='columns'>
-            <div className='column'>
+          <div className="columns">
+            <div className="column">
               <IconFailurePoint />
               <span>See exact point of failure of tests running in CI.</span>
             </div>
-            <div className='column'>
+            <div className="column">
               <IconSupercharge />
               <span>Supercharge test times with parallelization.</span>
             </div>
-            <div className='column'>
+            <div className="column">
               <IconFailAlerts />
               <span>Get instant test failure alerts via Slack or GitHub.</span>
             </div>
@@ -76,22 +69,23 @@ export default class ProjectNotSetup extends Component {
     )
   }
 
-  _invalidProject () {
+  _invalidProject() {
     return (
-      <div className='empty-runs-not-displayed'>
+      <div className="empty-runs-not-displayed">
         <h4>
-          <i className='fas fa-exclamation-triangle errored' />{' '}
-          Runs cannot be displayed
+          <i className="fas fa-exclamation-triangle errored" /> Runs cannot be displayed
         </h4>
-        <p>We were unable to find an existing project matching the <code>projectId</code> in your {configFileFormatted(this.props.project.configFile)}.</p>
-        <p>To see runs for a current project, add the correct <code>projectId</code> to your {configFileFormatted(this.props.project.configFile)}.</p>
+        <p>
+          We were unable to find an existing project matching the <code>projectId</code> in your{' '}
+          {configFileFormatted(this.props.project.configFile)}.
+        </p>
+        <p>
+          To see runs for a current project, add the correct <code>projectId</code> to your{' '}
+          {configFileFormatted(this.props.project.configFile)}.
+        </p>
         <p>- or -</p>
-        <button
-          className='btn btn-warning'
-          onClick={this._showSetupProject}
-        >
-          <i className='fas fa-wrench' />{' '}
-          Set up a project
+        <button className="btn btn-warning" onClick={this._showSetupProject}>
+          <i className="fas fa-wrench" /> Set up a project
         </button>
         <p>
           <small>You can link to an existing project or create a new project.</small>
@@ -100,14 +94,8 @@ export default class ProjectNotSetup extends Component {
     )
   }
 
-  _projectSetup () {
-    return (
-      <SetupProject
-        project={this.props.project}
-        onSetup={this._setupProject}
-        onClose={this._hideSetupProject}
-      />
-    )
+  _projectSetup() {
+    return <SetupProject project={this.props.project} onSetup={this._setupProject} onClose={this._hideSetupProject} />
   }
 
   _hideSetupProject = () => {

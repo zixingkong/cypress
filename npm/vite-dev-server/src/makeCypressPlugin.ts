@@ -12,27 +12,29 @@ const INIT_FILEPATH = resolve(__dirname, '../client/initCypressTests.js')
 export const makeCypressPlugin = (
   projectRoot: string,
   supportFilePath: string,
-  devServerEvents: EventEmitter,
+  devServerEvents: EventEmitter
 ): Plugin => {
   let base = '/'
 
   return {
     name: pluginName,
     enforce: 'pre',
-    config (_, env) {
+    config(_, env) {
       if (env) {
         return {
           define: {
-            'import.meta.env.__cypress_supportPath': JSON.stringify(supportFilePath ? resolve(projectRoot, supportFilePath) : undefined),
+            'import.meta.env.__cypress_supportPath': JSON.stringify(
+              supportFilePath ? resolve(projectRoot, supportFilePath) : undefined
+            ),
             'import.meta.env.__cypress_originAutUrl': JSON.stringify('__cypress/iframes/'),
           },
         }
       }
     },
-    configResolved (config) {
+    configResolved(config) {
       base = config.base
     },
-    transformIndexHtml () {
+    transformIndexHtml() {
       return [
         // load the script at the end of the body
         // script has to be loaded when the vite client is connected
@@ -45,7 +47,9 @@ export const makeCypressPlugin = (
       ]
     },
     configureServer: async (server: ViteDevServer) => {
-      const indexHtml = await read(resolve(__dirname, '..', 'index.html'), { encoding: 'utf8' })
+      const indexHtml = await read(resolve(__dirname, '..', 'index.html'), {
+        encoding: 'utf8',
+      })
 
       const transformedIndexHtml = await server.transformIndexHtml(base, indexHtml)
 

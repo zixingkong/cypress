@@ -23,13 +23,14 @@ if (!module.parent) {
     const filenames = process.argv.slice(2)
 
     Bluebird.each(filenames, (filename) => {
-      launcher.detectByPath(filename)
-      .then((foundBrowser) => {
-        console.log(` 👍 Found "${filename}":`, foundBrowser)
-      })
-      .catch((err) => {
-        console.log(` 👎 Couldn't find "${filename}:"`, err.message)
-      })
+      launcher
+        .detectByPath(filename)
+        .then((foundBrowser) => {
+          console.log(` 👍 Found "${filename}":`, foundBrowser)
+        })
+        .catch((err) => {
+          console.log(` 👎 Couldn't find "${filename}:"`, err.message)
+        })
     })
   } else {
     launcher.detect().then((browsers) => {

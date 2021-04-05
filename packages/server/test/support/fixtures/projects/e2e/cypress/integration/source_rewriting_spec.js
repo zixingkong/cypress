@@ -111,7 +111,9 @@ describe('source rewriting spec', function () {
     // NOTE: user's repro
     it.skip('Login demo', function () {
       // cy.on('fail', console.error)
-      cy.visit('https://apex.oracle.com/pls/apex/f?p=54707:LOGIN_DESKTOP', { timeout: 60000 })
+      cy.visit('https://apex.oracle.com/pls/apex/f?p=54707:LOGIN_DESKTOP', {
+        timeout: 60000,
+      })
       cy.get('#P9999_USERNAME').type('ApexUser')
       cy.get('#P9999_PASSWORD').type('Oradoc_db1')
       cy.get('.t-Button').click()
@@ -120,7 +122,7 @@ describe('source rewriting spec', function () {
 
   // NOTE: skip in CI for now - can be flaky
   context.skip('can load some well-known sites in a timely manner', () => {
-    [
+    ;[
       // FIXME: has to be HTTPS - https://github.com/cypress-io/cypress/issues/7268
       // 'http://apple.com',
       'http://google.com',

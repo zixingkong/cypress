@@ -79,11 +79,11 @@
       padding: 10px 5px;
 
       &.passed {
-        color: #23AE89;
+        color: #23ae89;
       }
 
       &.failed {
-        color: #E94B3B;
+        color: #e94b3b;
       }
 
       &.pending {
@@ -120,7 +120,7 @@
       margin-right: 5px;
 
       label {
-        background-color: #CC4239;
+        background-color: #cc4239;
       }
     }
 
@@ -164,7 +164,7 @@
 
   // utilizing element size queries: https://github.com/marcj/css-element-queries
   // styles take effect when width is greater than or equal to the specified amount
-  &[min-width~="398px"] {
+  &[min-width~='398px'] {
     header button {
       width: 50px;
     }

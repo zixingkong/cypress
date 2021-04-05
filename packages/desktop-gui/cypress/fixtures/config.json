@@ -121,10 +121,7 @@
   "cypressHostUrl": "http://localhost:2020",
   "cypressEnv": "development",
   "env": {},
-  "blockHosts": [
-    "www.google-analytics.com",
-    "hotjar.com"
-  ],
+  "blockHosts": ["www.google-analytics.com", "hotjar.com"],
   "execTimeout": 60000,
   "fileServerFolder": "/Users/jennifer/Dev/Projects/cypress-example-kitchensink",
   "fixturesFolder": "/Users/jennifer/Dev/Projects/cypress-example-kitchensink/cypress/fixtures",
@@ -394,10 +391,7 @@
     },
     "blockHosts": {
       "from": "config",
-      "value": [
-        "www.google-analytics.com",
-        "hotjar.com"
-      ]
+      "value": ["www.google-analytics.com", "hotjar.com"]
     },
     "hosts": {
       "from": "config",

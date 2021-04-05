@@ -14,10 +14,7 @@ const ScriptError = observer(({ error }) => {
 
   const errorHTML = convert.toHtml(error.error)
 
-  return (
-    <pre className='script-error' dangerouslySetInnerHTML={{ __html: errorHTML }}>
-    </pre>
-  )
+  return <pre className="script-error" dangerouslySetInnerHTML={{ __html: errorHTML }}></pre>
 })
 
 export default ScriptError

@@ -1,9 +1,5 @@
 import { NetworkProxy } from '../../'
-import {
-  netStubbingState as _netStubbingState,
-  NetStubbingState,
-  onNetEvent,
-} from '@packages/net-stubbing'
+import { netStubbingState as _netStubbingState, NetStubbingState, onNetEvent } from '@packages/net-stubbing'
 import { defaultMiddleware } from '../../lib/http'
 import express from 'express'
 import sinon from 'sinon'
@@ -57,10 +53,12 @@ context('network stubbing', () => {
 
     destinationApp.get('/', (req, res) => res.send('it worked'))
 
-    server = allowDestroy(destinationApp.listen(() => {
-      destinationPort = server.address().port
-      done()
-    }))
+    server = allowDestroy(
+      destinationApp.listen(() => {
+        destinationPort = server.address().port
+        done()
+      })
+    )
   })
 
   afterEach(() => {
@@ -68,17 +66,15 @@ context('network stubbing', () => {
   })
 
   it('can make a vanilla request', (done) => {
-    supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .expect('it worked', done)
+    supertest(app).get(`/http://localhost:${destinationPort}`).expect('it worked', done)
   })
 
   it('does not add CORS headers to all responses', () => {
     return supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .then((res) => {
-      expect(res.headers).to.not.have.property('access-control-allow-origin')
-    })
+      .get(`/http://localhost:${destinationPort}`)
+      .then((res) => {
+        expect(res.headers).to.not.have.property('access-control-allow-origin')
+      })
   })
 
   it('adds CORS headers to static stubs', () => {
@@ -95,15 +91,15 @@ context('network stubbing', () => {
     })
 
     return supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .then((res) => {
-      expect(res.headers).to.include({
-        'access-control-allow-origin': '*',
-        'access-control-allow-credentials': 'true',
-      })
+      .get(`/http://localhost:${destinationPort}`)
+      .then((res) => {
+        expect(res.headers).to.include({
+          'access-control-allow-origin': '*',
+          'access-control-allow-credentials': 'true',
+        })
 
-      expect(res.text).to.eq('foo')
-    })
+        expect(res.text).to.eq('foo')
+      })
   })
 
   it('does not override CORS headers', () => {
@@ -123,12 +119,12 @@ context('network stubbing', () => {
     })
 
     return supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .then((res) => {
-      expect(res.headers).to.include({
-        'access-control-allow-origin': 'something',
+      .get(`/http://localhost:${destinationPort}`)
+      .then((res) => {
+        expect(res.headers).to.include({
+          'access-control-allow-origin': 'something',
+        })
       })
-    })
   })
 
   it('uses Origin to set CORS header', () => {
@@ -145,13 +141,13 @@ context('network stubbing', () => {
     })
 
     return supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .set('Origin', 'http://foo.com')
-    .then((res) => {
-      expect(res.headers).to.include({
-        'access-control-allow-origin': 'http://foo.com',
+      .get(`/http://localhost:${destinationPort}`)
+      .set('Origin', 'http://foo.com')
+      .then((res) => {
+        expect(res.headers).to.include({
+          'access-control-allow-origin': 'http://foo.com',
+        })
       })
-    })
   })
 
   it('adds CORS headers to dynamically intercepted requests', () => {
@@ -187,14 +183,14 @@ context('network stubbing', () => {
     })
 
     return supertest(app)
-    .get(`/http://localhost:${destinationPort}`)
-    .then((res) => {
-      expect(res.headers).to.include({
-        'access-control-allow-origin': '*',
-      })
+      .get(`/http://localhost:${destinationPort}`)
+      .then((res) => {
+        expect(res.headers).to.include({
+          'access-control-allow-origin': '*',
+        })
 
-      expect(res.text).to.eq('replaced')
-    })
+        expect(res.text).to.eq('replaced')
+      })
   })
 
   it('does not modify multipart/form-data files', () => {
@@ -251,11 +247,17 @@ context('network stubbing', () => {
     })
 
     return supertest(app)
-    .post(`/http://localhost:${destinationPort}`)
-    .attach('file', Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64')) // 1 pixel png image
-    .then(() => {
-      expect(sendContentLength).to.eq(receivedContentLength)
-      expect(sendContentLength).to.eq(realContentLength)
-    })
+      .post(`/http://localhost:${destinationPort}`)
+      .attach(
+        'file',
+        Buffer.from(
+          'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+          'base64'
+        )
+      ) // 1 pixel png image
+      .then(() => {
+        expect(sendContentLength).to.eq(receivedContentLength)
+        expect(sendContentLength).to.eq(realContentLength)
+      })
   })
 })

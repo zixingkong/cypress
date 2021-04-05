@@ -3,13 +3,13 @@ const terminalSize = require('./terminal-size')
 
 // polyfills node's getWindowSize
 // by returning an array of columns/rows
-function getWindowSize () {
+function getWindowSize() {
   const { columns, rows } = terminalSize.get()
 
   return [columns, rows]
 }
 
-function patchStream (patched, name) {
+function patchStream(patched, name) {
   const stream = process[name]
 
   stream.isTTY = true

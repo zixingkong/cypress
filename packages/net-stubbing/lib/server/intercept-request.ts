@@ -3,27 +3,11 @@ import { concatStream } from '@packages/network'
 import Debug from 'debug'
 import url from 'url'
 
-import {
-  CypressIncomingRequest,
-  RequestMiddleware,
-} from '@packages/proxy'
-import {
-  BackendRoute,
-  BackendRequest,
-  NetStubbingState,
-} from './types'
-import {
-  CyHttpMessages,
-  NetEventFrames,
-  SERIALIZABLE_REQ_PROPS,
-} from '../types'
+import { CypressIncomingRequest, RequestMiddleware } from '@packages/proxy'
+import { BackendRoute, BackendRequest, NetStubbingState } from './types'
+import { CyHttpMessages, NetEventFrames, SERIALIZABLE_REQ_PROPS } from '../types'
 import { getRouteForRequest, matchesRoutePreflight } from './route-matching'
-import {
-  sendStaticResponse,
-  emit,
-  setResponseFromFixture,
-  setDefaultHeaders,
-} from './util'
+import { sendStaticResponse, emit, setResponseFromFixture, setDefaultHeaders } from './util'
 import CyServer from '@packages/server'
 
 const debug = Debug('cypress:net-stubbing:server:intercept-request')
@@ -55,7 +39,11 @@ export const InterceptRequest: RequestMiddleware = function () {
 
   const requestId = _.uniqueId('interceptedRequest')
 
-  debug('intercepting request %o', { requestId, route, req: _.pick(this.req, 'url') })
+  debug('intercepting request %o', {
+    requestId,
+    route,
+    req: _.pick(this.req, 'url'),
+  })
 
   const request: BackendRequest = {
     requestId,
@@ -78,7 +66,12 @@ export const InterceptRequest: RequestMiddleware = function () {
   _interceptRequest(this.netStubbingState, request, route, this.socket)
 }
 
-function _interceptRequest (state: NetStubbingState, request: BackendRequest, route: BackendRoute, socket: CyServer.Socket) {
+function _interceptRequest(
+  state: NetStubbingState,
+  request: BackendRequest,
+  route: BackendRoute,
+  socket: CyServer.Socket
+) {
   const notificationOnly = !route.hasInterceptor
 
   const frame: NetEventFrames.HttpRequestReceived = {
@@ -96,7 +89,9 @@ function _interceptRequest (state: NetStubbingState, request: BackendRequest, ro
       routeHandlerId: route.handlerId!,
     })
 
-    debug('request/response finished, cleaning up %o', { requestId: request.requestId })
+    debug('request/response finished, cleaning up %o', {
+      requestId: request.requestId,
+    })
     delete state.requests[request.requestId]
   })
 
@@ -109,13 +104,15 @@ function _interceptRequest (state: NetStubbingState, request: BackendRequest, ro
       return cb()
     }
 
-    request.req.pipe(concatStream((reqBody) => {
-      const contentType = frame.req.headers['content-type']
-      const isMultipart = contentType && contentType.includes('multipart/form-data')
+    request.req.pipe(
+      concatStream((reqBody) => {
+        const contentType = frame.req.headers['content-type']
+        const isMultipart = contentType && contentType.includes('multipart/form-data')
 
-      request.req.body = frame.req.body = isMultipart ? reqBody : reqBody.toString()
-      cb()
-    }))
+        request.req.body = frame.req.body = isMultipart ? reqBody : reqBody.toString()
+        cb()
+      })
+    )
   }
 
   if (route.staticResponse) {
@@ -147,7 +144,11 @@ function _interceptRequest (state: NetStubbingState, request: BackendRequest, ro
 /**
  * If applicable, return the route that is next in line after `prevRouteHandlerId` to handle `req`.
  */
-function getNextRoute (state: NetStubbingState, req: CypressIncomingRequest, prevRouteHandlerId: string): BackendRoute | undefined {
+function getNextRoute(
+  state: NetStubbingState,
+  req: CypressIncomingRequest,
+  prevRouteHandlerId: string
+): BackendRoute | undefined {
   const prevRoute = _.find(state.routes, { handlerId: prevRouteHandlerId })
 
   if (!prevRoute) {
@@ -157,11 +158,17 @@ function getNextRoute (state: NetStubbingState, req: CypressIncomingRequest, pre
   return getRouteForRequest(state.routes, req, prevRoute)
 }
 
-export async function onRequestContinue (state: NetStubbingState, frame: NetEventFrames.HttpRequestContinue, socket: CyServer.Socket) {
+export async function onRequestContinue(
+  state: NetStubbingState,
+  frame: NetEventFrames.HttpRequestContinue,
+  socket: CyServer.Socket
+) {
   const backendRequest = state.requests[frame.requestId]
 
   if (!backendRequest) {
-    debug('onRequestContinue received but no backendRequest exists %o', { frame })
+    debug('onRequestContinue received but no backendRequest exists %o', {
+      frame,
+    })
 
     return
   }

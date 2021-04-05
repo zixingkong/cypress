@@ -6,7 +6,5 @@
  */
 module.exports = {
   ...require('../../.releaserc.base'),
-  branches: [
-    { name: 'master', channel: 'next' },
-  ],
+  branches: [{ name: 'master', channel: 'next' }],
 }

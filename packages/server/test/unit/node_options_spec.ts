@@ -39,9 +39,10 @@ describe('NODE_OPTIONS lib', function () {
       beforeEach(() => {
         fakeProc = new EventEmitter()
 
-        sinon.stub(cp, 'spawn')
-        .withArgs(process.execPath, sinon.match.any, { stdio: 'inherit' })
-        .returns(fakeProc as ChildProcess)
+        sinon
+          .stub(cp, 'spawn')
+          .withArgs(process.execPath, sinon.match.any, { stdio: 'inherit' })
+          .returns(fakeProc as ChildProcess)
 
         sinon.stub(process, 'exit')
       })

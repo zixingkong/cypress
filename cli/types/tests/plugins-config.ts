@@ -61,11 +61,11 @@ const pluginConfig2: Cypress.PluginConfig = (on, config) => {
   on('task', {
     foo() {
       return true
-    }
+    },
   })
 
   return {
-    baseUrl: 'http://localhost:3000'
+    baseUrl: 'http://localhost:3000',
   }
 }
 
@@ -100,17 +100,18 @@ const pluginConfig4: Cypress.PluginConfig = (on, config) => {
   on('task', {
     foo() {
       return Promise.resolve([])
-    }
+    },
   })
 
   return Promise.resolve({
-    baseUrl: 'http://localhost:3000'
+    baseUrl: 'http://localhost:3000',
   })
 }
 
 // does not allow returning unknown properties
-const pluginConfig5: Cypress.PluginConfig = (on, config) => { // $ExpectError
+const pluginConfig5: Cypress.PluginConfig = (on, config) => {
+  // $ExpectError
   return {
-    unknownKey: 42
+    unknownKey: 42,
   }
 }

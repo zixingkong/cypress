@@ -8,7 +8,9 @@ window.it = (title, ...args) => {
 }
 
 window.it.only = () => {
-  throw new Error('Instead of putting .only in the spec-under-test, put it in the corresponding test in the parent spec (reporter.error.spec.js, etc)')
+  throw new Error(
+    'Instead of putting .only in the spec-under-test, put it in the corresponding test in the parent spec (reporter.error.spec.js, etc)'
+  )
 }
 
 // eslint-disable-next-line

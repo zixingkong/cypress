@@ -10,13 +10,26 @@ describe('FilePreference', () => {
   const availableEditors = [
     { id: 'atom', name: 'Atom', isOther: false, openerId: 'atom' },
     { id: 'vim', name: 'Vim', isOther: false, openerId: 'vim' },
-    { id: 'sublime', name: 'Sublime Text', isOther: false, openerId: 'sublime' },
-    { id: 'vscode', name: 'Visual Studio Code', isOther: false, openerId: 'vscode' },
+    {
+      id: 'sublime',
+      name: 'Sublime Text',
+      isOther: false,
+      openerId: 'sublime',
+    },
+    {
+      id: 'vscode',
+      name: 'Visual Studio Code',
+      isOther: false,
+      openerId: 'vscode',
+    },
     { id: 'other', name: 'Other', isOther: true, openerId: '' },
   ]
 
   it('shows editor choice', () => {
-    const editorsAfterDelay = Cypress.Promise.resolve({ availableEditors, preferredOpener: availableEditors[3] }).delay(2000)
+    const editorsAfterDelay = Cypress.Promise.resolve({
+      availableEditors,
+      preferredOpener: availableEditors[3],
+    }).delay(2000)
 
     cy.stub(ipc, 'getUserEditor').resolves(editorsAfterDelay)
 
@@ -24,13 +37,17 @@ describe('FilePreference', () => {
       <div className="settings">
         <div className="settings-wrapper">
           <Collapse>
-            <Panel header='File Opener Preference' key='file-preference' className='form-horizontal settings-file-preference'>
+            <Panel
+              header="File Opener Preference"
+              key="file-preference"
+              className="form-horizontal settings-file-preference"
+            >
               <FilePreference />
             </Panel>
           </Collapse>
         </div>
       </div>,
-      { alias: 'FilePreference' },
+      { alias: 'FilePreference' }
     )
 
     cy.get('.file-preference').should('not.exist')

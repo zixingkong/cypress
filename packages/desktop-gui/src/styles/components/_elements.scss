@@ -9,7 +9,8 @@ body {
   // Margin bottom by nav heights
 }
 
-html, body {
+html,
+body {
   background-color: transparent;
   margin: 0 auto;
   overflow: hidden;
@@ -20,13 +21,16 @@ a {
   color: $brand-primary;
   cursor: pointer;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     cursor: pointer;
     color: darken($brand-primary, 10%);
   }
 }
 
-a, button {
+a,
+button {
   &:focus {
     outline: 0;
   }
@@ -36,7 +40,8 @@ form {
   overflow: auto;
 }
 
-h3, h4 {
+h3,
+h4 {
   font-family: $font-title;
 }
 
@@ -48,7 +53,6 @@ h4 {
   font-size: 20px;
   margin-bottom: 15px;
 }
-
 
 legend {
   font-size: $font-size;

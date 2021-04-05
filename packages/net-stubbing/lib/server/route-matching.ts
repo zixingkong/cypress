@@ -10,7 +10,7 @@ import { getAllStringMatcherFields } from './util'
 /**
  * Returns `true` if `req` matches all supplied properties on `routeMatcher`, `false` otherwise.
  */
-export function _doesRouteMatch (routeMatcher: RouteMatcherOptions, req: CypressIncomingRequest) {
+export function _doesRouteMatch(routeMatcher: RouteMatcherOptions, req: CypressIncomingRequest) {
   const matchable = _getMatchableForRequest(req)
 
   // get a list of all the fields which exist where a rule needs to be succeed
@@ -30,12 +30,11 @@ export function _doesRouteMatch (routeMatcher: RouteMatcherOptions, req: Cypress
       return (
         value === matcher ||
         minimatch(value, matcher, { matchBase: true }) ||
-        (field === 'url' && (
+        (field === 'url' &&
           // substring match
-          value.includes(matcher) ||
-          // be nice and match paths that are missing leading slashes
-          (value[0] === '/' && matcher[0] !== '/' && stringMatch(value, `/${matcher}`))
-        ))
+          (value.includes(matcher) ||
+            // be nice and match paths that are missing leading slashes
+            (value[0] === '/' && matcher[0] !== '/' && stringMatch(value, `/${matcher}`))))
       )
     }
 
@@ -94,7 +93,7 @@ export function _doesRouteMatch (routeMatcher: RouteMatcherOptions, req: Cypress
   return true
 }
 
-export function _getMatchableForRequest (req: CypressIncomingRequest) {
+export function _getMatchableForRequest(req: CypressIncomingRequest) {
   let matchable: any = _.pick(req, ['headers', 'method'])
 
   const authorization = req.headers['authorization']
@@ -115,7 +114,7 @@ export function _getMatchableForRequest (req: CypressIncomingRequest) {
 
   matchable.url = req.proxiedUrl
 
-  matchable.https = proxiedUrl.protocol && (proxiedUrl.protocol.indexOf('https') === 0)
+  matchable.https = proxiedUrl.protocol && proxiedUrl.protocol.indexOf('https') === 0
 
   if (!matchable.port) {
     matchable.port = matchable.https ? 443 : 80
@@ -124,7 +123,7 @@ export function _getMatchableForRequest (req: CypressIncomingRequest) {
   return matchable
 }
 
-export function getRouteForRequest (routes: BackendRoute[], req: CypressIncomingRequest, prevRoute?: BackendRoute) {
+export function getRouteForRequest(routes: BackendRoute[], req: CypressIncomingRequest, prevRoute?: BackendRoute) {
   const possibleRoutes = prevRoute ? routes.slice(_.findIndex(routes, prevRoute) + 1) : routes
 
   return _.find(possibleRoutes, (route) => {
@@ -132,7 +131,7 @@ export function getRouteForRequest (routes: BackendRoute[], req: CypressIncoming
   })
 }
 
-function isPreflightRequest (req: CypressIncomingRequest) {
+function isPreflightRequest(req: CypressIncomingRequest) {
   return req.method === 'OPTIONS' && req.headers['access-control-request-method']
 }
 
@@ -140,7 +139,7 @@ function isPreflightRequest (req: CypressIncomingRequest) {
  * Is this a CORS preflight request that could be for an existing route?
  * If there is a matching route with method = 'OPTIONS', returns false.
  */
-export function matchesRoutePreflight (routes: BackendRoute[], req: CypressIncomingRequest) {
+export function matchesRoutePreflight(routes: BackendRoute[], req: CypressIncomingRequest) {
   if (!isPreflightRequest(req)) {
     return false
   }

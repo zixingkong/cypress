@@ -13,7 +13,7 @@ export interface UserWebpackDevServerOptions {
   /**
    * if `true` will compile all the specs together when the first one is request and can slow up initial build time.
    * @default false
-  */
+   */
   disableLazyCompilation?: boolean
 }
 
@@ -26,7 +26,7 @@ const mergePublicPath = (baseValue = '/', userValue = '/') => {
   return path.join(baseValue, userValue, '/')
 }
 
-function getLazyCompilationWebpackConfig (options: MakeWebpackConfigOptions): webpack.Configuration {
+function getLazyCompilationWebpackConfig(options: MakeWebpackConfigOptions): webpack.Configuration {
   if (options.disableLazyCompilation || !options.isOpenMode) {
     return {}
   }
@@ -35,13 +35,18 @@ function getLazyCompilationWebpackConfig (options: MakeWebpackConfigOptions): we
     case 4:
       return { plugins: [new LazyCompilePlugin()] }
     case 5:
-      return { experiments: { lazyCompilation: true } } as webpack.Configuration
+      return {
+        experiments: { lazyCompilation: true },
+      } as webpack.Configuration
     default:
-      return { }
+      return {}
   }
 }
 
-export async function makeWebpackConfig (userWebpackConfig: webpack.Configuration, options: MakeWebpackConfigOptions): Promise<webpack.Configuration> {
+export async function makeWebpackConfig(
+  userWebpackConfig: webpack.Configuration,
+  options: MakeWebpackConfigOptions
+): Promise<webpack.Configuration> {
   const { projectRoot, devServerPublicPathRoute, files, supportFile, devServerEvents } = options
 
   debug(`User passed in webpack config with values %o`, userWebpackConfig)
@@ -72,7 +77,7 @@ export async function makeWebpackConfig (userWebpackConfig: webpack.Configuratio
     userWebpackConfig,
     defaultWebpackConfig,
     dynamicWebpackConfig,
-    getLazyCompilationWebpackConfig(options),
+    getLazyCompilationWebpackConfig(options)
   )
 
   mergedConfig.entry = entry

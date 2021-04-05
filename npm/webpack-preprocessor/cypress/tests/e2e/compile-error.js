@@ -1,5 +1,6 @@
 /// <reference types="cypress"/>
 /* eslint-disable */
+/* prettier-disable */
 
 
 /* EXPECT: {

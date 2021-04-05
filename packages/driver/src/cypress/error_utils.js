@@ -8,12 +8,14 @@ const $utils = require('./utils')
 const $stackUtils = require('./stack_utils')
 const $errorMessages = require('./error_messages')
 
-const ERROR_PROPS = 'message type name stack sourceMappedStack parsedStack fileName lineNumber columnNumber host uncaught actual expected showDiff isPending docsUrl codeFrame'.split(' ')
+const ERROR_PROPS = 'message type name stack sourceMappedStack parsedStack fileName lineNumber columnNumber host uncaught actual expected showDiff isPending docsUrl codeFrame'.split(
+  ' '
+)
 const ERR_PREPARED_FOR_SERIALIZATION = Symbol('ERR_PREPARED_FOR_SERIALIZATION')
 
 if (!Error.captureStackTrace) {
   Error.captureStackTrace = (err, fn) => {
-    const stack = (new Error()).stack
+    const stack = new Error().stack
 
     err.stack = $stackUtils.stackWithLinesDroppedFromMarker(stack, fn.name)
   }
@@ -72,16 +74,9 @@ const mergeErrProps = (origErr, ...newProps) => {
 }
 
 const stackWithReplacedProps = (err, props) => {
-  const {
-    message: originalMessage,
-    name: originalName,
-    stack: originalStack,
-  } = err
+  const { message: originalMessage, name: originalName, stack: originalStack } = err
 
-  const {
-    message: newMessage,
-    name: newName,
-  } = props
+  const { message: newMessage, name: newName } = props
 
   // if stack doesn't already exist, leave it as is
   if (!originalStack) return originalStack
@@ -201,7 +196,7 @@ const warnByPath = (errPath, options = {}) => {
 }
 
 class InternalCypressError extends Error {
-  constructor (message) {
+  constructor(message) {
     super(message)
 
     this.name = 'InternalCypressError'
@@ -213,7 +208,7 @@ class InternalCypressError extends Error {
 }
 
 class CypressError extends Error {
-  constructor (message) {
+  constructor(message) {
     super(message)
 
     this.name = 'CypressError'
@@ -223,7 +218,7 @@ class CypressError extends Error {
     }
   }
 
-  setUserInvocationStack (stack) {
+  setUserInvocationStack(stack) {
     this.userInvocationStack = stack
 
     return this
@@ -260,13 +255,17 @@ const replaceErrMsgTokens = (errMessage, args) => {
   }
 
   const getMsg = function (args = {}) {
-    return _.reduce(args, (message, argValue, argKey) => {
-      if (_.isArray(message)) {
-        return _.map(message, (str) => replace(str, argValue, argKey))
-      }
+    return _.reduce(
+      args,
+      (message, argValue, argKey) => {
+        if (_.isArray(message)) {
+          return _.map(message, (str) => replace(str, argValue, argKey))
+        }
 
-      return replace(message, argValue, argKey)
-    }, errMessage)
+        return replace(message, argValue, argKey)
+      },
+      errMessage
+    )
   }
 
   // replace more than 2 newlines with exactly 2 newlines
@@ -277,7 +276,9 @@ const errByPath = (msgPath, args) => {
   let msgValue = _.get($errorMessages, msgPath)
 
   if (!msgValue) {
-    return internalErr({ message: `Error message path '${msgPath}' does not exist` })
+    return internalErr({
+      message: `Error message path '${msgPath}' does not exist`,
+    })
   }
 
   let msgObj = msgValue
@@ -300,7 +301,7 @@ const errByPath = (msgPath, args) => {
 
 const createUncaughtException = (type, err) => {
   // FIXME: `fromSpec` is a dirty hack to get uncaught exceptions in `top` to say they're from the spec
-  const errPath = (type === 'spec' || err.fromSpec) ? 'uncaught.fromSpec' : 'uncaught.fromApp'
+  const errPath = type === 'spec' || err.fromSpec ? 'uncaught.fromSpec' : 'uncaught.fromApp'
   let uncaughtErr = errByPath(errPath, {
     errMsg: err.message,
   })

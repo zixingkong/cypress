@@ -14,13 +14,13 @@ export default {
     return {
       name: '',
       email: '',
-    };
+    }
   },
   computed: {
     hasValidFields() {
-      return Boolean(this.email && this.name);
+      return Boolean(this.email && this.name)
     },
   },
-};
+}
 </script>
 <style></style>

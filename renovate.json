@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "automerge": true,
   "major": {
     "automerge": false
@@ -18,18 +16,13 @@
     }
   ],
   "separateMultipleMajor": true,
-  "labels": [
-    "type: dependencies",
-    "renovate"
-  ],
+  "labels": ["type: dependencies", "renovate"],
   "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
   "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{#if isRange}}{{newVersion}}{{else}}{{#if isMajor}}{{newVersionMajor}}.x{{else}}{{newVersion}}{{/if}}{{/if}} 🌟",
   "prHourlyLimit": 1,
   "prConcurrentLimit": 1,
   "updateNotScheduled": false,
   "timezone": "America/New_York",
-  "schedule": [
-    "before 3am on the first day of the month"
-  ],
+  "schedule": ["before 3am on the first day of the month"],
   "dependencyDashboardApproval": true
 }

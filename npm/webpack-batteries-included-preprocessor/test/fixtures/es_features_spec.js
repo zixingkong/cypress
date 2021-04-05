@@ -18,11 +18,10 @@ expect(obj).to.eql({
 
 // class properties
 expect(SampleClass.staticProp).to.equal('staticProp')
-expect((new SampleClass()).prop).to.equal('prop')
-
-;(async () => {
+expect(new SampleClass().prop).to.equal('prop')
+;async () => {
   // async/await
   const value = await asyncFn()
 
   expect(value).to.equal('value')
-})
+}

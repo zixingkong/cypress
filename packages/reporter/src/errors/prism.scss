@@ -1,15 +1,15 @@
-@import "../../node_modules/prismjs/themes/prism";
-@import "../../node_modules/prismjs/plugins/line-highlight/prism-line-highlight";
+@import '../../node_modules/prismjs/themes/prism';
+@import '../../node_modules/prismjs/plugins/line-highlight/prism-line-highlight';
 
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #70787a;
-	margin: 0;
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #70787a;
+  margin: 0;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #fff;
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #fff;
 }
 
 // .token.comment,
@@ -20,7 +20,7 @@ pre[class*="language-"] {
 // }
 
 .token.punctuation {
-	color: #70787a;
+  color: #70787a;
 }
 
 .token.property,
@@ -30,7 +30,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: #c1434f;
+  color: #c1434f;
 }
 
 .token.selector,
@@ -39,7 +39,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: #469b76;
+  color: #469b76;
 }
 
 .token.operator,
@@ -50,7 +50,7 @@ pre[class*="language-"] {
 .token.regex,
 .token.important,
 .token.variable {
-	color: #e08a45;
+  color: #e08a45;
 }
 
 .token.atrule,
@@ -58,26 +58,26 @@ pre[class*="language-"] {
 .token.keyword,
 .token.function,
 .token.class-name {
-	color: #3e76ad;
+  color: #3e76ad;
 }
 
 .line-numbers .line-numbers-rows {
-	border-right: 0;
+  border-right: 0;
 }
 
 .line-numbers-rows > span:before {
-	color: #c4c8cb;
+  color: #c4c8cb;
 }
 
 .line-highlight {
-	background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 100%, hsla(24, 20%, 50%,0));
+  background: linear-gradient(to right, hsla(24, 20%, 50%, 0.1) 100%, hsla(24, 20%, 50%, 0));
 
-	&:before {
-		display: none;
-	}
+  &:before {
+    display: none;
+  }
 }
 
 .test-error-code-frame pre[data-line] {
-	padding-left: 0.5em;
-	position: relative;
+  padding-left: 0.5em;
+  position: relative;
 }

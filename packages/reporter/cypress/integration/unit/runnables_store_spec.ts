@@ -33,13 +33,26 @@ const createHook = (hookId: string) => {
   return { hookId, hookName: 'before each' } as HookProps
 }
 const createTest = (id: string) => {
-  return { id, title: `test ${id}`, hooks: [], state: 'processing', currentRetry: 0 } as TestProps
+  return {
+    id,
+    title: `test ${id}`,
+    hooks: [],
+    state: 'processing',
+    currentRetry: 0,
+  } as TestProps
 }
 const createSuite = (id: string, tests: Array<TestProps>, suites: Array<SuiteProps>) => {
   return { id, title: `suite ${id}`, tests, suites, hooks: [] } as SuiteProps
 }
 const createAgent = (id: number, testId: string) => {
-  return { id, testId, instrument: 'agent', callCount: 0, testCurrentRetry: 0, functionName: 'foo' } as AgentProps
+  return {
+    id,
+    testId,
+    instrument: 'agent',
+    callCount: 0,
+    testCurrentRetry: 0,
+    functionName: 'foo',
+  } as AgentProps
 }
 const createCommand = (id: number, testId: string, hookId?: string) => {
   return { id, testId, instrument: 'command', hookId } as CommandProps
@@ -52,7 +65,11 @@ const createRootRunnable = () => {
   return {
     tests: [createTest('1')],
     suites: [
-      createSuite('1', [createTest('2'), createTest('3')], [createSuite('3', [createTest('4')], []), createSuite('4', [createTest('5')], [])]),
+      createSuite(
+        '1',
+        [createTest('2'), createTest('3')],
+        [createSuite('3', [createTest('4')], []), createSuite('4', [createTest('5')], [])]
+      ),
       createSuite('2', [createTest('6')], []),
     ],
   } as RootRunnable
@@ -139,17 +156,26 @@ describe('runnables store', () => {
     })
 
     it('sets .hasTests flag to false if there are no tests', () => {
-      instance.setRunnables({ tests: [], suites: [createSuite('1', [], []), createSuite('2', [], [])] })
+      instance.setRunnables({
+        tests: [],
+        suites: [createSuite('1', [], []), createSuite('2', [], [])],
+      })
       expect(instance.hasTests).to.be.false
     })
 
     it('sets .hasSingleTest flag to true if there is only one test', () => {
-      instance.setRunnables({ tests: [], suites: [createSuite('1', [], []), createSuite('2', [createTest('1')], [])] })
+      instance.setRunnables({
+        tests: [],
+        suites: [createSuite('1', [], []), createSuite('2', [createTest('1')], [])],
+      })
       expect(instance.hasSingleTest).to.be.true
     })
 
     it('sets .hasSingleTest flag to false if there are no tests', () => {
-      instance.setRunnables({ tests: [], suites: [createSuite('1', [], []), createSuite('2', [], [])] })
+      instance.setRunnables({
+        tests: [],
+        suites: [createSuite('1', [], []), createSuite('2', [], [])],
+      })
       expect(instance.hasSingleTest).to.be.false
     })
 
@@ -159,7 +185,10 @@ describe('runnables store', () => {
     })
 
     it('starts rendering the runnables on requestAnimationFrame', () => {
-      instance.setRunnables({ tests: [], suites: [createSuite('1', [], []), createSuite('2', [createTest('1')], [])] })
+      instance.setRunnables({
+        tests: [],
+        suites: [createSuite('1', [], []), createSuite('2', [createTest('1')], [])],
+      })
       expect(instance.runnables[0].shouldRender).to.be.true
       expect(instance.runnables[1].shouldRender).to.be.true
       expect((instance.runnables[1] as SuiteModel).children[0].shouldRender).to.be.true
@@ -216,7 +245,10 @@ describe('runnables store', () => {
 
   context('#testByid', () => {
     it('returns the test with the given id', () => {
-      instance.setRunnables({ tests: [createTest('1'), createTest('3')], suites: [] })
+      instance.setRunnables({
+        tests: [createTest('1'), createTest('3')],
+        suites: [],
+      })
       expect(instance.testById('3').title).to.be.equal('test 3')
     })
   })

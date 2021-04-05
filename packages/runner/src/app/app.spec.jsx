@@ -7,7 +7,7 @@ import * as reporter from '@packages/reporter'
 import Message from '../message/message'
 import State from '../lib/state'
 
-const Reporter = reporter.Reporter = () => <div />
+const Reporter = (reporter.Reporter = () => <div />)
 
 import App from './app'
 
@@ -44,7 +44,7 @@ const shallowRender = (component) => {
 describe('<App />', () => {
   beforeEach(() => {
     driver.$.returns({
-      outerHeight () {
+      outerHeight() {
         return 10
       },
     })
@@ -123,8 +123,8 @@ describe('<App />', () => {
   it('renders children', () => {
     const component = shallowRender(
       <App {...createProps()}>
-        <div className='some-child' />
-      </App>,
+        <div className="some-child" />
+      </App>
     )
 
     expect(component.find('.some-child')).to.exist
@@ -199,7 +199,9 @@ describe('<App />', () => {
 
       component.find('Resizer').prop('onResize')(300)
       component.find('Resizer').prop('onResizeEnd')()
-      expect(props.eventManager.saveState).to.have.been.calledWith({ reporterWidth: 300 })
+      expect(props.eventManager.saveState).to.have.been.calledWith({
+        reporterWidth: 300,
+      })
     })
   })
 })

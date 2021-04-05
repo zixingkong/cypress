@@ -8,8 +8,8 @@ The [cypress/integration/spec.js](cypress/integration/spec.js) uses null coalesc
 it('handles nullish operator', () => {
   const data = {
     person: {
-      firstName: 'Joe'
-    }
+      firstName: 'Joe',
+    },
   }
   const name = data.person.firstName ?? 'Anonymous'
   expect(name).to.equal('Joe')

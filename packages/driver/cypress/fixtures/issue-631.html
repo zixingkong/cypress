@@ -45,10 +45,10 @@
       }
     </style>
     <script>
-        window.changeSlide = function(num) {
-          var el = document.querySelector('.slider-offset');
-          el.style.transform = 'translateX(-' + (num * 100) + '%)';
-        }
+      window.changeSlide = function (num) {
+        var el = document.querySelector('.slider-offset')
+        el.style.transform = 'translateX(-' + num * 100 + '%)'
+      }
     </script>
   </head>
   <body>
@@ -70,11 +70,10 @@
     <button id="button-2" onclick="changeSlide(1)">Show second slide</button>
     <button id="button-3" onclick="changeSlide(2)">Show third slide</button>
 
-  <!--
+    <!--
   The element to test is nested in multiple parents, with different overflow rules in each elements.
   The `.slider` element if the frame to see the data, so its overflow has to be hidden;
   The `.slide-offset` element is meant to have the width of each slider so that we can then set `transform: translateX(slideNum * -100%)` to show the slide slideNum. Since the slides are its children, its overflow need to be visible.
   Each `.slide-content` element is a slider container, since the content might get out of the slide but we don't want it to bleed in another slide, its overflow need to be hidden.
-  -->
-</body>
+  --></body>
 </html>

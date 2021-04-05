@@ -100,20 +100,24 @@ describe('features', () => {
 
     it('errors when processing .ts file and typescript option is not set', function () {
       return run('ts_spec.ts')
-      .then(shouldntResolve)
-      .catch((err) => {
-        expect(err.message).to.include(`You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support`)
-        expect(err.message).to.include('ts_spec.ts')
-      })
+        .then(shouldntResolve)
+        .catch((err) => {
+          expect(err.message).to.include(
+            `You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support`
+          )
+          expect(err.message).to.include('ts_spec.ts')
+        })
     })
 
     it('errors when processing .tsx file and typescript option is not set', function () {
       return run('tsx_spec.tsx')
-      .then(shouldntResolve)
-      .catch((err) => {
-        expect(err.message).to.include(`You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support`)
-        expect(err.message).to.include('tsx_spec.tsx')
-      })
+        .then(shouldntResolve)
+        .catch((err) => {
+          expect(err.message).to.include(
+            `You are attempting to run a TypeScript file, but do not have TypeScript installed. Ensure you have 'typescript' installed to enable TypeScript support`
+          )
+          expect(err.message).to.include('tsx_spec.tsx')
+        })
     })
   })
 })

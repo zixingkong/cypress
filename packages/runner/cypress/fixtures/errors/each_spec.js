@@ -9,7 +9,7 @@ describe('cy.each', { defaultCommandTimeout: 0 }, () => {
 
   it('exception', () => {
     cy.wrap([1]).each(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 

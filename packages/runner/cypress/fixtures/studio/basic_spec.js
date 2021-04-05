@@ -7,7 +7,5 @@ describe('suite', () => {
     cy.visit('the://url')
   })
 
-  it('test 3', () => {
-
-  })
+  it('test 3', () => {})
 })

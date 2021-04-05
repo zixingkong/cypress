@@ -1,4 +1,6 @@
-exports['vue webpack-file install template correctly generates plugins config when webpack config path is missing 1'] = `
+exports[
+  'vue webpack-file install template correctly generates plugins config when webpack config path is missing 1'
+] = `
 const {
   startDevServer
 } = require("@cypress/webpack-dev-server");
@@ -18,7 +20,9 @@ module.exports = (on, config) => {
 };
 `
 
-exports['vue webpack-file install template correctly generates plugins config when webpack config path is provided 1'] = `
+exports[
+  'vue webpack-file install template correctly generates plugins config when webpack config path is provided 1'
+] = `
 const {
   startDevServer
 } = require("@cypress/webpack-dev-server");

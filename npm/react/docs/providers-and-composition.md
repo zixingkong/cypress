@@ -38,15 +38,13 @@ export const createMount = (
   { mode, locale, ...mountOpts }: MountOptions = {
     mode: 'light',
     locale: 'en-US',
-  },
+  }
 ) => {
   mount(
     <ThemeProvider theme={createTheme({ mode })}>
-      <I18nProvider i18n={i18n.cloneInstance({ lng: locale })}>
-        {element}
-      </I18nProvider>
+      <I18nProvider i18n={i18n.cloneInstance({ lng: locale })}>{element}</I18nProvider>
     </ThemeProvider>,
-    mountOpts,
+    mountOpts
   )
 }
 ```
@@ -93,8 +91,7 @@ describe('<Button />', () => {
 It is also possible to create several different versions of `createMount` and use them apparently. For example you can also create a new
 
 ```jsx
-export const mountWithRouter = (element, mountOptions) =>
-  mount(<Router> {element} </Router>, mountOptions)
+export const mountWithRouter = (element, mountOptions) => mount(<Router> {element} </Router>, mountOptions)
 
 // then in your tests
 mountWithRouter(<Component />)

@@ -8,16 +8,13 @@ const { verify } = helpers.createCypress({
 const verifyInternalFailure = (props) => {
   const { method } = props
 
-  cy.get('.runnable-err-message')
-  .should('include.text', `thrown in ${method.replace(/\./g, '-')}`)
+  cy.get('.runnable-err-message').should('include.text', `thrown in ${method.replace(/\./g, '-')}`)
 
   cy.get('.runnable-err-stack-expander > .collapsible-header').click()
 
-  cy.get('.runnable-err-stack-trace')
-  .should('include.text', method)
+  cy.get('.runnable-err-stack-trace').should('include.text', method)
 
-  cy.get('.test-err-code-frame')
-  .should('not.exist')
+  cy.get('.test-err-code-frame').should('not.exist')
 }
 
 describe('errors ui', () => {
@@ -117,13 +114,13 @@ describe('errors ui', () => {
     verify.it('standard assertion failure', {
       file,
       column: 6,
-      message: 'Timed out retrying after 0ms: expected {} to have property \'foo\'',
+      message: "Timed out retrying after 0ms: expected {} to have property 'foo'",
     })
 
     verify.it('after multiple', {
       file,
       column: 6,
-      message: 'Timed out retrying after 0ms: expected \'foo\' to equal \'bar\'',
+      message: "Timed out retrying after 0ms: expected 'foo' to equal 'bar'",
     })
 
     verify.it('after multiple callbacks exception', {
@@ -143,7 +140,7 @@ describe('errors ui', () => {
     verify.it('after callback success assertion failure', {
       file,
       column: 6,
-      codeFrameText: '.should(\'have.property',
+      codeFrameText: ".should('have.property",
       message: `expected {} to have property 'foo'`,
     })
 
@@ -396,9 +393,8 @@ describe('errors ui', () => {
     const file = 'readfile_spec.js'
 
     verify.it('existence failure', {
-      onBeforeRun ({ win }) {
-        win.runnerWs.emit.withArgs('backend:request', 'read:file')
-        .yields({ error: { code: 'ENOENT' } })
+      onBeforeRun({ win }) {
+        win.runnerWs.emit.withArgs('backend:request', 'read:file').yields({ error: { code: 'ENOENT' } })
       },
       file,
       column: 8,
@@ -463,10 +459,7 @@ describe('errors ui', () => {
 
     verify.it('sync app exception', {
       file,
-      message: [
-        'The following error originated from your application code',
-        'syncReference is not defined',
-      ],
+      message: ['The following error originated from your application code', 'syncReference is not defined'],
       regex: /localhost\:\d+\/fixtures\/isolated-runner-inner.html:\d+:\d+/,
       hasCodeFrame: false,
       verifyOpenInIde: false,
@@ -475,10 +468,7 @@ describe('errors ui', () => {
     // FIXME: does not get caught and wrapped like it does in real cypress
     verify.it.skip('async app exception', {
       file,
-      message: [
-        'The following error originated from your application code',
-        'asyncReference is not defined',
-      ],
+      message: ['The following error originated from your application code', 'asyncReference is not defined'],
       regex: /localhost\:\d+\/fixtures\/isolated-runner-inner.html:\d+:\d+/,
       hasCodeFrame: false,
       verifyOpenInIde: false,
@@ -487,19 +477,13 @@ describe('errors ui', () => {
     verify.it('async exception', {
       file,
       column: 12,
-      message: [
-        'bar is not a function',
-        'The following error originated from your test code',
-      ],
+      message: ['bar is not a function', 'The following error originated from your test code'],
     })
 
     verify.it('async exception with done', {
       file,
       column: 12,
-      message: [
-        'bar is not a function',
-        'The following error originated from your test code',
-      ],
+      message: ['bar is not a function', 'The following error originated from your test code'],
     })
   })
 
@@ -554,25 +538,24 @@ describe('errors ui', () => {
     const file = 'docs_url_spec.js'
     const docsUrl = 'https://on.cypress.io/viewport'
 
-    verify.it('displays as button in interactive mode', { retries: 1 }, {
-      file,
-      verifyFn () {
-        cy
-        .get('.runnable-err-message')
-        .should('not.contain', docsUrl)
-        .contains('Learn more')
-        .should('have.attr', 'href', docsUrl)
-      },
-    })
+    verify.it(
+      'displays as button in interactive mode',
+      { retries: 1 },
+      {
+        file,
+        verifyFn() {
+          cy.get('.runnable-err-message')
+            .should('not.contain', docsUrl)
+            .contains('Learn more')
+            .should('have.attr', 'href', docsUrl)
+        },
+      }
+    )
 
     verify.it('is text in error message in run mode', {
       file,
-      verifyFn () {
-        cy
-        .get('.runnable-err-message')
-        .should('contain', docsUrl)
-        .contains('Learn more')
-        .should('not.exist')
+      verifyFn() {
+        cy.get('.runnable-err-message').should('contain', docsUrl).contains('Learn more').should('not.exist')
       },
     })
   })

@@ -1,4 +1,8 @@
-.fa { &:not(.fa-spin) { animation: none; } }
+.fa {
+  &:not(.fa-spin) {
+    animation: none;
+  }
+}
 
 .reporter {
   min-height: 0; // needed for firefox or else scrolling gets funky
@@ -131,7 +135,8 @@
         visibility: visible !important;
       }
 
-      .hooks-container, .runnable-err-wrapper {
+      .hooks-container,
+      .runnable-err-wrapper {
         border-color: #828282;
       }
     }
@@ -142,7 +147,8 @@
       }
     }
 
-    .runnable-state,.attempt-state {
+    .runnable-state,
+    .attempt-state {
       display: inline-block;
       line-height: 18px;
       margin-right: 5px;
@@ -152,14 +158,13 @@
       font-size: 11px;
     }
 
-    &.suite .collapsible-indicator  {
+    &.suite .collapsible-indicator {
       padding-left: 2px;
       font-size: 14px;
       color: #bbbcbd;
     }
 
-
-    &.test.runnable-processing  {
+    &.test.runnable-processing {
       .runnable-state {
         @include runnable-state-processing;
       }
@@ -449,32 +454,35 @@
       }
 
       div:nth-child(1) {
-        animation-delay:0.1s;
+        animation-delay: 0.1s;
         background: #56b790;
       }
 
       div:nth-child(2) {
-        animation-delay:0.2s;
+        animation-delay: 0.2s;
         background: #4a88cc;
       }
 
       div:nth-child(3) {
-        animation-delay:0.3s;
+        animation-delay: 0.3s;
         background: #b96162;
       }
 
       div:nth-child(4) {
-        animation-delay:0.4s;
+        animation-delay: 0.4s;
         background: #e3b065;
       }
 
       div:nth-child(5) {
-        animation-delay:0.5s;
+        animation-delay: 0.5s;
         background: #a9abad;
       }
 
       @keyframes scaling {
-        0%, 20%, 80%, 100% {
+        0%,
+        20%,
+        80%,
+        100% {
           opacity: 100%;
           transform: scale(0.5);
         }

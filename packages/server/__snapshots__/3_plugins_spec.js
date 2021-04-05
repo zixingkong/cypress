@@ -444,7 +444,9 @@ The following are valid events:
       [stack trace lines]
 `
 
-exports['e2e plugins does not report more screenshots than exist if user overwrites previous screenshot in afterScreenshot 1'] = `
+exports[
+  'e2e plugins does not report more screenshots than exist if user overwrites previous screenshot in afterScreenshot 1'
+] = `
 
 ====================================================================================================
 

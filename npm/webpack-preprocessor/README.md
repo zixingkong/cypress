@@ -10,10 +10,10 @@ npm install --save-dev @cypress/webpack-preprocessor
 
 This package relies on the following [peer dependencies](https://docs.npmjs.com/files/package.json#peerdependencies):
 
-* @babel/core
-* @babel/preset-env
-* babel-loader
-* webpack
+- @babel/core
+- @babel/preset-env
+- babel-loader
+- webpack
 
 It is likely you already have these installed either directly or as a transient dependency, but if not, you will need to install them.
 
@@ -25,8 +25,8 @@ npm install --save-dev @babel/core @babel/preset-env babel-loader webpack
 
 This version is only compatible with webpack 4.x+ and Babel 7.x+.
 
-* If you need webpack 2 or 3 support, use `@cypress/webpack-preprocessor` 1.x
-* If you need Babel 6 support, use `@cypress/webpack-preprocessor` <= 2.x
+- If you need webpack 2 or 3 support, use `@cypress/webpack-preprocessor` 1.x
+- If you need Babel 6 support, use `@cypress/webpack-preprocessor` <= 2.x
 
 By default, this plugin (and all Cypress plugins) run in the Node version that is bundled with Cypress. Alternatively, you can use the Node found on your system by setting [nodeVersion: system](https://on.cypress.io/configuration#Node-version) configuration option. A common use case for using the system Node are native dependencies like `node-sass`.
 
@@ -169,6 +169,7 @@ You can see Webpack bundle diagnostic output (timings, chunks, sizes) by running
 ```
 DEBUG=cypress:webpack:stats
 ```
+
 ![Webpack stats](images/webpack-stats.png)
 
 ## Contributing

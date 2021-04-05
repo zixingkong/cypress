@@ -19,7 +19,10 @@ const webpackConfig = {
       {
         test: /\.(js|jsx|mjs|ts|tsx)$/,
         loader: 'babel-loader',
-        options: { ...babelConfig, cacheDirectory: path.resolve(__dirname, '..', '..', '.babel-cache') },
+        options: {
+          ...babelConfig,
+          cacheDirectory: path.resolve(__dirname, '..', '..', '.babel-cache'),
+        },
       },
       {
         test: /\.modules\.css$/i,
@@ -62,11 +65,17 @@ const webpackConfig = {
  */
 module.exports = (on, config) => {
   if (config.testingType !== 'component') {
-    throw Error(`This is a component testing project. testingType should be 'component'. Received ${config.testingType}`)
+    throw Error(
+      `This is a component testing project. testingType should be 'component'. Received ${config.testingType}`
+    )
   }
 
   on('dev-server:start', (options) => {
-    return startDevServer({ options, webpackConfig, disableLazyCompilation: false })
+    return startDevServer({
+      options,
+      webpackConfig,
+      disableLazyCompilation: false,
+    })
   })
 
   return config

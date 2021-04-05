@@ -16,18 +16,18 @@
 
   .content {
     align-items: center;
-    color: #EFF0F3;
+    color: #eff0f3;
     display: flex;
     font-size: 1.3rem;
 
     i {
-      color: #5393E9;
+      color: #5393e9;
       font-size: 2.2rem;
       margin-right: 1rem;
     }
 
     a {
-      color: #8EBCF9;
+      color: #8ebcf9;
       margin-left: 1rem;
 
       &:hover,
@@ -40,7 +40,7 @@
   .notification-close {
     background: none;
     border: none;
-    color: #8A8C92;
+    color: #8a8c92;
     font-size: 2.4rem;
     margin-left: 3rem;
     padding: 0 0.4rem;
@@ -101,6 +101,6 @@
 
 .new-spec-warning {
   .content i {
-    color: #F5A327;
+    color: #f5a327;
   }
 }

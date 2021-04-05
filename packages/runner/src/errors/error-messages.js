@@ -1,5 +1,5 @@
 export default {
-  reporterError (err, specPath) {
+  reporterError(err, specPath) {
     if (!err) return null
 
     switch (err.type) {

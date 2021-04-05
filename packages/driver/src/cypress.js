@@ -50,7 +50,7 @@ const throwPrivateCommandInterface = (method) => {
 }
 
 class $Cypress {
-  constructor (config = {}) {
+  constructor(config = {}) {
     this.cy = null
     this.chai = null
     this.mocha = null
@@ -68,7 +68,7 @@ class $Cypress {
     this.setConfig(config)
   }
 
-  setConfig (config = {}) {
+  setConfig(config = {}) {
     // config.remote
     // {
     //   origin: "http://localhost:2020"
@@ -158,7 +158,7 @@ class $Cypress {
     return this.action('cypress:config', config)
   }
 
-  initialize ({ $autIframe, onSpecReady }) {
+  initialize({ $autIframe, onSpecReady }) {
     this.$autIframe = $autIframe
     this.onSpecReady = onSpecReady
     if (this._onInitialize) {
@@ -167,7 +167,7 @@ class $Cypress {
     }
   }
 
-  run (fn) {
+  run(fn) {
     if (!this.runner) {
       $errUtils.throwErrByPath('miscellaneous.no_runner')
     }
@@ -177,7 +177,7 @@ class $Cypress {
 
   // Method to manually re-execute Runner (usually within $autIframe)
   // used mainly by Component Testing
-  restartRunner () {
+  restartRunner() {
     if (!window.top.Cypress) {
       throw Error('Cannot re-run spec without Cypress')
     }
@@ -195,7 +195,7 @@ class $Cypress {
   // specs or support files have been downloaded
   // or parsed. we have not received any custom commands
   // at this point
-  onSpecWindow (specWindow, scripts) {
+  onSpecWindow(specWindow, scripts) {
     const logFn = (...args) => {
       return this.log.apply(this, args)
     }
@@ -216,31 +216,32 @@ class $Cypress {
 
     $FirefoxForcedGc.install(this)
 
-    $scriptUtils.runScripts(specWindow, scripts)
-    .catch((err) => {
-      err = $errUtils.createUncaughtException('spec', err)
+    $scriptUtils
+      .runScripts(specWindow, scripts)
+      .catch((err) => {
+        err = $errUtils.createUncaughtException('spec', err)
 
-      this.runner.onScriptError(err)
-    })
-    .then(() => {
-      return (new Promise((resolve) => {
-        if (this.$autIframe) {
-          resolve()
-        } else {
-          // block initialization if the iframe has not been created yet
-          // Used in CT when async chunks for plugins take their time to download/parse
-          this._onInitialize = resolve
-        }
-      }))
-    })
-    .then(() => {
-      this.cy.initialize(this.$autIframe)
+        this.runner.onScriptError(err)
+      })
+      .then(() => {
+        return new Promise((resolve) => {
+          if (this.$autIframe) {
+            resolve()
+          } else {
+            // block initialization if the iframe has not been created yet
+            // Used in CT when async chunks for plugins take their time to download/parse
+            this._onInitialize = resolve
+          }
+        })
+      })
+      .then(() => {
+        this.cy.initialize(this.$autIframe)
 
-      this.onSpecReady()
-    })
+        this.onSpecReady()
+      })
   }
 
-  action (eventName, ...args) {
+  action(eventName, ...args) {
     // normalizes all the various ways
     // other objects communicate intent
     // and 'action' to Cypress
@@ -525,7 +526,7 @@ class $Cypress {
     }
   }
 
-  backend (eventName, ...args) {
+  backend(eventName, ...args) {
     return new Promise((resolve, reject) => {
       const fn = function (reply) {
         const e = reply.error
@@ -552,7 +553,7 @@ class $Cypress {
     })
   }
 
-  automation (eventName, ...args) {
+  automation(eventName, ...args) {
     // wrap action in promise
     return new Promise((resolve, reject) => {
       const fn = function (reply) {
@@ -573,7 +574,7 @@ class $Cypress {
     })
   }
 
-  stop () {
+  stop() {
     if (!this.runner) {
       // the tests have been reloaded
       return
@@ -585,21 +586,21 @@ class $Cypress {
     return this.action('cypress:stop')
   }
 
-  addAssertionCommand () {
+  addAssertionCommand() {
     return throwPrivateCommandInterface('addAssertionCommand')
   }
 
-  addUtilityCommand () {
+  addUtilityCommand() {
     return throwPrivateCommandInterface('addUtilityCommand')
   }
 
-  static create (config) {
+  static create(config) {
     return new $Cypress(config)
   }
 }
 
-function wrapMoment (moment) {
-  function deprecatedFunction (...args) {
+function wrapMoment(moment) {
+  function deprecatedFunction(...args) {
     $errUtils.warnByPath('moment.deprecated')
 
     return moment.apply(moment, args)

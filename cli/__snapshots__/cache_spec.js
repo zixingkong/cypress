@@ -6,7 +6,7 @@ exports['lib/tasks/cache .prune deletes cache binaries for all version but the c
 Deleted all binary caches except for the 1.2.3 binary cache.
 `
 
-exports['lib/tasks/cache .prune doesn\'t delete any cache binaries 1'] = `
+exports["lib/tasks/cache .prune doesn't delete any cache binaries 1"] = `
 No binary caches found to prune.
 `
 

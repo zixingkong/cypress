@@ -9,7 +9,7 @@ describe('cy.route', { defaultCommandTimeout: 0 }, () => {
 
   it('callback exception', () => {
     cy.server().route(() => {
-      ({}).bar()
+      ;({}.bar())
     })
   })
 
@@ -22,64 +22,76 @@ describe('cy.route', { defaultCommandTimeout: 0 }, () => {
   })
 
   it('onAbort assertion failure', () => {
-    cy.server().route({
-      url: '/foo',
-      onAbort () {
-        expect('actual').to.equal('expected')
-      },
-    })
-    .window().then(abortXhr('/foo'))
+    cy.server()
+      .route({
+        url: '/foo',
+        onAbort() {
+          expect('actual').to.equal('expected')
+        },
+      })
+      .window()
+      .then(abortXhr('/foo'))
   })
 
   it('onAbort exception', () => {
-    cy.server().route({
-      url: '/foo',
-      onAbort () {
-        ({}).bar()
-      },
-    })
-    .window().then(abortXhr('/foo'))
+    cy.server()
+      .route({
+        url: '/foo',
+        onAbort() {
+          ;({}.bar())
+        },
+      })
+      .window()
+      .then(abortXhr('/foo'))
   })
 
   it('onRequest assertion failure', () => {
-    cy.server().route({
-      url: '/foo',
-      onRequest () {
-        expect('actual').to.equal('expected')
-      },
-    })
-    .window().then(sendXhr('/foo'))
+    cy.server()
+      .route({
+        url: '/foo',
+        onRequest() {
+          expect('actual').to.equal('expected')
+        },
+      })
+      .window()
+      .then(sendXhr('/foo'))
   })
 
   it('onRequest exception', () => {
-    cy.server().route({
-      url: '/foo',
-      onRequest () {
-        ({}).bar()
-      },
-    })
-    .window().then(sendXhr('/foo'))
+    cy.server()
+      .route({
+        url: '/foo',
+        onRequest() {
+          ;({}.bar())
+        },
+      })
+      .window()
+      .then(sendXhr('/foo'))
   })
 
   it('onResponse assertion failure', () => {
-    cy.server().route({
-      url: '/json-content-type',
-      onResponse () {
-        expect('actual').to.equal('expected')
-      },
-    })
-    .window().then(sendXhr('/json-content-type'))
-    .wait(10000)
+    cy.server()
+      .route({
+        url: '/json-content-type',
+        onResponse() {
+          expect('actual').to.equal('expected')
+        },
+      })
+      .window()
+      .then(sendXhr('/json-content-type'))
+      .wait(10000)
   })
 
   it('onResponse exception', () => {
-    cy.server().route({
-      url: '/json-content-type',
-      onResponse () {
-        ({}).bar()
-      },
-    })
-    .window().then(sendXhr('/json-content-type'))
-    .wait(10000)
+    cy.server()
+      .route({
+        url: '/json-content-type',
+        onResponse() {
+          ;({}.bar())
+        },
+      })
+      .window()
+      .then(sendXhr('/json-content-type'))
+      .wait(10000)
   })
 })

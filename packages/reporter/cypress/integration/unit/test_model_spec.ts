@@ -154,9 +154,9 @@ describe('Test model', () => {
     })
 
     it('creates a hook and adds the command to it if it does not exist', () => {
-      const test = createTest({ hooks: [
-        { hookName: 'before each', hookId: 'h1' },
-      ] })
+      const test = createTest({
+        hooks: [{ hookName: 'before each', hookId: 'h1' }],
+      })
 
       test.addLog(createCommand({ instrument: 'command', hookId: 'h1' }))
       expect(test.lastAttempt.hooks.length).to.equal(3)
@@ -165,7 +165,9 @@ describe('Test model', () => {
     })
 
     it('adds the command to an existing hook if it already exists', () => {
-      const test = createTest({ hooks: [{ hookId: 'h1', hookName: 'before each' }] })
+      const test = createTest({
+        hooks: [{ hookId: 'h1', hookName: 'before each' }],
+      })
       const commandProps = createCommand({
         hookId: 'h1',
       })
@@ -322,10 +324,15 @@ describe('Test model', () => {
     })
 
     it('sets the hook to failed if it exists', () => {
-      const test = createTest({ hooks: [{ hookId: 'h1', hookName: 'before each' }] })
+      const test = createTest({
+        hooks: [{ hookId: 'h1', hookName: 'before each' }],
+      })
 
       test.addLog(createCommand({ instrument: 'command' }))
-      test.finish({ failedFromHookId: 'h1', err: { message: 'foo' } as Err } as UpdatableTestProps)
+      test.finish({
+        failedFromHookId: 'h1',
+        err: { message: 'foo' } as Err,
+      } as UpdatableTestProps)
       expect(test.lastAttempt.hooks[1].failed).to.be.true
     })
 
@@ -340,25 +347,37 @@ describe('Test model', () => {
 
   context('#commandMatchingErr', () => {
     it('returns last command matching the error', () => {
-      const test = createTest({ err: { message: 'SomeError' } as Err, hooks: [
-        { hookId: 'h1', hookName: 'before each' },
-        { hookId: 'h2', hookName: 'before each' },
-      ] })
+      const test = createTest({
+        err: { message: 'SomeError' } as Err,
+        hooks: [
+          { hookId: 'h1', hookName: 'before each' },
+          { hookId: 'h2', hookName: 'before each' },
+        ],
+      })
 
       test.addLog(createCommand({ err: { message: 'SomeError' } as Err, hookId: 'h1' }))
       test.addLog(createCommand({ err: {} as Err, hookId: 'h1' }))
       test.addLog(createCommand({ err: { message: 'SomeError' } as Err, hookId: 'h1' }))
       test.addLog(createCommand({ err: {} as Err, hookId: 'h2' }))
-      test.addLog(createCommand({ name: 'The One', err: { message: 'SomeError' } as Err, hookId: 'h2' }))
+      test.addLog(
+        createCommand({
+          name: 'The One',
+          err: { message: 'SomeError' } as Err,
+          hookId: 'h2',
+        })
+      )
       expect(test.commandMatchingErr()!.name).to.equal('The One')
     })
 
     it('returns undefined if there are no commands with errors', () => {
-      const test = createTest({ err: { message: 'SomeError' } as Err, hooks: [
-        { hookId: 'h1', hookName: 'before each' },
-        { hookId: 'h2', hookName: 'before each' },
-        { hookId: 'h3', hookName: 'before each' },
-      ] })
+      const test = createTest({
+        err: { message: 'SomeError' } as Err,
+        hooks: [
+          { hookId: 'h1', hookName: 'before each' },
+          { hookId: 'h2', hookName: 'before each' },
+          { hookId: 'h3', hookName: 'before each' },
+        ],
+      })
 
       expect(test.commandMatchingErr()).to.be.undefined
     })

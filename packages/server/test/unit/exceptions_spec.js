@@ -172,7 +172,7 @@ at bar <stripped-path>bar.js:92\
 
     describe('with CYPRESS_CRASH_REPORTS=0', () => {
       beforeEach(() => {
-        return process.env['CYPRESS_CRASH_REPORTS'] = '0'
+        return (process.env['CYPRESS_CRASH_REPORTS'] = '0')
       })
 
       afterEach(() => {
@@ -180,8 +180,7 @@ at bar <stripped-path>bar.js:92\
       })
 
       it('immediately resolves', () => {
-        return exception.create()
-        .then(() => {
+        return exception.create().then(() => {
           expect(api.createCrashReport).to.not.be.called
         })
       })
@@ -189,12 +188,11 @@ at bar <stripped-path>bar.js:92\
 
     describe('development', () => {
       beforeEach(() => {
-        return process.env['CYPRESS_INTERNAL_ENV'] = 'development'
+        return (process.env['CYPRESS_INTERNAL_ENV'] = 'development')
       })
 
       it('immediately resolves', () => {
-        return exception.create()
-        .then(() => {
+        return exception.create().then(() => {
           expect(api.createCrashReport).to.not.be.called
         })
       })
@@ -204,7 +202,11 @@ at bar <stripped-path>bar.js:92\
       beforeEach(function () {
         process.env['CYPRESS_INTERNAL_ENV'] = 'production'
 
-        this.err = { name: 'ReferenceError', message: 'undefined is not a function', stack: 'asfd' }
+        this.err = {
+          name: 'ReferenceError',
+          message: 'undefined is not a function',
+          stack: 'asfd',
+        }
 
         sinon.stub(exception, 'getBody').resolves({
           err: this.err,

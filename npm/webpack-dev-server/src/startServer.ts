@@ -12,7 +12,10 @@ export interface StartDevServer extends UserWebpackDevServerOptions {
 
 const debug = Debug('cypress:webpack-dev-server:start')
 
-export async function start ({ webpackConfig: userWebpackConfig, options, ...userOptions }: StartDevServer, exitProcess = process.exit): Promise<WebpackDevServer> {
+export async function start(
+  { webpackConfig: userWebpackConfig, options, ...userOptions }: StartDevServer,
+  exitProcess = process.exit
+): Promise<WebpackDevServer> {
   if (!userWebpackConfig) {
     debug('User did not pass in any webpack configuration')
   }

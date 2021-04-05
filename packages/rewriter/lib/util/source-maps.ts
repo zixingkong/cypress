@@ -47,15 +47,20 @@ export const getPaths = (urlStr: string) => {
     parsed.pathname = path.dirname(parsed.pathname || '')
     delete parsed.search
 
-    return { sourceRoot: parsed.format(), sourceFileName, sourceMapName: `${sourceFileName}.map` }
+    return {
+      sourceRoot: parsed.format(),
+      sourceFileName,
+      sourceMapName: `${sourceFileName}.map`,
+    }
   } catch {
-    return { sourceRoot: undefined, sourceFileName: 'source.js', sourceMapName: 'source.js.map' }
+    return {
+      sourceRoot: undefined,
+      sourceFileName: 'source.js',
+      sourceMapName: 'source.js.map',
+    }
   }
 }
 
 export const urlFormatter = (url: string, js: string): string => {
-  return [
-    stripMappingUrl(js),
-    `//# sourceMappingURL=${url}`,
-  ].join('\n')
+  return [stripMappingUrl(js), `//# sourceMappingURL=${url}`].join('\n')
 }

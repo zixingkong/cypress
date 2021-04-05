@@ -51,4 +51,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Internal Jira issue: [${{ steps.create_jira_internal_priority_issue.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create_jira_internal_priority_issue.outputs.issue }})'
-            }) 
+            })

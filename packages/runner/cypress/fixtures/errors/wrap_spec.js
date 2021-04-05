@@ -9,7 +9,7 @@ describe('cy.wrap', { defaultCommandTimeout: 0 }, () => {
 
   it('exception', () => {
     cy.wrap(() => {
-      ({}).bar()
+      ;({}.bar())
     }).then((fn) => fn())
   })
 

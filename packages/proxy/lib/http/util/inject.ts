@@ -1,6 +1,6 @@
 import { oneLine } from 'common-tags'
 
-export function partial (domain) {
+export function partial(domain) {
   return oneLine`
     <script type='text/javascript'>
       document.domain = '${domain}';
@@ -8,7 +8,7 @@ export function partial (domain) {
   `
 }
 
-export function full (domain) {
+export function full(domain) {
   return oneLine`
     <script type='text/javascript'>
       document.domain = '${domain}';

@@ -15,20 +15,22 @@ import ProjectsList from '../projects/projects-list'
 class Default extends Component {
   @observable isDraggingOver
 
-  componentDidMount () {
+  componentDidMount() {
     // silly idiosyncrancies of the drag-n-drop API
     document.addEventListener('dragover', this._nope)
     document.addEventListener('drop', this._nope)
   }
 
-  render () {
+  render() {
     return (
-      <div className='intro'>
+      <div className="intro">
         {this._localNotice()}
-        <div className='intro-content'>
+        <div className="intro-content">
           <h1>To get started...</h1>
           <div
-            className={cs('project-drop', { 'is-dragging-over': this.isDraggingOver })}
+            className={cs('project-drop', {
+              'is-dragging-over': this.isDraggingOver,
+            })}
             onDragOver={this._dragover}
             onDragLeave={this._dragleave}
             onDrop={this._drop}
@@ -37,7 +39,13 @@ class Default extends Component {
               <i className="fas fa-folder fa-stack-2x"></i>
               <i className="fas fa-plus fa-stack-1x"></i>
             </span>
-            <p>Drag your project here or <a href="#" onClick={this._selectProject}>select manually</a>.</p>
+            <p>
+              Drag your project here or{' '}
+              <a href="#" onClick={this._selectProject}>
+                select manually
+              </a>
+              .
+            </p>
           </div>
           <ProjectsList onSelect={this._projectSelected} />
         </div>
@@ -45,24 +53,26 @@ class Default extends Component {
     )
   }
 
-  _localNotice () {
+  _localNotice() {
     if (appStore.localInstallNoticeDismissed) return null
 
     return (
-      <div className='local-install-notice alert alert-info alert-dismissible'>
-        <p className='text-center'>
-          <i className='fas fa-info-circle'></i>{' '}
-          We recommend versioning Cypress per project and{' '}
-          <a onClick={this._openHelp} className='helper-docs-link'>
-            installing it via <span className='mono'>npm</span>
-          </a>.
+      <div className="local-install-notice alert alert-info alert-dismissible">
+        <p className="text-center">
+          <i className="fas fa-info-circle"></i> We recommend versioning Cypress per project and{' '}
+          <a onClick={this._openHelp} className="helper-docs-link">
+            installing it via <span className="mono">npm</span>
+          </a>
+          .
         </p>
-        <button className="close" onClick={this._removeGlobalIntro}><span>&times;</span></button>
+        <button className="close" onClick={this._removeGlobalIntro}>
+          <span>&times;</span>
+        </button>
       </div>
     )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener('dragover', this._nope)
     document.removeEventListener('drop', this._nope)
   }
@@ -84,7 +94,7 @@ class Default extends Component {
     projectsApi.addProject(project.path)
   }
 
-  _addProject (path) {
+  _addProject(path) {
     projectsApi.addProject(path).then((project) => {
       viewStore.showProjectSpecs(project)
     })
@@ -119,13 +129,13 @@ class Default extends Component {
     this.isDraggingOver = isDraggingOver
   }
 
-  _nope (e) {
+  _nope(e) {
     e.preventDefault()
 
     return false
   }
 
-  _openHelp () {
+  _openHelp() {
     ipc.externalOpen('https://on.cypress.io/installing-via-npm')
   }
 }

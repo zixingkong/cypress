@@ -1,9 +1,5 @@
 import * as _ from 'lodash'
-import {
-  RouteMatcherOptionsGeneric,
-  CyHttpMessages,
-  GenericStaticResponse,
-} from './external-types'
+import { RouteMatcherOptionsGeneric, CyHttpMessages, GenericStaticResponse } from './external-types'
 
 export type FixtureOpts = {
   encoding: string
@@ -22,11 +18,7 @@ export const SERIALIZABLE_REQ_PROPS = [
   'followRedirect',
 ]
 
-export const SERIALIZABLE_RES_PROPS = _.concat(
-  SERIALIZABLE_REQ_PROPS,
-  'statusCode',
-  'statusMessage',
-)
+export const SERIALIZABLE_RES_PROPS = _.concat(SERIALIZABLE_REQ_PROPS, 'statusCode', 'statusMessage')
 
 export const DICT_STRING_MATCHER_FIELDS = ['headers', 'query']
 

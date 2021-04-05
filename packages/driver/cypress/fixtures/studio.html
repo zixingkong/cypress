@@ -27,35 +27,35 @@
       const btn2 = document.getElementsByClassName('interactive')[1]
       const btn3 = document.getElementsByClassName('interactive')[2]
 
-      btn1.addEventListener('mouseover', function() {
+      btn1.addEventListener('mouseover', function () {
         btn1.classList.add('mouseover')
       })
 
-      btn2.addEventListener('mouseenter', function() {
+      btn2.addEventListener('mouseenter', function () {
         btn2.classList.add('mouseenter')
       })
 
-      btn3.addEventListener('mousedown', function() {
+      btn3.addEventListener('mousedown', function () {
         btn3.classList.add('mousedown')
       })
 
       const both = document.getElementsByClassName('both')[0]
 
-      both.addEventListener('mouseover', function() {
+      both.addEventListener('mouseover', function () {
         both.classList.add('mouseover')
       })
 
-      both.addEventListener('mousedown', function() {
+      both.addEventListener('mousedown', function () {
         both.classList.add('mousedown')
       })
 
       const mdown = document.getElementsByClassName('mdown')[0]
 
-      mdown.addEventListener('mousedown', function() {
+      mdown.addEventListener('mousedown', function () {
         mdown.classList.remove('clicked')
       })
 
-      mdown.addEventListener('click', function() {
+      mdown.addEventListener('click', function () {
         mdown.classList.add('clicked')
       })
     </script>

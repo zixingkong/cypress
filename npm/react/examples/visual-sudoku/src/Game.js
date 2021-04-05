@@ -51,10 +51,7 @@ export const Game = () => {
    * Creates a new game and initializes the state variables.
    */
   function _createNewGame(e) {
-    let [temporaryInitArray, temporarySolvedArray] = getUniqueSudoku(
-      difficulty,
-      e,
-    )
+    let [temporaryInitArray, temporarySolvedArray] = getUniqueSudoku(difficulty, e)
 
     setInitArray(temporaryInitArray)
     setGameArray(temporaryInitArray)
@@ -233,10 +230,10 @@ export const Game = () => {
       <div className={overlay ? 'container blur' : 'container'}>
         <Header onClick={onClickNewGame} />
         <div className="innercontainer">
-          <GameSection onClick={indexOfArray => onClickCell(indexOfArray)} />
+          <GameSection onClick={(indexOfArray) => onClickCell(indexOfArray)} />
           <StatusSection
-            onClickNumber={number => onClickNumber(number)}
-            onChange={e => onChangeDifficulty(e)}
+            onClickNumber={(number) => onClickNumber(number)}
+            onChange={(e) => onChangeDifficulty(e)}
             onClickUndo={onClickUndo}
             onClickErase={onClickErase}
             onClickHint={onClickHint}
@@ -246,13 +243,9 @@ export const Game = () => {
         </div>
         <Footer />
       </div>
-      <div
-        className={overlay ? 'overlay overlay--visible' : 'overlay'}
-        onClick={onClickOverlay}
-      >
+      <div className={overlay ? 'overlay overlay--visible' : 'overlay'} onClick={onClickOverlay}>
         <h2 className="overlay__text">
-          You <span className="overlay__textspan1">solved</span>{' '}
-          <span className="overlay__textspan2">it!</span>
+          You <span className="overlay__textspan1">solved</span> <span className="overlay__textspan2">it!</span>
         </h2>
       </div>
     </>

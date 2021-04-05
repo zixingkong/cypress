@@ -35,15 +35,11 @@ it('can be passed as an option', () => {
     }
   `
   const myComponent = {
-    template: '<button class="orange"><slot/></button>'
+    template: '<button class="orange"><slot/></button>',
   }
 
   mount(myComponent, { style })
-  cy.get('.orange button').should(
-    'have.css',
-    'background-color',
-    'rgb(245, 146, 62)',
-  )
+  cy.get('.orange button').should('have.css', 'background-color', 'rgb(245, 146, 62)')
 })
 ```
 
@@ -52,7 +48,7 @@ it('can be passed as an option', () => {
 ```js
 const cssFiles = 'cypress/integration/Button.css'
 const myComponent = {
-  template: '<button class="orange"><slot/></button>'
+  template: '<button class="orange"><slot/></button>',
 }
 mount(myComponent, { cssFiles })
 ```
@@ -61,11 +57,9 @@ mount(myComponent, { cssFiles })
 
 ```js
 const myComponent = {
-  template: '<button class="orange"><slot/></button>'
+  template: '<button class="orange"><slot/></button>',
 }
 mount(myComponent, {
-  stylesheets: [
-    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-  ],
+  stylesheets: ['https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'],
 })
 ```

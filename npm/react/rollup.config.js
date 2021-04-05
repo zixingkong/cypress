@@ -12,22 +12,13 @@ const banner = `
  */
 `
 
-function createEntry (options) {
-  const {
-    format,
-    input,
-    isBrowser,
-  } = options
+function createEntry(options) {
+  const { format, input, isBrowser } = options
 
   const config = {
     input,
-    external: [
-      'react',
-      'react-dom',
-    ],
-    plugins: [
-      resolve(), commonjs(),
-    ],
+    external: ['react', 'react-dom'],
+    plugins: [resolve(), commonjs()],
     output: {
       banner,
       name: 'CypressReact',
@@ -64,7 +55,7 @@ function createEntry (options) {
         },
         exclude: ['tests'],
       },
-    }),
+    })
   )
 
   return config
