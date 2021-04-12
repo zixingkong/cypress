@@ -26,6 +26,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "classnames": "^2.3.1",
     "debug": "^4.3.2",
+    "react-aria": "^3.5.0",
     "react-virtualized-auto-sizer": "^1.0.5",
     "react-vtree": "3.0.0-beta.1",
     "react-window": "^1.8.6"
@@ -39,6 +40,8 @@
     "@cypress/react": "0.0.0-development",
     "@cypress/vite-dev-server": "0.0.0-development",
     "@percy/cypress": "2.3.2",
+    "@react-types/button": "^3.3.1",
+    "@react-types/shared": "^3.5.0",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-image": "2.0.6",
     "@rollup/plugin-json": "^4.1.0",
@@ -59,9 +62,8 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.2.8",
-    "react": "^17.0.1",
-    "react-aria": "^3.5.0",
-    "react-dom": "^17.0.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "rollup": "^2.38.5",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
@@ -90,7 +92,7 @@
     "type": "git",
     "url": "https://github.com/cypress-io/cypress.git"
   },
-  "author": "Jessica Sachs <jess@jessicasachs.io>",
+  "author": "Cypress.io",
   "keywords": [
     "design-system",
     "cypress",
